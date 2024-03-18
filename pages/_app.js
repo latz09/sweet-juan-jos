@@ -11,8 +11,8 @@ export default function App({ Component, pageProps }) {
 		visible: {
 			opacity: 1,
 			transition: {
-				delay: 0.1,
-				duration: 0.98,
+				delay: 0.3,
+				duration: 1.1,
 			},
 		},
 		exit: { opacity: 0, transition: { duration: 0.4 } },
