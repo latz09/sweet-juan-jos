@@ -20,7 +20,7 @@ const AboutBlurb = () => {
 					transition={{ duration: 1.1, delay:.1 }}
 				>
 					<h4 className='text-3xl mt-12 lg:mt-0'>{`Hi!, I'm Katie Jo, the founder of Sweet Juanjo's!`}</h4>
-					<div className='grid gap-2 mt-4'>
+					<div className='grid gap-2 mt-4 px-2 lg:px-1'>
 						<p className='leading-7 lg:leading-8'>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 							eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus

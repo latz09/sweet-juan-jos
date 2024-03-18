@@ -78,7 +78,7 @@ const MobileNavigation = () => {
                                     transition={{ duration: 1.1, delay: .3 }}
                                 >
                                     <Link href={link.slug}>
-                                        <span className='inline-block font-bold w-full py-3 px-8 text-lg  border-x border-primary cursor-pointer hover:border-dark hover:scale-110 hover:border-x-0 hover:border-y transition duration-300' onClick={toggleMenu}>
+                                        <span className='inline-block font-bold w-full py-3 px-8 text-2xl  border-x border-primary cursor-pointer hover:border-dark hover:scale-110 hover:border-x-0 hover:border-y transition duration-300' onClick={toggleMenu}>
                                             {link.name}
                                         </span>
                                     </Link>

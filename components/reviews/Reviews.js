@@ -28,18 +28,21 @@ const shakeAnimation = {
 
 const Review = ({ review }) => {
 	return (
-		<div
+		<motion.div
 			className='flex flex-col items-center gap-4 px-2 lg:px-1 lg:w-1/2 mx-auto text-xl text-light'
+      initial = {{y:100}}
+      whileInView={{y:0}}
+      transition={{duration:1.1, delay:.1}}
      
 		>
-			<motion.div className='text-primar text-4xl '  variants={shakeAnimation}
+			<motion.div className='text-primary text-3xl '  variants={shakeAnimation}
       initial='initial'
       whileInView='animate'>
-				< MdFormatQuote />
+				<MdFormatQuote />
 			</motion.div>
 			<p className='text-center leading-7 lg:leading-8'>{review.review}</p>
 			<p className='text-primary font-semibold'>- {review.name}</p>
-		</div>
+		</motion.div>
 	);
 };
 
