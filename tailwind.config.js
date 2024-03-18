@@ -1,17 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    
-    fontFamily: {
-			oswald: ['Oswald', 'sans-serif'],
-			// amatic: ['Amatic SC', 'sans-serif'],
+	content: [
+		'./pages/**/*.{js,ts,jsx,tsx,mdx}',
+		'./components/**/*.{js,ts,jsx,tsx,mdx}',
+		'./app/**/*.{js,ts,jsx,tsx,mdx}',
+	],
+	theme: {
+		colors: {
+			primary: '#29B2AC', 			
+			secondary: '', 			
+			dark: '#012623', 
+			light: '#F0FFFE', 
+		},
+		fontFamily: {
+			josefin: ['Josefin Slab', 'serif'],
+	
 			amatic: ['Dancing Script', 'cursive'],
 		},
-  },
-  plugins: [],
+	},
+	plugins: [],
 };
