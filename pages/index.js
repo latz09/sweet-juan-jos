@@ -9,7 +9,7 @@ import IntroBlurb from '@/components/about/IntroBlurb';
 export default function Home() {
 	return (
 		<main className='grid gap-32'>
-			<div className="grid gap-8 lg:gap-16">
+			<div className="grid gap-12 lg:gap-16">
 				<LogoDisplay />
 				<IntroBlurb />
 			</div>
