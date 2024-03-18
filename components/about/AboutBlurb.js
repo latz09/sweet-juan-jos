@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import trebzPortrait from '../../public/images/about/trebz.webp';
-
+import {motion} from 'framer-motion';
 const AboutBlurb = () => {
 	return (
 		<div className='max-w-5xl mx-auto grid gap-12 '>
@@ -14,7 +14,11 @@ const AboutBlurb = () => {
 					alt='Trebz'
 					className='w-1/2 lg:w-full mx-auto border-2 border-primary/40 rounded shadow-lg shadow-primary/50'
 				/>
-				<div className='lg:col-span-2 place-self-center text-center lg:text-justify'>
+				<motion.div className='lg:col-span-2 place-self-center text-center lg:text-justify'
+					initial={{ y: 200 }}
+					whileInView={{ y: 0 }}
+					transition={{ duration: 1.1, delay:.1 }}
+				>
 					<h4 className='text-3xl mt-12 lg:mt-0'>{`Hi!, I'm Katie Jo, the founder of Sweet Juanjo's!`}</h4>
 					<div className='grid gap-2 mt-4'>
 						<p className='leading-7 lg:leading-8'>
@@ -31,7 +35,7 @@ const AboutBlurb = () => {
 							<button className="text-primary font-bold underline underline-offset-4">Our Story</button>
 						</div>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);
