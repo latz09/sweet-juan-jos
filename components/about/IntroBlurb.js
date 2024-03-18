@@ -2,7 +2,7 @@ import {motion } from 'framer-motion';
 
 const IntroBlurb = () => {
 	return (
-		<motion.div className='bg-dark'
+		<motion.div className=''
 			initial={{ y: 100 }}
 			whileInView={{ y: 0}}
 			transition={{ duration: 1.1, delay:.1 }}
