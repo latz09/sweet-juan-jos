@@ -6,21 +6,27 @@ export const NavigationLinks = [
     },
     {
         id: 2,
-        name: 'Menu',
+        name: 'Weddings & Special Events',
         slug: '/'
     },
     {
         id: 3,
-        name: 'About Us',  
+        name: 'Cupcakes & Specialty Cakes',
         slug: '/'
     },
     {
         id: 4,
-        name: 'Events',
+        name: 'Cookies',  
         slug: '/'
     },
     {
         id: 5,
+        name: 'Candy & Treats',  
+        slug: '/'
+    },
+  
+    {
+        id: 6,
         name: 'Contact',
         slug: '/'
     }

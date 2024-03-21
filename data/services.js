@@ -1,32 +1,62 @@
 import { FaCandyCane } from 'react-icons/fa';
-import { GiCupcake } from "react-icons/gi";
 import { HiCake } from "react-icons/hi";
 import { BiSolidCookie } from "react-icons/bi";
+import { MdCelebration } from "react-icons/md";
+
+// Stock Images
+import dessertTable from '../public/images/stock/dessert-table.webp';
+import cupcakes from '../public/images/stock/cupcake.webp';
+import cookies from '../public/images/stock/cookie.webp';
+import candy from '../public/images/stock/candy.webp';
 
 
 export const services = [
     {
         id: 1,
-        title: 'Cupcakes',
-        description: 'Delight in our handcrafted cupcakes, each a miniature masterpiece of flavor. Perfect for any occasion or a sweet everyday treat.',
-        icon: GiCupcake
+        title: 'Weddings & Special Events',
+        description: 'Elevate your special day with our exquisite range of confections, designed to complement the elegance and joy of weddings and significant celebrations. Let us add a touch of sweetness to your memorable moments.',
+        icon: MdCelebration
     },
     {
         id: 2,
-        title: 'Specialty Cakes',
-        description: 'Turn your celebrations into memorable events with our custom-designed specialty cakes, tailored to your theme and flavor preferences.',
+        title: 'Cupcakes & Specialty Cakes',
+        description: 'Explore a delightful fusion of flavors with our cupcakes and specialty cakes, each crafted to make your occasions extraordinary. From classic favorites to innovative creations, find the perfect match for your taste and theme.',
         icon: HiCake
     },
     {
         id: 3,
         title: 'Cookies',
-        description: 'Discover the comforting taste of homemade cookies, baked fresh with love and the finest ingredients for a truly heartwarming bite.',
+        description: 'Savor the classic comfort of our homemade cookies, freshly baked to offer a warm, comforting embrace with every bite. Perfect for sharing, gifting, or indulging in a personal treat.',
         icon: BiSolidCookie
     },
     {
         id: 4,
-        title: 'Candy and Treats',
-        description: 'Indulge in our assortment of handmade candies and treats, a collection of sweet delights that promises to bring joy to every palate.',
+        title: 'Candy & Treats',
+        description: 'Dive into a world of sweetness with our handmade candies and treats, an enchanting assortment designed to captivate and delight. From traditional favorites to unique creations, there\'s something to satisfy every sweet tooth.',
         icon: FaCandyCane
     }
 ];
+
+
+export const servicestwo = [
+    {
+        id: 1,
+        title: 'Weddings & Special Events',
+        image: dessertTable,
+    },
+    {
+        id: 2,
+        title: 'Cupcakes & Specialty Cakes',
+        image: cupcakes,
+    },
+    {
+        id: 3,
+        title: 'Handcrafted Cookies',
+        image: cookies,
+    },
+    {
+        id: 4,
+        title: 'Candy & Treats',
+        image: candy,
+    }
+]

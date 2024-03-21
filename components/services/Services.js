@@ -19,7 +19,7 @@ const Services = () => {
 					<h3 className='text-3xl font-semibold mb-2 text-primary  '>
 						{service.title}
 					</h3>
-					<p className='text-center px-8 y leading-7 lg:leading-8'>
+					<p className='text-center px-4 y leading-7 lg:leading-8'>
 						{service.description}
 					</p>
 					<button className='mt-4 text-primary font-bold underline underline-offset-2'>

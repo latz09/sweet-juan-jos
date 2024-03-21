@@ -5,6 +5,7 @@ import HeroLayout from '@/components/heros/HeroLayout';
 import AboutBlurb from '@/components/about/AboutBlurb';
 import Reviews from '@/components/reviews/Reviews';
 import IntroBlurb from '@/components/about/IntroBlurb';
+import ServiceCard from '@/components/services/ServiceCard';
 
 export default function Home() {
 	return (
@@ -15,13 +16,14 @@ export default function Home() {
 			</div>
 			<Services />
 			<HeroLayout
-				heading='Special Events'
-				subheading='From birthdays to weddings - We can help you celebrate anything!'
+				heading='Weddings & Special Events'
+				subheading='From Weddings to Birthdays - We can help you celebrate any special occasion'
 				img={specialEventsImage}
 				CTA='/'
 				CTAText='Learn More'
 			/>
 			<AboutBlurb />
+			<ServiceCard />
 			<Reviews />
 		</main>
 	);
