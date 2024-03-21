@@ -18,7 +18,7 @@ const ServiceCard = () => {
 
 						{/* Overlay Container with Primary Background centered */}
 						<div className='absolute inset-0 flex items-center justify-center group-hover:scale-105 transition duration-700'>
-							<div className='bg-gradient-to-t from-primary/90 to-primary via-primary/95 px-16 py-4 shadow-lg shadow-primary/30 text-light text-center rounded-lg'>
+							<div className='bg-gradient-to-t from-primary/90 to-primary via-primary/95 mx-4 px-4 lg:px-16 py-4 shadow-lg shadow-primary/30 text-light text-center rounded-lg'>
 								{/* Title */}
 								<h3 className='font-semibold  text-2xl lg:text-3xl'>{service.title}</h3>
 
