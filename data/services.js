@@ -1,7 +1,7 @@
-import { FaCandyCane } from 'react-icons/fa';
-import { HiCake } from "react-icons/hi";
-import { BiSolidCookie } from "react-icons/bi";
-import { MdCelebration } from "react-icons/md";
+// import { FaCandyCane } from 'react-icons/fa';
+// import { HiCake } from "react-icons/hi";
+// import { BiSolidCookie } from "react-icons/bi";
+// import { MdCelebration } from "react-icons/md";
 
 // Stock Images
 import dessertTable from '../public/images/stock/dessert-table.webp';
@@ -38,7 +38,7 @@ import candy from '../public/images/stock/candy.webp';
 // ];
 
 
-export const services = [
+export const serviceCardsData = [
     {
         id: 1,
         title: 'Weddings & Special Events',
@@ -64,3 +64,4 @@ export const services = [
         href:'candy-and-treats'
     }
 ]
+

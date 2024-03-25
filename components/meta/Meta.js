@@ -25,7 +25,7 @@ const Meta = () => {
 			<meta property='og:description' content={description} />
 			<meta property='og:image' content={ogImage} />
 			<meta name='viewport' content='width=device-width, initial-scale=1.0' />
-			<link rel='icon' href='/Images/home-page/innerChild.jpg' />
+			<link rel='icon' href='/favicon.png' />
 			<meta name='author' content='Tami Schiltz' />
 		</Head>
 	);

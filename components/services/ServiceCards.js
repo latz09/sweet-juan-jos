@@ -1,4 +1,4 @@
-import { services } from '@/data/services';
+import { serviceCardsData } from '@/data/services';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MainHeading, SubHeading } from '../utils/Typography';
@@ -11,7 +11,7 @@ const ServiceCards = () => {
 				<MainHeading title='Our Delicious Offerings' type='dark' />
 			</div>
 			<div className='grid lg:grid-cols-2 gap-24 max-w-7xl mx-auto place-items-center'>
-				{services.map((service) => (
+				{serviceCardsData.map((service) => (
 					<motion.div
 						key={service.id}
 						initial={{ y: 100, opacity: 0 }}
