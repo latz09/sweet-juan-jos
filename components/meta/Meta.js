@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { pageMetadata } from '@/pages/pageMetaData';
+import { pageMetadata } from '@/data/pageMetaData';
 
 const Meta = () => {
 	const router = useRouter();
