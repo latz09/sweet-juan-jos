@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { NavigationLinks } from '@/data/NavigationLinks';
-import logo from '../../public/images/logo/transparent-juanjos.png'
+import logo from '../../public/images/logo/transparent-juanjos.png';
+
 
 const Navigation = () => {
 	return (
@@ -37,8 +38,21 @@ const MobileNavigation = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const toggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Cleanup function to remove the class when the component unmounts
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
+    }, [isMenuOpen]);
 
 	// Animation variants for Framer Motion
 	const menuVariants = {

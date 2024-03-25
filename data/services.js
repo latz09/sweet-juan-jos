@@ -43,20 +43,24 @@ export const services = [
         id: 1,
         title: 'Weddings & Special Events',
         image: dessertTable,
+        href:'weddings-and-special-events'
     },
     {
         id: 2,
         title: 'Cupcakes & Specialty Cakes',
         image: cupcakes,
+        href:'cupcakes-and-specialty-cakes'
     },
     {
         id: 3,
         title: 'Handcrafted Cookies',
         image: cookies,
+        href:'hand-crafted-cookies'
     },
     {
         id: 4,
         title: 'Candy & Treats',
         image: candy,
+        href:'candy-and-treats'
     }
 ]
