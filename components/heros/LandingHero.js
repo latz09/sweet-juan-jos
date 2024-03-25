@@ -29,7 +29,7 @@ const LandingHero = () => {
 						<Image src={logo} alt='sweet juanjos' width={250} height={250} />
 					</div>
 					<div className='mt-16 '>
-						<ButtonLink title='Order Now' type='primary' href='/menu'  />
+						<ButtonLink title='Order Now' type='primary' href='/sweet-juanjos/contact-us'  />
 					</div>
 				</motion.div>
 			</div>
