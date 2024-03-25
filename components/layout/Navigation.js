@@ -8,7 +8,7 @@ import logo from '../../public/images/logo/transparent-juanjos.png'
 
 const Navigation = () => {
 	return (
-		<div className='mb-12 sticky top-0 bg-light/95 z-40'>
+		<div className='py-2 lg:py-6 sticky top-0 bg-light/95 z-40'>
 			<DesktopNavigation />
 			<MobileNavigation />
 		</div>
@@ -19,7 +19,7 @@ export default Navigation;
 
 const DesktopNavigation = () => {
 	return (
-		<div className='hidden lg:block max-w-7xl mx-auto px-2  pt-2'>
+		<div className='hidden lg:block max-w-7xl mx-auto px-2 pb-2'>
 			<div className='mt-[2px] border-y border-primary py-4 flex items-center justify-around'>
 				{NavigationLinks.map((link) => (
 					<Link key={link.id} href={link.slug}>
@@ -51,7 +51,9 @@ const MobileNavigation = () => {
 			<div className="lg:hidden  py-1  ">
 				<div className=' p-4'>
 					<div className='flex justify-between items-center'>
+						<Link href='/' >
 						<Image src={logo} alt='Sweet Juanjo Logo' width={100} height={100} className="pl-4" />
+						</Link>
 						<button onClick={toggleMenu} className='text-2xl'>
 							<AiOutlineMenu />
 						</button>
