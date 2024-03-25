@@ -4,7 +4,7 @@ const ButtonLink = ({ title, type, href }) => {
 	switch (type) {
 		case 'primary':
 			type =
-				'bg-dark text-light  shadow-lg shadow-dark/50 hover:shadow-sm hover:border-dark/0 hover:bg-light hover:text-primary';
+				'bg-dark text-light  shadow-lg shadow-dark/50 border border-light/60 hover:border-dark hover:shadow-sm  hover:bg-light hover:text-dark';
 			break;
 		case 'secondary':
 			type = 'bg-light text-dark hover:bg-primary hover:text-light';
