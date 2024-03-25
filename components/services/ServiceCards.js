@@ -6,7 +6,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 const ServiceCards = () => {
 	return (
-		<div className='mx-2 lg:mx-0'>
+		<div className=''>
 			<div className='grid place-items-center my-16'>
 				<MainHeading title='Our Delicious Offerings' type='dark' />
 			</div>

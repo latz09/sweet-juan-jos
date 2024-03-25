@@ -11,10 +11,10 @@ import LandingHero from '@/components/heros/LandingHero';
 export default function Home() {
 	return (
 		<main className='grid gap-32'>
-			{/* <div className='grid gap-12 lg:gap-16'> */}
+			<div className='grid gap-24'>
 				<LandingHero />
 				<IntroBlurb />
-			{/* </div> */}
+			</div>
 			<ServiceCard />
 			<HeroLayout
 				heading='Weddings & Special Events'

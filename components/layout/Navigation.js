@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { NavigationLinks } from '@/data/NavigationLinks';
+import logo from '../../public/images/logo/transparent-juanjos.png'
 
 const Navigation = () => {
 	return (
-		<div className='mb-12 sticky top-4 bg-light/95 z-40'>
+		<div className='mb-12 sticky top-0 bg-light/95 z-40'>
 			<DesktopNavigation />
 			<MobileNavigation />
 		</div>
@@ -46,10 +48,10 @@ const MobileNavigation = () => {
 
 	return (
 		<>
-			<div className="lg:hidden border-t-2 py-1 border-primary/50 ">
-				<div className=' p-4 border-y border-primary '>
+			<div className="lg:hidden  py-1  ">
+				<div className=' p-4'>
 					<div className='flex justify-between items-center'>
-						<div></div>
+						<Image src={logo} alt='Sweet Juanjo Logo' width={100} height={100} className="pl-4" />
 						<button onClick={toggleMenu} className='text-2xl'>
 							<AiOutlineMenu />
 						</button>

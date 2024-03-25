@@ -11,7 +11,7 @@ export const MainHeading = ({title, type}) => {
 
     return (
         <div>
-            <h1 className={`text-5xl lg:text-6xl font-bold ${type}`}>{title}</h1>
+            <h1 className={`text-5xl lg:text-6xl font-bold text-center  ${type}`}>{title}</h1>
         </div>
     );
 }

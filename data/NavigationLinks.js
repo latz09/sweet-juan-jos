@@ -7,27 +7,27 @@ export const NavigationLinks = [
     {
         id: 2,
         name: 'Weddings & Special Events',
-        slug: '/'
+        slug: '/services/weddings-and-special-events'
     },
     {
         id: 3,
         name: 'Cupcakes & Specialty Cakes',
-        slug: '/'
+        slug: '/services/cupcakes-and-specialty-cakes'
     },
     {
         id: 4,
         name: 'Cookies',  
-        slug: '/'
+        slug: '/services/hand-crafted-cookies'
     },
     {
         id: 5,
         name: 'Candy & Treats',  
-        slug: '/'
+        slug: '/services/candy-and-treats'
     },
   
     {
         id: 6,
         name: 'Contact',
-        slug: '/'
+        slug: '/sweet-juanjos/contact-us'
     }
 ];
