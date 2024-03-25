@@ -7,9 +7,9 @@ import { NavigationLinks } from '@/data/NavigationLinks';
 const Footer = () => {
 	return (
 		<div className='grid lg:grid-cols-3 place-items-center gap-16 max-w-7xl mx-auto py-32 text-lg lg:text-2xl'>
-			<div className=''>
+			<Link href={'/'}>
 				<Image src={logo} alt='logo' height={200} width={200} />
-			</div>
+			</Link>
 
 			<div>
 				<ul className='grid gap-6 place-items-center'>

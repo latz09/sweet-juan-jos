@@ -16,6 +16,7 @@ const LandingHero = () => {
 				objectFit='cover'
 				objectPosition='center'
 				className='z-0'
+				quality={100}
 			/>
 			<div className='absolute inset-0 bg-gradient-to-b from-dark/0 via-dark/20 to-dark/0  z-10 text-center'>
 				<motion.div
