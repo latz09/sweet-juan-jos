@@ -1,15 +1,14 @@
 import Image from 'next/image';
-import landingImage from '../../public/images/displays/special-events.jpg';
+// import landingImage from '../../public/images/displays/special-events.jpg';
 import landingImage2 from '../../public/images/ai-generated/display.png';
-import Link from 'next/link';
+
 import { motion } from 'framer-motion';
 import logo from '../../public/images/logo/transparent-juanjos.png';
-import Socials from '../utils/Socials';
 import ButtonLink from '../utils/ButtonLink';
 
 const LandingHero = () => {
 	return (
-		<div className='relative h-[80vh] w-full  shadow-lg shadow-primary/40 '>
+		<div className='relative h-[70vh] w-full  shadow-lg shadow-primary/40 '>
 			<Image
 				src={landingImage2}
 				alt='sweet juanjos'
