@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion';
+import { Paragraph } from '../utils/Typography';
+import Socials from '../utils/Socials';
 const IntroBlurb = () => {
 	return (
 		<motion.div
-			className='bg-dark'
+			className='max-w-4xl mx-auto px-4 lg:px-0 text-center grid gap-12'
 			initial={{ y: 100 }}
 			whileInView={{ y: 0 }}
 			transition={{ duration: 1.1, delay: 0.1 }}
 		>
-			<div className='bg-gradient-to-l from-dark via-primary/40 to-dark py-24 text-light shadow-lg shadow-primary/50 '>
-				<p className='leading-8 lg:leading-9 max-w-3xl mx-auto text-center text-xl lg:text-2xl px-4 lg:px-1 '>
-					{`  Sweet Juanjo's is located in Stevens Point WI. We specialize in cupcakes, custom cakes, and cookies. All our products are created in our licensed kitchen, and are made to order. Contact us to discuss your vision for your next celebration.`}
-				</p>
-			</div>
+			<Paragraph
+				content={`Sweet Juanjo's is located in Stevens Point WI. We specialize in cupcakes, custom cakes, and cookies. All our products are created in our licensed kitchen, and are made to order. Contact us to discuss your vision for your next celebration.`}
+				type='dark'
+			/>
+			<Socials includeText={false}/>
 		</motion.div>
 	);
 };

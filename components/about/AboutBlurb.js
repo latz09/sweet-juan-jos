@@ -1,39 +1,41 @@
+import { aboutUsBlurb } from '@/data/about';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import trebzPortrait from '../../public/images/about/trebz.webp';
-import {motion} from 'framer-motion';
+import { MainHeading, SubHeading } from '../utils/Typography';
+import Socials from '../utils/Socials';
+
 const AboutBlurb = () => {
 	return (
 		<div className='max-w-5xl mx-auto grid gap-12 '>
-			<div className='grid place-items-center '>
-				<span className='text-5xl '>Meet Jo</span>
-				<span className='text-2xl'>{`The 'Jo' in Juanjo's`}</span>
+			<div className='grid place-items-center gap-2 '>
+				<MainHeading title={aboutUsBlurb.title} type='dark' />
+				<SubHeading title={aboutUsBlurb.subtitle} type='dark' />
 			</div>
-			<div className=' mx-auto grid lg:grid-cols-3 gap-x-16  borde'>
+			<div className=' mx-auto grid lg:grid-cols-3 gap-y-16 lg:gap-x-16  borde'>
 				<Image
-					src={trebzPortrait}
-					alt='Trebz'
-					className='w-1/2 lg:w-full mx-auto border-2 border-primary/40 rounded shadow-lg shadow-primary/50'
+					src={aboutUsBlurb.image}
+					alt={aboutUsBlurb.subtitle}
+					className='w-3/5 lg:w-full mx-auto shadow-lg shadow-primary/40'
 				/>
-				<motion.div className='lg:col-span-2 place-self-center text-center lg:text-justify'
+				<motion.div
+					className='lg:col-span-2 place-self-center text-center lg:text-justify'
 					initial={{ y: 200 }}
 					whileInView={{ y: 0 }}
-					transition={{ duration: 1.1, delay:.1 }}
+					transition={{ duration: 1.1, delay: 0.1 }}
 				>
-					<h4 className='text-3xl mt-12 lg:mt-0'>{`Hi!, I'm Katie Jo, the founder of Sweet Juanjo's!`}</h4>
+					<SubHeading title={aboutUsBlurb.intro} type='dark' />
 					<div className='grid gap-2 mt-4 px-2 lg:px-1'>
-						<p className='leading-7 lg:leading-8'>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus
-							viverra adipiscing at in tellus integer.
-						</p>
-						<p className='leading-7 lg:leading-8'>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus
-							viverra adipiscing at in tellus integer.
-						</p>
-						<div className='grid place-items-center mt-8'>
-							<button className="text-primary font-bold underline underline-offset-4">Our Story</button>
-						</div>
+						{aboutUsBlurb.description.map((content, index) => (
+							<p
+								key={index}
+								className='leading-7 lg:leading-8 text-lg lg:text-xl'
+							>
+								{content}
+							</p>
+						))}
+					</div>
+					<div className='grid place-items-center mt-16 lg:mt-4 '>
+						<Socials includeText={true} />
 					</div>
 				</motion.div>
 			</div>

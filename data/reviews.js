@@ -15,8 +15,8 @@ export const reviews = [
 			'Ordered cookies from Katie and she went above and beyond with my idea. Cookies tasted great and the detail of each cookie as well as the price were AMAZING. Definitely will be using her again.',
 	},
 	{
-		name: 'Jared B',
+		name: 'Tammy K',
 		review:
-			'I was at a wedding last week and Sweet Juanjo’s did the desserts. Hands down',
+			'Absolutely delicious wedding cake she made for us. Our cake turned out perfectly….I’m so so happy with what she made. The frosting fell only because we had set it out for a while, but that was on us.  It was a beautiful cake that tasted amazing!',
 	},
 ];

@@ -17,11 +17,11 @@ export default Navigation;
 
 const DesktopNavigation = () => {
 	return (
-		<div className='hidden lg:block border-t max-w-7xl mx-auto px-2 border-primary mt-2'>
+		<div className='hidden lg:block max-w-7xl mx-auto px-2  pt-2'>
 			<div className='mt-[2px] border-y border-primary py-4 flex items-center justify-around'>
 				{NavigationLinks.map((link) => (
 					<Link key={link.id} href={link.slug}>
-						<div className='text-lg border-x px-4 border-primary hover:border-x-2   hover:border-x-dark hover:scale-110 transition duration-700'>
+						<div className='text-xl border-x px-4 border-primary hover:border-x-2   hover:border-x-dark hover:scale-110 transition duration-700 font-bold'>
 							{link.name}
 						</div>
 					</Link>
@@ -60,7 +60,7 @@ const MobileNavigation = () => {
 			<AnimatePresence>
 				{isMenuOpen && (
 					<motion.div
-						className='fixed top-0 left-0 h-full w-full bg-light/80 backdrop-blur-sm flex items-center justify-center z-50'
+						className='fixed top-0 left-0 h-full w-full bg-light/80 backdrop-blur flex items-center justify-center z-50'
 						variants={menuVariants}
 						initial='hidden'
 						animate='visible'
@@ -100,4 +100,3 @@ const MobileNavigation = () => {
 	);
 };
 
-// The DesktopNavigation component is a simple list of links that are displayed when the screen size is large. The MobileNavigation component is a bit more complex. It uses the useState hook to manage the state of the menu. The toggleMenu function is used to open and close the menu. The menuVariants object is used to define the animation for the menu. The AnimatePresence component is used to animate the menu when it appears and disappears. Inside the AnimatePresence component, we have a motion.div component that contains the menu items. The motion.div component uses the menuVariants object to animate the menu. The Link component is used to create the menu items. The onClick event handler is used to close the menu when a menu item is clicked. The button at the bottom of the menu is used to close the menu. The onClick event handler is used to call the toggleMenu function to close the menu.
