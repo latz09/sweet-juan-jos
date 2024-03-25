@@ -1,7 +1,7 @@
 const baseUrl = 'https://sweet-juan-jos.vercel.app';
 const ogImage = `${baseUrl}/images/stock/dessert-table.webp`;
 const baseKeywords = 'd';
-const baseDescription = 'sweet Juanjo\'s is where Stevens Point\'s celebrations get a sprinkle of fun! From weddings to birthdays, our cupcakes, cakes, and cookies are all about making your big moments a tad sweeter and a lot more memorable. Let\'s party, Wisconsin style!';
+const baseDescription = 'Sweet Juanjo\'s is where Stevens Point\'s celebrations get a sprinkle of fun! From weddings to birthdays, our cupcakes, cakes, and cookies are all about making your big moments a tad sweeter and a lot more memorable. Let\'s party, Wisconsin style!';
 
 
 export const pageMetadata = {
