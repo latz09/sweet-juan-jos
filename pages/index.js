@@ -20,7 +20,7 @@ export default function Home() {
 				heading='Weddings & Special Events'
 				subheading='From Weddings to Birthdays - We can help you celebrate any special occasion'
 				img={specialEventsImage}
-				CTA='/sweet-juanjos/contact-us'
+				CTA='/services/weddings-and-special-events'
 				CTAText='Learn More'
 			/>
 			<AboutBlurb />

@@ -20,9 +20,9 @@ const LandingHero = () => {
 			<div className='absolute inset-0 bg-gradient-to-b from-dark/0 via-dark/20 to-dark/0  z-10 text-center'>
 				<motion.div
 					className='flex flex-col justify-center items-center h-full'
-					initial={{ opacity: 0, scale: 0 }}
+					initial={{ opacity: 0, scale: .85 }}
 					whileInView={{ opacity: 1, scale: 1 }}
-					transition={{ duration: 1.1, delay: 0.1 }}
+					transition={{ duration: 1.1, delay: 0.15 }}
 				>
 				
 					<div className='p-8  bg-gradient-to-tl from-light via-light/80 to-light rounded-sm shadow-lg shadow-primary/40'>
