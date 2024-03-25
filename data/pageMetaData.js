@@ -1,13 +1,14 @@
 const baseUrl = 'https://sweet-juan-jos.vercel.app';
-
+const ogImage = `${baseUrl}/images/stock/dessert-table.webp`;
 const baseKeywords = '';
+
 
 export const pageMetadata = {
 	// HOME PAGE
 	'/': {
-		title: 'Sweet JaunJos',
+		title: 'Sweet Jaunjos',
 		description: '',
-		ogImage: `${baseUrl}/images/logo/transparent-juanjos.png`,
+		ogImage: ogImage,
 		keywords: baseKeywords,
 	},
 
@@ -15,42 +16,42 @@ export const pageMetadata = {
 	'/services/weddings-and-special-events': {
 		title: 'Weddings & Special Events',
 		description: '',
-		ogImage: `${baseUrl}/images/logo/transparent-juanjos.png`,
+		ogImage: ogImage,
 		keywords: baseKeywords,
 	},
 	// Cupcakes and Specialty Cakes
 	'/services/cupcakes-and-specialty-cakes': {
 		title: 'Cupcakes & Specialty Cakes',
 		description: '',
-		ogImage: `${baseUrl}/images/logo/transparent-juanjos.png`,
+		ogImage: ogImage,
 		keywords: baseKeywords,
 	},
 	// Hand Crafted Cookies
 	'/services/hand-crafted-cookies': {
 		title: 'Hand Crafted Cookies',
 		description: '',
-		ogImage: `${baseUrl}/images/logo/transparent-juanjos.png`,
+		ogImage: ogImage,
 		keywords: baseKeywords,
 	},
 	// Candy and Treats
 	'/services/candy-and-treats': {
 		title: 'Candy and Treats',
 		description: '',
-		ogImage: `${baseUrl}/images/logo/transparent-juanjos.png`,
+		ogImage: ogImage,
 		keywords: baseKeywords,
 	},
 	// Contact Us
 	'/sweet-juanjos/contact-us': {
-		title: 'Contact Us - Sweet JuanJos',
+		title: 'Contact Us - Sweet Juanjos',
 		description: '',
-		ogImage: `${baseUrl}/images/logo/transparent-juanjos.png`,
+		ogImage: ogImage,
 		keywords: baseKeywords,
 	},
 	// Documents
 	'/documents': {
-		title: "Documents - Sweet JuanJos",
+		title: "Documents - Sweet Juanjos",
 		description: '',
-		ogImage: `${baseUrl}/images/logo/transparent-juanjos.png`,
+		ogImage: ogImage,
 		keywords: baseKeywords,
 	},
 };
