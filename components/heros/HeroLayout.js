@@ -5,14 +5,14 @@ import ButtonLink from '../utils/ButtonLink';
 
 const HeroLayout = ({ heading, subheading, img, CTA, CTAText }) => {
 	return (
-		<div className='relative h-[65vh] w-full text-light shadow-lg shadow-primary/40'>
+		<div className='relative h-[60vh] w-full text-light shadow-lg shadow-primary/40'>
 			<Image
 				src={img}
 				alt={heading}
 				layout='fill'
 				objectFit='cover'
 				className='z-0'
-				
+				priority={true}
 			/>
 			<div className='absolute inset-0 bg-gradient-to-b from-dark/20 via-dark/70 to-dark/20  z-10 text-center'>
 				<motion.div
