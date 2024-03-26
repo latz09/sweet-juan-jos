@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Paragraph, SubHeading } from '../utils/Typography';
 const Reviews = () => {
 	return (
-		<div className='grid gap-24 lg:gap-32 bg-gradient-to-l from-dark via-dark/90 to-dark py-24 lg:py-36'>
+		<div className='grid gap-24 lg:gap-32 bg-gradient-to-l from-dark via-dark/80 to-dark py-24 lg:py-36'>
 			{reviews.map((review, index) => (
 				<Review key={index} review={review} />
 			))}
