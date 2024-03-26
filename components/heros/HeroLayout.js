@@ -24,7 +24,7 @@ const HeroLayout = ({ heading, subheading, img, CTA, CTAText }) => {
 					<MainHeading title={heading} type='light' />
 					<SubHeading type='light' title={subheading} />
 					<div className='mt-10 '>
-						<ButtonLink title={CTAText} type='secondary' href={CTA} />
+						<ButtonLink title={CTAText} type='primary' href={CTA} />
 					</div>
 				</motion.div>
 			</div>

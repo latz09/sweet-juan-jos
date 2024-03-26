@@ -1,8 +1,17 @@
+import HeroLayout from '@/components/heros/HeroLayout';
+import { cupcakeAndSpecialtyCakesData as data } from '@/data/services/cupcakes-and-specialty-cakes';
+
 const CupcakesAndSpecialtyCakes = () => {
 	return (
-		<div className='h-screen grid place-items-center text-2xl text-primary'>
-			Cupcakes & Specialty Cakes
-		</div>
+		<>
+			<HeroLayout
+				heading={data.heading}
+				subheading={data.subheading}
+				img={data.img}
+				CTA={data.CTA}
+				CTAText={data.CTAText}
+			/>
+		</>
 	);
 };
 

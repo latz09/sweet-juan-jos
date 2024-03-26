@@ -17,7 +17,7 @@ export const NavigationLinks = [
     {
         id: 4,
         name: 'Cookies',  
-        slug: '/services/hand-crafted-cookies'
+        slug: '/services/handcrafted-cookies'
     },
     {
         id: 5,

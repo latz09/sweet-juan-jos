@@ -1,8 +1,17 @@
+import HeroLayout from '@/components/heros/HeroLayout';
+import { candyAndTreatsData as data } from '@/data/services/candy-and-treats';
+
 const CandyAndTreats = () => {
 	return (
-		<div className='h-screen grid place-items-center text-2xl text-primary'>
-			Candy & Treats
-		</div>
+		<>
+			<HeroLayout
+				heading={data.heading}
+				subheading={data.subheading}
+				img={data.img}
+				CTA={data.CTA}
+				CTAText={data.CTAText}
+			/>
+		</>
 	);
 };
 
