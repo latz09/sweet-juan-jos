@@ -12,6 +12,7 @@ const HeroLayout = ({ heading, subheading, img, CTA, CTAText }) => {
 				layout='fill'
 				objectFit='cover'
 				className='z-0'
+				
 			/>
 			<div className='absolute inset-0 bg-gradient-to-b from-dark/20 via-dark/70 to-dark/20  z-10 text-center'>
 				<motion.div

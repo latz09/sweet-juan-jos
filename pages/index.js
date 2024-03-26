@@ -1,6 +1,7 @@
 import Services from '@/components/services/Services';
 
 import specialEventsImage from '../public/images/displays/special-events.jpg';
+import specialEventsImage2 from '../public/images/ai-generated/recreate.webp';
 import HeroLayout from '@/components/heros/HeroLayout';
 import AboutBlurb from '@/components/about/AboutBlurb';
 import Reviews from '@/components/reviews/Reviews';
