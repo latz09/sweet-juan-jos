@@ -14,9 +14,9 @@ const ServiceCards = () => {
 				{serviceCardsData.map((service) => (
 					<motion.div
 						key={service.id}
-						initial={{ y: 100, opacity: 0 }}
-						whileInView={{ y: 0, opacity: 1 }}
-						transition={{ duration: .7, delay: 0 }}
+						initial={{ scale: .95, opacity: 0 }}
+						whileInView={{ scale: 1, opacity: 1 }}
+						transition={{ duration: .4 }}
 						className="shadow-lg shadow-primary/30 lg:hover:shadow-none lg:hover:scale-105 transition duration-1000 cursor-pointer"
 					>
 						<Link
@@ -24,9 +24,9 @@ const ServiceCards = () => {
 							className='relative group '
 						>
 							{/* Image as Background */}
-							<div className='h-30 relative group-hover:opacity-95 transition duration-500'>
-								<Image src={service.image} alt={service.title} />
-							</div>
+							<motion.div className='h-30 relative group-hover:opacity-95 transition duration-500' >
+								<Image src={service.image} alt={service.title}  />
+							</motion.div>
 
 							{/* Overlay Container with Primary Background centered */}
 							<div className='absolute inset-0 flex items-center justify-center lg:group-hover:scale-90 transition duration-700 group'>

@@ -6,7 +6,7 @@ import HeroLayout from '@/components/heros/HeroLayout';
 import AboutBlurb from '@/components/about/AboutBlurb';
 import Reviews from '@/components/reviews/Reviews';
 import IntroBlurb from '@/components/about/IntroBlurb';
-import ServiceCard from '@/components/services/ServiceCards';
+import ServiceCards from '@/components/services/ServiceCards';
 import LandingHero from '@/components/heros/LandingHero';
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
 				<LandingHero />
 				<IntroBlurb />
 			</div>
-			<ServiceCard />
+			<ServiceCards />
 			<HeroLayout
 				heading='Weddings & Special Events'
 				subheading='From Weddings to Birthdays - We can help you celebrate any special occasion'
