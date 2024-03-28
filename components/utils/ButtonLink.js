@@ -9,6 +9,7 @@ const ButtonLink = ({ title, type, href }) => {
 		case 'secondary':
 			type = 'bg-primary text-light hover:bg-light hover:text-dark hover:border hover:border-primary	';
 			break;
+		
 	}
 
 	return (
