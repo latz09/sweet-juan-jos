@@ -25,7 +25,7 @@ const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
 			</div>
 			<div className="grid gap-2">
 				<SubHeading title={data.subheading} type='dark' />
-				<span className=' italic text-center'>{data.stipulation}</span>
+				<span className=' italic text-center mx-4'>{data.stipulation}</span>
 			</div>
 
 			<div className="grid gap-2">
@@ -56,8 +56,8 @@ const FlavorList = ({ flavors }) => {
 			{flavors.map((flavor, index) => (
 				<motion.li
 					key={index}
-					initial={{ opacity: 0, x: -100, scale: 0 }}
-					animate={viewed[index] ? { opacity: 1, x: 0, scale: 1 } : {}}
+					initial={{ opacity: 0, y: 20, scale: 0 }}
+					animate={viewed[index] ? { opacity: 1, y: 0, scale: 1 } : {}}
 					transition={{ duration: 0.4, delay: index * 0.1 }}
 					onViewportEnter={() => {
 						// Update the state to mark this item as viewed

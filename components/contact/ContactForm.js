@@ -30,7 +30,7 @@ const ContactForm = () => {
 	};
 
 	const handleSubmit = (e) => {
-		// e.preventDefault();
+		e.preventDefault();
 		console.log(formData);
 	};
 
