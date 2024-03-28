@@ -5,7 +5,7 @@ import {motion} from 'framer-motion';
 
 const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
 	const renderFlavorSection = (title, flavors) => (
-		<div className='grid place-items-center gap-8 mx-2'>
+		<div className='grid place-items-center gap-8 mx-2 text-center'>
 			<SubHeading title={title} type='dark' />
 			<FlavorList flavors={flavors} />
 			{/* <div className="mt-16"> */}
