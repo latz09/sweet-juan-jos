@@ -15,7 +15,7 @@ const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
 	);
 
 	return (
-		<div className='grid gap-12 place-items-center font-bold'>
+		<div className='grid gap-12 place-items-center font-bold text-center'>
 			<div className='grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 place-items-cente max-w-7xl mx-auto'>
 				{renderFlavorSection(data.cakeFlavors.title, data.cakeFlavors.flavors)}
 				{renderFlavorSection(
@@ -23,7 +23,7 @@ const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
 					data.frostingFlavors.flavors
 				)}
 			</div>
-			<span className=' italic'>{data.stipulation}</span>
+			<span className=' italic text-center'>{data.stipulation}</span>
             <SubHeading title={data.subheading} type='dark' />
             <ButtonLink
 					title='Request Order Now'
