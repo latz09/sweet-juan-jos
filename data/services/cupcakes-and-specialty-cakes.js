@@ -44,5 +44,13 @@ export const cupcakeAndSpecialtyCakesData = {
 				'Whiskey Salted Carmel*',
 			],
 		},
+        sizes: {
+            title: 'Small Cake Sizes',
+            options: [
+                '2-layer 5 inch round',
+                '2-layer 6 inch round',
+                '3-layer 6 inch round',
+            ]
+        }
 	},
 };
