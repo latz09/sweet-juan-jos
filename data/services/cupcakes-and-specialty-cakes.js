@@ -35,7 +35,7 @@ export const cupcakeAndSpecialtyCakesData = {
 				'Almond',
 				'Amaretto',
 				'Baileys*',
-				'Coconut Lime*',
+				'Coconut Lime',
 				'Cream Cheese*',
 				'Lemon',
 				'Maple',
@@ -47,6 +47,7 @@ export const cupcakeAndSpecialtyCakesData = {
         sizes: {
             title: 'Small Cake Sizes',
             options: [
+				'1-layer 5 inch round (Smash Cake!)',
                 '2-layer 5 inch round',
                 '2-layer 6 inch round',
                 '3-layer 6 inch round',

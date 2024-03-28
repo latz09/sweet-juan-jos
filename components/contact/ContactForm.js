@@ -8,6 +8,7 @@ const ContactForm = () => {
 		phoneNumber: '',
 		date: '',
 		interests: [],
+		amountInDozens: '',
 	});
 
 	const handleChange = (e) => {
@@ -64,12 +65,29 @@ const ContactForm = () => {
 					onChange={handleChange}
 				/>
 				<FormField
-					label='Date'
+					label='Event Date'
 					type='date'
 					name='date'
 					value={formData.date}
 					onChange={handleChange}
 				/>
+				{/* New dropdown for selecting amount in dozens */}
+				<label className='mb-4 grid lg:grid-cols-2 items-center lg:gap-8 w-[70vw] lg:w-[50vw]'>
+    <SubHeading title='Amount in Dozens'/> 
+    <select
+        name='amountInDozens'
+        value={formData.amountInDozens}
+        onChange={handleChange}
+        className='mt-1 block w-full rounded-sm border border-primary shadow-sm shadow-primary/30 focus:outline-none  bg-light focus:bg-primary/10 focus:border-dark p-4'
+    >
+        <option value='' >Select Amount</option>
+        {[...Array(9)].map((_, i) => (  // Options for 1 to 9 dozen
+            <option key={i} value={i + 1}>{`${i + 1} dozen`}</option>
+        ))}
+        <option value='10+'>10+</option>  
+    </select>
+</label>
+
 			</div>
 			<div>
 				<FormField
@@ -140,7 +158,7 @@ const FormField = ({
 		return (
 			<div className='grid place-items-center gap-4'>
 				<legend className='font-bold text-2xl mb-2'>{label}:</legend>
-				<div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
+				<div className='grid grid-cols-2 md:grid-cols-4 gap-8  '>
 					{options.map((option) => (
 						<label key={option} className='flex items-center space-x-3'>
 							<input
@@ -161,15 +179,15 @@ const FormField = ({
 
 	// Default input fields handling
 	return (
-		<label className='mb-4 grid lg:grid-cols-2 items-center lg:gap-8 w-[70vw] lg:w-[50vw]'>
-			<SubHeading title={`${label } ${required ? '*' : ''}`} />
+		<label className='mb-4 grid lg:grid-cols-2 items-center lg:gap-8 w-[70vw] lg:w-[50vw] '>
+			<SubHeading title={`${label} ${required ? '*' : ''}`} />
 			<input
 				type={type}
 				name={name}
 				value={value}
 				onChange={onChange}
 				required={required}
-				className='mt-1 block w-full rounded-sm border border-primary shadow-sm shadow-primary/30  focus:outline-none p-2 bg-light focus:bg-primary/10 focus:border-dark'
+				className='mt-1 block w-full rounded-sm border border-primary shadow-sm shadow-primary/30  focus:outline-none  bg-light focus:bg-primary/10 focus:border-dark p-4'
 			/>
 		</label>
 	);
