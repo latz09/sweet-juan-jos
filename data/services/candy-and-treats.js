@@ -4,9 +4,6 @@ export const candyAndTreatsData = {
 	heading: 'Candy & Treats',
 	subheading: 'Crafted Confections - Unique Twists on Beloved Classics',
 	img: landingImage,
-
-	//ALL CTA'S GO TO CONTACT PAGE?
-
 	CTA: '/sweet-juanjos/contact-us',
 	CTAText: 'Request Order Now',
 };

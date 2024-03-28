@@ -4,9 +4,45 @@ export const cupcakeAndSpecialtyCakesData = {
 	heading: 'Cupcakes & Specialty Cakes',
 	subheading: 'From Cupcakes to Specialty Cakes - We have you covered',
 	img: landingImage,
-
-	//ALL CTA'S GO TO CONTACT PAGE?
-
 	CTA: '/sweet-juanjos/contact-us',
 	CTAText: 'Request Order Now',
+	menuData: {
+		heading: 'Cupcakes & Specialty Cakes',
+		subheading: 'One Flavor Combination per Dozen / per Cake',
+        stipulation: '* Flavors available with cupcakes only. Not available for specialty cakes.',
+		cakeFlavors: {
+			title: 'Cake Flavors',
+			flavors: [
+				'Vanilla',
+				'Chocolate',
+				'Confetti',
+				'Almond',
+				'Coconut Lime',
+				'Lemon',
+				'Lemon Poppyseed',
+				'Pumpkin (Min. 2 Dozen)*',
+				'Red Velvet',
+				'Strawberry',
+				'Pineapple',
+				'Pistachio',
+			],
+		},
+		frostingFlavors: {
+			title: 'Frosting Flavors',
+			flavors: [
+				'Vanilla',
+				'Chocolate',
+				'Almond',
+				'Amaretto',
+				'Baileys*',
+				'Coconut Lime*',
+				'Cream Cheese*',
+				'Lemon',
+				'Maple',
+				'Peanut Butter*',
+				'Salted Carmel',
+				'Whiskey Salted Carmel*',
+			],
+		},
+	},
 };

@@ -9,4 +9,12 @@ export const handcraftedCookiesData = {
 
 	CTA: '/sweet-juanjos/contact-us',
 	CTAText: 'Request Order Now',
+	menuData: {
+		heading: 'Handcrafted Cookies',
+		subheading: 'One Flavor Combination Per Dozen',
+		cookieFlavors: {
+			title: 'Cookie Flavors',
+			flavors: ['Chocolate Chip', 'Chocolate', 'M&M', 'Peanut Butter'],
+		},
+	},
 };
