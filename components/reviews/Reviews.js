@@ -43,7 +43,7 @@ const Review = ({ review }) => {
 			<div className='place-self-start  hidden lg:block'>
 				<SubHeading title={`${review.name} -`} type='dark' />
 			</div>
-			<div className='grid place-items-center text-center gap-8 font-black bg-gradient-to-l from-dark via-dark/80 to-dark px-8 pt-12 pb-8 shadow-lg shadow-primary/60 border-y lg:border-x border-dark lg:rounded'>
+			<div className='grid place-items-center text-center gap-8 font-black bg-gradient-to-l from-dark via-dark/80 to-dark px-4 lg:px-8 pt-12 pb-8 shadow-lg shadow-primary/60 border-y lg:border-x border-dark lg:rounded'>
 				{/* <motion.div
 				className=' text-6xl lg:text-7xl text-light'
 				variants={shakeAnimation}
