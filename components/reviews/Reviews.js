@@ -52,7 +52,7 @@ const Review = ({ review }) => {
 			>
 				<GiCupcake />
 			</motion.div> */}
-				<Paragraph content={`" ${review.review} "`} type='light' />
+				<Paragraph content={`"${review.review}"`} type='light' />
 				<div className="block lg:hidden">
 					<SubHeading title={`-${review.name}`} type='light' />
 				</div>
