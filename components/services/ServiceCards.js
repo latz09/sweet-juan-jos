@@ -24,13 +24,13 @@ const ServiceCards = () => {
 							className='relative group '
 						>
 							{/* Image as Background */}
-							<motion.div className='h-330 relative group-hover:opacity-95 transition duration-500' >
+							<motion.div className='relative lg:group-hover:scale-105 transition duration-700' >
 								<Image src={service.image} alt={service.title} className=""  />
 							</motion.div>
 
 							{/* Overlay Container with Primary Background centered */}
-							<div className='absolute inset-0 flex items-end  justify-center lg:group-hover:scale-95 transition duration-700 group '>
-								<div className='bg-gradient-to-b w-full from-primary/70 lg:group-hover:from-primary to-primary/70 lg:group-hover:to-primary via-primary px-4 lg:px-16 py-6 shadow-lg shadow-primary/30 text-light text-center'>
+							<div className='absolute inset-0 flex items-end  justify-center group '>
+								<div className='bg-gradient-to-b w-full from-primary/70 lg:group-hover:from-primary to-primary/70 lg:group-hover:to-primary via-primary px-4 lg:px-16 py-6 shadow-lg shadow-primary/30 text-light text-center transitition duration-700'>
 									{/* Title */}
 									<SubHeading title={service.title} type='light' />
 								</div>
