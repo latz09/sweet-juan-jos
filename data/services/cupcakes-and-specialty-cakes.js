@@ -51,6 +51,7 @@ export const cupcakeAndSpecialtyCakesData = {
                 '2-layer 5 inch round',
                 '2-layer 6 inch round',
                 '3-layer 6 inch round',
+                '*Additional sizes available upon request',
             ]
         }
 	},
