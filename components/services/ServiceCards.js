@@ -17,7 +17,7 @@ const ServiceCards = () => {
 						initial={{ scale: .95, opacity: 0 }}
 						whileInView={{ scale: 1, opacity: 1 }}
 						transition={{ duration: .4 }}
-						className="shadow-lg shadow-primary/30 lg:hover:shadow-none lg:hover:scale-105 transition duration-1000 cursor-pointer"
+						className="shadow-lg shadow-primary/30 lg:hover:shadow-none lg:hover:scale-105 transition duration-1000 cursor-pointer lg:m-8"
 					>
 						<Link
 							href={`/services/${service.href}`}

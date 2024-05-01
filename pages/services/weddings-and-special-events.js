@@ -1,7 +1,14 @@
 const WeddingsAndSpecialEvents = () => {
 	return (
-		<div className='h-screen grid place-items-center text-2xl text-primary'>
-			Weddings & Special Events
+		<div className=''>
+		
+
+			<a
+				href='https://drive.google.com/uc?export=download&id=1zpwifbYSeIytCyIv4p2u4pVJW1FfniBt'
+				download
+			>
+				<button>Download PDF</button>
+			</a>
 		</div>
 	);
 };
