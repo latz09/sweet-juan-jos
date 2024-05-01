@@ -7,9 +7,10 @@ const ButtonLink = ({ title, type, href }) => {
 				'bg-dark text-light  shadow-lg shadow-dark/50 border lg:border-2 rounded-sm border-primary hover:border-primary/0 hover:shadow-sm  hover:bg-light hover:text-dark';
 			break;
 		case 'secondary':
-			type = 'bg-primary text-light hover:bg-light hover:text-dark hover:border hover:border-primary	';
+			type =
+				'bg-primary text-light hover:bg-light hover:text-dark hover:border hover:border-primary	';
 			break;
-		
+	
 	}
 
 	return (
@@ -17,7 +18,7 @@ const ButtonLink = ({ title, type, href }) => {
 			<Link href={href}>
 				<div className='grid place-items-center'>
 					<button
-						className={`py-3  px-8  font-bold text-2xl lg:text-3xl rounded-sm hover:scale-95 transition duration-700 ${type}`}
+						className={`py-3  px-8  font-bold text-3xl lg:text-4xl  hover:scale-95 transition duration-700 ${type}`}
 					>
 						{title}
 					</button>

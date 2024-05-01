@@ -37,7 +37,7 @@ const LandingHero = () => {
 					<div className=' '>
 						<ButtonLink
 							title='Order Now'
-							type='primary'
+							type='secondary'
 							href='/sweet-juanjos/contact-us'
 						/>
 					</div>

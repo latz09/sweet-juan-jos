@@ -12,7 +12,7 @@ import LandingHero from '@/components/heros/LandingHero';
 export default function Home() {
 	return (
 		<main className='grid gap-32'>
-			<div className='grid gap-24'>
+			<div className='grid gap-16 lg:gap-24'>
 				<LandingHero />
 				<IntroBlurb />
 			</div>
