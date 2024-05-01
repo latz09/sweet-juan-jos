@@ -29,7 +29,7 @@ export const SubHeading = ({title, type}) => {
 
     return (
         <div>
-            <h3 className={`text-2xl lg:text-3xl  font-bold px-2 ${type}`}>{title}</h3>
+            <h3 className={`text-3xl lg:text-4xl  font-bold px-2 ${type}`}>{title}</h3>
         </div>
     );
 }
