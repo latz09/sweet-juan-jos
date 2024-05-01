@@ -5,19 +5,6 @@ import { GiCupcake } from 'react-icons/gi';
 
 import { motion } from 'framer-motion';
 import { MainHeading, Paragraph, SubHeading } from '../utils/Typography';
-const Reviews = () => {
-	return (
-		<div className='grid place-items-center gap-16 py-24 lg:py-36'>
-			<MainHeading title={`Happy Customers`} type='dark' />
-			<div className='grid gap-24  '>
-				{reviews.map((review, index) => (
-					<Review key={index} review={review} />
-				))}
-			</div>
-		</div>
-	);
-};
-
 const shakeAnimation = {
 	initial: { rotate: 0 },
 	animate: {
@@ -27,9 +14,31 @@ const shakeAnimation = {
 			repeat: Infinity, // Repeat the animation indefinitely
 			repeatType: 'loop', // Loop the animation
 			ease: 'linear', // Linear easing for consistent shake speed
-			repeatDelay: 1.5, // Delay between each shake cycle to achieve a total of 2 seconds with the animation
+			repeatDelay: 1, // Delay between each shake cycle to achieve a total of 2 seconds with the animation
 		},
 	},
+};
+const Reviews = () => {
+	return (
+		<div className='grid place-items-center gap-24 py-24 lg:py-36 bg-gradient-to-b from-dark/0 via-primary/5 to-dark/0'>
+			<div className='grid place-items-center gap-8'>
+				<motion.div
+					className=' text-5xl lg:text-7xl text-primary'
+					variants={shakeAnimation}
+					initial='initial'
+					whileInView='animate'
+				>
+					<GiCupcake />
+				</motion.div>{' '}
+				<MainHeading title={`Happy Customers`} type='dark' />
+			</div>
+			<div className='grid gap-24  '>
+				{reviews.map((review, index) => (
+					<Review key={index} review={review} />
+				))}
+			</div>
+		</div>
+	);
 };
 
 const Review = ({ review }) => {
@@ -40,22 +49,10 @@ const Review = ({ review }) => {
 			whileInView={{ y: 0 }}
 			transition={{ duration: 1.1, delay: 0.1 }}
 		>
-			<div className='place-self-start  hidden lg:block'>
-				<SubHeading title={`${review.name} -`} type='dark' />
-			</div>
-			<div className='grid place-items-center text-center gap-8 font-black bg-gradient-to-l from-dark via-dark/80 to-dark px-4 lg:px-8 pt-12 pb-8 shadow-lg shadow-primary/60 border-y lg:border-x border-dark lg:rounded'>
-				{/* <motion.div
-				className=' text-6xl lg:text-7xl text-light'
-				variants={shakeAnimation}
-				initial='initial'
-				whileInView='animate'
-			>
-				<GiCupcake />
-			</motion.div> */}
-				<Paragraph content={`"${review.review}"`} type='light' />
-				<div className="block lg:hidden">
-					<SubHeading title={`-${review.name}`} type='light' />
-				</div>
+			<div className='grid place-items-center text-center gap-8 font-black  px-4 lg:px-1 '>
+				<Paragraph content={`"${review.review}"`} type='dark' />
+
+				<SubHeading title={`-${review.name}`} type='dark' />
 			</div>
 		</motion.div>
 	);
