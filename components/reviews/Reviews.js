@@ -1,18 +1,20 @@
 import { reviews } from '../../data/reviews';
 import { MdFormatQuote } from 'react-icons/md';
-import { BsFillChatSquareQuoteFill } from "react-icons/bs";
-import { GiCupcake } from "react-icons/gi";
+import { BsFillChatSquareQuoteFill } from 'react-icons/bs';
+import { GiCupcake } from 'react-icons/gi';
 
 import { motion } from 'framer-motion';
-import { Paragraph, SubHeading } from '../utils/Typography';
+import { MainHeading, Paragraph, SubHeading } from '../utils/Typography';
 const Reviews = () => {
 	return (
-		<div className='grid gap-24 lg:gap-32 bg-gradient-to-l from-dark via-dark/70 to-dark py-24 lg:py-36'>
-			{reviews.map((review, index) => (
-				<Review key={index} review={review} />
-			))}
+		<div className='grid place-items-center gap-16 py-24 lg:py-36'>
+			<MainHeading title={`Happy Customers is Alway's our Goal!`} type='dark' />
+			<div className='grid gap-24  '>
+				{reviews.map((review, index) => (
+					<Review key={index} review={review} />
+				))}
+			</div>
 		</div>
-		// <div></div>
 	);
 };
 
@@ -33,23 +35,27 @@ const shakeAnimation = {
 const Review = ({ review }) => {
 	return (
 		<motion.div
-			className='flex flex-col items-center gap-4 px-2 lg:px-1 lg:w-1/2 mx-auto text-xl text-light '
+			className='flex flex-col items-center gap-4  lg:px-1 lg:w-1/2 mx-auto text-xl text-primary  '
 			initial={{ y: 100 }}
 			whileInView={{ y: 0 }}
 			transition={{ duration: 1.1, delay: 0.1 }}
 		>
-			<motion.div
-				className=' text-4xl lg:text-6xl mb-4'
+			<div className='place-self-start  hidden lg:block'>
+				<SubHeading title={`${review.name} -`} type='dark' />
+			</div>
+			<div className='grid place-items-center text-center gap-8 font-black bg-gradient-to-l from-dark via-dark/80 to-dark px-8 pt-12 pb-8 shadow-lg shadow-primary/60 border-y lg:border-x border-dark lg:rounded'>
+				{/* <motion.div
+				className=' text-6xl lg:text-7xl text-light'
 				variants={shakeAnimation}
 				initial='initial'
 				whileInView='animate'
 			>
 				<GiCupcake />
-			</motion.div>
-			<div className="grid place-items-center text-center gap-8">
-				<Paragraph content={review.review} type='light' />
-
-				<SubHeading title={review.name} type='light' />
+			</motion.div> */}
+				<Paragraph content={`" ${review.review} "`} type='light' />
+				<div className="block lg:hidden">
+					<SubHeading title={`-${review.name}`} type='light' />
+				</div>
 			</div>
 		</motion.div>
 	);
