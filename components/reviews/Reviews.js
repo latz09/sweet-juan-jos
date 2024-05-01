@@ -1,6 +1,7 @@
 import { reviews } from '../../data/reviews';
 import { MdFormatQuote } from 'react-icons/md';
 import { BsFillChatSquareQuoteFill } from "react-icons/bs";
+import { GiCupcake } from "react-icons/gi";
 
 import { motion } from 'framer-motion';
 import { Paragraph, SubHeading } from '../utils/Typography';
@@ -38,12 +39,12 @@ const Review = ({ review }) => {
 			transition={{ duration: 1.1, delay: 0.1 }}
 		>
 			<motion.div
-				className='text-primary text-3xl lg:text-5xl mb-4'
+				className=' text-4xl lg:text-6xl mb-4'
 				variants={shakeAnimation}
 				initial='initial'
 				whileInView='animate'
 			>
-				<BsFillChatSquareQuoteFill />
+				<GiCupcake />
 			</motion.div>
 			<div className="grid place-items-center text-center gap-8">
 				<Paragraph content={review.review} type='light' />

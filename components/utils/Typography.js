@@ -51,7 +51,7 @@ export const Paragraph = ({content, type}) => {
 
     return (
         <div>
-            <p className={`leading-8 lg:leading-10 text-2xl lg:text-3xl  ${type}`}>{content}</p>
+            <p className={`leading-8 lg:leading-10 text-2xl lg:text-4xl   ${type}`}>{content}</p>
         </div>
     );
 }
