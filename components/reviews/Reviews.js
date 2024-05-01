@@ -1,6 +1,6 @@
 import { reviews } from '../../data/reviews';
 import { MdFormatQuote } from 'react-icons/md';
-import { BsFillChatSquareQuoteFill } from 'react-icons/bs';
+import { FaQuoteLeft } from 'react-icons/fa6';
 import { GiCupcake } from 'react-icons/gi';
 
 import { motion } from 'framer-motion';
@@ -22,14 +22,14 @@ const Reviews = () => {
 	return (
 		<div className='grid place-items-center gap-24 py-24 lg:py-36 bg-gradient-to-b from-dark/0 via-primary/5 to-dark/0'>
 			<div className='grid place-items-center gap-8'>
-				<motion.div
+				<div
 					className=' text-5xl lg:text-7xl text-primary'
-					variants={shakeAnimation}
-					initial='initial'
-					whileInView='animate'
+					// variants={shakeAnimation}
+					// initial='initial'
+					// whileInView='animate'
 				>
 					<GiCupcake />
-				</motion.div>{' '}
+				</div>{' '}
 				<MainHeading title={`Happy Customers`} type='dark' />
 			</div>
 			<div className='grid gap-24  '>
@@ -50,8 +50,15 @@ const Review = ({ review }) => {
 			transition={{ duration: 1.1, delay: 0.1 }}
 		>
 			<div className='grid place-items-center text-center gap-8 font-black  px-4 lg:px-1 '>
-				<Paragraph content={`"${review.review}"`} type='dark' />
-
+				<motion.div
+					className=' text-3xl lg:text-5xl text-primary'
+					variants={shakeAnimation}
+					initial='initial'
+					whileInView='animate'
+				>
+					<FaQuoteLeft />
+				</motion.div>{' '}
+				<Paragraph content={`${review.review}"`} type='dark' />
 				<SubHeading title={`-${review.name}`} type='dark' />
 			</div>
 		</motion.div>
