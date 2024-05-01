@@ -7,6 +7,7 @@ import { NavigationLinks } from '@/data/NavigationLinks';
 import logo from '../../public/images/logo/transparent-juanjos.png';
 
 
+
 const Navigation = () => {
 	return (
 		<div className='py-2 lg:py-6 sticky top-0 bg-light/95 z-40'>
