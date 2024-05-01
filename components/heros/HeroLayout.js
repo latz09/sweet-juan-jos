@@ -5,7 +5,7 @@ import ButtonLink from '../utils/ButtonLink';
 
 const HeroLayout = ({ heading, subheading, img, CTA, CTAText }) => {
 	return (
-		<div className='relative h-[80vh] w-full text-light shadow-lg shadow-primary/40'>
+		<div className='relative h-[60vh] lg:h-[65vh] w-full text-light shadow-lg shadow-primary/40'>
 			<Image
 				src={img}
 				alt={heading}
