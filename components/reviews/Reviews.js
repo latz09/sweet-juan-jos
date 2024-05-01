@@ -8,7 +8,7 @@ import { MainHeading, Paragraph, SubHeading } from '../utils/Typography';
 const Reviews = () => {
 	return (
 		<div className='grid place-items-center gap-16 py-24 lg:py-36'>
-			<MainHeading title={`Happy Customers is Alway's our Goal!`} type='dark' />
+			<MainHeading title={`Happy Customers`} type='dark' />
 			<div className='grid gap-24  '>
 				{reviews.map((review, index) => (
 					<Review key={index} review={review} />
