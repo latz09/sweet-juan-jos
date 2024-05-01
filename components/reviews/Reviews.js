@@ -1,10 +1,8 @@
 import { reviews } from '../../data/reviews';
-import { MdFormatQuote } from 'react-icons/md';
 import { FaQuoteLeft } from 'react-icons/fa6';
-import { GiCupcake } from 'react-icons/gi';
-
 import { motion } from 'framer-motion';
 import { MainHeading, Paragraph, SubHeading } from '../utils/Typography';
+import { RiDoubleQuotesL } from "react-icons/ri";
 const shakeAnimation = {
 	initial: { rotate: 0 },
 	animate: {
@@ -21,17 +19,8 @@ const shakeAnimation = {
 const Reviews = () => {
 	return (
 		<div className='grid place-items-center gap-24 py-24 lg:py-36 bg-gradient-to-b from-dark/0 via-primary/5 to-dark/0'>
-			<div className='grid place-items-center gap-8'>
-				<div
-					className=' text-5xl lg:text-7xl text-primary'
-					// variants={shakeAnimation}
-					// initial='initial'
-					// whileInView='animate'
-				>
-					<GiCupcake />
-				</div>{' '}
-				<MainHeading title={`Happy Customers`} type='dark' />
-			</div>
+			<MainHeading title={`Happy Customers`} type='dark' />
+
 			<div className='grid gap-24  '>
 				{reviews.map((review, index) => (
 					<Review key={index} review={review} />
@@ -51,12 +40,12 @@ const Review = ({ review }) => {
 		>
 			<div className='grid place-items-center text-center gap-8 font-black  px-4 lg:px-1 '>
 				<motion.div
-					className=' text-3xl lg:text-5xl text-primary'
+					className=' text-5xl lg:text-6xl text-primary'
 					variants={shakeAnimation}
 					initial='initial'
 					whileInView='animate'
 				>
-					<FaQuoteLeft />
+					<RiDoubleQuotesL />
 				</motion.div>{' '}
 				<Paragraph content={`${review.review}"`} type='dark' />
 				<SubHeading title={`-${review.name}`} type='dark' />
