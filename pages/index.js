@@ -19,7 +19,7 @@ export default function Home() {
 			<ServiceCards />
 			<HeroLayout
 				heading='Weddings & Special Events'
-				subheading='From Weddings to Birthdays - We can help you celebrate any special occasion'
+				subheading='From Weddings to Birthdays. We can help you celebrate any special occasion'
 				img={specialEventsImage}
 				CTA='/services/weddings-and-special-events'
 				CTAText='Learn More'
