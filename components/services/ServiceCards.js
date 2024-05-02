@@ -16,22 +16,17 @@ const ServiceCards = () => {
 						key={service.id}
 						initial={{ y: 80, opacity: 0 }}
 						whileInView={{ y: 0, opacity: 1 }}
-						whileHover={{ scale: .95 }}
-						transition={{ duration: .6 }}
-						className="shadow-lg shadow-primary/30 hover:shadow-none cursor-pointer lg:m-8"
+						whileHover={{ scale: 0.95 }}
+						transition={{ duration: 0.6 }}
+						className='shadow-lg shadow-primary/30 hover:shadow-none cursor-pointer lg:m-8'
 					>
-						<Link
-							href={`/services/${service.href}`}
-							className='relative '
-						>
-							<motion.div className='' >
-								<Image src={service.image} alt={service.title} className=""  />
+						<Link href={`/services/${service.href}`} className='relative '>
+							<motion.div className=''>
+								<Image src={service.image} alt={service.title} className='' />
 							</motion.div>
 
-							{/* Overlay Container with Primary Background centered */}
-							<div className='absolute inset-0 flex items-center  justify-center  '>
-								<div className='bg-gradient-to-b  from-primary/70  to-primary/70  via-primary px-4 lg:px-16 py-4 shadow-lg shadow-primary/30 text-light text-center '>
-									
+							<div className='absolute inset-0 flex items-center  justify-center  shadow-lg shadow-primary/30 text-light text-center w-full'>
+								<div className='w-full bg-gradient-to-b  from-primary/70  to-primary/70  via-primary px-4 lg:px-16 py-4'>
 									<SubHeading title={service.title} type='light' />
 								</div>
 							</div>
