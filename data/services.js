@@ -55,7 +55,7 @@ export const serviceCardsData = [
         id: 3,
         title: 'Handcrafted Cookies',
         image: cookies,
-        href:'hand-crafted-cookies'
+        href:'handcrafted-cookies'
     },
     {
         id: 4,
