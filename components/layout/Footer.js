@@ -17,7 +17,7 @@ const Footer = () => {
 					
 						
 					
-					<div className='grid place-items-center gap-2 text-2xl'>
+					<div className='grid place-items-center gap-2 text-2xl font-bold'>
 						<a href='mailto:sweetjuanjos@gmail.com'>sweetjuanjos@gmail.com</a>
 						<a href='tel:7155721681'>715 572-1681</a>
 					</div>
@@ -46,7 +46,7 @@ const Footer = () => {
 					</div>
 					<div className='grid place-items-center gap-4'>
 						<PdfDownload title='Current Flavor Options' document='flavors' />{' '}
-						<PdfDownload title='Current Pricing' document='flavors' />
+						<PdfDownload title='Current Pricing' document='pricing' />
 						<PdfDownload title='Wedding Checklist' document='checklist' />
 					</div>
 				</div>
