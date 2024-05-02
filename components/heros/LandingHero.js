@@ -13,12 +13,18 @@ const LandingHero = () => {
 			<Image
 				src={landingImage2}
 				alt='sweet juanjos'
-				layout='fill'
-				objectFit='cover'
-				objectPosition='center'
 				className='z-0'
 				quality={100}
 				priority={true}
+				fill
+				placeholder='blur'
+				style={{
+					position: 'absolute',
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					objectPosition: 'center',
+				}}
 			/>
 			<div className='absolute inset-0 bg-gradient-to-b from-light/90 via-light/70 to-light/0  z-10 text-center grid place-items-center '>
 				<motion.div

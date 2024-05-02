@@ -9,10 +9,16 @@ const HeroLayout = ({ heading, subheading, img, CTA, CTAText }) => {
 			<Image
 				src={img}
 				alt={heading}
-				layout='fill'
-				objectFit='cover'
 				className='z-0'
 				priority={true}
+				fill
+				placeholder='blur'
+				style={{
+					position: 'absolute',
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+				}}
 			/>
 			<div className='absolute inset-0 bg-gradient-to-b from-dark/5 via-dark/70 to-dark/0  z-10 '>
 				<motion.div
