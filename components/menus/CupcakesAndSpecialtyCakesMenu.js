@@ -2,15 +2,13 @@ import ButtonLink from '../utils/ButtonLink';
 import { useState } from 'react';
 import { SubHeading } from '../utils/Typography';
 import { motion } from 'framer-motion';
+import PdfDownload from '../utils/PdfDownload';
 
 const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
 	const renderFlavorSection = (title, flavors) => (
 		<div className='grid place-items-center gap-8 mx-2 text-center'>
 			<SubHeading title={title} type='dark' />
 			<FlavorList flavors={flavors} />
-			{/* <div className="mt-16"> */}
-
-			{/* </div> */}
 		</div>
 	);
 
@@ -23,12 +21,18 @@ const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
 					data.frostingFlavors.flavors
 				)}
 			</div>
-			<div className="grid gap-2">
+			<PdfDownload
+				title='View Latest Flavor Options'
+				document='flavors'
+				icon={true}
+				
+			/>
+			<div className='grid gap-2'>
 				<SubHeading title={data.subheading} type='dark' />
 				<span className=' italic text-center mx-4'>{data.stipulation}</span>
 			</div>
 
-			<div className="grid gap-2">
+			<div className='grid gap-2'>
 				<SubHeading title={data.sizes.title} type='dark' />
 				<ul className='grid grid-cols-1 gap-2 text-lg'>
 					{data.sizes.options.map((size, index) => (
@@ -36,11 +40,6 @@ const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
 					))}
 				</ul>
 			</div>
-			<ButtonLink
-				title='Request Order Now'
-				type='secondary'
-				href='/sweet-juanjos/contact-us'
-			/>
 		</div>
 	);
 };

@@ -25,7 +25,7 @@ const Socials = ({includeText}) => {
 				))}
 			</div>
 			{
-				includeText && <p className='font-bold text-base text-center mx-4'>
+				includeText && <p className='font-bold text-2xl text-center w-4/5 lg:w-3/4 mx-auto'>
 				Join our sweet journey on social media for all the latest treats.
 			</p>
 			}
