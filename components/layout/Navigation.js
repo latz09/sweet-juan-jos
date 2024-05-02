@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { NavigationLinks } from '@/data/NavigationLinks';
 import logo from '../../public/images/logo/transparent-juanjos.png';
+import { useRouter } from 'next/router'; // Import useRouter
 
 
 
@@ -20,19 +21,27 @@ const Navigation = () => {
 export default Navigation;
 
 const DesktopNavigation = () => {
-	return (
-		<div className='hidden lg:block max-w-7xl mx-auto px-2 pb-2'>
-			<div className='mt-[2px] border-y border-primary py-4 flex items-center justify-around'>
-				{NavigationLinks.map((link) => (
-					<Link key={link.id} href={link.slug}>
-						<div className='text-xl border-x px-4 border-primary hover:border-x-2   hover:border-x-dark hover:scale-110 transition duration-700 font-bold'>
-							{link.name}
-						</div>
-					</Link>
-				))}
-			</div>
-		</div>
-	);
+    const router = useRouter(); // Use the useRouter hook to access the current route
+
+    // A function to determine if the link is the active page
+    const isActive = (path) => {
+        // This checks if the current path is exactly the link's path or if it's a subdirectory of a link path in a more forgiving way
+        return router.pathname === path || router.pathname.startsWith(path + '/');
+    };
+
+    return (
+        <div className='hidden lg:block max-w-7xl mx-auto px-2 pb-2'>
+            <div className='mt-[2px] border-y border-primary py-4 flex items-center justify-around'>
+                {NavigationLinks.map((link) => (
+                    <Link key={link.id} href={link.slug} passHref>
+                        <div className={`text-xl border-x px-4  font-bold ${isActive(link.slug) ? ' bg-primary text-light shadow-lg shadow-primary/30 py-2  border-x-0 scale-110' : 'hover:border-x-2 hover:border-x-dark hover:scale-110 transition duration-700'}`}>
+                            {link.name}
+                        </div>
+                    </Link>
+                ))}
+            </div>
+        </div>
+    );
 };
 
 const MobileNavigation = () => {
