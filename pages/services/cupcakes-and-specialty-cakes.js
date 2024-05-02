@@ -16,7 +16,7 @@ const CupcakesAndSpecialtyCakes = () => {
 			/>
 			<CupcakesAndSpecialtyCakesMenu data={data.menuData} />
 			<div className="grid gap-12 place-items-center">
-				<PdfDownload title='View Latest Pricing' document='pricing' />
+				<PdfDownload title='View Latest Pricing' document='pricing' icon={true} />
 
 				<ButtonLink
 					title='Request Order Now'
