@@ -53,7 +53,7 @@ const FlavorList = ({ flavors, title }) => {
 			</div>
 			<ul className='grid grid-cols-2 place-items-center gap-x-16 gap-y-8 lg:gap-y-6 p-4 '>
 				{flavors.map((flavor, index) => (
-					<li key={index} className='text-2xl text-center'>
+					<li key={index} className='text-xl lg:text-2xl text-dark/90 text-center'>
 						{flavor}
 					</li>
 				))}
