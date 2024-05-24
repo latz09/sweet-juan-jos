@@ -8,7 +8,7 @@ const ServiceCards = ({ data }) => {
 	return (
 		<div className='max-w-5xl mx-auto '>
 			<div className='grid place-items-center mb-12 '>
-				<MainHeading title='Our Delicious Offerings' type='dark' />
+				<MainHeading title='Browse Our Best' type='dark' />
 			</div>
 			<div className='grid lg:grid-cols-2 gap- place-items-center gap-x-4 gap-y-12 '>
 				{data.map((service) => (
