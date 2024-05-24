@@ -6,7 +6,7 @@ import LandingHeroAnimate from '../utils/animations/LandingHeroAnimate';
 
 const LandingHero = ({ landingImage }) => {
 	return (
-		<div className='relative h-[80vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>
+		<div className='relative h-[83vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>
 			<Image
 				src={landingImage}
 				alt='sweet juanjos'

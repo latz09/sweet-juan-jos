@@ -6,7 +6,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 	const query = FETCH_SPECIAL_EVENTS_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
 	const data = dataAsArray[0];
-    console.log(data)
+    
 	return (
 		<div className='grid gap-16 lg:gap-24'>
 			<HeroLayout

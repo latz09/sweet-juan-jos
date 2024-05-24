@@ -5,7 +5,7 @@ import { MainHeading, SubHeading } from '../utils/Typography';
 
 const BannerLayout = ({ imageUrl, heading, subheading, href, CTAText }) => {
 	return (
-		<div className='relative h-[55vh] lg:h-[80vh] w-full  text-dark shadow-lg shadow-primary/40'>
+		<div className='relative h-[40vh] lg:h-[80vh] w-full  text-dark shadow-lg shadow-primary/40'>
 			<Image
 				src={imageUrl}
 				alt={heading}
@@ -27,10 +27,10 @@ const BannerLayout = ({ imageUrl, heading, subheading, href, CTAText }) => {
 					whileInView={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 1.1, delay: 0.2 }}
 				>
-					<div className='max-w-3xl mx-auto grid gap-2 lg:gap-4 place-items-center  '>
+					<div className='max-w-3xl mx-auto grid gap-1 lg:gap-3 place-items-center  '>
 						<MainHeading title={heading} type='light' />
 						<SubHeading type='light' title={subheading} />
-						<div className='pt-2'>
+						<div className='pt-3'>
 							<ButtonLink title={CTAText} type='secondary' href={href} />
 						</div>
 					</div>

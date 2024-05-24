@@ -12,7 +12,7 @@ const CupcakesAndSpecialtyCakesPage = async () => {
 	const query = FETCH_CUPCAKE_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
 	const data = dataAsArray[0];
-	
+
 	return (
 		<div className='grid gap-16 lg:gap-24'>
 			<HeroLayout
@@ -29,12 +29,14 @@ const CupcakesAndSpecialtyCakesPage = async () => {
 				cupcakePrice={data.cupcakePrice}
 			/>
 
-			<ButtonLink
-				title='Order Now'
-				type='primary'
-				href='/sweet-juanjos/contact-us'
-			/>
 			<ImageBanner images={data.bannerImages} />
+			<div className='mt-2'>
+				<ButtonLink
+					title='Order Now'
+					type='primary'
+					href='/sweet-juanjos/contact-us'
+				/>
+			</div>
 		</div>
 	);
 };

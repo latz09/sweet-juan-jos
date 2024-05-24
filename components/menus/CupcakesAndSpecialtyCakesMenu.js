@@ -32,7 +32,7 @@ export default CupcakesAndSpecialtyCakesMenu;
 const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 	return (
 		<div className='grid gap-16'>
-			<div className='grid lg:flex items-center gap-4 lg:gap-16 justify-around w-full max-w-7xl mx-auto '>
+			<div className='grid lg:flex items-center lg:gap-16 justify-around w-full max-w-7xl mx-auto '>
 				<FlavorList flavors={cakeFlavors} title='Cake Flavors' />
 				<FlavorList flavors={frostingFlavors} title='Frosting Options' />
 			</div>
@@ -81,14 +81,14 @@ const SmallCakeSizes = ({ sizes }) => {
 	return (
 		<div className='grid gap-8 font-bold'>
 			<MainHeading title='Small Cake Sizes' type='dark' />
-			<div className='grid gap-8 place-items-center'>
+			<div className='grid gap-8 place-items-center '>
 				<ul className='grid place-items-center gap-y-8'>
 					{sizes.map((size, index) => (
 						<li
 							key={index}
-							className='text-2xl text-center flex items-center justify-between gap-24 w-full'
+							className='text-lg lg:text-2xl text-center flex items-center justify-between gap-24 w-full bg-primary/5 lg:bg-primary/0 p-4 lg:p-0 text-dark shadow-sm lg:shadow-none'
 						>
-							<span className='text-3xl'>{size.size}</span>
+							<span className=' text-2xl lg:text-3xl'>{size.size}</span>
 							<span>${size.price}</span>
 						</li>
 					))}

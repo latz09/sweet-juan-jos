@@ -26,7 +26,7 @@ const Reviews = ({ data, imageUrl }) => {
 					<Review key={index} review={review} />
 				))}
 			</div>
-			<Image src={imageUrl} alt='Reviews' height={350} width={350} className="shadow-lg shadow-primary/40 rounded-lg" />
+			<Image src={imageUrl} alt='Reviews' height={200} width={300} className="shadow-lg shadow-primary/40 rounded-lg " />
 		</div>
 	);
 };

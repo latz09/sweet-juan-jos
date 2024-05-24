@@ -14,7 +14,7 @@ export default CookieMenu;
 
 const Cookies = ({ cookieOptions }) => {
 	return (
-		<div className='flex flex-col md:flex-row md:flex-wrap gap-y-6 lg:gap-y-12 justify-center items-start'>
+		<div className='flex flex-col md:flex-row md:flex-wrap gap-y-5 lg:gap-y-12 justify-center items-start'>
 			{cookieOptions.map((cookie, index) => {
 				// Using Tailwind's responsive classes to adjust the layout on different screen sizes
 				let widthClass = 'md:w-1/2 w-full'; // Stack on small screens, half width on medium and up

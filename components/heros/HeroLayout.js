@@ -7,7 +7,7 @@ import ButtonLink from '../utils/ButtonLink';
 const HeroLayout = ({ imageUrl, heading, subheading, href, CTAText }) => {
 	return (
 		<div className='grid gap-12'>
-			<div className='relative h-[45vh] lg:h-[65vh] w-full  text-dark shadow-lg shadow-primary/40'>
+			<div className='relative h-[45vh] lg:h-[70vh] w-full  text-dark shadow-lg shadow-primary/40'>
 				<Image
 					src={imageUrl}
 					alt={heading}
