@@ -14,21 +14,24 @@ const socialLinks = [
 	},
 ];
 
-const Socials = ({includeText}) => {
+const Socials = ({ includeText, color }) => {
 	return (
-		<div className='grid place-items-center gap-4'>
-			<div className='flex items-center gap-16 text-4xl text-primary'>
+		<div className='grid place-items-center gap-3'>
+				{includeText && (
+				<p className='font-bold text-2xl text-center  mx-auto'>
+					Stay connected for all things sweet!
+				</p>
+			)}
+			<div
+				className={`flex items-center gap-16 text-4xl ${color === 'light' ? 'text-light' : 'text-primary'}`}
+			>
+				
 				{socialLinks.map(({ id, href, icon }) => (
 					<a key={id} href={href} target='_blank' rel='noopener noreferrer'>
 						{icon}
 					</a>
 				))}
 			</div>
-			{
-				includeText && <p className='font-bold text-2xl text-center w-4/5 lg:w-3/4 mx-auto'>
-				Join our sweet journey on social media for all the latest treats.
-			</p>
-			}
 		
 		</div>
 	);

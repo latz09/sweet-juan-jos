@@ -1,75 +1,99 @@
 import ButtonLink from '../utils/ButtonLink';
-import { useState } from 'react';
-import { SubHeading } from '../utils/Typography';
-import { motion } from 'framer-motion';
+// import { useState } from 'react';
+import { MainHeading, SubHeading } from '../utils/Typography';
+// import { motion } from 'framer-motion';
 import PdfDownload from '../utils/PdfDownload';
 
-const CupcakesAndSpecialtyCakesMenu = ({ data }) => {
-	const renderFlavorSection = (title, flavors) => (
-		<div className='grid place-items-center gap-8 mx-2 text-center'>
-			<SubHeading title={title} type='dark' />
-			<FlavorList flavors={flavors} />
-		</div>
-	);
-
+const CupcakesAndSpecialtyCakesMenu = ({
+	cakeFlavors,
+	frostingFlavors,
+	smallCakeSizes,
+	cupcakePrice,
+}) => {
 	return (
-		<div className='grid gap-16 place-items-center font-bold text-center'>
-			<div className='grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 place-items-cente max-w-7xl mx-auto'>
-				{renderFlavorSection(data.cakeFlavors.title, data.cakeFlavors.flavors)}
-				{renderFlavorSection(
-					data.frostingFlavors.title,
-					data.frostingFlavors.flavors
-				)}
-			</div>
-			<PdfDownload
-				title='View Latest Flavor Options'
-				document='flavors'
-				icon={true}
-				
-			/>
-			<div className='grid gap-2'>
-				<SubHeading title={data.subheading} type='dark' />
-				<span className=' italic text-center mx-4'>{data.stipulation}</span>
-			</div>
+		<div className='grid gap-8 lg:gap-24'>
+			<MainHeading title='Choose Your Flavor' type='dark' />
+			
 
-			<div className='grid gap-2'>
-				<SubHeading title={data.sizes.title} type='dark' />
-				<ul className='grid grid-cols-1 gap-2 text-lg'>
-					{data.sizes.options.map((size, index) => (
-						<li key={index}>{size}</li>
-					))}
-				</ul>
-			</div>
+			<Flavors
+				cakeFlavors={cakeFlavors}
+				frostingFlavors={frostingFlavors}
+				title='Cake Flavors'
+				price={cupcakePrice}
+			/>
+
+			<SmallCakeSizes sizes={smallCakeSizes} />
 		</div>
 	);
 };
 
 export default CupcakesAndSpecialtyCakesMenu;
 
-const FlavorList = ({ flavors }) => {
-	// State to keep track of which elements have been viewed
-	const [viewed, setViewed] = useState(new Array(flavors.length).fill(false));
-
+const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 	return (
-		<ul className='grid grid-cols-2 place-items-center gap-4 text-lg'>
-			{flavors.map((flavor, index) => (
-				<motion.li
-					key={index}
-					initial={{ opacity: 0, y: 20, scale: 0 }}
-					animate={viewed[index] ? { opacity: 1, y: 0, scale: 1 } : {}}
-					transition={{ duration: 0.4, delay: index * 0.1 }}
-					onViewportEnter={() => {
-						// Update the state to mark this item as viewed
-						setViewed((prevViewed) => {
-							const updatedViewed = [...prevViewed];
-							updatedViewed[index] = true;
-							return updatedViewed;
-						});
-					}}
-				>
-					{flavor}
-				</motion.li>
-			))}
-		</ul>
+		<div className='grid gap-16'>
+			<div className='grid lg:flex items-center gap-4 lg:gap-16 justify-around w-full max-w-7xl mx-auto '>
+				<FlavorList flavors={cakeFlavors} title='Cake Flavors' />
+				<FlavorList flavors={frostingFlavors} title='Frosting Options' />
+			</div>
+			
+			<div className='grid place-items-center'>
+				<MainHeading title={`$${price} / dozen`} type='dark' />
+				<FlavorExplanation />
+			</div>
+		</div>
+	);
+};
+
+const FlavorList = ({ flavors, title }) => {
+	return (
+		<div className='grid gap-4 place-items-center lg:w-1/2  bg-primary/10 shadow shadow-primary/10  text-dark font-bold  pb-8'>
+			<div className='bg-dar  w-full text-center pb-4 pt-6 border-b border-primary/20 '>
+				<SubHeading title={title} type='dark' />
+			</div>
+			<ul className='grid grid-cols-2 place-items-center gap-x-16 gap-y-8 lg:gap-y-6 p-4 '>
+				{flavors.map((flavor, index) => (
+					<li key={index} className='text-2xl text-center'>
+						{flavor}
+					</li>
+				))}
+			</ul>
+		</div>
+	);
+};
+
+const FlavorExplanation = () => {
+	return (
+		<div className='mt-8 mb-12 lg:mb-3 grid place-items-center gap-2 text-center'>
+			<SubHeading
+				title='One Flavor Combination per Dozen / per Cake'
+				type='dark'
+			/>
+			<p className='italic font-bold text-lg'>
+				* Flavors available with cupcakes only. Not available for specialty
+				cakes.
+			</p>
+		</div>
+	);
+};
+
+const SmallCakeSizes = ({ sizes }) => {
+	return (
+		<div className='grid gap-8 font-bold'>
+			<MainHeading title='Small Cake Sizes' type='dark' />
+			<div className='grid gap-8 place-items-center'>
+				<ul className='grid place-items-center gap-y-8'>
+					{sizes.map((size, index) => (
+						<li
+							key={index}
+							className='text-2xl text-center flex items-center justify-between gap-24 w-full'
+						>
+							<span className='text-3xl'>{size.size}</span>
+							<span>${size.price}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
 	);
 };

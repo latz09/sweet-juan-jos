@@ -1,9 +1,10 @@
+"use client"
 import React, { useState } from 'react';
 import { MainHeading, SubHeading } from '../utils/Typography';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 const ContactForm = () => {
-    const router = useRouter();
+    // const router = useRouter();
 
 	const [formData, setFormData] = useState({
 		name: '',
@@ -36,7 +37,7 @@ const ContactForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(formData);
-        router.reload();
+        // router.reload();
 	};
 
 	return (

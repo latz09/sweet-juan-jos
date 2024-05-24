@@ -1,54 +1,41 @@
 import Image from 'next/image';
-// import landingImage from '../../public/images/displays/special-events.jpg';
-import landingImage2 from '../../public/images/ai-generated/display.png';
-
-import { motion } from 'framer-motion';
 import logo from '../../public/images/logo/transparent-juanjos.png';
 import ButtonLink from '../utils/ButtonLink';
-import { MainHeading, Paragraph, SubHeading } from '../utils/Typography';
+import Socials from '../utils/Socials';
+import LandingHeroAnimate from '../utils/animations/LandingHeroAnimate';
 
-const LandingHero = () => {
+const LandingHero = ({ landingImage }) => {
 	return (
-		<div className='relative h-[65vh] lg:h-[70vh] w-full  shadow-lg shadow-primary/40 '>
+		<div className='relative h-[80vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>
 			<Image
-				src={landingImage2}
+				src={landingImage}
 				alt='sweet juanjos'
 				className='z-0'
 				quality={100}
 				priority={true}
 				fill
-				placeholder='blur'
 				style={{
 					position: 'absolute',
 					width: '100%',
 					height: '100%',
 					objectFit: 'cover',
-					objectPosition: 'center',
+					objectPosition: 'center ',
 				}}
 			/>
-			<div className='absolute inset-0 bg-gradient-to-b from-light/90 via-light/70 to-light/0  z-10 text-center grid place-items-center '>
-				<motion.div
-					className='flex flex-col'
-					initial={{ opacity: 0, scale: 0.85 }}
-					whileInView={{ opacity: 1, scale: 1 }}
-					transition={{ duration: 1.1, delay: 0.15 }}
-				>
-					<div className='p-8  bg-gradie5nt-to-tl from-light via-light/80 to-light rounded-sm shadowlg shadow-primary/40 grid gap-4 place-items-center font'>
-						<Image src={logo} alt='sweet juanjos' width={250} height={250} />
-
-						<h1 className='text-4xl lg:text-6xl font-bold text-center'>
-							Delicious Treats for Any Occasion
-						</h1>
+			<div className='absolute inset-0 bg-gradient-to-b from-light/10 via-light/40 to-light/0 z-10 text-center grid place-items-center '>
+				<LandingHeroAnimate className='flex flex-col gap-4 '>
+					<div className='p-8 grid gap-6 place-items-center font '>
+						<Socials includeText={false} color='light' />
+						<Image src={logo} alt='sweet juanjos' width={350} height={350} />
 					</div>
-					<div className=' '>
-						<ButtonLink
-							title='Order Now'
-							type='secondary'
-							href='/sweet-juanjos/contact-us'
-						/>
-					</div>
-				</motion.div>
+					<ButtonLink
+						title='Order Now'
+						type='secondary'
+						href='/sweet-juanjos/contact-us'
+					/>
+				</LandingHeroAnimate>
 			</div>
+			<div> </div>
 		</div>
 	);
 };

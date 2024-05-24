@@ -28,6 +28,6 @@ export const NavigationLinks = [
     {
         id: 6,
         name: 'Contact',
-        slug: '/sweet-juanjos/contact-us'
+        slug: '/contact-us'
     }
 ];

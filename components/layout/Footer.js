@@ -39,14 +39,14 @@ const Footer = () => {
 				</ul>
 			</div>
 			<div className='grid place-items-center gap-6'>
-				<div className='grid gap-3 place-items-center mt-4'>
+				<div className='grid gap-2 place-items-center mt-4'>
 					<div className='flex gap-4 items-center font-bold'>
 						<p>Downloads</p>
 						<FaCloudDownloadAlt className='text-primary text-2xl' />
 					</div>
 					<div className='grid place-items-center gap-4'>
-						<PdfDownload title='Current Flavor Options' document='flavors' />{' '}
-						<PdfDownload title='Current Pricing' document='pricing' />
+						{/* <PdfDownload title='Current Flavor Options' document='flavors' />{' '}
+						<PdfDownload title='Current Pricing' document='pricing' /> */}
 						<PdfDownload title='Wedding Checklist' document='checklist' />
 					</div>
 				</div>

@@ -12,11 +12,7 @@ module.exports = {
 			dark: '#012623', 
 			light: '#F0FFFE', 
 		},
-		fontFamily: {
-			josefin: ['Josefin Slab', 'serif'],
-	
-			amatic: ['Dancing Script', 'cursive'],
-		},
+		
 	},
 	plugins: [],
 };

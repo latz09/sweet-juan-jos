@@ -1,37 +1,33 @@
-import { serviceCardsData } from '@/data/services';
+
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import { MainHeading, SubHeading } from '../utils/Typography';
 import Link from 'next/link';
 
-const ServiceCards = () => {
+const ServiceCards = ({ data }) => {
 	return (
-		<div className='max-w-7xl mx-auto '>
-			<div className='grid place-items-center my-16 '>
+		<div className='max-w-5xl mx-auto '>
+			<div className='grid place-items-center mb-12 '>
 				<MainHeading title='Our Delicious Offerings' type='dark' />
 			</div>
-			<div className='grid lg:grid-cols-2 gap-24 place-items-center'>
-				{serviceCardsData.map((service) => (
-					<motion.div
-						key={service.id}
-						initial={{ y: 80, opacity: 0 }}
-						whileInView={{ y: 0, opacity: 1 }}
-						whileHover={{ scale: 0.95 }}
-						transition={{ duration: 0.6 }}
-						className='shadow-lg shadow-primary/30 hover:shadow-none cursor-pointer lg:m-8'
-					>
-						<Link href={`/services/${service.href}`} className='relative '>
-							<motion.div className=''>
-								<Image src={service.image} alt={service.title} className='' />
-							</motion.div>
-
-							<div className='absolute inset-0 flex items-center  justify-center  shadow-lg shadow-primary/30 text-light text-center w-full'>
-								<div className='w-full bg-gradient-to-b  from-primary/70  to-primary/70  via-primary px-4 lg:px-16 py-4'>
-									<SubHeading title={service.title} type='light' />
-								</div>
+			<div className='grid lg:grid-cols-2 gap- place-items-center gap-x-4 gap-y-12 '>
+				{data.map((service) => (
+					<div key={service.title} className='relative shadow-hover-image rounded-lg'>
+						<Link href={service.link}>
+							<Image
+								src={service.imageUrl}
+								alt={service.title}
+								className='w-full h-auto rounded-lg '
+								width={500}
+								height={500}
+							/>
+							<div className='absolute bottom-0 left-0 w-full bg-light/80 p-2 lg:p-4 rounded-b-lg'>
+								<h3 className='text-2xl lg:text-4xl  font-bold px-2 text-center'>
+									{service.title}
+								</h3>
 							</div>
 						</Link>
-					</motion.div>
+					</div>
 				))}
 			</div>
 		</div>
@@ -39,3 +35,33 @@ const ServiceCards = () => {
 };
 
 export default ServiceCards;
+
+// <div className='max-w-7xl mx-auto '>
+// 			<div className='grid place-items-center mb-12 '>
+// 				<MainHeading title='Our Delicious Offerings' type='dark' />
+// 			</div>
+// 			<div className='grid lg:grid-cols-2 gap-24 place-items-center'>
+// 				{data.map((service) => (
+// 					<div
+// 						key={service.title}
+// 						className='shadow-lg shadow-primary/30 hover:shadow-none cursor-pointer lg:m-8'
+// 					>
+// 						<Link href={service.link} className='relative '>
+// 							<Image
+// 								src={service.imageUrl}
+// 								alt={service.title}
+// 								className=''
+// 								width={500}
+// 								height={500}
+// 							/>
+
+// 							<div className='absolute inset-0 flex items-start   justify-center  shadow-lg shadow-primary/30 text-light text-center w-full'>
+// 								<div className='w-full bg-primary px-4 lg:px-16 py-4'>
+// 									<SubHeading title={service.title} type='light' />
+// 								</div>
+// 							</div>
+// 						</Link>
+// 					</div>
+// 				))}
+// 			</div>
+// 		</div>

@@ -1,11 +1,11 @@
 import { services } from '@/data/services';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 
 const Services = () => {
 	return (
 		<div className='grid lg:grid-cols-2 gap-x-16 gap-y-32 lg:gap-y-16 max-w-6xl mx-auto'>
 			{services.map((service) => (
-				<motion.div
+				<div
 					key={service.id}
 					className='grid place-items-center'
 					initial={{ y: 100 }}
@@ -25,7 +25,7 @@ const Services = () => {
 					<button className='mt-4 text-primary font-bold underline underline-offset-2'>
 						Order Now
 					</button>
-				</motion.div>
+				</div>
 			))}
 		</div>
 	);
