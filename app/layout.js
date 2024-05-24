@@ -15,8 +15,8 @@ const josefinSlab = Josefin_Slab({
   export const metadata = {
 	metadataBase: new URL('https://sweet-juan-jos.vercel.app/'),
 	title: {
-		default: 'Sweet JuanJos',
-		template: `%s | Sweet JuanJos`,
+		default: 'Sweet Juanjos',
+		template: `%s | Sweet Juanjos`,
 	},
 	description:
 		`Sweet Juanjo's Bakery in Stevens Point, WI, offers expertly crafted cupcakes, specialty cakes, and cookies perfect for weddings and special events. All treats are made-to-order in our licensed kitchen. Call or visit to bring your celebration vision to life!`,
