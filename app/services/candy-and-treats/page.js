@@ -4,6 +4,11 @@ import HeroLayout from '@/components/heros/HeroLayout';
 import CandyAndTreatsMenu from '@/components/menus/CandyAndTreatsMenu';
 import ImageBanner from '@/components/utils/ImageBanner';
 import ButtonLink from '@/components/utils/ButtonLink';
+import PageEntry from '@/components/utils/animations/PageEntry';
+
+export const metadata = {
+	title: 'Candy & Treats',
+};
 
 const CandyAndTreatsPage = async () => {
 	const query = FETCH_CANDY_AND_TREATS_PAGE_QUERY;
@@ -11,7 +16,7 @@ const CandyAndTreatsPage = async () => {
 	const data = dataAsArray[0];
 
 	return (
-		<div className='grid gap-16 lg:gap-24 '>
+		<PageEntry className='grid gap-16 lg:gap-24 '>
 			<HeroLayout
 				heading={data.landingHeading}
 				subheading={data.landingSlogan}
@@ -24,7 +29,7 @@ const CandyAndTreatsPage = async () => {
 			<div className='pt-2'>
 				<ButtonLink title={`Order Now`} type='primary' href={'/contact-us'} />
 			</div>
-		</div>
+		</PageEntry>
 	);
 };
 

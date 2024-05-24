@@ -6,9 +6,10 @@ const AnimateUp = ({ children, className, ...rest }) => {
 		<>
 			<motion.div
 				className={className}
-				initial={{ y: 100, opacity: 0 }}
+				initial={{ y: 30, opacity: 0 }}
 				whileInView={{ y: 0, opacity: 1 }}
-				transition={{ duration: 1.1, delay: 0.1 }}
+				transition={{ duration: .7, delay: 0 }}
+				viewport={{ once: true }}
                 {...rest}
 			>
                 <div>

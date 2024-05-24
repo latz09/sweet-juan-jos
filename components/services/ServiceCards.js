@@ -1,8 +1,8 @@
-
 import Image from 'next/image';
 // import { motion } from 'framer-motion';
 import { MainHeading, SubHeading } from '../utils/Typography';
 import Link from 'next/link';
+import AnimateUp from '../utils/animations/AnimateUp';
 
 const ServiceCards = ({ data }) => {
 	return (
@@ -12,7 +12,10 @@ const ServiceCards = ({ data }) => {
 			</div>
 			<div className='grid lg:grid-cols-2 gap- place-items-center gap-x-4 gap-y-12 '>
 				{data.map((service) => (
-					<div key={service.title} className='relative shadow-hover-image rounded-lg'>
+					<div
+						className='relative shadow-hover-image rounded-lg'
+						key={service.title}
+					>
 						<Link href={service.link}>
 							<Image
 								src={service.imageUrl}

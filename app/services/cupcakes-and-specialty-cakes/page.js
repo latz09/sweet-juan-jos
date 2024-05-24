@@ -7,6 +7,11 @@ import CupcakesAndSpecialtyCakesMenu from '@/components/menus/CupcakesAndSpecial
 import ButtonLink from '@/components/utils/ButtonLink';
 import PdfDownload from '@/components/utils/PdfDownload';
 import ImageBanner from '@/components/utils/ImageBanner';
+import PageEntry from '@/components/utils/animations/PageEntry';
+
+export const metadata = {
+	title: 'Cupcakes and Specialty Cakes',
+};
 
 const CupcakesAndSpecialtyCakesPage = async () => {
 	const query = FETCH_CUPCAKE_PAGE_QUERY;
@@ -14,7 +19,7 @@ const CupcakesAndSpecialtyCakesPage = async () => {
 	const data = dataAsArray[0];
 
 	return (
-		<div className='grid gap-16 lg:gap-24'>
+		<PageEntry className='grid gap-16 lg:gap-24 '>
 			<HeroLayout
 				heading={data.landingHeading}
 				subheading={data.landingSlogan}
@@ -37,7 +42,7 @@ const CupcakesAndSpecialtyCakesPage = async () => {
 					href='/sweet-juanjos/contact-us'
 				/>
 			</div>
-		</div>
+		</PageEntry>
 	);
 };
 

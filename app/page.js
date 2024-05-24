@@ -7,15 +7,15 @@ import IntroBlurb from '@/components/about/IntroBlurb';
 import ServiceCards from '@/components/services/ServiceCards';
 import LandingHero from '@/components/heros/LandingHero';
 import BannerLayout from '@/components/heros/BannerLayout';
+import PageEntry from '@/components/utils/animations/PageEntry';
 
 export default async function Home() {
-	
 	const query = FETCH_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
 	const data = dataAsArray[0];
 
 	return (
-		<main className='grid gap-24'>
+		<PageEntry className='grid gap-24'>
 			<LandingHero landingImage={data.landingImage} />
 			<IntroBlurb data={data.intro} />
 			<ServiceCards data={data.servicePhotoLinks} />
@@ -29,7 +29,7 @@ export default async function Home() {
 			<AboutBlurb data={data.about} />
 
 			<Reviews data={data.reviews} imageUrl={data.reviewsImage} />
-		</main>
+		</PageEntry>
 	);
 }
 

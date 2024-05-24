@@ -1,9 +1,17 @@
 import ContactForm from '@/components/contact/ContactForm';
 import { MainHeading } from '@/components/utils/Typography';
+import PageEntry from '@/components/utils/animations/PageEntry';
+
+
+export const metadata = {
+	title: 'Hello There! ',
+	
+};
+
 
 const ContactUsPage = () => {
 	return (
-		<div className='grid gap-16 mt-8 px-2 max-w-7xl mx-auto '>
+		<PageEntry className='grid gap-16 mt-8 px-2 max-w-7xl mx-auto '>
 			<div className='grid gap-6'>
 				<MainHeading title={`Contact Sweet JuanJo's`} />
 				<p className='text-center text-lg lg:text-xl font-bold'>
@@ -12,7 +20,7 @@ const ContactUsPage = () => {
 				</p>
 			</div>
 			<ContactForm />
-		</div>
+		</PageEntry>
 	);
 };
 
