@@ -28,7 +28,7 @@ const AboutBlurb = ({ data }) => {
 				>
 					<SubHeading title={data.heading} type='dark' />
 
-					<div className='grid gap-2 mt-4 px-2 lg:px-1  text-lg lg:text-xl'>
+					<div className='grid gap-2 mt-4 px-4 lg:px-1  text-xl lg:text-2xl'>
 						<p className='leading-7 lg:leading-8'>{data.paragraph1}</p>
 						<p className='leading-7 lg:leading-8'>{data.paragraph2}</p>
 					</div>
