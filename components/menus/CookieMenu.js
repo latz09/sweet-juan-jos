@@ -1,11 +1,15 @@
 import { MainHeading, SubHeading } from '../utils/Typography';
 
 const CookieMenu = ({ cookieOptions, specialtyFlavors }) => {
-	
 	return (
-		<div className='max-w-5xl mx-auto grid gap-16 lg:gap-24 '>
-			<Cookies cookieOptions={cookieOptions} />
-			<SpecialtyCookeMenu specialtyFlavors={specialtyFlavors} />
+		<div className="max-w-6xl mx-auto grid gap-10 lg:gap-20">
+			<div className="opacity-70">
+				<MainHeading title='Prices per dozen' type='dark' />
+			</div>
+			<div className=' grid gap-16 lg:gap-24 '>
+				<Cookies cookieOptions={cookieOptions} />
+				<SpecialtyCookeMenu specialtyFlavors={specialtyFlavors} />
+			</div>
 		</div>
 	);
 };
@@ -45,17 +49,16 @@ const Cookies = ({ cookieOptions }) => {
 
 const SpecialtyCookeMenu = ({ specialtyFlavors }) => {
 	return (
-		<div className="grid gap-6 lg:gap-12">
+		<div className='grid gap-6 lg:gap-12'>
 			<MainHeading title='Specialty Cookies' type='primary' />
-			<div className="grid lg:grid-cols-3 lg:gap-x-24 gap-y-4 lg:gap-y-8 font-bold place-items-center mx-auto text-center">
+			<div className='grid lg:grid-cols-3 lg:gap-x-24 gap-y-4 lg:gap-y-8 font-bold place-items-center mx-auto text-center'>
 				{specialtyFlavors.map((cookie, index) => {
 					return (
-						<div
-							key={index}
-							className=' '
-						>
-							<div className="flex items-center gap-2">
-								<div className='text-xl md:text-2xl xl:text-3xl'>{cookie.cookieFlavor}</div>
+						<div key={index} className=' '>
+							<div className='flex items-center gap-2'>
+								<div className='text-xl md:text-2xl xl:text-3xl'>
+									{cookie.cookieFlavor}
+								</div>
 
 								{cookie.priceUpcharge && (
 									<p className='text-2xl font-bold text-primary'>

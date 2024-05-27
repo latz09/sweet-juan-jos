@@ -34,7 +34,7 @@ const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 		<div className='grid gap-16'>
 			<div className='grid lg:flex items-center lg:gap-16 justify-around w-full max-w-7xl mx-auto '>
 				<FlavorList flavors={cakeFlavors} title='Cake Flavors' />
-				<FlavorList flavors={frostingFlavors} title='Frosting Options' />
+				<FlavorList flavors={frostingFlavors} title='Frosting Options' background='other' />
 			</div>
 			
 			<div className='grid place-items-center'>
@@ -45,9 +45,9 @@ const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 	);
 };
 
-const FlavorList = ({ flavors, title }) => {
+const FlavorList = ({ flavors, title, background }) => {
 	return (
-		<div className='grid gap-4 place-items-center lg:w-1/2  bg-primary/10 shadow shadow-primary/10  text-dark font-bold  pb-8'>
+		<div className={`grid gap-4 place-items-center lg:w-1/2  bg-primary/10 shadow shadow-primary/10  text-dark font-bold  pb-8 ${background === 'other' ? 'bg-primary/20 lg:bg-primary/10' : 'bg-primary/10'}` }>
 			<div className='bg-dar  w-full text-center pb-4 pt-6 border-b border-primary/20 '>
 				<SubHeading title={title} type='dark' />
 			</div>
@@ -82,11 +82,11 @@ const SmallCakeSizes = ({ sizes }) => {
 		<div className='grid gap-8 font-bold'>
 			<MainHeading title='Small Cake Sizes' type='dark' />
 			<div className='grid gap-8 place-items-center '>
-				<ul className='grid place-items-center gap-y-8'>
+				<ul className='grid place-items-center lg:gap-y-8 gap-y-1 bg-primary/10 lg:bg-primary/0 '>
 					{sizes.map((size, index) => (
 						<li
 							key={index}
-							className='text-lg lg:text-2xl text-center flex items-center justify-between gap-24 w-full bg-primary/5 lg:bg-primary/0 p-4 lg:p-0 text-dark shadow-sm lg:shadow-none'
+							className='text-lg lg:text-2xl text-center flex items-center justify-between gap-24 w-full bg-primary/5 lg:bg-primary/0 px-8 py-6 lg:py-4 lg:p-0 text-dark shadow-sm lg:shadow-none '
 						>
 							<span className=' text-2xl lg:text-3xl'>{size.size}</span>
 							<span>${size.price}</span>
