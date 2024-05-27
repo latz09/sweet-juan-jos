@@ -4,5 +4,11 @@ export const FETCH_SPECIAL_EVENTS_PAGE_QUERY = `
   "landingImage": landingImage.asset->url,
   landingHeading,
   landingSlogan,
+  introductionSection {
+    heading,
+    openingParagraph1,
+    openingParagraph2,
+    "introImageUrl": introImage.asset->url
+  }
 }
 `;
