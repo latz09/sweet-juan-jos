@@ -29,7 +29,7 @@ const LandingHero = ({ landingImage }) => {
 						<Image src={logo} alt='sweet juanjos' width={350} height={350} />
 					</div>
 					<ButtonLink
-						title='Order Now'
+						title='Request an Order'
 						type='secondary'
 						href='/sweet-juanjos/contact-us'
 					/>

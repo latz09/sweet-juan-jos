@@ -51,25 +51,26 @@ const SpecialtyCookeMenu = ({ specialtyFlavors }) => {
 	return (
 		<div className='grid gap-6 lg:gap-12'>
 			<MainHeading title='Specialty Cookies' type='primary' />
-			<div className='grid lg:grid-cols-3 lg:gap-x-24 gap-y-4 lg:gap-y-8 font-bold place-items-center mx-auto text-center'>
-				{specialtyFlavors.map((cookie, index) => {
-					return (
-						<div key={index} className=' '>
-							<div className='flex items-center gap-2'>
-								<div className='text-xl md:text-2xl xl:text-3xl'>
-									{cookie.cookieFlavor}
-								</div>
+			<div className='flex flex-wrap items-center justify-center gap-y-4 lg:gap-y-12 mx-auto text-center font-bold'>
+    {specialtyFlavors.map((cookie, index) => {
+        return (
+            <div key={index} className='w-full lg:w-1/3'>
+                <div className='flex items-center justify-center gap-2'>
+                    <div className='text-xl md:text-2xl xl:text-3xl'>
+                        {cookie.cookieFlavor}
+                    </div>
 
-								{cookie.priceUpcharge && (
-									<p className='text-2xl font-bold text-primary'>
-										${cookie.priceUpcharge}+
-									</p>
-								)}
-							</div>
-						</div>
-					);
-				})}
-			</div>
+                    {cookie.priceUpcharge && (
+                        <p className='text-2xl font-bold text-primary'>
+                            ${cookie.priceUpcharge}+
+                        </p>
+                    )}
+                </div>
+            </div>
+        );
+    })}
+</div>
+
 		</div>
 	);
 };

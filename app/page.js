@@ -28,7 +28,7 @@ export default async function Home() {
 			/>
 			<AboutBlurb data={data.about} />
 
-			<Reviews data={data.reviews} imageUrl={data.reviewsImage} />
+			<Reviews data={data.reviews}  />
 		</PageEntry>
 	);
 }

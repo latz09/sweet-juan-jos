@@ -108,6 +108,9 @@ const ContactForm = () => {
 						'Specialty Cakes',
 						'Cookies',
 						'Candy & Treats',
+						'Delivery',
+						'Event Set Up',
+						'Display Item Rental',
 						'General Inquiry',
 						'Other',
 					]}

@@ -20,7 +20,6 @@ export const FETCH_PAGE_QUERY = `
     paragraph1,
     paragraph2
   },
-  "reviewsImage": reviewsImage.asset->url,
   reviews[] {
     review,
     author

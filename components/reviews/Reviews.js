@@ -15,7 +15,7 @@ const shakeAnimation = {
 		},
 	},
 };
-const Reviews = ({ data, imageUrl }) => {
+const Reviews = ({ data }) => {
 	return (
 		<div className='grid place-items-center gap-16 mt-12  bg-gradient-to-b from-dark/0 via-primary/20 to-dark/0'>
 			<MainHeading title={`Happy Customers`} type='dark' />
@@ -26,7 +26,7 @@ const Reviews = ({ data, imageUrl }) => {
 					<Review key={index} review={review} />
 				))}
 			</div>
-			<Image src={imageUrl} alt='Reviews' height={200} width={300} className="shadow-lg shadow-primary/40 rounded-lg " />
+			
 		</div>
 	);
 };
