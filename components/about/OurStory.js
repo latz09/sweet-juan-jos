@@ -68,6 +68,7 @@ const OurStory = ({ data }) => {
 											alt={data.heading}
 											width={200}
 											height={200}
+											priority={true}
 											className='mx-auto shadow-lg shadow-primary/40 rounded-lg mb-4'
 										/>
 										{data.paragraphs.map((item, index) => (
