@@ -4,7 +4,7 @@ import { urlFor } from '@/lib/imageUrlBuilder';
 import { MainHeading, SubHeading } from '../utils/Typography';
 import ButtonLink from '../utils/ButtonLink';
 
-const HeroLayout = ({ imageUrl, heading, subheading, href, CTAText }) => {
+const HeroLayout = ({ imageUrl, heading, subheading, CTAText }) => {
 	return (
 		<div className='grid gap-12'>
 			<div className='relative h-[45vh] lg:h-[70vh] w-full  text-dark shadow-lg shadow-primary/40'>
@@ -33,7 +33,7 @@ const HeroLayout = ({ imageUrl, heading, subheading, href, CTAText }) => {
 							<MainHeading title={heading} type='light' />
 							<SubHeading type='light' title={subheading} />
 							<div className='hidden lg:block lg:pt-6'>
-								<ButtonLink title={CTAText} type='primary' href={href} />
+								<ButtonLink title={CTAText} type='primary' href='/contact-katie-jo' />
 							</div>
 						</div>
 					</div>

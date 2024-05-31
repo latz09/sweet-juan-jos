@@ -20,7 +20,6 @@ const WeddingsAndSpecialEventsPage = async () => {
 				heading={data.landingHeading}
 				subheading={data.landingSlogan}
 				imageUrl={data.landingImage}
-				href='/services/handcrafted-cookies'
 				CTAText={'Order Request'}
 			/>
 			<WeddingIntro data={data.introductionSection} />

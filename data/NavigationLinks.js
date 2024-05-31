@@ -28,6 +28,6 @@ export const NavigationLinks = [
     {
         id: 6,
         name: 'Contact',
-        slug: '/contact-us'
+        slug: '/contact-katie-jo'
     }
 ];

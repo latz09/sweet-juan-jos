@@ -25,8 +25,7 @@ const HandCraftedCookies = async () => {
 			<HeroLayout
 				heading={data.landingHeading}
 				subheading={data.landingSlogan}
-				imageUrl={data.landingImage}
-				href='/services/handcrafted-cookies'
+				imageUrl={data.landingImage}				
 				CTAText={'Order Request'}
 			/>
 			<CookieMenu

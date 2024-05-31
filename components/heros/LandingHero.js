@@ -31,7 +31,7 @@ const LandingHero = ({ landingImage }) => {
 					<ButtonLink
 						title='Request an Order'
 						type='secondary'
-						href='/sweet-juanjos/contact-us'
+						href='/contact-katie-jo'
 					/>
 				</LandingHeroAnimate>
 			</div>

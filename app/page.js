@@ -13,6 +13,7 @@ export default async function Home() {
 	const query = FETCH_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
 	const data = dataAsArray[0];
+	
 
 	return (
 		<PageEntry className='grid gap-24'>
@@ -26,7 +27,7 @@ export default async function Home() {
 				href={`/services/weddings-and-special-events`}
 				CTAText='Learn More'
 			/>
-			<AboutBlurb data={data.about} />
+			<AboutBlurb data={data.about} ourStoryData={data.sweetJuanjosStory} />
 
 			<Reviews data={data.reviews}  />
 		</PageEntry>

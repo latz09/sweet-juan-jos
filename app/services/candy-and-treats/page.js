@@ -21,7 +21,6 @@ const CandyAndTreatsPage = async () => {
 				heading={data.landingHeading}
 				subheading={data.landingSlogan}
 				imageUrl={data.landingImage}
-				href='/services/handcrafted-cookies'
 				CTAText={'Order Request'}
 			/>
 			<CandyAndTreatsMenu data={data.candyOptions} />

@@ -23,6 +23,14 @@ export const FETCH_PAGE_QUERY = `
   reviews[] {
     review,
     author
+  },
+  sweetJuanjosStory {
+    heading,
+    "ourStoryImage": ourStoryImage.asset->url,
+    paragraphs[] {
+      heading,
+      paragraph
+    }
   }
 }
 `;

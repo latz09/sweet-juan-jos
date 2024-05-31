@@ -24,7 +24,6 @@ const CupcakesAndSpecialtyCakesPage = async () => {
 				heading={data.landingHeading}
 				subheading={data.landingSlogan}
 				imageUrl={data.landingImage}
-				href={`/contact-us`}
 				CTAText={'Order Request'}
 			/>
 			<CupcakesAndSpecialtyCakesMenu
