@@ -48,7 +48,7 @@ const OurStory = ({ data }) => {
 							// initial={{ opacity: 0 }}
 							// animate={{ opacity: 1 }}
 							// transition={{ duration: 1.1 }}
-							className='relative w-full h-full flex flex-col items-center justify-center p-4 max-w-5xl '
+							className='relative w-full h-full flex flex-col items-center justify-center p-2 lg:p-4 max-w-5xl '
 							onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
 						>
 							<div className='w-full h-full relative max-w-4xl mx-auto overflow-hidden '>
@@ -77,7 +77,7 @@ const OurStory = ({ data }) => {
 												className='mb-4 text-center w-full lg:w-5/6 grid gap-2'
 											>
 												<h2 className='text-2xl font-bold'>{item.heading}</h2>
-												<p className='text-xl lg:text-2xl font-semibold leading-10'>
+												<p className='text-xl lg:text-2xl font-semibold leading-8 lg:leading-10'>
 													{item.paragraph}
 												</p>
 											</div>
