@@ -8,7 +8,7 @@ import ButtonLink from '../utils/ButtonLink';
 import { FaArrowLeft } from 'react-icons/fa6';
 
 const OurStory = ({ data }) => {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 
 	// Disable scrolling on the body when the modal is open
 	useEffect(() => {
