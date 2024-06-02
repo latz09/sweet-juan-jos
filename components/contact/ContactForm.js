@@ -1,202 +1,250 @@
-"use client"
-import React, { useState } from 'react';
-import { MainHeading, SubHeading } from '../utils/Typography';
-// import { useRouter } from 'next/router';
-
+/* eslint-disable @next/next/no-img-element */
+'use client';
+import { AiOutlineClose } from 'react-icons/ai';
+import { useState } from 'react';
+import { SubHeading } from '../utils/Typography';
 const ContactForm = () => {
-    // const router = useRouter();
-
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
 		phoneNumber: '',
-		date: '',
+		eventDate: '',
+		amount: '',
 		interests: [],
-		amountInDozens: '',
+		inspirationPhotos: [],
+		additionalDetails: '',
 	});
 
-	const handleChange = (e) => {
-		const { name, value, type } = e.target;
-
-		// Handle checkboxes separately
+	const handleInputChange = (e) => {
+		const { name, value, type, files } = e.target;
 		if (type === 'checkbox') {
-			setFormData((prevState) => ({
-				...prevState,
-				[name]: prevState[name].includes(value)
-					? prevState[name].filter((i) => i !== value)
-					: [...prevState[name], value],
-			}));
+			if (e.target.checked) {
+				setFormData({
+					...formData,
+					interests: [...formData.interests, value],
+				});
+			} else {
+				setFormData({
+					...formData,
+					interests: formData.interests.filter(
+						(interest) => interest !== value
+					),
+				});
+			}
+		} else if (type === 'file') {
+			// Append new files to the existing file list
+			const fileList = Array.from(files);
+			setFormData({
+				...formData,
+				inspirationPhotos: [...formData.inspirationPhotos, ...fileList],
+			});
 		} else {
-			setFormData((prevState) => ({
-				...prevState,
+			setFormData({
+				...formData,
 				[name]: value,
-			}));
+			});
 		}
+	};
+	const formatLabel = (text) => {
+		// Split words based on capital letters and join with space
+		return text
+			.replace(/([A-Z])/g, ' $1') // Insert a space before all caps
+			.replace(/^./, (str) => str.toUpperCase()); // Capitalize the first letter
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(formData);
-        // router.reload();
+		// Submit logic goes here
 	};
 
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='grid gap-16 max-w-5xl mx-auto place-items-center '
+			className='max-w-6xl mx-auto p-5 w-full grid gap-10 lg:gap-16'
 		>
-			<div className='grid gap-4'>
-				<FormField
-					label='Name'
-					type='text'
-					name='name'
-					value={formData.name}
-					onChange={handleChange}
-					required
-				/>
-				<FormField
-					label='Email'
-					type='email'
-					name='email'
-					value={formData.email}
-					onChange={handleChange}
-					required
-				/>
-				<FormField
-					label='Phone Number'
-					type='tel'
-					name='phoneNumber'
-					value={formData.phoneNumber}
-					onChange={handleChange}
-				/>
-				<FormField
-					label='Event Date'
-					type='date'
-					name='date'
-					value={formData.date}
-					onChange={handleChange}
-				/>
-				{/* New dropdown for selecting amount in dozens */}
-				<label className='mb-4 grid lg:grid-cols-2 items-center lg:gap-8 w-[70vw] lg:w-[50vw]'>
-    <SubHeading title='Amount in Dozens'/> 
-    <select
-        name='amountInDozens'
-        value={formData.amountInDozens}
-        onChange={handleChange}
-        className='mt-1 block w-full rounded-sm border border-primary shadow-sm shadow-primary/30 focus:outline-none  bg-light focus:bg-primary/10 focus:border-dark p-4'
-    >
-        <option value='' >Select Amount</option>
-        {[...Array(9)].map((_, i) => (  // Options for 1 to 9 dozen
-            <option key={i} value={i + 1}>{`${i + 1} dozen`}</option>
-        ))}
-        <option value='10+'>10+</option>  
-    </select>
-</label>
+			<div className='grid lg:grid-cols-2  gap-y-6 lg:gap-y-10 lg:gap-x-12 lg:max-w-4xl lg:mx-auto'>
+				<div className=''>
+					<label htmlFor='name' className='form-label'>
+						Name
+					</label>
+					<input
+						type='text'
+						id='name'
+						name='name'
+						value={formData.name}
+						onChange={handleInputChange}
+						required
+						className='form-input'
+					/>
+				</div>
 
+				<div className=''>
+					<label htmlFor='email' className='form-label'>
+						Email
+					</label>
+					<input
+						type='email'
+						id='email'
+						name='email'
+						value={formData.email}
+						onChange={handleInputChange}
+						required
+						className='form-input'
+					/>
+				</div>
+
+				<div className=''>
+					<label htmlFor='phoneNumber' className='form-label'>
+						Phone Number
+					</label>
+					<input
+						type='tel'
+						id='phoneNumber'
+						name='phoneNumber'
+						value={formData.phoneNumber}
+						onChange={handleInputChange}
+						required
+						className='form-input'
+					/>
+				</div>
+
+				<div className=''>
+					<label htmlFor='eventDate' className='form-label'>
+						Event Date
+					</label>
+					<input
+						type='datetime-local'
+						id='eventDate'
+						name='eventDate'
+						value={formData.eventDate}
+						onChange={handleInputChange}
+						required
+						className='form-input'
+					/>
+				</div>
 			</div>
-			<div>
-				<FormField
-					label='Interested in (select all that apply)'
-					type='checkbox'
-					name='interests'
-					value={formData.interests}
-					onChange={handleChange}
-					options={[
-						'Wedding',
-						'Special Event',
-						'Cupcakes',
-						'Specialty Cakes',
-						'Cookies',
-						'Candy & Treats',
-						'Delivery',
-						'Event Set Up',
-						'Display Item Rental',
-						'General Inquiry',
-						'Other',
-					]}
+
+			<div className='md:2/3 lg:w-1/4 mx-auto'>
+				<label htmlFor='amount' className='form-label'>
+					Est. Amount in Dozens
+				</label>
+				<input
+					type='number'
+					id='amount'
+					name='amount'
+					value={formData.amount}
+					onChange={handleInputChange}
+					required
+					className='form-input'
 				/>
 			</div>
-			<FormField
-				label='Additional Notes'
-				type='textarea' // Specify the type as 'textarea' for a multiline input
-				name='additionalNotes'
-				value={formData.additionalNotes || ''} // Ensure the value is controlled even if it's initially undefined
-				onChange={handleChange}
-				required={false} // Set to true if the field is required, or omit/leave as false if it's optional
-			/>
+
+			<fieldset className='grid gap-6 bg-primary/10 shadow-lg rounded-md px-1 py-8 '>
+				<div>
+					<legend>
+						
+						<SubHeading
+							title='Select all that apply'
+							type='dark'
+						/>
+					</legend>
+				</div>
+				<div className='form-subheading max-w- lg:mx-auto grid grid-cols-2 place-iems-center lg:place-items-start text-center gap-x-8 lg:grid-cols-3 lg:gap-y-2 lg:gap-x-12  '>
+					{[
+						'wedding',
+						'cupcakes',
+						'cookies',
+						'delivery',
+						'specialEvent',
+						'specialtyCakes',
+						'candyAndTreats',
+						'eventSetup',
+						'generalInquiry',
+						'displayItemRental',
+						'other',
+					].map((interest) => (
+						<div key={interest} className=' py-4  '>
+							<input
+								type='checkbox'
+								id={interest}
+								name='interests'
+								value={interest}
+								checked={formData.interests.includes(interest)}
+								onChange={handleInputChange}
+								className='mr-2'
+							/>
+							<label htmlFor={interest} className='text-dark  '>
+								{formatLabel(interest)}
+							</label>
+						</div>
+					))}
+				</div>
+			</fieldset>
+
+			<div className='w-full md:w-1/2  mx-auto'>
+				<label htmlFor='inspirationPhotos' className='form-label '>
+					Inspiration Photos:
+				</label>
+				<input
+					type='file'
+					id='inspirationPhotos'
+					name='inspirationPhotos'
+					accept='image/*'
+					multiple
+					onChange={handleInputChange}
+					className='my-4 w-full  p-2 border border-primary text-2xl rounded-sm  file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light file:text-dark hover:file:bg-primary'
+				/>
+				<div className='my-4 grid grid-cols-3 place-items-center gap-4'>
+					{formData.inspirationPhotos.map((file, index) => (
+						<div key={index} className='relative'>
+							<img
+								src={URL.createObjectURL(file)}
+								alt='preview'
+								className='w-full h-auto rounded-md shadow-lg shadow-primary/40 '
+							/>
+							<button
+								type='button'
+								className='absolute top-2 right-2 py-1 px-3 bg-primary/70 rounded-full '
+								onClick={() => {
+									setFormData({
+										...formData,
+										inspirationPhotos: formData.inspirationPhotos.filter(
+											(_, idx) => idx !== index
+										),
+									});
+								}}
+							>
+								
+								<AiOutlineClose className="font-bold text-lg text-light"/>
+							</button>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<div className='lg:w-2/3 lg:mx-auto '>
+				<label htmlFor='additionalDetails' className='form-label'>
+					Additional Details:
+				</label>
+				<textarea
+					id='additionalDetails'
+					name='additionalDetails'
+					value={formData.additionalDetails}
+					onChange={handleInputChange}
+					rows='5'
+					className='form-input mt-4'
+				></textarea>
+			</div>
+
 			<button
 				type='submit'
-				className='bg-dark text-light  shadow-lg shadow-dark/50 border border-light/60 hover:border-dark hover:shadow-sm  hover:bg-light hover:text-dark py-3  px-8  font-bold text-2xl lg:text-3xl rounded-sm hover:scale-95 transition duration-700 mt-12'
+				className='border border-primary md:w-1/2 lg:w-1/3 mx-auto hover:bg-primary hover:text-light transition duration-700 text-xl shadow font-bold py-3 px-8 rounded '
 			>
-				Submit Now
+				Submit
 			</button>
 		</form>
 	);
 };
 
 export default ContactForm;
-const FormField = ({
-	label,
-	type,
-	name,
-	value,
-	onChange,
-	required = false,
-	options,
-}) => {
-	// Check if the type is 'textarea' and render a textarea element instead
-	if (type === 'textarea') {
-		return (
-			<label className='mb-4 grid place-items-center  gap-6 lg:gap-4 w-[90vw] lg:w-[50vw]'>
-				<SubHeading title={label} />
-				<textarea
-					name={name}
-					value={value}
-					onChange={onChange}
-					required={required}
-					className='mt-1 block w-full  h-[30vh] border rounded-sm border-primary shadow-sm shadow-primary focus:border-dark focus:outline-none bg-light focus:bg-primary/10 p-4'
-					rows='4' // Set the default height of the textarea
-				></textarea>
-			</label>
-		);
-	}
-
-	// Handling for checkboxes
-	if (type === 'checkbox') {
-		return (
-			<div className='grid place-items-center gap-4'>
-				<legend className='font-bold text-2xl mb-2'>{label}:</legend>
-				<div className='grid grid-cols-2 md:grid-cols-4 gap-8  '>
-					{options.map((option) => (
-						<label key={option} className='flex items-center space-x-3'>
-							<input
-								type='checkbox'
-								name={name}
-								value={option}
-								checked={value.includes(option)}
-								onChange={onChange}
-								className='accent-primary h-4 w-4'
-							/>
-							<span className='font-bold'>{option}</span>
-						</label>
-					))}
-				</div>
-			</div>
-		);
-	}
-
-	// Default input fields handling
-	return (
-		<label className='mb-4 grid lg:grid-cols-2 items-center lg:gap-8 w-[70vw] lg:w-[50vw] '>
-			<SubHeading title={`${label} ${required ? '*' : ''}`} />
-			<input
-				type={type}
-				name={name}
-				value={value}
-				onChange={onChange}
-				required={required}
-				className='mt-1 block w-full rounded-sm border border-primary shadow-sm shadow-primary/30  focus:outline-none  bg-light focus:bg-primary/10 focus:border-dark p-4'
-			/>
-		</label>
-	);
-};
