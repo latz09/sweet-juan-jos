@@ -3,6 +3,8 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
 import { SubHeading } from '../utils/Typography';
+
+
 const ContactForm = () => {
 	const [formData, setFormData] = useState({
 		name: '',
@@ -17,6 +19,7 @@ const ContactForm = () => {
 
 	const handleInputChange = (e) => {
 		const { name, value, type, files } = e.target;
+		
 		if (type === 'checkbox') {
 			if (e.target.checked) {
 				setFormData({
@@ -45,6 +48,7 @@ const ContactForm = () => {
 			});
 		}
 	};
+
 	const formatLabel = (text) => {
 		// Split words based on capital letters and join with space
 		return text
@@ -52,10 +56,41 @@ const ContactForm = () => {
 			.replace(/^./, (str) => str.toUpperCase()); // Capitalize the first letter
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
+	
 		e.preventDefault();
-		console.log(formData);
-		// Submit logic goes here
+		
+		try {
+			const response = await fetch('/api/submitContactForm', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
+			
+			const result = await response.json();
+			if (result.success) {
+				alert('Form submitted successfully!');
+				console.log(formData)
+				// Optionally reset form here or navigate the user
+				setFormData({
+					name: '',
+					email: '',
+					phoneNumber: '',
+					eventDate: '',
+					amount: '',
+					interests: [],
+					inspirationPhotos: [],
+					additionalDetails: '',
+				});
+			} else {
+				alert('Submission failed: ' + result.message);
+			}
+		} catch (error) {
+			console.error('Failed to submit form:', error);
+			alert('Submission failed, please try again.');
+		}
 	};
 
 	return (
@@ -119,7 +154,7 @@ const ContactForm = () => {
 						name='eventDate'
 						value={formData.eventDate}
 						onChange={handleInputChange}
-						required
+						
 						className='form-input'
 					/>
 				</div>
@@ -135,7 +170,7 @@ const ContactForm = () => {
 					name='amount'
 					value={formData.amount}
 					onChange={handleInputChange}
-					required
+					
 					className='form-input'
 				/>
 			</div>
@@ -143,11 +178,7 @@ const ContactForm = () => {
 			<fieldset className='grid gap-6 bg-primary/10 shadow-lg rounded-md px-1 py-8 '>
 				<div>
 					<legend>
-						
-						<SubHeading
-							title='Select all that apply'
-							type='dark'
-						/>
+						<SubHeading title='Select all that apply' type='dark' />
 					</legend>
 				</div>
 				<div className='form-subheading max-w- lg:mx-auto grid grid-cols-2 place-iems-center lg:place-items-start text-center gap-x-8 lg:grid-cols-3 lg:gap-y-2 lg:gap-x-12  '>
@@ -215,8 +246,7 @@ const ContactForm = () => {
 									});
 								}}
 							>
-								
-								<AiOutlineClose className="font-bold text-lg text-light"/>
+								<AiOutlineClose className='font-bold text-lg text-light' />
 							</button>
 						</div>
 					))}
