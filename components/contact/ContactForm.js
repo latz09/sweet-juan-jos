@@ -4,8 +4,9 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
 import { SubHeading } from '../utils/Typography';
 
-
 const ContactForm = () => {
+	const [isLoading, setIsLoading] = useState(false);
+	const [isErrorMessage, setIsErrorMessage] = useState();
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -19,7 +20,7 @@ const ContactForm = () => {
 
 	const handleInputChange = (e) => {
 		const { name, value, type, files } = e.target;
-		
+
 		if (type === 'checkbox') {
 			if (e.target.checked) {
 				setFormData({
@@ -57,39 +58,56 @@ const ContactForm = () => {
 	};
 
 	const handleSubmit = async (e) => {
-	
 		e.preventDefault();
-		
+		setIsLoading(true);
+		setIsErrorMessage('');
+
+		const formDataToSend = new FormData();
+		formDataToSend.append('name', formData.name);
+		formDataToSend.append('email', formData.email);
+		formDataToSend.append('phoneNumber', formData.phoneNumber);
+		formDataToSend.append('eventDate', formData.eventDate);
+		formDataToSend.append('amount', formData.amount);
+		formDataToSend.append('interests', JSON.stringify(formData.interests));
+		formDataToSend.append('additionalDetails', formData.additionalDetails);
+
+		formData.inspirationPhotos.forEach((file) => {
+			formDataToSend.append('inspirationPhotos', file);
+		});
+
 		try {
 			const response = await fetch('/api/submitContactForm', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(formData),
+				body: formDataToSend,
 			});
-			
-			const result = await response.json();
-			if (result.success) {
-				alert('Form submitted successfully!');
-				console.log(formData)
-				// Optionally reset form here or navigate the user
-				setFormData({
-					name: '',
-					email: '',
-					phoneNumber: '',
-					eventDate: '',
-					amount: '',
-					interests: [],
-					inspirationPhotos: [],
-					additionalDetails: '',
-				});
+
+			const contentType = response.headers.get('content-type');
+			if (contentType && contentType.includes('application/json')) {
+				const result = await response.json();
+				if (result.success) {
+					setFormData({
+						name: '',
+						email: '',
+						phoneNumber: '',
+						eventDate: '',
+						amount: '',
+						interests: [],
+						inspirationPhotos: [],
+						additionalDetails: '',
+					});
+					setIsErrorMessage(''); // Clear any previous error message
+					// Display success message
+					setSuccessMessage('Form submitted successfully!');
+				} else {
+					setIsErrorMessage(result.message || 'Submission failed');
+				}
 			} else {
-				alert('Submission failed: ' + result.message);
+				setIsErrorMessage('Unexpected response from server');
 			}
 		} catch (error) {
-			console.error('Failed to submit form:', error);
-			alert('Submission failed, please try again.');
+			setIsErrorMessage('Failed to submit form');
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -154,7 +172,6 @@ const ContactForm = () => {
 						name='eventDate'
 						value={formData.eventDate}
 						onChange={handleInputChange}
-						
 						className='form-input'
 					/>
 				</div>
@@ -170,7 +187,6 @@ const ContactForm = () => {
 					name='amount'
 					value={formData.amount}
 					onChange={handleInputChange}
-					
 					className='form-input'
 				/>
 			</div>
@@ -278,3 +294,16 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
+{
+	/* USE THIS FOR FOR HANDLING IS LOADING AND WHAT NOT
+ <form onSubmit={handleSubmit}>
+  //Form Fields here
+<button type="submit" disabled={isLoading}>
+  {isLoading ? 'Submitting...' : 'Submit'}
+</button>
+{isErrorMessage && <p className="error">{isErrorMessage}</p>}
+{successMessage && <p className="success">{successMessage}</p>}
+</form> 
+*/
+}
