@@ -7,6 +7,7 @@ import { SubHeading } from '../utils/Typography';
 const ContactForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState();
+	const [successMessage, setSuccessMessage] = useState();
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -61,7 +62,8 @@ const ContactForm = () => {
 		e.preventDefault();
 		setIsLoading(true);
 		setIsErrorMessage('');
-
+		setSuccessMessage('');
+	  
 		const formDataToSend = new FormData();
 		formDataToSend.append('name', formData.name);
 		formDataToSend.append('email', formData.email);
@@ -70,46 +72,44 @@ const ContactForm = () => {
 		formDataToSend.append('amount', formData.amount);
 		formDataToSend.append('interests', JSON.stringify(formData.interests));
 		formDataToSend.append('additionalDetails', formData.additionalDetails);
-
+	  
 		formData.inspirationPhotos.forEach((file) => {
-			formDataToSend.append('inspirationPhotos', file);
+		  formDataToSend.append('inspirationPhotos', file);
 		});
-
+	  
 		try {
-			const response = await fetch('/api/submitContactForm', {
-				method: 'POST',
-				body: formDataToSend,
-			});
-
-			const contentType = response.headers.get('content-type');
-			if (contentType && contentType.includes('application/json')) {
-				const result = await response.json();
-				if (result.success) {
-					setFormData({
-						name: '',
-						email: '',
-						phoneNumber: '',
-						eventDate: '',
-						amount: '',
-						interests: [],
-						inspirationPhotos: [],
-						additionalDetails: '',
-					});
-					setIsErrorMessage(''); // Clear any previous error message
-					// Display success message
-					setSuccessMessage('Form submitted successfully!');
-				} else {
-					setIsErrorMessage(result.message || 'Submission failed');
-				}
+		  const response = await fetch('/api/submitContactForm', {
+			method: 'POST',
+			body: formDataToSend,
+		  });
+	  
+		  const contentType = response.headers.get('content-type');
+		  if (contentType && contentType.includes('application/json')) {
+			const result = await response.json();
+			if (result.success) {
+			  setFormData({
+				name: '',
+				email: '',
+				phoneNumber: '',
+				eventDate: '',
+				amount: '',
+				interests: [],
+				inspirationPhotos: [],
+				additionalDetails: '',
+			  });
+			  setSuccessMessage('Form submitted successfully!');
 			} else {
-				setIsErrorMessage('Unexpected response from server');
+			  setIsErrorMessage(result.message || 'Submission failed');
 			}
+		  } else {
+			setIsErrorMessage('Unexpected response from server');
+		  }
 		} catch (error) {
-			setIsErrorMessage('Failed to submit form');
+		  setIsErrorMessage('Failed to submit form');
 		} finally {
-			setIsLoading(false);
+		  setIsLoading(false);
 		}
-	};
+	  };
 
 	return (
 		<form
