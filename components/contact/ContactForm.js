@@ -191,7 +191,7 @@ const ContactForm = () => {
 				/>
 			</div>
 
-			<fieldset className='grid gap-6 bg-primary/10 shadow-lg rounded-md px-1 py-8 '>
+			<fieldset className='grid gap-6  bg-primary/10 shadow-lg rounded-md px-1 py-8 '>
 				<div>
 					<legend>
 						<SubHeading title='Select all that apply' type='dark' />
