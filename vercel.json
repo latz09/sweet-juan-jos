@@ -1,7 +1,8 @@
 {
-	"functions": {
-		"api/submitContactForm": {
-			"maxDuration": 30
-		}
-	}
-}
+    "functions": {
+      "api/submitContactForm.js": {
+        "maxDuration": 30
+      }
+    }
+  }
+  
