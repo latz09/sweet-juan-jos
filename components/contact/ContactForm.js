@@ -197,7 +197,7 @@ const ContactForm = () => {
 						<SubHeading title='Select all that apply' type='dark' />
 					</legend>
 				</div>
-				<div className='form-subheading max-w- lg:mx-auto grid grid-cols-2 place-iems-center lg:place-items-start text-center gap-x-8 lg:grid-cols-3 lg:gap-y-2 lg:gap-x-12  '>
+				<div className='form-subheading  max-w- lg:mx-auto grid grid-cols-2 place-iems-center lg:place-items-start text-center gap-x-8 lg:grid-cols-3 lg:gap-y-2 lg:gap-x-12  '>
 					{[
 						'wedding',
 						'cupcakes',
