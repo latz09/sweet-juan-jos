@@ -2,13 +2,17 @@
 'use client';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { SubHeading } from '../utils/Typography';
 import imageCompression from 'browser-image-compression';
+import { motion } from 'framer-motion';
 
 const ContactForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState();
 	const [successMessage, setSuccessMessage] = useState();
+	const router = useRouter();
+
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -79,7 +83,7 @@ const ContactForm = () => {
 		setIsLoading(true);
 		setIsErrorMessage('');
 		setSuccessMessage('');
-	  
+
 		const formDataToSend = new FormData();
 		formDataToSend.append('name', formData.name);
 		formDataToSend.append('email', formData.email);
@@ -88,44 +92,45 @@ const ContactForm = () => {
 		formDataToSend.append('amount', formData.amount);
 		formDataToSend.append('interests', JSON.stringify(formData.interests));
 		formDataToSend.append('additionalDetails', formData.additionalDetails);
-	  
+
 		formData.inspirationPhotos.forEach((file) => {
-		  formDataToSend.append('inspirationPhotos', file);
+			formDataToSend.append('inspirationPhotos', file);
 		});
-	  
+
 		try {
-		  const response = await fetch('/api/submitContactForm', {
-			method: 'POST',
-			body: formDataToSend,
-		  });
-	  
-		  const contentType = response.headers.get('content-type');
-		  if (contentType && contentType.includes('application/json')) {
-			const result = await response.json();
-			if (result.success) {
-			  setFormData({
-				name: '',
-				email: '',
-				phoneNumber: '',
-				eventDate: '',
-				amount: '',
-				interests: [],
-				inspirationPhotos: [],
-				additionalDetails: '',
-			  });
-			  setSuccessMessage('Form submitted successfully!');
+			const response = await fetch('/api/submitContactForm', {
+				method: 'POST',
+				body: formDataToSend,
+			});
+
+			const contentType = response.headers.get('content-type');
+			if (contentType && contentType.includes('application/json')) {
+				const result = await response.json();
+				if (result.success) {
+					setFormData({
+						name: '',
+						email: '',
+						phoneNumber: '',
+						eventDate: '',
+						amount: '',
+						interests: [],
+						inspirationPhotos: [],
+						additionalDetails: '',
+					});
+					setSuccessMessage('Form submitted successfully!');
+					router.push(`/thank-you?name=${encodeURIComponent(formData.name)}`); 
+				} else {
+					setIsErrorMessage(result.message || 'Submission failed');
+				}
 			} else {
-			  setIsErrorMessage(result.message || 'Submission failed');
+				setIsErrorMessage('Unexpected response from server');
 			}
-		  } else {
-			setIsErrorMessage('Unexpected response from server');
-		  }
 		} catch (error) {
-		  setIsErrorMessage('Failed to submit form');
+			setIsErrorMessage('Failed to submit form');
 		} finally {
-		  setIsLoading(false);
+			setIsLoading(false);
 		}
-	  };
+	};
 
 	return (
 		<form
@@ -299,18 +304,84 @@ const ContactForm = () => {
 				></textarea>
 			</div>
 
-			<button
+			<motion.button
 				type='submit'
-				className='border border-primary md:w-1/2 lg:w-1/3 mx-auto hover:bg-primary hover:text-light transition duration-700 text-xl shadow font-bold py-3 px-8 rounded '
+				className={`border border-primary  mx-auto transition duration-700 text-xl shadow font-bold  rounded ${
+					isLoading
+						? 'border-opacity-0 shadow-none scale-90 w-full'
+						: 'hover:bg-primary hover:text-light py-3 px-8 w-full md:w-1/2 lg:w-1/3'
+				}`}
+				whileTap={{ scale: 0.95 }}
 			>
-				Submit
-			</button>
+				{!isLoading && (
+					<motion.span
+						key='submit'
+						initial={{ opacity: 0, y: -10 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: 10 }}
+					>
+						Submit
+					</motion.span>
+				)}
+				{isLoading && (
+					<motion.div
+						key='submitting'
+						initial={{ opacity: 0, scale: 0.9 }}
+						animate={{ opacity: 1, scale: 1 }}
+						exit={{ opacity: 0, scale: 0 }}
+						transition={{ duration: 0.9 }}
+						className='grid gap-4 lg:gap-6 place-items-center '
+						disabled={isLoading}
+					>
+						<span className="lg:text-xl">Almost there! Gathering your information...</span>
+
+						<motion.div
+							className=''
+							animate={{ rotate: 360 }}
+							transition={{ repeat: Infinity, duration: 5, ease: 'linear' }}
+						>
+							<motion.div
+								className='w-[.4rem] h-[.4rem] bg-primary rounded-full inline-block mx-1'
+								initial={{ scale: 1 }}
+								animate={{ scale: [1, 1.2, 1] }}
+								transition={{
+									repeat: Infinity,
+									duration: 0.9,
+									ease: 'easeInOut',
+								}}
+							/>
+							<motion.div
+								className='w-[.4rem] h-[.4rem] bg-dark rounded-full inline-block mx-1'
+								initial={{ scale: 1 }}
+								animate={{ scale: [1, 1.2, 1] }}
+								transition={{
+									repeat: Infinity,
+									duration: 1.4,
+									ease: 'easeInOut',
+									delay: 0.5,
+								}}
+							/>
+							<motion.div
+								className='w-[.4rem] h-[.4rem] bg-primary rounded-full inline-block mx-1'
+								initial={{ scale: 1 }}
+								animate={{ scale: [1, 1.2, 1] }}
+								transition={{
+									repeat: Infinity,
+									duration: 0.9,
+									ease: 'easeInOut',
+									delay: 0.2,
+								}}
+							/>
+						</motion.div>
+							
+					</motion.div>
+				)}
+			</motion.button>
 		</form>
 	);
 };
 
 export default ContactForm;
-
 
 {
 	/* USE THIS FOR FOR HANDLING IS LOADING AND WHAT NOT

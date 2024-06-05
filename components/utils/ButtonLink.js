@@ -20,7 +20,7 @@ const ButtonLink = ({ title, type, href }) => {
 					<button
 						className={`py-3  px-8  font-bold text-2xl lg:text-4xl  hover:scale-95 transition duration-700 ${type}`}
 					>
-						{title}
+						Request an Order
 					</button>
 				</div>
 			</Link>
