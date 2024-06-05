@@ -3,6 +3,7 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
 import { SubHeading } from '../utils/Typography';
+import imageCompression from 'browser-image-compression';
 
 const ContactForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +20,7 @@ const ContactForm = () => {
 		additionalDetails: '',
 	});
 
-	const handleInputChange = (e) => {
+	const handleInputChange = async (e) => {
 		const { name, value, type, files } = e.target;
 
 		if (type === 'checkbox') {
@@ -37,11 +38,26 @@ const ContactForm = () => {
 				});
 			}
 		} else if (type === 'file') {
-			// Append new files to the existing file list
 			const fileList = Array.from(files);
+			const compressedFiles = await Promise.all(
+				fileList.map(async (file) => {
+					try {
+						const options = {
+							maxSizeMB: 1, // Set the max size in MB
+							maxWidthOrHeight: 1920, // Set the max width or height of the image
+							useWebWorker: true, // Use web workers for faster compression
+						};
+						const compressedFile = await imageCompression(file, options);
+						return compressedFile;
+					} catch (error) {
+						console.error('Error compressing the image:', error);
+						return file; // Use original file if compression fails
+					}
+				})
+			);
 			setFormData({
 				...formData,
-				inspirationPhotos: [...formData.inspirationPhotos, ...fileList],
+				inspirationPhotos: [...formData.inspirationPhotos, ...compressedFiles],
 			});
 		} else {
 			setFormData({
@@ -294,6 +310,7 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
 
 {
 	/* USE THIS FOR FOR HANDLING IS LOADING AND WHAT NOT

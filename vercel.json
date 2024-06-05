@@ -1,0 +1,7 @@
+{
+	"functions": {
+		"api/submitContactForm": {
+			"maxDuration": 30
+		}
+	}
+}
