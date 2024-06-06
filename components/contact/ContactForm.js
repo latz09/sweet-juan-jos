@@ -261,7 +261,7 @@ const ContactForm = () => {
 					accept='image/*'
 					multiple
 					onChange={handleInputChange}
-					className='my-4 w-full  p-2 border border-primary text-2xl rounded-sm  file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light file:text-dark hover:file:bg-primary'
+					className='my-4 w-full  p-2 border md:border-primary/20 text-2xl rounded-sm  file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light file:text-dark hover:file:bg-primary'
 				/>
 				<div className='my-4 grid grid-cols-3 place-items-center gap-4'>
 					{formData.inspirationPhotos.map((file, index) => (
