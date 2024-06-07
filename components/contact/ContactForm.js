@@ -308,7 +308,7 @@ const ContactForm = () => {
 					value={formData.additionalDetails}
 					onChange={handleInputChange}
 					rows='7'
-					className='form-input mt-4 text-lg lg:text-xl font-bold '
+					className='form-input mt-4  '
 				></textarea>
 			</div>
 
