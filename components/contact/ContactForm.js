@@ -3,7 +3,7 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { SubHeading } from '../utils/Typography';
+import { MainHeading, SubHeading } from '../utils/Typography';
 import imageCompression from 'browser-image-compression';
 import { motion } from 'framer-motion';
 
@@ -24,9 +24,10 @@ const ContactForm = () => {
 		inspirationPhotos: [],
 		additionalDetails: '',
 	});
-	console.log(isInterestSelected);
+	
 
 	const handleInputChange = async (e) => {
+		e.preventDefault();
 		const { name, value, type, files } = e.target;
 
 		if (type === 'checkbox') {
@@ -214,10 +215,10 @@ const ContactForm = () => {
 				/>
 			</div>
 
-			<fieldset className=' bg-primary/10 py-12 lg:py-20 '>
+			<fieldset className=' bg-primary/10 py-20 '>
 				<div className='mb-16'>
 					<legend>
-						<SubHeading title='Select all that apply' type='dark' />
+						<MainHeading title='Your Interests...' type='dark' />
 					</legend>
 				</div>
 				<div className='px-6  form-subheading grid gap-y-12 gap-x-4 lg:gap-x-0 lg:gap-y-8 grid-cols-2  place-items-center'>
