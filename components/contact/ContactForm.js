@@ -11,6 +11,7 @@ const ContactForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState();
 	const [successMessage, setSuccessMessage] = useState();
+	const [isInterestSelected, setIsInterestSelected] = useState(false);
 	const router = useRouter();
 
 	const [formData, setFormData] = useState({
@@ -23,6 +24,7 @@ const ContactForm = () => {
 		inspirationPhotos: [],
 		additionalDetails: '',
 	});
+	console.log(isInterestSelected);
 
 	const handleInputChange = async (e) => {
 		const { name, value, type, files } = e.target;
@@ -118,7 +120,7 @@ const ContactForm = () => {
 						additionalDetails: '',
 					});
 					setSuccessMessage('Form submitted successfully!');
-					router.push(`/thank-you?name=${encodeURIComponent(formData.name)}`); 
+					router.push(`/thank-you?name=${encodeURIComponent(formData.name)}`);
 				} else {
 					setIsErrorMessage(result.message || 'Submission failed');
 				}
@@ -135,9 +137,9 @@ const ContactForm = () => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='max-w-6xl mx-auto p-5 w-full grid gap-10 lg:gap-16'
+			className='max-w-6xl mx-auto  w-full grid gap-10 lg:gap-16'
 		>
-			<div className='grid lg:grid-cols-2  gap-y-6 lg:gap-y-10 lg:gap-x-12 lg:max-w-4xl lg:mx-auto'>
+			<div className='px-8 grid lg:grid-cols-2  gap-y-6 lg:gap-y-10 lg:gap-x-12 lg:max-w-4xl lg:mx-auto'>
 				<div className=''>
 					<label htmlFor='name' className='form-label'>
 						Name
@@ -212,13 +214,13 @@ const ContactForm = () => {
 				/>
 			</div>
 
-			<fieldset className='grid gap-6  bg-primary/10 shadow-lg rounded-md px-1 py-8 '>
-				<div>
+			<fieldset className=' bg-primary/10 py-12 lg:py-20 '>
+				<div className='mb-16'>
 					<legend>
 						<SubHeading title='Select all that apply' type='dark' />
 					</legend>
 				</div>
-				<div className='form-subheading  max-w- lg:mx-auto grid grid-cols-2 place-iems-center lg:place-items-start text-center gap-x-8 lg:grid-cols-3 lg:gap-y-2 lg:gap-x-12  '>
+				<div className='px-6  form-subheading grid gap-y-12 gap-x-4 lg:gap-x-0 lg:gap-y-8 grid-cols-2  place-items-center'>
 					{[
 						'wedding',
 						'cupcakes',
@@ -232,7 +234,10 @@ const ContactForm = () => {
 						'displayItemRental',
 						'other',
 					].map((interest) => (
-						<div key={interest} className=' py-4  '>
+						<div
+							key={interest}
+							className={`grid place-items-center tracking-wider text-lg lg:text-xl  w-full h-full `}
+						>
 							<input
 								type='checkbox'
 								id={interest}
@@ -240,9 +245,10 @@ const ContactForm = () => {
 								value={interest}
 								checked={formData.interests.includes(interest)}
 								onChange={handleInputChange}
-								className='mr-2'
+								className='sr-only h-full '
+								
 							/>
-							<label htmlFor={interest} className='text-dark  '>
+							<label htmlFor={interest} className={`text-dark rounded-sm  p-4 w-full lg:w-1/2 text-center border-2 h-full grid place-items-center ${formData.interests.includes(interest) ? 'bg-primary text-light font-bold  shadow-xl border-primary shadow-primary/50' : 'border-primary/20 shadow-sm '}`}>
 								{formatLabel(interest)}
 							</label>
 						</div>
@@ -250,7 +256,7 @@ const ContactForm = () => {
 				</div>
 			</fieldset>
 
-			<div className='w-full md:w-1/2  mx-auto'>
+			<div className='w-full md:w-1/2  mx-auto px-8'>
 				<label htmlFor='inspirationPhotos' className='form-label '>
 					Inspiration Photos:
 				</label>
@@ -261,7 +267,7 @@ const ContactForm = () => {
 					accept='image/*'
 					multiple
 					onChange={handleInputChange}
-					className='my-4 w-full  p-2 border md:border-primary/20 text-2xl rounded-sm  file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-light file:text-dark hover:file:bg-primary'
+					className='my-4 w-full file:border-0 file:shadow-lg shadow-sm text-2xl rounded-sm  file:mr-4 file:py-2 file:px-4 file:rounded-sm file:text-sm file:bg-light file:text-primary file:font-bold  file:m-2 bg-dark/10'
 				/>
 				<div className='my-4 grid grid-cols-3 place-items-center gap-4'>
 					{formData.inspirationPhotos.map((file, index) => (
@@ -290,7 +296,7 @@ const ContactForm = () => {
 				</div>
 			</div>
 
-			<div className='lg:w-2/3 lg:mx-auto '>
+			<div className='lg:w-2/3 lg:mx-auto px-2 '>
 				<label htmlFor='additionalDetails' className='form-label'>
 					Additional Details:
 				</label>
@@ -299,29 +305,32 @@ const ContactForm = () => {
 					name='additionalDetails'
 					value={formData.additionalDetails}
 					onChange={handleInputChange}
-					rows='5'
+					rows='7'
 					className='form-input mt-4'
 				></textarea>
 			</div>
 
 			<motion.button
 				type='submit'
-				className={`border border-primary  mx-auto transition duration-700 text-xl shadow font-bold  rounded ${
+				className={`border  border-primary  mx-auto transition duration-700 text-xl shadow font-bold  rounded ${
 					isLoading
 						? 'border-opacity-0 shadow-none scale-90 w-full'
-						: 'hover:bg-primary hover:text-light py-3 px-8 w-full md:w-1/2 lg:w-1/3'
+						: ' py-3 px-8 w-5/6 md:w-1/2 lg:w-1/3'
 				}`}
 				whileTap={{ scale: 0.95 }}
+				whileHover={{ scale: 1.05 }}
 			>
 				{!isLoading && (
-					<motion.span
-						key='submit'
-						initial={{ opacity: 0, y: -10 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: 10 }}
-					>
-						Submit
-					</motion.span>
+					<div className='mx-8'>
+						<motion.span
+							key='submit'
+							initial={{ opacity: 0, y: -10 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: 10 }}
+						>
+							Submit
+						</motion.span>
+					</div>
 				)}
 				{isLoading && (
 					<motion.div
@@ -333,7 +342,9 @@ const ContactForm = () => {
 						className='grid gap-4 lg:gap-6 place-items-center '
 						disabled={isLoading}
 					>
-						<span className="lg:text-xl">Almost there! Gathering your information...</span>
+						<span className='lg:text-xl'>
+							Almost there! Gathering your information...
+						</span>
 
 						<motion.div
 							className=''
@@ -373,7 +384,6 @@ const ContactForm = () => {
 								}}
 							/>
 						</motion.div>
-							
 					</motion.div>
 				)}
 			</motion.button>

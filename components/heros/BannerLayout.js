@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import ButtonLink from '../utils/ButtonLink';
 import { MainHeading, SubHeading } from '../utils/Typography';
+import Link from 'next/link';
 
 const BannerLayout = ({ imageUrl, heading, subheading, href, CTAText }) => {
 	return (
@@ -30,9 +31,14 @@ const BannerLayout = ({ imageUrl, heading, subheading, href, CTAText }) => {
 					<div className='max-w-3xl mx-auto grid gap-1 lg:gap-3 place-items-center  '>
 						<MainHeading title={heading} type='light' />
 						<SubHeading type='light' title={subheading} />
-						<div className='pt-3'>
+						{/* <div className='pt-3'>
 							<ButtonLink title={CTAText} type='secondary' href={href} />
-						</div>
+						</div> */}
+						<Link href={href} CTAText={CTAText}>
+							<div className="border border-light/60 rounded-sm  px-8 py-2 font-semibold lg:text-2xl bg-dark/90 text-light">
+								<button className=' '>{CTAText}</button>
+							</div>
+						</Link>
 					</div>
 				</div>
 			</div>
