@@ -139,7 +139,7 @@ const ContactForm = () => {
 			onSubmit={handleSubmit}
 			className='max-w-6xl mx-auto  w-full grid gap-10 lg:gap-16'
 		>
-			<div className='px-8 grid lg:grid-cols-2  gap-y-6 lg:gap-y-10 lg:gap-x-12 lg:max-w-4xl lg:mx-auto'>
+			<div className='px-8 lg:px-0 grid lg:grid-cols-2  gap-y-6 lg:gap-y-10 lg:gap-x-12 lg:max-w-4xl lg:mx-auto'>
 				<div className=''>
 					<label htmlFor='name' className='form-label'>
 						Name
@@ -200,21 +200,9 @@ const ContactForm = () => {
 				</div>
 			</div>
 
-			<div className='md:2/3 lg:w-1/4 mx-auto'>
-				<label htmlFor='amount' className='form-label'>
-					Est. Amount in Dozens
-				</label>
-				<input
-					type='number'
-					id='amount'
-					name='amount'
-					value={formData.amount}
-					onChange={handleInputChange}
-					className='form-input'
-				/>
-			</div>
+		
 
-			<fieldset className=' bg-primary/10 py-20 '>
+			<fieldset className=' bg-primary/10 py-20 my-8 lg:my-4 '>
 				<div className='mb-16'>
 					<legend>
 						<MainHeading title='Your Interests...' type='dark' />
@@ -257,8 +245,21 @@ const ContactForm = () => {
 					))}
 				</div>
 			</fieldset>
+			<div className='md:2/3 lg:w-1/4 mx-auto'>
+				<label htmlFor='amount' className='form-label'>
+					Est. Amount in Dozens
+				</label>
+				<input
+					type='number'
+					id='amount'
+					name='amount'
+					value={formData.amount}
+					onChange={handleInputChange}
+					className='form-input'
+				/>
+			</div>
 
-			<div className='w-full md:w-1/2  mx-auto px-8'>
+			<div className='w-full md:w-1/2  mx-auto px-8 my-8 lg:my-0'>
 				<label htmlFor='inspirationPhotos' className='form-label '>
 					Inspiration Photos:
 				</label>
