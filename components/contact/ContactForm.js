@@ -24,7 +24,6 @@ const ContactForm = () => {
 		inspirationPhotos: [],
 		additionalDetails: '',
 	});
-	
 
 	const handleInputChange = async (e) => {
 		e.preventDefault();
@@ -247,9 +246,11 @@ const ContactForm = () => {
 								checked={formData.interests.includes(interest)}
 								onChange={handleInputChange}
 								className='sr-only h-full '
-								
 							/>
-							<label htmlFor={interest} className={`text-dark rounded-sm  p-4 w-full lg:w-1/2 text-center border-2 h-full grid place-items-center ${formData.interests.includes(interest) ? 'bg-primary text-light font-bold  shadow-xl border-primary shadow-primary/50' : 'border-primary/20 shadow-sm '}`}>
+							<label
+								htmlFor={interest}
+								className={`text-dark rounded-sm  p-4 w-full lg:w-1/2 text-center border-2 h-full grid place-items-center ${formData.interests.includes(interest) ? 'bg-primary text-light font-bold  shadow-xl border-primary shadow-primary/50' : 'border-primary/20 shadow-sm '}`}
+							>
 								{formatLabel(interest)}
 							</label>
 						</div>
@@ -307,7 +308,7 @@ const ContactForm = () => {
 					value={formData.additionalDetails}
 					onChange={handleInputChange}
 					rows='7'
-					className='form-input mt-4'
+					className='form-input mt-4 text-lg lg:text-xl font-bold '
 				></textarea>
 			</div>
 

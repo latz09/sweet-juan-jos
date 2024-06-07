@@ -17,8 +17,8 @@ const DynamicHello = () => {
 			transition={{ duration: 1.1 }}
 		>
 			<div className='text-center grid gap-3'>
-				<SubHeading title={`Thank you, ${name}, for your request`} />
-				<p className='text-xl lg:text-2xl'>We will get back to you shortly</p>
+				<SubHeading title={`Thank you, ${name}, for your request.`} />
+				<p className='text-xl lg:text-2xl'>We will get back to you shortly.</p>
 				<motion.div className='font-bold opacity-80 tracking-wide lg:text-lg '
                 initial={{ opacity: 0, x: 50}}
                 animate={{ opacity: 1, x: 0}}

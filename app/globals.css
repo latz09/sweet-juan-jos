@@ -24,7 +24,7 @@ body {
 
 
 .form-input {
-	@apply   w-full  p-2 bg-light border border-dark/40 focus:border-dark rounded-sm;
+	@apply   w-full  focus:outline-primary/0 border border-dark/30 focus:bg-primary/10   p-2 bg-light ring-0  rounded-sm;
 }
 
 .form-subheading {
