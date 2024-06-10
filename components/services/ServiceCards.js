@@ -13,14 +13,14 @@ const ServiceCards = ({ data }) => {
 			<div className='grid lg:grid-cols-2 gap- place-items-center gap-x-4 gap-y-12 '>
 				{data.map((service) => (
 					<div
-						className='relative shadow-hover-image rounded-lg'
+						className='relative shadow-hover-image lg:rounded-lg'
 						key={service.title}
 					>
 						<Link href={service.link}>
 							<Image
 								src={service.imageUrl}
 								alt={service.title}
-								className='w-full h-auto rounded-lg '
+								className='w-full h-auto lg:rounded-lg '
 								width={500}
 								height={500}
 							/>

@@ -7,13 +7,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BiLoaderAlt } from 'react-icons/bi'; // Importing a loading icon
 import { FiMaximize2, FiMinimize2 } from 'react-icons/fi'; // Importing a maximize icon
 
-const AvailableDisplayItems = ({ data }) => (
-	<div className='grid gap-y-16 gap-x-2 md:gap-x-4 lg:gap-x-8 lg:gap-y-16 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-end max-w-5xl mx-auto px-2'>
-		{data.map((item, index) => (
-			<DisplayItem key={index} item={item} index={index} />
-		))}
-	</div>
-);
+const AvailableDisplayItems = ({ data }) => {
+	return (
+		<div className='grid gap-y-16 gap-x-2 md:gap-x-4 lg:gap-x-8 lg:gap-y-20 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-end max-w-5xl mx-auto px-2'>
+			{data.map((item, index) => (
+				<DisplayItem key={index} item={item} index={index} />
+			))}
+		</div>
+	);
+};
 
 const DisplayItem = ({ item, index }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -112,6 +114,7 @@ const DisplayItem = ({ item, index }) => {
 							)}
 							<Image
 								src={item.imageUrl}
+								onClick={closeModal}
 								alt='Available Display Items'
 								width={450}
 								height={450}
@@ -123,7 +126,7 @@ const DisplayItem = ({ item, index }) => {
 								className='absolute top-4 right-4 p-3  bg-dark/90 text-light rounded-bl-lg  shadow-lg shadow-primary/30 hover:bg-dark hover:text-primary transition-colors duration-300'
 								onClick={closeModal}
 							>
-								<FiMinimize2 className="text-2xl"/>
+								<FiMinimize2 className='text-2xl' />
 							</button>
 						</motion.div>
 					</motion.div>
