@@ -17,7 +17,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 
 
 	return (
-		<PageEntry className='grid gap-16 lg:gap-24 '>
+		<PageEntry className='grid gap-20 lg:gap-24 '>
 			<HeroLayout
 				heading={data.landingHeading}
 				subheading={data.landingSlogan}
