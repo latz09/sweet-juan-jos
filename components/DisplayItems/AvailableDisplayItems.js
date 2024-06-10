@@ -8,7 +8,7 @@ import { BiLoaderAlt } from 'react-icons/bi'; // Importing a loading icon
 import { FiMaximize2, FiMinimize2 } from 'react-icons/fi'; // Importing a maximize icon
 
 const AvailableDisplayItems = ({ data }) => (
-	<div className='grid gap-y-16 gap-x-4 lg:gap-x-8 lg:gap-y-16 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-end max-w-5xl mx-auto px-2'>
+	<div className='grid gap-y-16 gap-x-2 md:gap-x-4 lg:gap-x-8 lg:gap-y-16 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-end max-w-5xl mx-auto px-2'>
 		{data.map((item, index) => (
 			<DisplayItem key={index} item={item} index={index} />
 		))}
