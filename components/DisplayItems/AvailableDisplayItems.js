@@ -77,13 +77,15 @@ const DisplayItem = ({ item, index }) => {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
+						transition={{ duration: 0.2 }}
 						onClick={handleBackgroundClick}
 					>
 						<motion.div
 							className='relative p-4 rounded-lg max-w-full max-h-full overflow-auto scrollbar-hide'
-							initial={{ scale: 0.8 }}
-							animate={{ scale: 1 }}
+							initial={{ scale: 0.98 }}
+							animate={{ scale: 1}}
 							exit={{ scale: 0.8 }}
+							transition = {{  duration: .45,}}
 							onClick={(e) => e.stopPropagation()}
 						>
 							{isLoading && (
