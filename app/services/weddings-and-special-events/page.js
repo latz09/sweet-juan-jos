@@ -20,13 +20,15 @@ const WeddingsAndSpecialEventsPage = async () => {
 
 	return (
 		<PageEntry className='grid gap-20 lg:gap-24 '>
-			<HeroLayout
-				heading={data.landingHeading}
-				subheading={data.landingSlogan}
-				imageUrl={data.landingImage}
-				CTAText={'Order Request'}
-			/>
-			<WeddingIntro data={data.introductionSection} />
+			<div className="grid gap-8 lg:gap-20">
+				<HeroLayout
+					heading={data.landingHeading}
+					subheading={data.landingSlogan}
+					imageUrl={data.landingImage}
+					CTAText={'Order Request'}
+				/>
+				<WeddingIntro data={data.introductionSection} />
+			</div>
 			<ImageBanner images={data.bannerImages1} />
 			<MenuList data={data.weddingMenuLinks} />
 			<AvailableDisplayItemsBlurb data={data.displayItemsLink} />
