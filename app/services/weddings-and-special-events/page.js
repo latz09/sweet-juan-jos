@@ -5,6 +5,9 @@ import PageEntry from '@/components/utils/animations/PageEntry';
 import WeddingIntro from '@/components/weddings-and-special-events/WeddingIntro';
 import ImageBanner from '@/components/utils/ImageBanner';
 import MenuList from '@/components/special-events/MenuList';
+import AvailableDisplayItemsBlurb from '@/components/special-events/AvailableDisplayItemsBlurb';
+import WeddingNavigationLinks from '@/components/special-events/WeddingNavigationLinks';
+import StartPlanningLink from '@/components/utils/StartPlanningLink';
 
 export const metadata = {
 	title: 'Weddings & Special Events',
@@ -14,7 +17,6 @@ const WeddingsAndSpecialEventsPage = async () => {
 	const query = FETCH_SPECIAL_EVENTS_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
 	const data = dataAsArray[0];
-
 
 	return (
 		<PageEntry className='grid gap-20 lg:gap-24 '>
@@ -26,7 +28,13 @@ const WeddingsAndSpecialEventsPage = async () => {
 			/>
 			<WeddingIntro data={data.introductionSection} />
 			<ImageBanner images={data.bannerImages1} />
-			<MenuList data={data.weddingMenuLinks}/>
+			<MenuList data={data.weddingMenuLinks} />
+			<AvailableDisplayItemsBlurb data={data.displayItemsLink} />
+			<WeddingNavigationLinks />
+			<ImageBanner images={data.bannerImages2} />
+			<div className='grid place-items-center'>
+				<StartPlanningLink />
+			</div>
 		</PageEntry>
 	);
 };
