@@ -5,7 +5,7 @@ import { FaCheck, FaPenAlt, FaQuestion } from 'react-icons/fa';
 
 const WeddingNavigationLinks = () => {
 	return (
-		<div className='grid lg:grid-cols-3 gap-8 lg:gap-2 place-items-center w-3/4 lg:w-full max-w-7xl mx-auto lg:px-2'>
+		<div className='grid lg:grid-cols-3 gap-8 lg:gap-2 place-items-center w-5/6 lg:w-full max-w-7xl mx-auto lg:px-2'>
 			{weddingLinks.map((link, index) => (
 				<Link href={link.link} key={index} className='w-full shadow-lg rounded-sm h-full'>
 					<motion.div
