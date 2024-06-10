@@ -35,3 +35,5 @@ const ContactUsPage = async () => {
 };
 
 export default ContactUsPage;
+
+export const revalidate = 10;
