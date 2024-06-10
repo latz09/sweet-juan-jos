@@ -11,7 +11,7 @@ const ContactForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState();
 	const [successMessage, setSuccessMessage] = useState();
-	const [isInterestSelected, setIsInterestSelected] = useState(false);
+
 	const router = useRouter();
 
 	const [formData, setFormData] = useState({
@@ -199,8 +199,6 @@ const ContactForm = () => {
 					/>
 				</div>
 			</div>
-
-		
 
 			<fieldset className=' bg-primary/10 py-20 my-8 lg:my-4 '>
 				<div className='mb-16'>

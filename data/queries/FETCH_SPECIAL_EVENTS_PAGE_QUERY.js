@@ -6,9 +6,12 @@ export const FETCH_SPECIAL_EVENTS_PAGE_QUERY = `
   landingSlogan,
   introductionSection {
     heading,
-    openingParagraph1,
-    openingParagraph2,
+    subHeading,
+    openingParagraph,
     "introImageUrl": introImage.asset->url
-  }
+  },
+  "bannerImages1": bannerImages1[].asset->{
+    "url": url,
+  },
 }
 `;

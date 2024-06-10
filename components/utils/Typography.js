@@ -28,6 +28,9 @@ export const SubHeading = ({title, type}) => {
 		case 'light':
 			type = 'text-light';
 			break;
+		case 'primary':
+			type = 'text-primary font-bold';
+			break;
             
 	}
 

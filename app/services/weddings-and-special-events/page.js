@@ -3,6 +3,7 @@ import { FETCH_SPECIAL_EVENTS_PAGE_QUERY } from '@/data/queries/FETCH_SPECIAL_EV
 import HeroLayout from '@/components/heros/HeroLayout';
 import PageEntry from '@/components/utils/animations/PageEntry';
 import WeddingIntro from '@/components/weddings-and-special-events/WeddingIntro';
+import ImageBanner from '@/components/utils/ImageBanner';
 
 export const metadata = {
 	title: 'Weddings & Special Events',
@@ -23,6 +24,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 				CTAText={'Order Request'}
 			/>
 			<WeddingIntro data={data.introductionSection} />
+			<ImageBanner images={data.bannerImages1} />
 		</PageEntry>
 	);
 };
