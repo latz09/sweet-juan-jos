@@ -6,7 +6,6 @@ export const FETCH_SPECIAL_EVENTS_PAGE_QUERY = `
   landingSlogan,
   introductionSection {
     heading,
-    subHeading,
     openingParagraph,
     "introImageUrl": introImage.asset->url
   },
