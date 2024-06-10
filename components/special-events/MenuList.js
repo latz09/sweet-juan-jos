@@ -5,7 +5,7 @@ import MenuItem from './MenuItem';
 
 const MenuList = ({ data }) => {
 	return (
-		<div className='max-w-5xl mx-auto grid gap-12 place-items-center'>
+		<div className='max-w-5xl mx-auto grid gap-8 lg:gap-12 place-items-center'>
 			<MainHeading title={`Menus & Pricing`} />
 			<AnimateUp>
 				<ul className='grid gap-8 lg:flex lg:gap-4'>
