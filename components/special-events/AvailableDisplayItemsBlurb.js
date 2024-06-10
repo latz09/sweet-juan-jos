@@ -4,8 +4,9 @@ import { FaLongArrowAltRight } from 'react-icons/fa';
 import Link from 'next/link';
 
 const AvailableDisplayItemsBlurb = ({ data }) => {
+	
 	return (
-		<Link href={'/'}>
+		<Link href={'/available-display-items'}>
 			<div className='py-16 grid lg:grid-cols-4 gap-12 place-items-center  max-w-5xl mx-auto '>
 				<div className='lg:col-span-3 grid gap-2 place-items-center '>
 					<MainHeading title={data.heading} />
