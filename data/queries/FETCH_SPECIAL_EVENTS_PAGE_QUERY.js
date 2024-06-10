@@ -12,5 +12,10 @@ export const FETCH_SPECIAL_EVENTS_PAGE_QUERY = `
   "bannerImages1": bannerImages1[].asset->{
     "url": url,
   },
+    weddingMenuLinks[] {
+    title,
+    link,
+    "imageUrl": image.asset->url
+  },
 }
 `;

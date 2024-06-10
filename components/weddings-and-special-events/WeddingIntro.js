@@ -1,4 +1,5 @@
-import {  SubHeading } from '../utils/Typography';
+import StartPlanningLink from '../utils/StartPlanningLink';
+import { SubHeading } from '../utils/Typography';
 
 const WeddingIntro = ({ data }) => {
 	return (
@@ -7,9 +8,9 @@ const WeddingIntro = ({ data }) => {
 				<SubHeading title={data.heading} type='primary' />
 			</div>
 
-			<div className='lg:w-2/3 mx-auto grid place-items-center gap-2 text-xl lg:text-2xl font-bold text-center leading-9 lg:leading-10 px-2 '>
-				
+			<div className='lg:w-2/3 mx-auto grid place-items-center gap-6 text-xl lg:text-2xl font-bold text-center leading-9 lg:leading-10 px-2 '>
 				<p>{data.openingParagraph} </p>
+				<StartPlanningLink />
 			</div>
 		</div>
 	);

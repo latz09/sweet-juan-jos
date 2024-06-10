@@ -4,6 +4,7 @@ import HeroLayout from '@/components/heros/HeroLayout';
 import PageEntry from '@/components/utils/animations/PageEntry';
 import WeddingIntro from '@/components/weddings-and-special-events/WeddingIntro';
 import ImageBanner from '@/components/utils/ImageBanner';
+import MenuList from '@/components/special-events/MenuList';
 
 export const metadata = {
 	title: 'Weddings & Special Events',
@@ -13,7 +14,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 	const query = FETCH_SPECIAL_EVENTS_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
 	const data = dataAsArray[0];
-	
+
 
 	return (
 		<PageEntry className='grid gap-16 lg:gap-24 '>
@@ -25,6 +26,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 			/>
 			<WeddingIntro data={data.introductionSection} />
 			<ImageBanner images={data.bannerImages1} />
+			<MenuList data={data.weddingMenuLinks}/>
 		</PageEntry>
 	);
 };
