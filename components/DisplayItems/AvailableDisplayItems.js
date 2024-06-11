@@ -61,9 +61,18 @@ const DisplayItem = ({ item, index }) => {
 			transition={{ duration: 0.5, delay: 0.2 }}
 			viewport={{ once: true }}
 		>
-			<span className='text-dark font-bold lg:text-lg tracking-widest mb-1'>
-				#{item.inventoryID}
-			</span>
+			
+			<div className='bg-dark  py-2 px-3 '>
+				<span className='text-light font-bold lg:text-lg tracking-widest mb-1'>
+					#{item.inventoryID}
+				</span>
+			</div>
+			<div className='absolute top-0 right-0 p-3 rounded-bl-lg bg-dark/90 '>
+				<FiMaximize2
+					className=' text-lg text-light cursor-pointer'
+					onClick={openModal}
+				/>
+			</div>
 			<motion.div>
 				<div className='relative'>
 					<Image
@@ -76,12 +85,6 @@ const DisplayItem = ({ item, index }) => {
 						priority={index < 3} // Use priority for the first few images
 						onLoad={handleImageLoad} // Update loading status when image is loaded
 					/>
-					<div className='absolute top-0 right-0 p-3 rounded-bl-lg bg-dark/90 '>
-						<FiMaximize2
-							className=' text-lg text-light cursor-pointer'
-							onClick={openModal}
-						/>
-					</div>
 				</div>
 			</motion.div>
 			<div className='bg-dark text-light p-3 flex justify-between lg:text-xl'>
