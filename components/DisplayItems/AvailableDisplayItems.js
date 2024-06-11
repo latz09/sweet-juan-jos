@@ -10,7 +10,7 @@ import { FiMaximize2, FiMinimize2 } from 'react-icons/fi'; // Importing a maximi
 const AvailableDisplayItems = ({ data }) => {
 	return (
 		<div className='grid gap-y-16 gap-x-2 md:gap-x-4 lg:gap-x-8 lg:gap-y-20 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-end max-w-5xl mx-auto px-2'>
-			{data.map((item, index) => (
+			{data.filter(item => item.available).map((item, index) => (
 				<DisplayItem key={index} item={item} index={index} />
 			))}
 		</div>
