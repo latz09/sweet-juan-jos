@@ -30,7 +30,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 				<WeddingIntro data={data.introductionSection} />
 			</div>
 			<ImageBanner images={data.bannerImages1} />
-			<div className='py-16'>
+			<div className='py-8 lg:py-16'>
 				<MenuList data={data.weddingMenuLinks} />
 			</div>
 			<AvailableDisplayItemsBlurb data={data.displayItemsLink} />
