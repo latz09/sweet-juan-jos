@@ -7,7 +7,7 @@ const MenuItem = ({ title, image, link }) => {
 	return (
 		<li className=' grid place-items-center  '>
 			<div className='relative lg:hover:scale-95 shadow-lg lg:rounded-lg shadow-primary/30 lg:hover:shadow-primary/80 transition duration-700  ' key={title}>
-				<Link href={`/services/${link}`} className="group">
+				<Link href={`${link}`} className="group">
 					<Image
 						src={image}
 						alt={title}
