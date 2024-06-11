@@ -16,7 +16,7 @@ const WeddingNavigationLinks = () => {
 					>
 						<div className='flex items-center  lg:justify-around gap-4 text-center h-full  '>
 							<span className='lg:text-2xl text-primary'>{link.icon}</span>
-							<span className='lg:text-xl  w-full'>{link.title}</span>
+							<span className='lg:text-xl  w-full'>{link.title} </span>
 						</div>
 					</motion.div>
 				</Link>
