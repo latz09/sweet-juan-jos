@@ -24,7 +24,7 @@ const ServiceCards = ({ data }) => {
 								width={500}
 								height={500}
 							/>
-							<div className='absolute bottom-0 left-0 w-full bg-light/80 p-2 lg:p-4 rounded-b-lg'>
+							<div className='absolute bottom-0 left-0 w-full bg-light/80 p-2 lg:p-4 lg:rounded-b-lg'>
 								<h3 className='text-2xl lg:text-4xl  font-bold px-2 text-center'>
 									{service.title}
 								</h3>

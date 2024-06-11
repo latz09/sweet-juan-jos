@@ -10,9 +10,11 @@ import { FiMaximize2, FiMinimize2 } from 'react-icons/fi'; // Importing a maximi
 const AvailableDisplayItems = ({ data }) => {
 	return (
 		<div className='grid gap-y-16 gap-x-2 md:gap-x-4 lg:gap-x-8 lg:gap-y-20 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-end max-w-5xl mx-auto px-2'>
-			{data.filter(item => item.available).map((item, index) => (
-				<DisplayItem key={index} item={item} index={index} />
-			))}
+			{data
+				.filter((item) => item.available)
+				.map((item, index) => (
+					<DisplayItem key={index} item={item} index={index} />
+				))}
 		</div>
 	);
 };
@@ -59,6 +61,9 @@ const DisplayItem = ({ item, index }) => {
 			transition={{ duration: 0.5, delay: 0.2 }}
 			viewport={{ once: true }}
 		>
+			<span className='text-dark font-bold lg:text-lg tracking-widest mb-1'>
+				#{item.inventoryID}
+			</span>
 			<motion.div>
 				<div className='relative'>
 					<Image
@@ -122,8 +127,11 @@ const DisplayItem = ({ item, index }) => {
 								priority
 								onLoad={handleImageLoad} // Update loading status when image is loaded
 							/>
+							<div className='text-center mt-4 text-xl font-black tracking-widest text-light'>
+								# {item.inventoryID}
+							</div>
 							<button
-								className='absolute top-4 right-4 p-3  bg-dark/90 text-light rounded-bl-lg  shadow-lg shadow-primary/30 hover:bg-dark hover:text-primary transition-colors duration-300'
+								className='absolute top-4 right-4 p-3 bg-dark/90 text-light rounded-bl-lg shadow-lg shadow-primary/30 hover:bg-dark hover:text-primary transition-colors duration-300'
 								onClick={closeModal}
 							>
 								<FiMinimize2 className='text-2xl' />
