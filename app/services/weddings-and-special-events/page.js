@@ -20,7 +20,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 
 	return (
 		<PageEntry className='grid gap-20 lg:gap-24 '>
-			<div className="grid gap-8 lg:gap-20">
+			<div className='grid gap-8 lg:gap-20'>
 				<HeroLayout
 					heading={data.landingHeading}
 					subheading={data.landingSlogan}
@@ -30,7 +30,9 @@ const WeddingsAndSpecialEventsPage = async () => {
 				<WeddingIntro data={data.introductionSection} />
 			</div>
 			<ImageBanner images={data.bannerImages1} />
-			<MenuList data={data.weddingMenuLinks} />
+			<div className='py-16'>
+				<MenuList data={data.weddingMenuLinks} />
+			</div>
 			<AvailableDisplayItemsBlurb data={data.displayItemsLink} />
 			<WeddingNavigationLinks />
 			<ImageBanner images={data.bannerImages2} />
