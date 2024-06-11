@@ -30,17 +30,17 @@ export default WeddingNavigationLinks;
 const weddingLinks = [
 	{
 		title: 'Special Events Timeline & Checklist',
-		link: '/',
+		link: '/documents/time-line-and-checklist',
 		icon: <FaCheck />,
 	},
 	{
 		title: 'Guidelines & Things to Remember',
-		link: '/',
+		link: '/documents/things-to-remember',
 		icon: <FaQuestion />,
 	},
 	{
 		title: 'General Contract',
-		link: '/',
+		link: '/documents/general-contract',
 		icon: <FaPenAlt />,
 	},
 ];
