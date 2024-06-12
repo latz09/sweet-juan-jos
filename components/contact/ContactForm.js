@@ -202,7 +202,7 @@ const ContactForm = () => {
 
 			<fieldset className=' bg-primary/10 py-20 my-8 lg:my-4 '>
 				<div className='mb-16'>
-					<legend className="grid gap-2 opacity-90">
+					<legend className="grid gap-2 opacity-80">
 						<MainHeading title='Your Interests' type='dark' />
 						<SubHeading title='Select all that apply' type='dark' />
 					</legend>
