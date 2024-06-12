@@ -202,8 +202,9 @@ const ContactForm = () => {
 
 			<fieldset className=' bg-primary/10 py-20 my-8 lg:my-4 '>
 				<div className='mb-16'>
-					<legend>
-						<MainHeading title='Your Interests...' type='dark' />
+					<legend className="grid gap-2 opacity-90">
+						<MainHeading title='Your Interests' type='dark' />
+						<SubHeading title='Select all that apply' type='dark' />
 					</legend>
 				</div>
 				<div className='px-6  form-subheading grid gap-y-12 gap-x-4 lg:gap-x-0 lg:gap-y-8 grid-cols-2  place-items-center'>
@@ -211,10 +212,11 @@ const ContactForm = () => {
 						'wedding',
 						'cupcakes',
 						'cookies',
-						'delivery',
-						'specialEvent',
-						'specialtyCakes',
 						'candyAndTreats',
+						'specialtyCakes',
+						'specialEvent',	
+						'delivery',
+						'orderPickup',								
 						'eventSetup',
 						'generalInquiry',
 						'displayItemRental',
