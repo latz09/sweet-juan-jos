@@ -186,7 +186,7 @@ const ContactForm = () => {
 				</div>
 
 				<div className=''>
-					<label htmlFor='eventDate' className='form-label'>
+					<label htmlFor='eventDate' className='form-label '>
 						Event Date
 					</label>
 					<input
