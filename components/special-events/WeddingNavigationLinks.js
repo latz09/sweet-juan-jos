@@ -64,8 +64,8 @@ const weddingLinks = [
 		icon: <FaQuestion />,
 	},
 	{
-		title: 'General Contract',
-		link: '/documents/general-contract',
+		title: 'Terms & Conditions',
+		link: '/documents/terms-and-conditions',
 		icon: <FaPenAlt />,
 	},
 ];

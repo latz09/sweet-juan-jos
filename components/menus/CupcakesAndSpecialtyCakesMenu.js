@@ -37,7 +37,7 @@ const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 				<FlavorList flavors={frostingFlavors} title='Frosting Options' background='other' />
 			</div>
 			
-			<div className='grid place-items-center'>
+			<div className='grid place-items-center lg:mt-8'>
 				<MainHeading title={`$${price} / dozen`} type='dark' />
 				<FlavorExplanation />
 			</div>

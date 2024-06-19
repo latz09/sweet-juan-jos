@@ -142,7 +142,7 @@ const ContactForm = () => {
 			<div className='px-8 lg:px-0 grid lg:grid-cols-2  gap-y-6 lg:gap-y-10 lg:gap-x-12 lg:max-w-4xl lg:mx-auto'>
 				<div className=''>
 					<label htmlFor='name' className='form-label'>
-						Name
+						Name*
 					</label>
 					<input
 						type='text'
@@ -152,12 +152,13 @@ const ContactForm = () => {
 						onChange={handleInputChange}
 						required
 						className='form-input'
+						
 					/>
 				</div>
 
 				<div className=''>
 					<label htmlFor='email' className='form-label'>
-						Email
+						Email*
 					</label>
 					<input
 						type='email'
@@ -167,12 +168,13 @@ const ContactForm = () => {
 						onChange={handleInputChange}
 						required
 						className='form-input'
+						
 					/>
 				</div>
 
 				<div className=''>
 					<label htmlFor='phoneNumber' className='form-label'>
-						Phone Number
+						Phone Number*
 					</label>
 					<input
 						type='tel'
@@ -182,6 +184,7 @@ const ContactForm = () => {
 						onChange={handleInputChange}
 						required
 						className='form-input'
+						
 					/>
 				</div>
 
@@ -237,7 +240,7 @@ const ContactForm = () => {
 							/>
 							<label
 								htmlFor={interest}
-								className={`text-dark rounded-sm  p-4 w-full lg:w-1/2 text-center border-2 h-full grid place-items-center ${formData.interests.includes(interest) ? 'bg-primary text-light font-bold  shadow-xl border-primary shadow-primary/50' : 'border-primary/20 shadow-sm '}`}
+								className={`text-dark rounded-sm  p-4 w-full lg:w-1/2 text-center border h-full grid place-items-center  ${formData.interests.includes(interest) ? 'bg-primary text-light font-bold  shadow-xl border-primary shadow-primary/50' : 'border-primary/60 shadow-sm bg-light/20'}`}
 							>
 								{formatLabel(interest)}
 							</label>
