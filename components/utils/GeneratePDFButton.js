@@ -3,7 +3,7 @@
 import generatePDF from '@/lib/generatePDF';
 
 const GeneratePDFButton = ({ data }) => {
-	console.log('Button data:', data);
+
 
 	const handleClick = async () => {
 		console.log('Button clicked');
@@ -13,9 +13,9 @@ const GeneratePDFButton = ({ data }) => {
 	return (
 		<button
 			onClick={handleClick}
-			className='mt-4 p-2 border border-primary/40 w-5/6 lg:w-1/2 mx-auto text-xl lg:text-2xl font-semibold rounded-sm shadow shadow-primary/20 lg:hover:border-primary/70 lg:hover:shadow-lg lg:hover:shadow-primary/40 transtion duration-700 lg:hover:bg-primary lg:hover:text-light'
+			className='mt-4 p-2 border border-light w-5/6 lg:w-1/3 text-dark bg-light mx-auto text-xl lg:text-2xl font-semibold rounded-sm shadow shadow-primary/20 lg:hover:border-primary/70 lg:hover:shadow-lg lg:hover:shadow-primary/40 transtion duration-700 lg:hover:bg-light lg:hover:text-dark'
 		>
-			Generate PDF Checklist
+			Download PDF 
 		</button>
 	);
 };
