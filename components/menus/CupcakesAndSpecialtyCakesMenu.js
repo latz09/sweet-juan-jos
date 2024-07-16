@@ -13,7 +13,6 @@ const CupcakesAndSpecialtyCakesMenu = ({
 	return (
 		<div className='grid gap-8 lg:gap-24'>
 			<MainHeading title='Choose Your Flavor' type='dark' />
-			
 
 			<Flavors
 				cakeFlavors={cakeFlavors}
@@ -34,9 +33,13 @@ const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 		<div className='grid gap-16'>
 			<div className='grid lg:flex items-center lg:gap-16 justify-around w-full max-w-7xl mx-auto '>
 				<FlavorList flavors={cakeFlavors} title='Cake Flavors' />
-				<FlavorList flavors={frostingFlavors} title='Frosting Options' background='other' />
+				<FlavorList
+					flavors={frostingFlavors}
+					title='Frosting Options'
+					background='other'
+				/>
 			</div>
-			
+
 			<div className='grid place-items-center lg:mt-8'>
 				<MainHeading title={`$${price} / dozen`} type='dark' />
 				<FlavorExplanation />
@@ -47,16 +50,25 @@ const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 
 const FlavorList = ({ flavors, title, background }) => {
 	return (
-		<div className={`grid gap-4 place-items-center lg:w-1/2  bg-primary/10 shadow shadow-primary/10  text-dark font-bold  pb-8 ${background === 'other' ? 'bg-primary/20 lg:bg-primary/10' : 'bg-primary/10'}` }>
+		<div
+			className={`grid gap-4 place-items-center lg:w-1/2  bg-primary/10 shadow shadow-primary/10  text-dark font-bold  pb-8 ${background === 'other' ? 'bg-primary/20 lg:bg-primary/10' : 'bg-primary/10'}`}
+		>
 			<div className='bg-dar  w-full text-center pb-4 pt-6 border-b border-primary/20 '>
 				<SubHeading title={title} type='dark' />
 			</div>
-			<ul className='grid grid-cols-2 place-items-center gap-x-16 gap-y-8 lg:gap-y-6 p-4 '>
-				{flavors.map((flavor, index) => (
-					<li key={index} className='text-xl lg:text-2xl text-dark/90 text-center'>
-						{flavor}
-					</li>
-				))}
+			<ul className='grid grid-cols-2 place-items-center gap-x-16 gap-y-8 lg:gap-y-6 p-4'>
+				{flavors.map((flavor, index) => {
+					const isLastOdd =
+						flavors.length % 2 !== 0 && index === flavors.length - 1;
+					return (
+						<li
+							key={index}
+							className={`text-xl lg:text-2xl text-dark/90 text-center ${isLastOdd ? 'col-span-2' : ''}`}
+						>
+							{flavor}
+						</li>
+					);
+				})}
 			</ul>
 		</div>
 	);

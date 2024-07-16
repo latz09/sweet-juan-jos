@@ -29,7 +29,7 @@ export const FETCH_PAGE_QUERY = `
     "ourStoryImage": ourStoryImage.asset->url,
     paragraphs[] {
       heading,
-      paragraph
+      content 
     }
   }
 }

@@ -8,7 +8,7 @@ import ServiceCards from '@/components/services/ServiceCards';
 import LandingHero from '@/components/heros/LandingHero';
 import BannerLayout from '@/components/heros/BannerLayout';
 import PageEntry from '@/components/utils/animations/PageEntry';
-
+ 
 export default async function Home() {
 	const query = FETCH_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);

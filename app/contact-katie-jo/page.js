@@ -16,17 +16,17 @@ const ContactUsPage = async () => {
 	const data = dataAsArray[0];
 
 	return (
-		<PageEntry className='grid gap-16 lg:gap-20 mt-8  max-w-5xl mx-auto'>
-			<div className='grid gap-4 px-2'>
-				<div className='grid place-items-center lg:flex mx-auto gap-4'>
+		<PageEntry className='grid gap-16 lg:gap-20 mt-8 lg:mt-12  max-w-5xl mx-auto'>
+			<div className='grid gap-4 px-2 '>
+				<div className='grid place-items-center lg:grid-cols-3 mx-auto gap-4'>
 					<Image
 						src={data.landingImage}
 						alt='Landing Image'
 						width={250}
 						height={250}
-						className='w-1/2  rounded-sm mb-8 lg:mb-0 shadow-md shadow-primary/30'
+						className='lg:col-span-1 w-1/2 lg:w-3/4  rounded mb-8 lg:mb-0 shadow-md shadow-primary/30'
 					/>
-					<div className='gap-2 grid lg:col-span-'>
+					<div className='gap-2 grid lg:col-span-2 '>
 						<MainHeading title={data.heading} />
 						<SubHeading title={data.introduction} type='dark' />
 						<div className='mt-2'>

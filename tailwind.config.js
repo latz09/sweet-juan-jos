@@ -7,13 +7,12 @@ module.exports = {
 	],
 	theme: {
 		colors: {
-			primary: '#29B2AC', 			
-			secondary: '', 			
-			dark: '#012623', 
-			light: '#F0FFFE', 
-			invalid: '#CBFFFD'
+			primary: '#29B2AC',
+			secondary: '',
+			dark: '#012623',
+			light: '#F0FFFE',
+			invalid: '#CBFFFD',
 		},
-		
 	},
 	plugins: [],
 };

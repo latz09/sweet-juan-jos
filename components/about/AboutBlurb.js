@@ -1,12 +1,9 @@
-
-
 import Image from 'next/image';
 import { MainHeading, SubHeading } from '../utils/Typography';
 import Socials from '../utils/Socials';
 import Ourstory from './OurStory';
 
 const AboutBlurb = ({ data, ourStoryData }) => {
-	
 	return (
 		<div className='max-w-5xl mx-auto grid gap-12 '>
 			<div className='grid place-items-center gap-2 '>
@@ -33,15 +30,13 @@ const AboutBlurb = ({ data, ourStoryData }) => {
 						<p className='leading-8'>{data.paragraph1}</p>
 						<p className='leading-8'>{data.paragraph2}</p>
 					</div>
-					<Ourstory data={ourStoryData}/>
-					
+					<Ourstory data={ourStoryData} />
 				</div>
-				
 			</div>
-			
+
 			<div className='grid place-items-center mt-16 lg:mt-8 '>
-						<Socials includeText={true} />
-					</div>
+				<Socials includeText={true} />
+			</div>
 		</div>
 	);
 };

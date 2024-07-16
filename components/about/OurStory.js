@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { MainHeading, SubHeading } from '../utils/Typography';
-import ButtonLink from '../utils/ButtonLink';
+import { SubHeading, MainHeading } from '../utils/Typography';
 import { FaArrowLeft } from 'react-icons/fa6';
+import AnimateUp from '../utils/animations/AnimateUp';
 
 const OurStory = ({ data }) => {
+	console.log('OurStory data:', data.paragraphs); // Log entire data object
 	const [isOpen, setIsOpen] = useState(false);
 
 	// Disable scrolling on the body when the modal is open
@@ -41,19 +42,16 @@ const OurStory = ({ data }) => {
 						animate={{ y: 0 }}
 						exit={{ y: 2000 }}
 						transition={{ duration: 1.1 }}
-						className='fixed inset-0 bg-light/80 backdrop-blur z-50 flex justify-center items-center  border-t-4 border-primary'
+						className='fixed inset-0 bg-gradient-to-l from-light/80 via-light to-light/80 backdrop-blur z-50 flex justify-center items-center border-t-4 border-primary'
 						onClick={() => setIsOpen(false)}
 					>
 						<motion.div
-							// initial={{ opacity: 0 }}
-							// animate={{ opacity: 1 }}
-							// transition={{ duration: 1.1 }}
-							className='relative w-full h-full flex flex-col items-center justify-center p-2 lg:p-4   '
+							className='relative w-full h-full flex flex-col items-center justify-center p-2 lg:p-4'
 							onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
 						>
-							<div className='w-full h-full relative  overflow-hidden  '>
-								<div className='h-full flex flex-col  text-dark gap-8 overflow-y-auto max-h-[100vh] pb-16 scrollbar-hide'>
-									<div className='grid gap-7 lg:gap-10 place-items-center '>
+							<div className='w-full h-full relative overflow-hidden'>
+								<div className='h-full flex flex-col text-dark gap-8 overflow-y-auto max-h-[100vh] pb-16 scrollbar-hide'>
+									<div className='grid gap-7 lg:gap-10 place-items-center'>
 										<button
 											onClick={() => setIsOpen(false)}
 											className='text-2xl my-1 lg:my-4 sticky top-0 text-primary bg-light/90 border border-primary/30 p-3 rounded-full shadow-lg shadow-primary/30'
@@ -62,7 +60,7 @@ const OurStory = ({ data }) => {
 											<FaArrowLeft />
 										</button>
 
-										<SubHeading title={data.heading} type='dark' />
+										<MainHeading title={data.heading} type='dark' />
 										<Image
 											src={data.ourStoryImage}
 											alt={data.heading}
@@ -71,21 +69,21 @@ const OurStory = ({ data }) => {
 											priority={true}
 											className='mx-auto shadow-lg shadow-primary/40 rounded-lg mb-4'
 										/>
-										<div className='grid place-items-center w-full '>
+										<div className='grid place-items-center w-full'>
 											{data.paragraphs.map((item, index) => (
 												<div
 													key={index}
-													className={`${index % 2 === 0 ? 'bg-light/50' : 'bg-primary/10'} grid place-items-center py-12 w-full`}
+													className='grid place-items-center py-8 w-full'
 												>
-													<div
-														className={`text-center w-full lg:w-1/2 grid gap-2 ${index % 2 === 0 ? '' : ''}`}
-													>
-														<h2 className='text-2xl font-bold'>
-															{item.heading}
-														</h2>
-														<p className='text-xl lg:text-2xl font-bold leading-8 lg:leading-10 p-3'>
-															{item.paragraph}
-														</p>
+													<div className='text-center lg:text-start w-full lg:w-1/2 grid gap-4'>
+														<SubHeading title={item.heading} type='primary' />
+														{item.content.map((paragraph, paraIndex) => (
+															<AnimateUp key={paraIndex}>
+																<p className='text-xl lg:text-2xl font-bold leading-8 lg:leading-10 '>
+																	{paragraph}
+																</p>
+															</AnimateUp>
+														))}
 													</div>
 												</div>
 											))}
