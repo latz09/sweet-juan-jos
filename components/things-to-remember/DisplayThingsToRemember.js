@@ -77,14 +77,14 @@ const DisplayThingsToRemember = ({ data }) => {
 				</section>
 			</AnimateUp>
 
-			<AnimateUp>
-				<section className='my-8 grid gap-6 lg:gap-8'>
-					<div className='grid lg:place-items-start'>
-						<MainHeading title='Additional Information' type='dark' />
-					</div>
-					<div className='grid gap-12 lg:w-5/6 mx-auto'>
-						{data.additionalInformation.map((item, index) => (
-							<div key={index} className='grid gap-8'>
+			<section className='my-8 grid gap-6 lg:gap-8'>
+				<div className='grid lg:place-items-start'>
+					<MainHeading title='Additional Information' type='dark' />
+				</div>
+				<div className='grid gap-12 lg:w-5/6 mx-auto'>
+					{data.additionalInformation.map((item, index) => (
+						<AnimateUp key={index}>
+							<div className='grid gap-8'>
 								<h3 className='text-xl lg:text-2xl font-bold text-dark px-4 py-2 bg-primary/10 rounded-sm shadow-lg shadow-dark/10 text-center'>
 									{item.title}
 								</h3>
@@ -92,10 +92,10 @@ const DisplayThingsToRemember = ({ data }) => {
 									{item.description}
 								</p>
 							</div>
-						))}
-					</div>
-				</section>
-			</AnimateUp>
+						</AnimateUp>
+					))}
+				</div>
+			</section>
 		</div>
 	);
 };
