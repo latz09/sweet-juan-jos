@@ -1,13 +1,12 @@
-// GeneratePDFButton.js
+// GeneratePDFButtonForTips.js
 'use client';
-import generatePDF from '@/lib/generatePDF';
+import generatePDFForTips from '@/lib/generatePDFForTips';
 
-const GeneratePDFButton = ({ data }) => {
-
+const GeneratePDFButtonForTips = ({ data }) => {
 
 	const handleClick = async () => {
 		console.log('Button clicked');
-		generatePDF(data);
+		generatePDFForTips(data);
 	};
 
 	return (
@@ -20,4 +19,4 @@ const GeneratePDFButton = ({ data }) => {
 	);
 };
 
-export default GeneratePDFButton;
+export default GeneratePDFButtonForTips;

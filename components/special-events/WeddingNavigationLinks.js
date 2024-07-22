@@ -6,16 +6,16 @@ import { MdTableBar } from 'react-icons/md';
 
 const WeddingNavigationLinks = () => {
 	return (
-		<div className='grid lg:grid-cols-3 gap-8 lg:gap-2 place-items-center w-5/6 lg:w-full max-w-7xl mx-auto lg:px-2'>
+		<div className='grid lg:grid-cols-3 gap-8 lg:gap-4 place-items-center w-5/6 lg:w-full max-w-7xl mx-auto lg:px-2'>
 			{weddingLinks.map((link, index) => (
 				<Link
 					href={link.link}
 					key={index}
-					className='w-full shadow-lg rounded-sm h-full'
+					className='w-full rounded-sm h-full'
 				>
 					<motion.div
-						className='px-8 py-4 w-full bg-dark text-light font-bold h-full  '
-						whileHover={{ scale: 1.05 }}
+						className='px-8 py-4 w-full bg-primary/5 border rounded-sm border-primary/30 text-dark font-bold h-full shadow shadow-primary/20  '
+						whileHover={{ scale: 0.95 }}
 						whileTap={{ scale: 0.95 }}
 						transition={{ duration: 0.3 }}
 					>
