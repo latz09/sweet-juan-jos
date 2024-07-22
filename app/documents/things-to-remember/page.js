@@ -15,7 +15,7 @@ const ThingsToRemember = async () => {
 		<PageEntry>
 			<div className='grid gap-4 lg:gap-8 '>
 				
-				<div className='py-12 grid gap-2 place-items-center bg-primary'>
+				<div className='py-12 grid gap-2 place-items-center bg-gradient-to-l from-primary via-primary/80 to-primary'>
 					<MainHeading title='Things to Remember' type='light' />
 					<GeneratePDFButtonForTips data={data} />
 				</div>

@@ -13,12 +13,12 @@ const TimeLineAndChecklist = async () => {
 	return (
 		<PageEntry>
 			<div className='grid gap-16 lg:gap-24 '>
-				<div className='grid place-items-center gap-2 bg-primary py-12'>
+				<div className='grid place-items-center gap-2 bg-gradient-to-l from-primary via-primary/80 to-primary py-12'>
 					<SubHeading title='Time Line and Checklist' type='light' />
 					<GeneratePDFButton data={data} />
 				</div>
 				<div className='max-w-5xl mx-auto grid gap-10 lg:gap-12'>
-					<MainHeading title="The Sweet Juanjo's Way:" />
+					<SubHeading title="The Sweet Juanjo's Way" />
 					<DisplaySteps data={data} />
 				</div>
 			</div>
