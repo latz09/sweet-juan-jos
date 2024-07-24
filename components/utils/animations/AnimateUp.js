@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { motion } from 'framer-motion';
 
 const AnimateUp = ({ children, className, ...rest }) => {
@@ -8,12 +8,11 @@ const AnimateUp = ({ children, className, ...rest }) => {
 				className={className}
 				initial={{ y: 30, opacity: 0 }}
 				whileInView={{ y: 0, opacity: 1 }}
-				transition={{ duration: .7, delay: 0 }}
+				transition={{ duration: 0.7, delay: 0 }}
 				viewport={{ once: true }}
-                {...rest}
+				{...rest}
 			>
-                <div>
-				{children}</div>
+				<div>{children}</div>
 			</motion.div>
 		</>
 	);

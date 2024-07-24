@@ -1,6 +1,4 @@
 import Image from 'next/image';
-// import { motion } from 'framer-motion';
-import { urlFor } from '@/lib/imageUrlBuilder';
 import { MainHeading, SubHeading } from '../utils/Typography';
 import ButtonLink from '../utils/ButtonLink';
 
@@ -25,9 +23,7 @@ const HeroLayout = ({ imageUrl, heading, subheading, CTAText }) => {
 				<div className='grid place-items-center lg:place-items-center  absolute inset-0   bg-gradient-to-b from-dark/0 via-dark/50 to-dark/0 '>
 					<div
 						className='gird place-items-center  max-w-5xl mx-auto text-center '
-						initial={{ opacity: 0, scale: 0.9 }}
-						whileInView={{ opacity: 1, scale: 1 }}
-						transition={{ duration: 1.1, delay: 0.2 }}
+						
 					>
 						<div className='max-w-3xl mx-auto grid gap-2 lg:gap-4 place-items-center  '>
 							<MainHeading title={heading} type='light' />

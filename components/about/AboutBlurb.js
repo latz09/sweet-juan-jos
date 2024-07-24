@@ -20,9 +20,7 @@ const AboutBlurb = ({ data, ourStoryData }) => {
 				/>
 				<div
 					className='lg:col-span-2 place-self-center text-center lg:text-justify'
-					initial={{ y: 200 }}
-					whileInView={{ y: 0 }}
-					transition={{ duration: 1.1, delay: 0.1 }}
+					
 				>
 					<SubHeading title={data.heading} type='dark' />
 

@@ -29,7 +29,7 @@ const RootLayout = ({ children }) => {
 			<body className={`${josefinSlab.className}  text-dark`}>
 				<Navigation />
 				<div className='max-w-7l mx-auto '>
-					{children}
+					<div>{children}</div>
 					<Footer />
 				</div>
 			</body>
