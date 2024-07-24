@@ -17,7 +17,7 @@ export const metadata = {
 		default: 'Sweet Juanjos',
 		template: `%s | Sweet Juanjos`,
 	},
-	description: `Discover personalized insurance solutions with Rob Wood Agency. We offer tailored coverage for auto, home, and commercial needs.  Contact us today to protect what matters most.`,
+	description: `Sweet Juanjo's specialize's in cupcakes, custom cakes, and cookies. All our products are created in our licensed kitchen, and are made to order. Contact us to discuss your vision for your next celebration.`,
 	twitter: {
 		card: 'summary_large_image',
 	},
