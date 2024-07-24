@@ -19,7 +19,7 @@ const ServiceCards = ({ data }) => {
 						<Link href={service.link}>
 							<Image
 								src={service.imageUrl}
-								alt={service.title}
+								alt={`Image for ${service.title}`}
 								className='w-full h-auto lg:rounded-lg '
 								width={500}
 								height={500}

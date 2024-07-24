@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -7,9 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { NavigationLinks } from '@/data/NavigationLinks';
 import logo from '../../public/images/logo/transparent-juanjos.png';
-
-
-
 
 const Navigation = () => {
 	return (
@@ -23,42 +20,44 @@ const Navigation = () => {
 export default Navigation;
 
 const DesktopNavigation = () => {
-  
-
-    return (
-        <div className='hidden lg:block max-w-7xl mx-auto px-2 pb-2'>
-            <div className='mt-[2px] border-y border-primary py-4 flex items-center justify-around'>
-                {NavigationLinks.map((link) => (
-                    <Link key={link.id} href={link.slug} passHref>
-                        <div className={'text-xl border-x px-4  font-bold hover:border-x-2 hover:border-x-dark hover:scale-110 transition duration-700'}>
-                            {link.name}
-                        </div>
-                    </Link>
-                ))}
-            </div>
-        </div>
-    );
+	return (
+		<div className='hidden lg:block max-w-7xl mx-auto px-2 pb-2'>
+			<div className='mt-[2px] border-y border-primary py-4 flex items-center justify-around'>
+				{NavigationLinks.map((link) => (
+					<Link key={link.id} href={link.slug} passHref>
+						<div
+							className={
+								'text-xl border-x px-4  font-bold hover:border-x-2 hover:border-x-dark hover:scale-110 transition duration-700'
+							}
+						>
+							{link.name}
+						</div>
+					</Link>
+				))}
+			</div>
+		</div>
+	);
 };
 
 const MobileNavigation = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+		setIsMenuOpen(!isMenuOpen);
+	};
 
-    useEffect(() => {
-        if (isMenuOpen) {
-            document.body.classList.add('overflow-hidden');
-        } else {
-            document.body.classList.remove('overflow-hidden');
-        }
+	useEffect(() => {
+		if (isMenuOpen) {
+			document.body.classList.add('overflow-hidden');
+		} else {
+			document.body.classList.remove('overflow-hidden');
+		}
 
-        // Cleanup function to remove the class when the component unmounts
-        return () => {
-            document.body.classList.remove('overflow-hidden');
-        };
-    }, [isMenuOpen]);
+		// Cleanup function to remove the class when the component unmounts
+		return () => {
+			document.body.classList.remove('overflow-hidden');
+		};
+	}, [isMenuOpen]);
 
 	// Animation variants for Framer Motion
 	const menuVariants = {
@@ -68,13 +67,23 @@ const MobileNavigation = () => {
 
 	return (
 		<>
-			<div className="lg:hidden  py-1  ">
+			<div className='lg:hidden  py-1  '>
 				<div className=' p-4'>
 					<div className='flex justify-between items-center'>
-						<Link href='/' >
-						<Image src={logo} alt='Sweet Juanjo Logo' width={100} height={100} className="pl-4" />
+						<Link href='/'>
+							<Image
+								src={logo}
+								alt='Sweet Juanjo Logo'
+								width={100}
+								height={100}
+								className='pl-4'
+							/>
 						</Link>
-						<button onClick={toggleMenu} className='text-2xl'>
+						<button
+							onClick={toggleMenu}
+							className='text-2xl'
+							aria-label='Open Menu'
+						>
 							<AiOutlineMenu />
 						</button>
 					</div>
@@ -113,6 +122,7 @@ const MobileNavigation = () => {
 							<button
 								onClick={toggleMenu}
 								className='text-2xl absolute top-4 right-4 text-dark'
+								aria-label='Close Menu'
 							>
 								<AiOutlineClose />
 							</button>
@@ -123,4 +133,3 @@ const MobileNavigation = () => {
 		</>
 	);
 };
-
