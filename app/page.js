@@ -25,7 +25,7 @@ export default async function Home() {
 					heading={data.specialEventShoutOut.heading}
 					subheading={data.specialEventShoutOut.subheading}
 					href={`/services/weddings-and-special-events`}
-					CTAText='Learn More'
+					CTAText='Learn More About Our Special Events'
 				/>
 				<AboutBlurb data={data.about} ourStoryData={data.sweetJuanjosStory} />
 
