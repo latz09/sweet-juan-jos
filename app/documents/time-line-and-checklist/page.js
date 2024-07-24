@@ -27,3 +27,5 @@ const TimeLineAndChecklist = async () => {
 };
 
 export default TimeLineAndChecklist;
+
+export const revalidate = 10;

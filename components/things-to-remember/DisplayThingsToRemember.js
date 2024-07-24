@@ -10,7 +10,7 @@ const Section = ({ title, items }) => (
 			<div className='mx-4 lg:mx-8 my-2 grid gap-4'>
 				{items.map((item, index) => (
 					<div key={index}>
-						<div className='flex items-center gap-2 lg:gap-4'>
+						<div className='flex items-center gap-4'>
 							<span className='w-2 h-2 bg-primary rounded-full shadow-xl shadow-primary'></span>
 							<div className='flex flex-col'>
 								<h3 className='text-xl lg:text-2xl font-bold'>{item.title}</h3>

@@ -29,3 +29,5 @@ const ThingsToRemember = async () => {
 };
 
 export default ThingsToRemember;
+
+export const revalidate = 10;
