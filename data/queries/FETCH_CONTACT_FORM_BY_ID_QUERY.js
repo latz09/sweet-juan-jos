@@ -11,7 +11,16 @@ export const FETCH_CONTACT_FORM_BY_ID_QUERY = `
     additionalDetails,
     sentAt,
     CMSOwneradditionalDetails,
-    selectedDisplayItems[]->,
+    selectedDisplayItems[]->{
+      _id,
+      title,
+      description,
+      quantity,
+      sizes,
+      available,
+      "imageUrl": image.asset->url,
+      inventoryID,
+    },
     status
   }
 `;

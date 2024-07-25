@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MdSwapHoriz } from 'react-icons/md';
+import AnimateUp from '../utils/animations/AnimateUp';
 
 const ContactFormsList = ({ initialData }) => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -58,28 +59,30 @@ const ContactFormsList = ({ initialData }) => {
 				<ul className='grid md:grid-cols-2 xl:grid-cols-3 gap-8'>
 					{filteredData.map((form) => (
 						<Link key={form._id} href={`/admin/contact-form/${form._id}`}>
-							<li
-								className={`p-6  border rounded-sm shadow-lg shadow-primary/20 cursor-pointer transition duration-300 hover:scale-95 ${
-									form.status === 'active'
-										? 'bg-primary/0 border-primary hover:bg-primary hover:text-light'
-										: 'bg-primary/5 shadow-none border-primary/10  opacity-80 hover:bg-primary/0 hover:opacity-100 hover:border-primary hover:shadow-lg'
-								}`}
-							>
-								<div className='flex justify-between items-center'>
-									<div>
-										<p className='text-xl font-bold'>{form.name}</p>
-										<p className='font-semibold mx-2'>{form.email}</p>
-										<p className='font-semibold mx-2'>{form.phoneNumber}</p>
-										<p className='font-semibold mx-2'>
-											Event Date:{' '}
-											{new Date(form.eventDate).toLocaleDateString()}
-										</p>
-										<p className='font-semibold mx-2'>
-											Sent At: {new Date(form.sentAt).toLocaleDateString()}
-										</p>
+							<AnimateUp>
+								<li
+									className={`p-6  border rounded-sm shadow-lg shadow-primary/20 cursor-pointer transition duration-300 hover:scale-95 ${
+										form.status === 'active'
+											? 'bg-primary/0 border-primary hover:bg-primary hover:text-light'
+											: 'bg-primary/5 shadow-none border-primary/10  opacity-80 hover:bg-primary/0 hover:opacity-100 hover:border-primary hover:shadow-lg'
+									}`}
+								>
+									<div className='flex justify-between items-center'>
+										<div>
+											<p className='text-xl font-bold'>{form.name}</p>
+											<p className='font-semibold mx-2'>{form.email}</p>
+											<p className='font-semibold mx-2'>{form.phoneNumber}</p>
+											<p className='font-semibold mx-2'>
+												Event Date:{' '}
+												{new Date(form.eventDate).toLocaleDateString()}
+											</p>
+											<p className='font-semibold mx-2'>
+												Sent At: {new Date(form.sentAt).toLocaleDateString()}
+											</p>
+										</div>
 									</div>
-								</div>
-							</li>
+								</li>
+							</AnimateUp>
 						</Link>
 					))}
 				</ul>
@@ -90,4 +93,4 @@ const ContactFormsList = ({ initialData }) => {
 
 export default ContactFormsList;
 
-export const revalidate = 10
+export const revalidate = 10;

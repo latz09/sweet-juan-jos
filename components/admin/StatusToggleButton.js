@@ -42,9 +42,9 @@ const StatusToggleButton = ({ id, currentStatus, onStatusChange }) => {
 	return (
 		<button
 			onClick={toggleStatus}
-			className='mt-4 p-2 bg-dark text-light font-semibold text-xl rounded hover:bg-blue-700 transition'
+			className='mt-4 border w-5/6 lg:w-1/2 p-2 bg-dark text-light font-semibold text-xl rounded hover:bg-blue-700 transition'
 		>
-			{status === 'active' ? 'Archive' : 'Activate'}
+			{status === 'active' ? 'Send to Archive' : 'Activate'}
 		</button>
 	);
 };
