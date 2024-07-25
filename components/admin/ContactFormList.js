@@ -40,7 +40,7 @@ const ContactFormsList = ({ initialData }) => {
 					placeholder='Search by name...'
 					value={searchTerm}
 					onChange={handleSearch}
-					className='mb-4 p-2 w-full border-2 border-primary rounded-sm focus:outline-none focus:border-dark/70'
+					className='mb-4 p-2 w-full border-2 border-primary/50 rounded-sm focus:outline-none focus:border-none bg-primary/5 focus:bg-primary/10 font-bold tracking-wide scale-95 focus:scale-100 transition duration-700'
 				/>
 				<div className='grid place-items-center mt-4'>
 					<button
