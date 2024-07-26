@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { AiOutlineClose } from 'react-icons/ai';
+import { FaSpinner } from 'react-icons/fa';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MainHeading, SubHeading } from '../utils/Typography';
@@ -11,6 +12,7 @@ const ContactForm = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState();
 	const [successMessage, setSuccessMessage] = useState();
+	const [isUploading, setIsUploading] = useState(false);
 
 	const router = useRouter();
 
@@ -44,6 +46,7 @@ const ContactForm = () => {
 				});
 			}
 		} else if (type === 'file') {
+			setIsUploading(true);
 			const fileList = Array.from(files);
 			const compressedFiles = await Promise.all(
 				fileList.map(async (file) => {
@@ -65,6 +68,7 @@ const ContactForm = () => {
 				...formData,
 				inspirationPhotos: [...formData.inspirationPhotos, ...compressedFiles],
 			});
+			setIsUploading(false);
 		} else {
 			setFormData({
 				...formData,
@@ -152,7 +156,6 @@ const ContactForm = () => {
 						onChange={handleInputChange}
 						required
 						className='form-input'
-						
 					/>
 				</div>
 
@@ -168,7 +171,6 @@ const ContactForm = () => {
 						onChange={handleInputChange}
 						required
 						className='form-input'
-						
 					/>
 				</div>
 
@@ -184,7 +186,6 @@ const ContactForm = () => {
 						onChange={handleInputChange}
 						required
 						className='form-input'
-						
 					/>
 				</div>
 
@@ -205,7 +206,7 @@ const ContactForm = () => {
 
 			<fieldset className=' bg-primary/10 py-20 my-8 lg:my-4 '>
 				<div className='mb-16'>
-					<legend className="grid gap-2 opacity-80">
+					<legend className='grid gap-2 opacity-80'>
 						<MainHeading title='Your Interests' type='dark' />
 						<SubHeading title='Select all that apply' type='dark' />
 					</legend>
@@ -217,9 +218,9 @@ const ContactForm = () => {
 						'cookies',
 						'candyAndTreats',
 						'specialtyCakes',
-						'specialEvent',	
+						'specialEvent',
 						'delivery',
-						'orderPickup',								
+						'orderPickup',
 						'eventSetup',
 						'generalInquiry',
 						'displayItemRental',
@@ -262,19 +263,39 @@ const ContactForm = () => {
 				/>
 			</div>
 
-			<div className='w-full md:w-1/2  mx-auto px-8 my-8 lg:my-0'>
-				<label htmlFor='inspirationPhotos' className='form-label '>
-					Inspiration Photos:
-				</label>
-				<input
-					type='file'
-					id='inspirationPhotos'
-					name='inspirationPhotos'
-					accept='image/*'
-					multiple
-					onChange={handleInputChange}
-					className='my-4 w-full file:border-0 file:shadow-lg shadow-sm text-2xl rounded-sm  file:mr-4 file:py-2 file:px-4 file:rounded-sm file:text-sm file:bg-light file:text-primary file:font-bold  file:m-2 bg-dark/10'
-				/>
+			<div className='w-full md:w-1/2  mx-auto px-1 lg:px-8 my-8 lg:my-0'>
+				<div className='grid place-items-center gap-4'>
+					<label htmlFor='inspirationPhotos' className='form-label '>
+						Inspiration Photos:
+					</label>
+					<input
+						type='file'
+						id='inspirationPhotos'
+						name='inspirationPhotos'
+						accept='image/*'
+						multiple
+						onChange={handleInputChange}
+						className='hidden'
+					/>
+					<label
+						htmlFor='inspirationPhotos'
+						className='cursor-pointer  shadow-sm text-2xl  px-4 py-2 bg-primary rounded-sm text-light font-bold transition duration-700 hover:bg-primary/80 hover:shadow-xl hover:text-light '
+					>
+						Choose Files
+					</label>
+				</div>
+				<div className='mt-8 text-2xl text-gray-500  grid place-items-center'>
+					{isUploading ? (
+						<div className="flex place-items-center text-primary/70 font-semibold">
+							<FaSpinner className="animate-spin mr-4 text-primary" />
+							<span>Uploading...</span>
+						</div>
+					) : (
+						formData.inspirationPhotos.length > 0
+							? `${formData.inspirationPhotos.length} file(s) uploaded`
+							: 'No file chosen'
+					)}
+				</div>
 				<div className='my-4 grid grid-cols-3 place-items-center gap-4'>
 					{formData.inspirationPhotos.map((file, index) => (
 						<div key={index} className='relative'>

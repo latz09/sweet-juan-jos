@@ -3,11 +3,13 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FaCheck, FaPenAlt, FaQuestion } from 'react-icons/fa';
 import { MdTableBar } from 'react-icons/md';
+import AnimateUp from '../utils/animations/AnimateUp';
 
 const WeddingNavigationLinks = () => {
 	return (
-		<div className='grid lg:grid-cols-3 gap-8 lg:gap-4 place-items-center w-5/6 lg:w-full max-w-7xl mx-auto lg:px-2'>
+		<div className='grid lg:grid-cols-2 gap-4 lg:gap-8 place-items-center w-5/6 lg:w-3/4 max-w-7xl mx-auto lg:px-2'>
 			{weddingLinks.map((link, index) => (
+				<AnimateUp key={index} className='w-full h-full'>
 				<Link
 					href={link.link}
 					key={index}
@@ -25,6 +27,7 @@ const WeddingNavigationLinks = () => {
 						</div>
 					</motion.div>
 				</Link>
+				</AnimateUp>
 			))}
 		</div>
 	);
@@ -42,12 +45,12 @@ export const FooterWeddingNavigationLinks = () => {
 					<div className='transform transition-transform duration-300 group-hover:translate-x-4'>{link.title}</div>
 				</Link>
 			))}
-			<Link href='/available-display-items' className="flex items-center gap-2  group">
+			{/* <Link href='/available-display-items' className="flex items-center gap-2  group">
 				<div className='text-sm text-primary transform transition-transform duration-300 group-hover:scale-125 '>
 					<MdTableBar />
 				</div>
 				<div className='transform transition-transform duration-300 group-hover:translate-x-4'>Available Display Items</div>
-			</Link>
+			</Link> */}
 		</div>
 	);
 };
@@ -67,5 +70,10 @@ const weddingLinks = [
 		title: 'Terms & Conditions',
 		link: '/documents/terms-and-conditions',
 		icon: <FaPenAlt />,
+	},
+	{
+		title: 'Available Display Items',
+		link: '/available-display-items',
+		icon: <MdTableBar />,
 	},
 ];

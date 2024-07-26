@@ -3,6 +3,7 @@ import ButtonLink from '../utils/ButtonLink';
 import { MainHeading, SubHeading } from '../utils/Typography';
 // import { motion } from 'framer-motion';
 import PdfDownload from '../utils/PdfDownload';
+import AnimateUp from '../utils/animations/AnimateUp';
 
 const CupcakesAndSpecialtyCakesMenu = ({
 	cakeFlavors,
@@ -11,7 +12,7 @@ const CupcakesAndSpecialtyCakesMenu = ({
 	cupcakePrice,
 }) => {
 	return (
-		<div className='grid gap-8 lg:gap-24'>
+		<div className='grid gap-8 lg:gap-20'>
 			<MainHeading title='Choose Your Flavor' type='dark' />
 
 			<Flavors
@@ -31,19 +32,23 @@ export default CupcakesAndSpecialtyCakesMenu;
 const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 	return (
 		<div className='grid gap-16'>
-			<div className='grid lg:flex items-center lg:gap-16 justify-around w-full max-w-7xl mx-auto '>
-				<FlavorList flavors={cakeFlavors} title='Cake Flavors' />
-				<FlavorList
-					flavors={frostingFlavors}
-					title='Frosting Options'
-					background='other'
-				/>
-			</div>
-
-			<div className='grid place-items-center lg:mt-8'>
-				<MainHeading title={`$${price} / dozen`} type='dark' />
-				<FlavorExplanation />
-			</div>
+			<AnimateUp>
+				<div className='grid lg:flex items-center lg:gap-16 justify-around w-full max-w-7xl mx-auto '>
+					<FlavorList flavors={cakeFlavors} title='Cake Flavors' />
+					<FlavorList
+						flavors={frostingFlavors}
+						title='Frosting Options'
+						background='other'
+					/>
+				</div>
+			</AnimateUp>
+			<AnimateUp>
+				<div className='grid place-items-center gap-2 lg:mt-8'>
+					<MainHeading title='Cupcakes' type='dark' />
+					<MainHeading title={`$${price} / dozen`} type='dark' />
+					<FlavorExplanation />
+				</div>
+			</AnimateUp>
 		</div>
 	);
 };
@@ -51,7 +56,7 @@ const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 const FlavorList = ({ flavors, title, background }) => {
 	return (
 		<div
-			className={`grid gap-4 place-items-center lg:w-1/2  bg-primary/10 shadow shadow-primary/10  text-dark font-bold  pb-8 ${background === 'other' ? 'bg-primary/20 lg:bg-primary/10' : 'bg-primary/10'}`}
+			className={`grid gap-4 h-full lg:border border-primary/50 rounded-sm place-items-center lg:w-1/2   shadow shadow-primary/5 lg:shadow-primary/20  text-dark font-bold  pb-8 ${background === 'other' ? 'bg-primary/5 lg:bg-primary/10' : 'bg-primary/10 '}`}
 		>
 			<div className='bg-dar  w-full text-center pb-4 pt-6 border-b border-primary/20 '>
 				<SubHeading title={title} type='dark' />
@@ -76,36 +81,40 @@ const FlavorList = ({ flavors, title, background }) => {
 
 const FlavorExplanation = () => {
 	return (
-		<div className='mt-8 mb-12 lg:mb-3 grid place-items-center gap-2 text-center'>
-			<SubHeading
-				title='One Flavor Combination per Dozen / per Cake'
-				type='dark'
-			/>
-			<p className='italic font-bold text-lg'>
-				* Flavors available with cupcakes only. Not available for specialty
-				cakes.
-			</p>
+		<div className='mt-4 mb-12 lg:mb-3 grid place-items-center text-center'>
+			<SubHeading title='One Flavor Combination per Dozen' type='dark' />
 		</div>
 	);
 };
 
 const SmallCakeSizes = ({ sizes }) => {
 	return (
-		<div className='grid gap-8 font-bold'>
-			<MainHeading title='Small Cake Sizes' type='dark' />
-			<div className='grid gap-8 place-items-center '>
-				<ul className='grid place-items-center lg:gap-y-8 gap-y-1 bg-primary/10 lg:bg-primary/0 '>
-					{sizes.map((size, index) => (
-						<li
-							key={index}
-							className='text-lg lg:text-2xl text-center flex items-center justify-between gap-24 w-full bg-primary/5 lg:bg-primary/0 px-8 py-6 lg:py-4 lg:p-0 text-dark shadow-sm lg:shadow-none '
-						>
-							<span className=' text-2xl lg:text-3xl'>{size.size}</span>
-							<span>${size.price}</span>
-						</li>
-					))}
-				</ul>
+		<AnimateUp>
+			<div className='grid gap-4 font-bold'>
+				<div className='grid place-items-center'>
+					<MainHeading title='Small Cake Sizes' type='dark' />
+					<div className=' mb-12'>
+						<SubHeading title='One Flavor Combination per Dozen' type='dark' />
+						<p className='italic font-bold text-lg mt-1 w-4/5 mx-auto text-center'>
+							* Flavors available with cupcakes only. Not available for
+							specialty cakes.
+						</p>
+					</div>
+				</div>
+				<div className='grid gap-8 place-items-center '>
+					<ul className='grid place-items-center lg:gap-y-8 gap-y-1 bg-primary/10 lg:bg-primary/0 '>
+						{sizes.map((size, index) => (
+							<li
+								key={index}
+								className='text-lg lg:text-2xl text-center flex items-center justify-between gap-24 w-full bg-primary/5 lg:bg-primary/0 px-8 py-6 lg:py-4 lg:p-0 text-dark shadow-sm lg:shadow-none '
+							>
+								<span className=' text-2xl lg:text-3xl'>{size.size}</span>
+								<span>${size.price}</span>
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
-		</div>
+		</AnimateUp>
 	);
 };

@@ -5,7 +5,7 @@ import PageEntry from '@/components/utils/animations/PageEntry';
 import WeddingIntro from '@/components/weddings-and-special-events/WeddingIntro';
 import ImageBanner from '@/components/utils/ImageBanner';
 import MenuList from '@/components/special-events/MenuList';
-import AvailableDisplayItemsBlurb from '@/components/special-events/AvailableDisplayItemsBlurb';
+
 import WeddingNavigationLinks from '@/components/special-events/WeddingNavigationLinks';
 import StartPlanningLink from '@/components/utils/StartPlanningLink';
 
@@ -33,7 +33,7 @@ const WeddingsAndSpecialEventsPage = async () => {
 			<div className='py-8 lg:py-16'>
 				<MenuList data={data.weddingMenuLinks} />
 			</div>
-			<AvailableDisplayItemsBlurb data={data.displayItemsLink} />
+			
 			<WeddingNavigationLinks />
 			<ImageBanner images={data.bannerImages2} />
 			<div className='grid place-items-center'>
