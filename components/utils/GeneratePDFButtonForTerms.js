@@ -8,7 +8,7 @@ const GeneratePDFButtonForTerms = ({ data }) => {
     console.log('Button clicked');
     generatePDFForTerms(data);
   };
-
+ 
   return (
     <button
       onClick={handleClick}

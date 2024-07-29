@@ -1,3 +1,4 @@
+// GeneralContract.js
 import { sanityClient } from '@/lib/sanityConnection';
 import { FETCH_ACTIVE_TERMS_AND_CONDITIONS_QUERY } from '@/data/queries/FETCH_ACTIVE_TERMS_AND_CONDITIONS_QUERY';
 
