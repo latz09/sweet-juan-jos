@@ -2,7 +2,7 @@ import { sanityClient } from '@/lib/sanityConnection';
 import { FETCH_COOKIES_PAGE_QUERY } from '@/data/queries/FETCH_COOKIES_PAGE_QUERY';
 
 import HeroLayout from '@/components/heros/HeroLayout';
-import { handcraftedCookiesData as data } from '@/data/services/handcrafted-cookies';
+
 import ImageBanner from '@/components/utils/ImageBanner';
 import CookieMenu from '@/components/menus/CookieMenu';
 import ButtonLink from '@/components/utils/ButtonLink';

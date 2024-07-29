@@ -2,10 +2,10 @@ import { sanityClient } from '@/lib/sanityConnection';
 import { FETCH_CUPCAKE_PAGE_QUERY } from '@/data/queries/FETCH_CUPCAKE_PAGE_QUERY';
 
 import HeroLayout from '@/components/heros/HeroLayout';
-import { cupcakeAndSpecialtyCakesData as data } from '@/data/services/cupcakes-and-specialty-cakes';
+
 import CupcakesAndSpecialtyCakesMenu from '@/components/menus/CupcakesAndSpecialtyCakesMenu';
 import ButtonLink from '@/components/utils/ButtonLink';
-import PdfDownload from '@/components/utils/PdfDownload';
+
 import ImageBanner from '@/components/utils/ImageBanner';
 import PageEntry from '@/components/utils/animations/PageEntry';
 
