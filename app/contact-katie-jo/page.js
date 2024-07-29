@@ -1,5 +1,6 @@
 import { sanityClient } from '@/lib/sanityConnection';
 import { FETCH_CONTACT_PAGE_QUERY } from '@/data/queries/FETCH_CONTACT_PAGE_QUERY';
+import { FETCH_ACTIVE_TERMS_AND_CONDITIONS_QUERY } from '@/data/queries/FETCH_ACTIVE_TERMS_AND_CONDITIONS_QUERY';
 import ContactForm from '@/components/contact/ContactForm';
 import { MainHeading, SubHeading } from '@/components/utils/Typography';
 import PageEntry from '@/components/utils/animations/PageEntry';
@@ -14,6 +15,11 @@ const ContactUsPage = async () => {
 	const query = FETCH_CONTACT_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
 	const data = dataAsArray[0];
+
+	const termsAndConditionsquery = FETCH_ACTIVE_TERMS_AND_CONDITIONS_QUERY;
+	const termsAndConditionsDataAsArray = await sanityClient.fetch(termsAndConditionsquery);
+	const termsAndConditionsData = termsAndConditionsDataAsArray[0];
+	
 
 	return (
 		<PageEntry className='grid gap-16 lg:gap-20 mt-8 lg:mt-12  max-w-5xl mx-auto'>
@@ -36,7 +42,7 @@ const ContactUsPage = async () => {
 				</div>
 			</div>
 			<AnimateUp>
-				<ContactForm />
+				<ContactForm termsAndConditionsData={termsAndConditionsData}/>
 			</AnimateUp>
 		</PageEntry>
 	);

@@ -43,9 +43,9 @@ const Flavors = ({ cakeFlavors, frostingFlavors, price }) => {
 				</div>
 			</AnimateUp>
 			<AnimateUp>
-				<div className='grid place-items-center gap-2 lg:mt-8'>
+				<div className='grid place-items-center gap-2 lg:gap-4 lg:mt-8'>
 					<MainHeading title='Cupcakes' type='dark' />
-					<MainHeading title={`$${price} / dozen`} type='dark' />
+					<SubHeading title={`$${price} / dozen`} type='dark' />
 					<FlavorExplanation />
 				</div>
 			</AnimateUp>
@@ -81,7 +81,7 @@ const FlavorList = ({ flavors, title, background }) => {
 
 const FlavorExplanation = () => {
 	return (
-		<div className='mt-4 mb-12 lg:mb-3 grid place-items-center text-center'>
+		<div className=' mb-12 lg:mb-3 grid place-items-center text-center'>
 			<SubHeading title='One Flavor Combination per Dozen' type='dark' />
 		</div>
 	);
@@ -91,11 +91,11 @@ const SmallCakeSizes = ({ sizes }) => {
 	return (
 		<AnimateUp>
 			<div className='grid gap-4 font-bold'>
-				<div className='grid place-items-center'>
+				<div className='grid place-items-center gap-1 lg:gap-2'>
 					<MainHeading title='Small Cake Sizes' type='dark' />
-					<div className=' mb-12'>
+					<div className=' mb-12 grid '>
 						<SubHeading title='One Flavor Combination per Dozen' type='dark' />
-						<p className='italic font-bold text-lg mt-1 w-4/5 mx-auto text-center'>
+						<p className='italic font-bold text-lg  w-4/5 mx-auto text-center mt-2'>
 							* Flavors available with cupcakes only. Not available for
 							specialty cakes.
 						</p>

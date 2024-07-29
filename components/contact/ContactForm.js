@@ -7,8 +7,9 @@ import { useRouter } from 'next/navigation';
 import { MainHeading, SubHeading } from '../utils/Typography';
 import imageCompression from 'browser-image-compression';
 import { motion } from 'framer-motion';
+import ReadTermsAndConditions from './ReadTermsAndConditions';
 
-const ContactForm = () => {
+const ContactForm = ({ termsAndConditionsData }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isErrorMessage, setIsErrorMessage] = useState();
 	const [successMessage, setSuccessMessage] = useState();
@@ -25,6 +26,7 @@ const ContactForm = () => {
 		interests: [],
 		inspirationPhotos: [],
 		additionalDetails: '',
+		readTermsAndConditions: false,
 	});
 
 	const handleInputChange = async (e) => {
@@ -98,7 +100,10 @@ const ContactForm = () => {
 		formDataToSend.append('amount', formData.amount);
 		formDataToSend.append('interests', JSON.stringify(formData.interests));
 		formDataToSend.append('additionalDetails', formData.additionalDetails);
-
+		formDataToSend.append(
+			'readTermsAndConditions',
+			formData.readTermsAndConditions
+		);
 		formData.inspirationPhotos.forEach((file) => {
 			formDataToSend.append('inspirationPhotos', file);
 		});
@@ -286,14 +291,14 @@ const ContactForm = () => {
 				</div>
 				<div className='mt-8 text-2xl text-gray-500  grid place-items-center'>
 					{isUploading ? (
-						<div className="flex place-items-center text-primary/70 font-semibold">
-							<FaSpinner className="animate-spin mr-4 text-primary" />
+						<div className='flex place-items-center text-primary/70 font-semibold'>
+							<FaSpinner className='animate-spin mr-4 text-primary' />
 							<span>Uploading...</span>
 						</div>
+					) : formData.inspirationPhotos.length > 0 ? (
+						`${formData.inspirationPhotos.length} file(s) uploaded`
 					) : (
-						formData.inspirationPhotos.length > 0
-							? `${formData.inspirationPhotos.length} file(s) uploaded`
-							: 'No file chosen'
+						'No file chosen'
 					)}
 				</div>
 				<div className='my-4 grid grid-cols-3 place-items-center gap-4'>
@@ -336,84 +341,106 @@ const ContactForm = () => {
 					className='form-input mt-4  '
 				></textarea>
 			</div>
-
-			<motion.button
-				type='submit'
-				className={`border  border-primary  mx-auto transition duration-700 text-xl shadow font-bold  rounded ${
-					isLoading
-						? 'border-opacity-0 shadow-none scale-90 w-full'
-						: ' py-3 px-8 w-5/6 md:w-1/2 lg:w-1/3'
-				}`}
-				whileTap={{ scale: 0.95 }}
-				whileHover={{ scale: 1.05 }}
-			>
-				{!isLoading && (
-					<div className='mx-8'>
-						<motion.span
-							key='submit'
-							initial={{ opacity: 0, y: -10 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: 10 }}
-						>
-							Submit
-						</motion.span>
-					</div>
-				)}
-				{isLoading && (
-					<motion.div
-						key='submitting'
-						initial={{ opacity: 0, scale: 0.9 }}
-						animate={{ opacity: 1, scale: 1 }}
-						exit={{ opacity: 0, scale: 0 }}
-						transition={{ duration: 0.9 }}
-						className='grid gap-4 lg:gap-6 place-items-center '
-						disabled={isLoading}
-					>
-						<span className='lg:text-xl'>
-							Almost there! Gathering your information...
-						</span>
-
+			<div className='grid place-items-center gap-8 '>
+				<motion.button
+					type='submit'
+					className={`border  border-primary  mx-auto transition duration-700 text-xl shadow font-bold  rounded ${
+						isLoading
+							? 'border-opacity-0 shadow-none scale-90 w-full'
+							: ' py-3 px-8 w-5/6 md:w-1/2 lg:w-1/3'
+					}`}
+					whileHover={{ scale: 1.05 }}
+				>
+					{!isLoading && (
+						<div className='mx-8'>
+							<motion.span
+								key='submit'
+								initial={{ opacity: 0, y: -10 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: 10 }}
+							>
+								Submit
+							</motion.span>
+							<div></div>
+						</div>
+					)}
+					{isLoading && (
 						<motion.div
-							className=''
-							animate={{ rotate: 360 }}
-							transition={{ repeat: Infinity, duration: 5, ease: 'linear' }}
+							key='submitting'
+							initial={{ opacity: 0, scale: 0.9 }}
+							animate={{ opacity: 1, scale: 1 }}
+							exit={{ opacity: 0, scale: 0 }}
+							transition={{ duration: 0.9 }}
+							className='grid gap-4 lg:gap-6 place-items-center '
+							disabled={isLoading}
 						>
+							<span className='lg:text-xl'>
+								Almost there! Gathering your information...
+							</span>
+
 							<motion.div
-								className='w-[.4rem] h-[.4rem] bg-primary rounded-full inline-block mx-1'
-								initial={{ scale: 1 }}
-								animate={{ scale: [1, 1.2, 1] }}
-								transition={{
-									repeat: Infinity,
-									duration: 0.9,
-									ease: 'easeInOut',
-								}}
-							/>
-							<motion.div
-								className='w-[.4rem] h-[.4rem] bg-dark rounded-full inline-block mx-1'
-								initial={{ scale: 1 }}
-								animate={{ scale: [1, 1.2, 1] }}
-								transition={{
-									repeat: Infinity,
-									duration: 1.4,
-									ease: 'easeInOut',
-									delay: 0.5,
-								}}
-							/>
-							<motion.div
-								className='w-[.4rem] h-[.4rem] bg-primary rounded-full inline-block mx-1'
-								initial={{ scale: 1 }}
-								animate={{ scale: [1, 1.2, 1] }}
-								transition={{
-									repeat: Infinity,
-									duration: 0.9,
-									ease: 'easeInOut',
-									delay: 0.2,
-								}}
-							/>
+								className=''
+								animate={{ rotate: 360 }}
+								transition={{ repeat: Infinity, duration: 5, ease: 'linear' }}
+							>
+								<motion.div
+									className='w-[.4rem] h-[.4rem] bg-primary rounded-full inline-block mx-1'
+									initial={{ scale: 1 }}
+									animate={{ scale: [1, 1.2, 1] }}
+									transition={{
+										repeat: Infinity,
+										duration: 0.9,
+										ease: 'easeInOut',
+									}}
+								/>
+								<motion.div
+									className='w-[.4rem] h-[.4rem] bg-dark rounded-full inline-block mx-1'
+									initial={{ scale: 1 }}
+									animate={{ scale: [1, 1.2, 1] }}
+									transition={{
+										repeat: Infinity,
+										duration: 1.4,
+										ease: 'easeInOut',
+										delay: 0.5,
+									}}
+								/>
+								<motion.div
+									className='w-[.4rem] h-[.4rem] bg-primary rounded-full inline-block mx-1'
+									initial={{ scale: 1 }}
+									animate={{ scale: [1, 1.2, 1] }}
+									transition={{
+										repeat: Infinity,
+										duration: 0.9,
+										ease: 'easeInOut',
+										delay: 0.2,
+									}}
+								/>
+							</motion.div>
 						</motion.div>
-					</motion.div>
-				)}
-			</motion.button>
+					)}
+				</motion.button>
+				<div className="grid gap-3 place-items-center">
+					<ReadTermsAndConditions data={termsAndConditionsData} />
+					<div className='flex items-center'>
+						<input
+							type='checkbox'
+							id='readTermsAndConditions'
+							name='readTermsAndConditions'
+							checked={formData.readTermsAndConditions}
+							onChange={(e) =>
+								setFormData({
+									...formData,
+									readTermsAndConditions: e.target.checked,
+								})
+							}
+							required
+						/>
+						<label htmlFor='readTermsAndConditions' className='ml-2 '>
+							I have read and agree to the Terms and Conditions
+						</label>
+					</div>
+				</div>
+			</div>
 		</form>
 	);
 };

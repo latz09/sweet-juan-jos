@@ -4,20 +4,19 @@ import { MainHeading, SubHeading } from '../utils/Typography';
 const Section = ({ title, items }) => (
 	<AnimateUp>
 		<section className='grid gap-2'>
-			<div className='grid place-items-start'>
-				<SubHeading title={title} type='dark' />
+			<div className='grid place-items-center w-full'>
+				<h3 className='w-full text-xl lg:text-2xl font-bold text-dark px-4 py-2 bg-primary/10 rounded-sm shadow-lg shadow-dark/10 text-center mb-4'>
+					{title}
+				</h3>
 			</div>
-			<div className='mx-4 lg:mx-8 my-2 grid gap-4'>
+			<div className='mx-4 lg:mx-8 my-2 grid gap-6 place-items-start'>
 				{items.map((item, index) => (
 					<div key={index}>
-						<div className='flex items-center gap-4'>
-							<span className='w-2 h-2 bg-primary rounded-full shadow-xl shadow-primary'></span>
-							<div className='flex flex-col'>
-								<h3 className='text-xl lg:text-2xl font-bold'>{item.title}</h3>
-								<p className='text-lg lg:text-xl font-semibold'>
-									{item.description}
-								</p>
-							</div>
+						<div className='flex flex-col'>
+							<h3 className='text-xl lg:text-2xl font-bold'>{item.title}</h3>
+							<p className='text-lg lg:text-xl font-semibold ml-4'>
+								{item.description}
+							</p>
 						</div>
 					</div>
 				))}
@@ -59,17 +58,16 @@ const DisplayThingsToRemember = ({ data }) => {
 
 			<AnimateUp>
 				<section className='grid gap-2'>
-					<div className='grid place-items-start'>
-						<SubHeading title='Delivery' type='dark' />
+					<div className='grid place-items-center w-full'>
+						<h3 className=' mb-4 w-full text-xl lg:text-2xl font-bold text-dark px-4 py-2 bg-primary/10 rounded-sm shadow-lg shadow-dark/10 text-center'>
+							Delivery
+						</h3>
 					</div>
-					<div className='mx-8 my-2 grid gap-4'>
+					<div className='mx-8 my-2 grid gap-4 place-items-center'>
 						{data.delivery.details.map((detail, index) => (
 							<div key={index}>
-								<div className='flex items-center gap-4'>
-									<span className='w-2 h-2 bg-primary rounded-full shadow-xl'></span>
-									<div className='flex flex-col'>
-										<p className='text-lg lg:text-xl font-semibold'>{detail}</p>
-									</div>
+								<div className='flex flex-col'>
+									<p className='text-xl lg:text-2xl font-bold'>{detail}</p>
 								</div>
 							</div>
 						))}
@@ -78,7 +76,7 @@ const DisplayThingsToRemember = ({ data }) => {
 			</AnimateUp>
 
 			<section className='my-8 grid gap-6 lg:gap-8'>
-				<div className='grid lg:place-items-start'>
+				<div className='grid place-items-center mb-2'>
 					<MainHeading title='Additional Information' type='dark' />
 				</div>
 				<div className='grid gap-12 lg:w-5/6 mx-auto'>

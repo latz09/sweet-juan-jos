@@ -38,6 +38,7 @@ export default async function handler(req, res) {
 			amount,
 			interests,
 			additionalDetails,
+			readTermsAndConditions,
 		} = fields;
 
 		const safeEventDate =
@@ -90,6 +91,8 @@ export default async function handler(req, res) {
 			additionalDetails: additionalDetails[0],
 			sentAt: new Date().toISOString(),
 			status: 'active', // Set status to active
+			readTermsAndConditions: readTermsAndConditions[0] === 'true',
+
 		});
 
 		res.status(200).json({
