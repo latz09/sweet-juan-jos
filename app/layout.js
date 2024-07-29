@@ -12,7 +12,7 @@ const josefinSlab = Josefin_Slab({
 });
 
 export const metadata = {
-	metadataBase: new URL('https://sweet-juan-jos.vercel.app/'),
+	metadataBase: new URL('https://www.sweetjuanjos.com/'),
 	title: {
 		default: 'Sweet Juanjos',
 		template: `%s | Sweet Juanjos`,
