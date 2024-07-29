@@ -52,7 +52,7 @@ const ReadTermsAndConditions = ({ data }) => {
 							initial={{ scale: 0.8 }}
 							animate={{ scale: 1 }}
 							exit={{ scale: 0.8 }}
-							transition = {{ type: 'spring', stiffness: 260, damping: 20, duration: 1.1 }}
+							transition = {{ duration:1.1 }}
 						>
 							<div className='flex justify-between items-center border-b border-primary pb-3'>
 								<h2 className='text-2xl font-semibold'>Terms and Conditions</h2>
