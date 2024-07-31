@@ -144,17 +144,14 @@ export default async function handler(req, res) {
             You can view the form submission here: https://www.sweetjuanjos.com/admin/contact-forms`,
 			html: `
             <p>A new form has been submitted with the following details:</p>
-        <ul>
-			<li><strong>Name:</strong> ${name[0]}</li>
-			<li><br/></li>
-			<li><strong>Email:</strong> <br/><a href="mailto:${email[0]}">${email[0]}</a><br/></li>
-			<li><br/></li>
-			<li><strong>Phone Number:</strong> <br/><a href="tel:${phoneNumber[0]}">${phoneNumber[0]}</a><br/></li>
-			<li><br/></li>
-			<li><strong>Event Date:</strong> ${formattedEventDate}</li>
-			<li><strong>Amount:</strong> ${amount[0]}</li>
-			<li><strong>Additional Details:</strong> ${additionalDetails[0]}</li>
-		</ul>
+            <ul>
+                <li><strong>Name:</strong> ${name[0]}</li>
+                <li><strong>Email:</strong> ${email[0]}</li>
+               	<li><strong>Phone Number:</strong> <a href="tel:${phoneNumber[0]}">${phoneNumber[0]}</a></li>
+                <li><strong>Event Date:</strong> ${formattedEventDate}</li>
+                <li><strong>Amount:</strong> ${amount[0]}</li>
+                <li><strong>Additional Details:</strong> ${additionalDetails[0]}</li>
+            </ul>
             <a href="https://www.sweetjuanjos.com/admin/contact-forms" target="_blank">
                 <p>You can view the form submission here.</p>
             </a>
