@@ -19,6 +19,35 @@ const parseForm = (req, form) => {
 	});
 };
 
+// Date formatting function
+const formatDate = (dateString) => {
+	const date = new Date(dateString);
+	const options = { month: 'long', day: 'numeric' };
+	const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+	// Adding the suffix (st, nd, rd, th) to the day
+	const day = date.getDate();
+	let daySuffix;
+	if (day > 3 && day < 21) daySuffix = 'th';
+	else
+		switch (day % 10) {
+			case 1:
+				daySuffix = 'st';
+				break;
+			case 2:
+				daySuffix = 'nd';
+				break;
+			case 3:
+				daySuffix = 'rd';
+				break;
+			default:
+				daySuffix = 'th';
+				break;
+		}
+
+	return `${formattedDate}${daySuffix}`;
+};
+
 export default async function handler(req, res) {
 	if (req.method !== 'POST') {
 		res.setHeader('Allow', ['POST']);
@@ -95,36 +124,38 @@ export default async function handler(req, res) {
 			readTermsAndConditions: readTermsAndConditions[0] === 'true',
 		});
 
+		// Format the event date
+		const formattedEventDate = safeEventDate
+			? formatDate(safeEventDate)
+			: 'N/A';
+
 		// Nodemailer email sending code
 		const mailOptions = {
 			from: `Contact Form Submission <${email[0]}>`,
 			to: process.env.CLIENT_EMAIL, // Replace with your client's email address
 			subject: `${name[0]} Submitted a Contact Form`,
 			text: `A new form has been submitted with the following details:
-			  Name: ${name[0]}
-			  Email: ${email[0]}
-			  Phone Number: ${phoneNumber[0]}
-			  Event Date: ${safeEventDate}
-			  Amount: ${amount[0]}		
-			  Additional Details: ${additionalDetails[0]}
-
-			  You can view the form submission here: https://www.sweetjuanjos.com/admin/contact-forms`,
+            Name: ${name[0]}
+            Email: ${email[0]}
+            Phone Number: ${phoneNumber[0]}
+            Event Date: ${formattedEventDate}
+            Amount: ${amount[0]}
+            Additional Details: ${additionalDetails[0]}
+            You can view the form submission here: https://www.sweetjuanjos.com/admin/contact-forms`,
 			html: `
-			  <p>A new form has been submitted with the following details:</p>
-			  <ul>
-				  <li><strong>Name:</strong> ${name[0]}</li>
-				  <li><strong>Email:</strong> ${email[0]}</li>
-				  <li><strong>Phone Number:</strong> ${phoneNumber[0]}</li>
-				  <li><strong>Event Date:</strong> ${safeEventDate}</li>
-				  <li><strong>Amount:</strong> ${amount[0]}</li>
-				  
-				  <li><strong>Additional Details:</strong> ${additionalDetails[0]}</li>
-				
-			  </ul>
-			  <a href="https://www.sweetjuanjos.com/admin/contact-forms" target="_blank">
-				  <p>You can view the form submission here.</p>
-			  </a>
-		`,
+            <p>A new form has been submitted with the following details:</p>
+            <ul>
+                <li><strong>Name:</strong> ${name[0]}</li>
+                <li><strong>Email:</strong> ${email[0]}</li>
+                <li><strong>Phone Number:</strong> ${phoneNumber[0]}</li>
+                <li><strong>Event Date:</strong> ${formattedEventDate}</li>
+                <li><strong>Amount:</strong> ${amount[0]}</li>
+                <li><strong>Additional Details:</strong> ${additionalDetails[0]}</li>
+            </ul>
+            <a href="https://www.sweetjuanjos.com/admin/contact-forms" target="_blank">
+                <p>You can view the form submission here.</p>
+            </a>
+      `,
 		};
 
 		await transporter.sendMail(mailOptions);
