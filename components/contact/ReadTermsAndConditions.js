@@ -56,12 +56,12 @@ const ReadTermsAndConditions = ({ data }) => {
 						>
 							<div className='flex justify-between items-center border-b border-primary pb-3'>
 								<h2 className='text-2xl font-semibold'>Terms and Conditions</h2>
-								<button
-									
+								<span
+									className="cursor-pointer"
 									onClick={closeModal}
 								>
 									✖
-								</button>
+								</span>
 							</div>
 							<div className='pt-6  opacity-70'>
 								<Image
@@ -94,12 +94,12 @@ const ReadTermsAndConditions = ({ data }) => {
 								))}
 							</div>
 							<div className='flex justify-between items-center border-b border-primary py-6'>
-								<button
-									className='px-4 py-2 bg-primary text-light font-bold w-full text-2xl rounded'
+								<span
+									className='px-4 py-2 bg-primary text-light font-bold w-full text-2xl rounded cursor-pointer text-center'
 									onClick={closeModal}
 								>
 									Close
-								</button>
+								</span>
 							</div>
 						</motion.div>
 					</motion.div>
