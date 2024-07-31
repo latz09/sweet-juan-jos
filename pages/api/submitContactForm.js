@@ -93,11 +93,41 @@ export default async function handler(req, res) {
 			sentAt: new Date().toISOString(),
 			status: 'active', // Set status to active
 			readTermsAndConditions: readTermsAndConditions[0] === 'true',
-
 		});
 
+		// Nodemailer email sending code
+		const mailOptions = {
+			from: `Contact Form Submission <${email[0]}>`,
+			to: process.env.CLIENT_EMAIL, // Replace with your client's email address
+			subject: `${name[0]} Submitted a Contact Form`,
+			text: `A new form has been submitted with the following details:
+			  Name: ${name[0]}
+			  Email: ${email[0]}
+			  Phone Number: ${phoneNumber[0]}
+			  Event Date: ${safeEventDate}
+			  Amount: ${amount[0]}		
+			  Additional Details: ${additionalDetails[0]}
 
-		
+			  You can view the form submission here: https://www.sweetjuanjos.com/admin/contact-forms`,
+			html: `
+			  <p>A new form has been submitted with the following details:</p>
+			  <ul>
+				  <li><strong>Name:</strong> ${name[0]}</li>
+				  <li><strong>Email:</strong> ${email[0]}</li>
+				  <li><strong>Phone Number:</strong> ${phoneNumber[0]}</li>
+				  <li><strong>Event Date:</strong> ${safeEventDate}</li>
+				  <li><strong>Amount:</strong> ${amount[0]}</li>
+				  
+				  <li><strong>Additional Details:</strong> ${additionalDetails[0]}</li>
+				
+			  </ul>
+			  <a href="https://www.sweetjuanjos.com/admin/contact-forms" target="_blank">
+				  <p>You can view the form submission here.</p>
+			  </a>
+		`,
+		};
+
+		await transporter.sendMail(mailOptions);
 
 		res.status(200).json({
 			success: true,
