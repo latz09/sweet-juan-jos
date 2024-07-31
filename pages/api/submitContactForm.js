@@ -129,10 +129,16 @@ export default async function handler(req, res) {
 			? formatDate(safeEventDate)
 			: 'N/A';
 
+		// Generate image URLs using Sanity's image URL builder
+		const imageUrls = uploadedImages.map(
+			(image) =>
+				`https://cdn.sanity.io/images/5veay66n/${process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'}/${image.asset._ref.split('-')[1]}-${image.asset._ref.split('-')[2]}.${image.asset._ref.split('-')[3]}`
+		);
+
 		// Nodemailer email sending code
 		const mailOptions = {
 			from: `Contact Form Submission <${email[0]}>`,
-			to: process.env.CLIENT_EMAIL, // Replace with your client's email address
+			to: process.env.CLIENT_EMAIL, 
 			subject: `${name[0]} Submitted a Contact Form`,
 			text: `A new form has been submitted with the following details:
             Name: ${name[0]}
@@ -140,19 +146,25 @@ export default async function handler(req, res) {
             Phone Number: ${phoneNumber[0]}
             Event Date: ${formattedEventDate}
             Amount: ${amount[0]}
+            Interests: ${parsedInterests}
             Additional Details: ${additionalDetails[0]}
-            You can view the form submission here: https://www.sweetjuanjos.com/admin/contact-forms`,
+            You can view the form submission here: https://sweet-juanjos.sanity.studio/structure/contactForm`,
 			html: `
             <p>A new form has been submitted with the following details:</p>
             <ul>
                 <li><strong>Name:</strong> ${name[0]}</li>
                 <li><strong>Email:</strong> ${email[0]}</li>
-               	<li><strong>Phone Number:</strong> <a href="tel:${phoneNumber[0]}">${phoneNumber[0]}</a></li>
+                <li><strong>Phone Number:</strong> <a href="tel:${phoneNumber[0]}">${phoneNumber[0]}</a></li>
                 <li><strong>Event Date:</strong> ${formattedEventDate}</li>
+                <li><strong>Interests:</strong> ${parsedInterests}</li>
                 <li><strong>Amount:</strong> ${amount[0]}</li>
                 <li><strong>Additional Details:</strong> ${additionalDetails[0]}</li>
             </ul>
-            <a href="https://www.sweetjuanjos.com/admin/contact-forms" target="_blank">
+            <p><Strong>Inspiration Photos:</Strong></p>
+            <ul>
+                ${imageUrls.map((url) => `<li><img src="${url}" alt="Inspiration Photo" style="max-width: 100%;"></li>`).join('')}
+            </ul>
+            <a href="https://sweet-juanjos.sanity.studio/structure/contactForm" target="_blank">
                 <p>You can view the form submission here.</p>
             </a>
       `,

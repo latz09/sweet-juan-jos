@@ -26,11 +26,12 @@ const ContactFormDetails = async ({ params }) => {
 		: [];
 
 	return (
-		<ContactFormDetailsContent
-			data={data}
-			id={id}
-			eventDetails={eventDetails}
-		/>
+		// <ContactFormDetailsContent
+		// 	data={data}
+		// 	id={id}
+		// 	eventDetails={eventDetails}
+		// />
+		<div></div>
 	);
 };
 
