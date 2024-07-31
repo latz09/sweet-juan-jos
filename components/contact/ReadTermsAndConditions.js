@@ -69,7 +69,7 @@ const ReadTermsAndConditions = ({ data }) => {
 									alt='Juanjos Logo'
 									width={100}
 									height={100}
-									className='mx-auto'
+									className='mx-auto '
 								/>
 							</div>
 							<div className='grid'>
