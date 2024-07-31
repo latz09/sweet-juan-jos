@@ -20,6 +20,7 @@ const AvailableDisplayItems = ({ data }) => {
 };
 
 const DisplayItem = ({ item, index }) => {
+	
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true); // State to manage loading status
 
@@ -61,7 +62,6 @@ const DisplayItem = ({ item, index }) => {
 			transition={{ duration: 0.5, delay: 0.2 }}
 			viewport={{ once: true }}
 		>
-			
 			<div className='bg-dark  py-2 px-3 '>
 				<span className='text-light font-bold lg:text-lg tracking-widest mb-1'>
 					#{item.inventoryID}
@@ -87,12 +87,21 @@ const DisplayItem = ({ item, index }) => {
 					/>
 				</div>
 			</motion.div>
-			<div className='bg-dark text-light p-3 flex justify-between lg:text-xl'>
-				<div className='flex items-center gap-1'>
-					<span>{`sz:`}</span>
-					<span className='font-bold'>{item.sizes.join(' | ')}</span>
+			<div className='bg-dark text-light p-3 grid lg:text-xl'>
+				<div className='flex items-center gap-2 '>
+					{item.sizes && (
+						<div className="flex gap-2">
+							<span>szs -</span>
+							{item.sizes.map((size, index) => (
+								<div key={index} className='flex items-center gap-1 text-lg'>
+									<span>{size}</span>
+								</div>
+							))}
+						</div>
+					)}
 				</div>
-				<div className='flex items-center gap-1'>
+
+				<div className='flex items-center gap-1 place-self-end'>
 					<span>Qty:</span>
 					<span className='font-bold'>{item.quantity}</span>
 				</div>
