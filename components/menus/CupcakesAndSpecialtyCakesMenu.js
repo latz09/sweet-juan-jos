@@ -84,7 +84,7 @@ const FlavorExplanation = () => {
 		<div className=' mb-12 lg:mb-3 grid place-items-center text-center'>
 			<SubHeading title='One Flavor Combination per Dozen' type='dark' />
 			<p className='italic font-bold text-lg  w-4/5 mx-auto text-center mt-2'>
-				* Minimum two dozen.
+				** Minimum two dozen.
 			</p>
 		</div>
 	);
