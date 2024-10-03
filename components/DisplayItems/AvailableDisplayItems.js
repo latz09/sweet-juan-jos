@@ -20,6 +20,7 @@ const AvailableDisplayItems = ({ data }) => {
 };
 
 const DisplayItem = ({ item, index }) => {
+	
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true); // State to manage loading status
 
@@ -86,56 +87,23 @@ const DisplayItem = ({ item, index }) => {
 					/>
 				</div>
 			</motion.div>
-			<div className='bg-dark  py-2 px-3 '>
-				<span className='text-light font-bold lg:text-lg tracking-widest mb-1'>
-					#{item.inventoryID}
-				</span>
-			</div>
-			<div className='absolute top-0 right-0 p-3 rounded-bl-lg bg-dark/90 '>
-				<FiMaximize2
-					className=' text-lg text-light cursor-pointer'
-					onClick={openModal}
-				/>
-			</div>
-			<motion.div>
-				<div className='relative'>
-					{item.imageUrl ? (
-						<Image
-							src={item.imageUrl}
-							alt='Available Display Items'
-							width={400}
-							height={400}
-							className='cursor-pointer'
-							onClick={openModal}
-							priority={index < 3} // Use priority for the first few images
-							onLoad={handleImageLoad} // Update loading status when image is loaded
-						/>
-					) : (
-						<div className='w-400 h-400 flex items-center justify-center bg-gray-200 text-gray-500'>
-							No Image Available
-						</div>
-					)}
-				</div>
-			</motion.div>
 			<div className='bg-dark text-light p-3 grid lg:text-xl'>
 				<div className='flex items-center gap-2 '>
-					{item.sizes && item.sizes.length > 0 ? (
-						<div className='flex gap-2'>
-							<span>Sizes:</span>
+					{item.sizes && (
+						<div className="flex gap-2">
+							<span>szs -</span>
 							{item.sizes.map((size, index) => (
 								<div key={index} className='flex items-center gap-1 text-lg'>
 									<span>{size}</span>
 								</div>
 							))}
 						</div>
-					) : (
-						<span>No sizes available</span>
 					)}
 				</div>
 
 				<div className='flex items-center gap-1 place-self-end'>
 					<span>Qty:</span>
-					<span className='font-bold'>{item.quantity ?? 'N/A'}</span>
+					<span className='font-bold'>{item.quantity}</span>
 				</div>
 			</div>
 			<AnimatePresence>
@@ -161,22 +129,16 @@ const DisplayItem = ({ item, index }) => {
 									<BiLoaderAlt className='text-4xl animate-spin text-primary' />
 								</div>
 							)}
-							{item.imageUrl ? (
-								<Image
-									src={item.imageUrl}
-									onClick={closeModal}
-									alt='Available Display Items'
-									width={450}
-									height={450}
-									className='object-contain rounded-sm shadow-lg shadow-primary/30'
-									priority
-									onLoad={handleImageLoad} // Update loading status when image is loaded
-								/>
-							) : (
-								<div className='w-450 h-450 flex items-center justify-center bg-gray-200 text-gray-500'>
-									No Image Available
-								</div>
-							)}
+							<Image
+								src={item.imageUrl}
+								onClick={closeModal}
+								alt='Available Display Items'
+								width={450}
+								height={450}
+								className='object-contain rounded-sm shadow-lg shadow-primary/30'
+								priority
+								onLoad={handleImageLoad} // Update loading status when image is loaded
+							/>
 							<div className='text-center mt-4 text-xl font-black tracking-widest text-light'>
 								# {item.inventoryID}
 							</div>
