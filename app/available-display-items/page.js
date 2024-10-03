@@ -11,7 +11,7 @@ export const metadata = {
 const AvailableDisplayItemsPage = async () => {
 	const query = FETCH_AVAILABLE_DISPLAY_ITEMS_QUERY;
 	const data = await sanityClient.fetch(query);
-	
+	console.log(data)
 	return (
 		<div className='pt-4 lg:pt-16 grid gap-12 lg:gap-16 bg-gradient-to-b from-light via-primary/20 to-light'>
 			<MainHeading title='Available Display Items' />
