@@ -138,8 +138,8 @@ export default async function handler(req, res) {
 		// Nodemailer email sending code
 		const mailOptions = {
 			from: `Contact Form Submission <${email[0]}>`,
-			to: process.env.CLIENT_EMAIL, 
-			subject: `${name[0]} Submitted a Contact Form`,
+			to: process.env.CLIENT_EMAIL, 			
+			subject: `Thank you, ${name[0]}, for your interest in Sweet Juanjo's! `,
 			text: `A new form has been submitted with the following details:
             Name: ${name[0]}
             Email: ${email[0]}
