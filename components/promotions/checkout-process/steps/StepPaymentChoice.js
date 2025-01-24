@@ -57,7 +57,8 @@ function PaymentOptionCard({
 }) {
 	return (
 		<div
-			className={`  rounded-lg  p-4 flex flex-col justify-between ${cardBgClass}`}
+			className={`  rounded-lg  p-4 flex flex-col justify-between cursor-pointer ${cardBgClass}`}
+            onClick={onClick}
 		>
 			<div>
 				<h4 className={`text-2xl  lg:text-3xl font-bold mb-2 ${textColorClass}`}>{title}</h4>
@@ -65,7 +66,7 @@ function PaymentOptionCard({
 			</div>
 			<button
 				className={`mt-4 px-4 py-2 rounded hover:opacity-90 ${buttonBgClass} ${textColorClass}`}
-				onClick={onClick}
+				
 			>
 				{buttonText}
 			</button>

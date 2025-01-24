@@ -26,9 +26,9 @@ export default function StepUserInfo({
 					</h3>
 				</div>
 
-				<div className='grid lg:grid-cols-2 gap-8 place-items-center'>
+				<div className='grid lg:grid-cols-2 gap-8 mt-4 place-items-center'>
 					<div className='w-full md:w-5/6 mx-auto'>
-						<label className='promotion-form-label'>Your Name</label>
+						{/* <label className='promotion-form-label'>Your Name</label> */}
 						<input
 							type='text'
 							name='name'
@@ -39,7 +39,7 @@ export default function StepUserInfo({
 						/>
 
 						{/* Your Email */}
-						<label className='promotion-form-label'>Your Email</label>
+						{/* <label className='promotion-form-label'>Your Email</label> */}
 						<input
 							type='email'
 							name='email'
@@ -50,9 +50,9 @@ export default function StepUserInfo({
 						/>
 
 						{/* Your Phone Number */}
-						<label className='promotion-form-label'>
+						{/* <label className='promotion-form-label'>
 							Your Phone Number
-						</label>
+						</label> */}
 						<input
 							type='text'
 							name='phone'
@@ -64,7 +64,7 @@ export default function StepUserInfo({
 					</div>
 					{/* Name of Recipient */}
 					<div className='w-full md:w-5/6 mx-auto '>
-						<label className='promotion-form-label'>Recipient Name</label>
+						{/* <label className='promotion-form-label'>Recipient Name</label> */}
 						<input
 							type='text'
 							name='recipientName'
@@ -75,12 +75,13 @@ export default function StepUserInfo({
 						/>
 
 						{/* Note to add to gift */}
-						<label className='promotion-form-label'>Gift Note</label>
+						{/* <label className='promotion-form-label'>Gift Note</label> */}
 						<textarea
 							name='giftNote'
 							placeholder='Write a note to include with the gift...'
 							value={formData.giftNote}
 							onChange={onChange}
+                            rows={3}
 							className='promotion-form-input'
 						/>
 					</div>

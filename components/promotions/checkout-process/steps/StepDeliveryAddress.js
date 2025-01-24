@@ -21,7 +21,7 @@ export default function StepDeliveryAddress({
 					placeholder='Enter delivery address'
 					value={addressValue}
 					onChange={onChange}
-					className='border border-gray-300 p-2 w-full mb-4 rounded'
+					className='promotion-form-input'
 				/>
 				<div className='flex gap-2'>
 					<div className='flex gap-8 mx-auto items-center mt-8'>

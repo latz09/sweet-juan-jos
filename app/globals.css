@@ -45,7 +45,7 @@ body {
   }
 
 .promotion-form-input {
-	@apply border border-primary/60 focus:border-dark p-2 w-full mb-4 rounded outline-none
+	@apply border border-primary/60 p-2 text-lg focus:border-dark font-semibold  w-full mb-4 rounded outline-none
 }
 
 .promotion-form-label {
