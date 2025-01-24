@@ -34,9 +34,9 @@ const Promotions = async ({ params }) => {
 				<Delivery data={promotion.delivery.details} />
 			)}
 
-			{promotion.pickup && promotion.pickup.enabled && (
+			{/* {promotion.pickup && promotion.pickup.enabled && (
 				<Pickup data={promotion.pickup.details} />
-			)}
+			)} */}
 
 			{promotion.offerings && promotion.offerings.length > 0 && (
 				<Offerings data={promotion.offerings} />
