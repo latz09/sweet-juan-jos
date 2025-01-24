@@ -3,7 +3,8 @@
 import { motion as m } from 'framer-motion';
 import OfferingItem from './OfferingItem';
 
-const OfferingGroup = ({ groupItems }) => {
+const OfferingGroup = ({ groupItems, onOrderNow }) => {
+    
 	return (
 		<div className=' space-y-8 pt-4 '>
 			<m.div
@@ -27,7 +28,7 @@ const OfferingGroup = ({ groupItems }) => {
 						transition={{ duration: 0.8, delay: 0.3 }}
 						viewport={{ once: true }}
 					>
-						<OfferingItem item={item} />
+						<OfferingItem item={item} onOrderNow={onOrderNow} />
 					</m.div>
 				))}
 			</div>

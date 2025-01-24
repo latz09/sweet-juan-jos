@@ -21,15 +21,15 @@ const Promotions = async ({ params }) => {
 
 	return (
 		<main className='md:mt-4 '>
-			<div className="max-w-7xl mx-auto py-16  bg-gradient-to-b from-dark via-dark/70 to-dark md:rounded-lg shadow-lg shadow-primary/20 px-2">
+			<div className='max-w-7xl mx-auto py-16  bg-gradient-to-b from-dark via-dark/70 to-dark md:rounded-lg shadow-lg shadow-primary/20 px-2'>
 				<PromotionHeading
 					title={promotion.title || ''}
 					subtitle={promotion.subtitle || ''}
 				/>
 				<Availability delivery={promotion.delivery} pickup={promotion.pickup} />
-                {promotion.timeline && <TimeLine data={promotion.timeline} />}
+				{promotion.timeline && <TimeLine data={promotion.timeline} />}
 			</div>
-			
+
 			{promotion.delivery && promotion.delivery.enabled && (
 				<Delivery data={promotion.delivery.details} />
 			)}
@@ -39,7 +39,15 @@ const Promotions = async ({ params }) => {
 			)} */}
 
 			{promotion.offerings && promotion.offerings.length > 0 && (
-				<Offerings data={promotion.offerings} />
+				<Offerings
+					data={promotion.offerings}
+					deliveryDetails={
+						promotion.delivery?.enabled ? promotion.delivery.details : null
+					}
+					pickupDetails={
+						promotion.pickup?.enabled ? promotion.pickup.details : null
+					}
+				/>
 			)}
 		</main>
 	);
