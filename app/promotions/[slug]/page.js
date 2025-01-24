@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import PromotionHeading from '@/components/promotions/PromotionHeading';
 import TimeLine from '@/components/promotions/TimeLine';
 import Delivery from '@/components/promotions/Delivery';
-import Pickup from '@/components/promotions/PickUp';
+// import Pickup from '@/components/promotions/PickUp';
 import Offerings from '@/components/promotions/Offerings';
 import Availability from '@/components/promotions/Availability';
 
