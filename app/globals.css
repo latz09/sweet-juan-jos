@@ -43,3 +43,11 @@ body {
 .no-scroll {
 	overflow: hidden;
   }
+
+.promotion-form-input {
+	@apply border border-primary/60 focus:border-dark p-2 w-full mb-4 rounded outline-none
+}
+
+.promotion-form-label {
+	@apply block mb-2 text-lg md:text-xl font-bold opacity-60 focus:opacity-100 
+}

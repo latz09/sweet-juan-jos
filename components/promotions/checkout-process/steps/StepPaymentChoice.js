@@ -60,8 +60,8 @@ function PaymentOptionCard({
 			className={`  rounded-lg  p-4 flex flex-col justify-between ${cardBgClass}`}
 		>
 			<div>
-				<h4 className={`text-xl font-bold mb-2 ${textColorClass}`}>{title}</h4>
-				<p className={` ${textColorClass}`}>{description}</p>
+				<h4 className={`text-2xl  lg:text-3xl font-bold mb-2 ${textColorClass}`}>{title}</h4>
+				<p className={`text-lg ${textColorClass}`}>{description}</p>
 			</div>
 			<button
 				className={`mt-4 px-4 py-2 rounded hover:opacity-90 ${buttonBgClass} ${textColorClass}`}

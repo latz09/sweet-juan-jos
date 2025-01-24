@@ -21,36 +21,36 @@ export default function StepUserInfo({
 				<div className='text-center'>
 					{/* Show which method user picked (pickup or delivery) */}
 					<p className='text-dark/80  font-bold italic'>{infoText}</p>
-					<h3 className='mb-2 text-lg font-semibold  mt-8 m'>
+					<h3 className='mb-4 text-2xl font-bold  mt-8  m'>
 						Contact & Gift Details
 					</h3>
 				</div>
 
 				<div className='grid lg:grid-cols-2 gap-8 place-items-center'>
 					<div className='w-full md:w-5/6 mx-auto'>
-						<label className='block mb-1 font-semibold'>Your Name</label>
+						<label className='promotion-form-label'>Your Name</label>
 						<input
 							type='text'
 							name='name'
 							placeholder='Your Name'
 							value={formData.name}
 							onChange={onChange}
-							className='border border-gray-300 p-2 w-full mb-4 rounded'
+							className='promotion-form-input'
 						/>
 
 						{/* Your Email */}
-						<label className='block mb-1 font-semibold'>Your Email</label>
+						<label className='promotion-form-label'>Your Email</label>
 						<input
 							type='email'
 							name='email'
 							placeholder='Your Email'
 							value={formData.email}
 							onChange={onChange}
-							className='border border-gray-300 p-2 w-full mb-4 rounded'
+							className='promotion-form-input'
 						/>
 
 						{/* Your Phone Number */}
-						<label className='block mb-1 font-semibold'>
+						<label className='promotion-form-label'>
 							Your Phone Number
 						</label>
 						<input
@@ -59,29 +59,29 @@ export default function StepUserInfo({
 							placeholder='Your Phone Number'
 							value={formData.phone}
 							onChange={onChange}
-							className='border border-gray-300 p-2 w-full mb-4 rounded'
+							className='promotion-form-input'
 						/>
 					</div>
 					{/* Name of Recipient */}
 					<div className='w-full md:w-5/6 mx-auto '>
-						<label className='block mb-1 font-semibold'>Recipient Name</label>
+						<label className='promotion-form-label'>Recipient Name</label>
 						<input
 							type='text'
 							name='recipientName'
 							placeholder='Recipient Name'
 							value={formData.recipientName}
 							onChange={onChange}
-							className='border border-gray-300 p-2 w-full mb-4 rounded'
+							className='promotion-form-input'
 						/>
 
 						{/* Note to add to gift */}
-						<label className='block mb-1 font-semibold'>Gift Note</label>
+						<label className='promotion-form-label'>Gift Note</label>
 						<textarea
 							name='giftNote'
 							placeholder='Write a note to include with the gift...'
 							value={formData.giftNote}
 							onChange={onChange}
-							className='border border-gray-300 p-2 w-full mb-4 rounded'
+							className='promotion-form-input'
 						/>
 					</div>
 				</div>
