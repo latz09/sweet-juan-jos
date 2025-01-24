@@ -168,7 +168,7 @@ export default function OrderModal({
 
 					{/* Title */}
 					<div className='space-y-8 flex flex-col h-full'>
-						<div className='flex items-center gap-4 py-4 px-4 border-b'>
+						<div className='flex items-center gap-4 py-6 px-4 border-b'>
 							<Image
 								src={item?.itemImageUrl}
 								alt={item?.itemTitle}
