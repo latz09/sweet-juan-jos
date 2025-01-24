@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { SubHeading } from '../utils/Typography';
 import AnimateUp from '../utils/animations/AnimateUp';
 import logo from '@/public/images/logo/transparent-juanjos.png';
+import FadeInAndRotate from '../utils/animations/FadeInAndRotate';
 
 const OfferingItem = ({ item }) => {
 	return (
@@ -16,22 +17,23 @@ const OfferingItem = ({ item }) => {
 			/>
 
 			<div className='flex justify-center'>
+                <FadeInAndRotate>
 				<Image
 					src={item.itemImageUrl}
 					alt={item.itemTitle}
 					width={110}
 					height={110}
-					className='border'
-				/>
+					
+				/></FadeInAndRotate>
 			</div>
 
 			<div className='text-center flex-grow flex flex-col gap-2 justify-center'>
-				<p className='font-bold text-dark text-lg'>{item.itemTitle}</p>
-				<div className='text-sm text-gray-600'>{item.itemDescription}</div>
+				<p className='font-bold text-dark text-xl md:text-2xl'>{item.itemTitle}</p>
+				<div className='md:text-lg text-gray-600'>{item.itemDescription}</div>
 			</div>
 
 			<div className='flex justify-center mt-4'>
-				<button className='bg-primary py-2 px-8 font-bold text-light rounded-full transition-colors duration-300 sm:group-hover:bg-dark'>
+				<button className='font-bold text-lg md:text-xl bg-primary py-2 px-8  text-light rounded-full transition-colors duration-300 sm:group-hover:bg-dark'>
 					Order Now
 				</button>
 			</div>
