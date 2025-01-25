@@ -22,10 +22,11 @@ export const FETCH_PROMOTION_QUERY = `
       title,
       subtitle,
       "groupImageUrl": groupImage.asset->url,
-      cost,
+      
       items[]{
         itemTitle,
         itemDescription,
+        itemCost,
         "itemImageUrl": itemImage.asset->url,
         buyNowLink
       }

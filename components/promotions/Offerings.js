@@ -7,6 +7,7 @@ import OrderModal from './checkout-process/OrderModal';
 const Offerings = ({ data, deliveryDetails, pickupDetails }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
+	const [selectedItemCost, setSelectedItemCost] = useState(null);
 
 	useEffect(() => {
 		// Add or remove the no-scroll class to the body based on showModal state
@@ -48,6 +49,7 @@ const Offerings = ({ data, deliveryDetails, pickupDetails }) => {
 			{showModal && (
 				<OrderModal
 					item={selectedItem}
+					
 					onClose={handleCloseModal}
 					deliveryDetails={deliveryDetails}
 					pickupDetails={pickupDetails}
