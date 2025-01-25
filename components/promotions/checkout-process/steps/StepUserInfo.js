@@ -1,4 +1,5 @@
 import AnimateUp from '@/components/utils/animations/AnimateUp';
+import { useState } from 'react';
 
 export default function StepUserInfo({
 	method,
@@ -12,23 +13,64 @@ export default function StepUserInfo({
 	// Show some info about the chosen method
 	const infoText =
 		method === 'pickup'
-			? `Pickup details- ${pickupDetails}`
+			? `Pickup details: ${pickupDetails}`
 			: `Delivery address: ${deliveryAddress}`;
 
+	// State to track validation errors
+	const [errors, setErrors] = useState({});
+
+	function handleNext() {
+		const newErrors = {};
+
+		// Require name
+		if (!formData.name.trim()) {
+			newErrors.name = 'Name is required.';
+		}
+
+		// Require valid email
+		if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+			newErrors.email = 'Valid email is required.';
+		}
+
+		// Require phone
+		if (!formData.phone.trim()) {
+			newErrors.phone = 'Phone number is required.';
+		}
+
+		// Require recipientName (remove this if you want it optional)
+		if (!formData.recipientName.trim()) {
+			newErrors.recipientName = 'Recipient name is required.';
+		}
+
+		// Note: We do NOT validate giftNote, leaving it optional
+
+		// If there are errors, set them and don't proceed
+		if (Object.keys(newErrors).length > 0) {
+			setErrors(newErrors);
+			return;
+		}
+
+		// Clear errors and proceed to the next step
+		setErrors({});
+		onNext();
+	}
+
 	return (
-		<AnimateUp className="w-full">
-			<div className=' w-full grid'>
+		<AnimateUp className='w-full'>
+			<div className='w-full grid'>
 				<div className='text-center'>
-					{/* Show which method user picked (pickup or delivery) */}
-					<p className='text-dark/80  font-bold italic'>{infoText}</p>
-					<h3 className='mb-4 text-2xl font-bold  mt-8  m'>
+					<p className='text-dark/80 font-bold italic'>{infoText}</p>
+					<h3 className='mb-4 text-2xl font-bold mt-8'>
 						Contact & Gift Details
 					</h3>
 				</div>
 
 				<div className='grid lg:grid-cols-2 gap-8 mt-4 place-items-center'>
 					<div className='w-full md:w-5/6 mx-auto'>
-						{/* <label className='promotion-form-label'>Your Name</label> */}
+						{/* Your Name */}
+                        {errors.name && (
+							<p className='text-[#a4336b] font-bold'>{errors.name}</p>
+						)}
 						<input
 							type='text'
 							name='name'
@@ -37,9 +79,12 @@ export default function StepUserInfo({
 							onChange={onChange}
 							className='promotion-form-input'
 						/>
+						
 
 						{/* Your Email */}
-						{/* <label className='promotion-form-label'>Your Email</label> */}
+                        {errors.email && (
+							<p className='text-[#a4336b] font-bold'>{errors.email}</p>
+						)}
 						<input
 							type='email'
 							name='email'
@@ -48,11 +93,12 @@ export default function StepUserInfo({
 							onChange={onChange}
 							className='promotion-form-input'
 						/>
+						
 
 						{/* Your Phone Number */}
-						{/* <label className='promotion-form-label'>
-							Your Phone Number
-						</label> */}
+                        {errors.phone && (
+							<p className='text-[#a4336b] font-bold'>{errors.phone}</p>
+						)}
 						<input
 							type='text'
 							name='phone'
@@ -61,10 +107,14 @@ export default function StepUserInfo({
 							onChange={onChange}
 							className='promotion-form-input'
 						/>
+						
 					</div>
+
 					{/* Name of Recipient */}
-					<div className='w-full md:w-5/6 mx-auto '>
-						{/* <label className='promotion-form-label'>Recipient Name</label> */}
+					<div className='w-full md:w-5/6 mx-auto'>
+                    {errors.recipientName && (
+							<p className='text-[#a4336b] font-bold'>{errors.recipientName}</p>
+						)}
 						<input
 							type='text'
 							name='recipientName'
@@ -73,15 +123,15 @@ export default function StepUserInfo({
 							onChange={onChange}
 							className='promotion-form-input'
 						/>
+					
 
 						{/* Note to add to gift */}
-						{/* <label className='promotion-form-label'>Gift Note</label> */}
 						<textarea
 							name='giftNote'
 							placeholder='Write a note to include with the gift...'
 							value={formData.giftNote}
 							onChange={onChange}
-                            rows={3}
+							rows={3}
 							className='promotion-form-input'
 						/>
 					</div>
@@ -89,14 +139,14 @@ export default function StepUserInfo({
 
 				<div className='flex gap-8 mx-auto items-center mt-8'>
 					<button
-						className='px-4 py-2 rounded-sm border border-dark/60 '
+						className='px-4 py-2 rounded-sm border border-dark/60'
 						onClick={onBack}
 					>
 						Back
 					</button>
 					<button
 						className='px-4 py-2 bg-primary text-light font-bold rounded-sm shadow-lg'
-						onClick={onNext}
+						onClick={handleNext}
 					>
 						Next
 					</button>

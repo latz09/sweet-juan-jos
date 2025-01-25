@@ -18,7 +18,7 @@ const TimeLine = ({ data }) => {
 
 	return (
 		<div className='text-center  text-light text-2xl  mt-8'>
-			{`Order's Due by `}
+			{`Orders Due by `}
 			<span className='font-bold  underline underline-offset-4 decoration-primary/30 '>{formattedTime}</span> on{' '}
 			<span className='font-bold  '>{formattedDate}!</span>
 			

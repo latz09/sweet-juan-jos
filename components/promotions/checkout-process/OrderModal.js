@@ -13,8 +13,8 @@ import StepUserInfo from './steps/StepUserInfo';
 import StepPaymentChoice from './steps/StepPaymentChoice';
 import StepThankYou from './steps/StepThankYou'; // New StepThankYou component
 
-
 import DeliveryValidationError from './steps/DeliveryValidationError';
+import LoadingOverlay from './LoadingOverlay';
 
 export default function OrderModal({
 	item,
@@ -31,6 +31,8 @@ export default function OrderModal({
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState(null);
 	const router = useRouter();
+	const [submissionError, setSubmissionError] = useState(null);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [formData, setFormData] = useState({
 		address: '',
 		name: '',
@@ -75,12 +77,11 @@ export default function OrderModal({
 	}
 
 	function handleAddressNext(fullAddress) {
-		// Extract zip code from fullAddress
 		const zip = fullAddress.split(',').pop().trim();
 		if (!allowedZipCodes.includes(zip)) {
 			setShowValidationError(true);
 		} else {
-			setFormData((prev) => ({ ...prev, address: fullAddress }));
+			setFormData((prev) => ({ ...prev, address: fullAddress })); // Update formData.address
 			setStep(2);
 		}
 	}
@@ -89,38 +90,59 @@ export default function OrderModal({
 		setStep(3);
 	}
 
-	function handlePaymentChoice(payNow) {
-		// Build final order object
+	async function handlePaymentChoice(payNow) {
 		const orderInfo = {
-			item: item?.itemTitle || 'Unknown Item',
+			itemTitle: item?.itemTitle || 'Unknown Item',
 			method,
 			name: formData.name,
 			email: formData.email,
 			phone: formData.phone,
 			recipientName: formData.recipientName,
 			giftNote: formData.giftNote,
+			address: method === 'delivery' ? formData.address : '',
+			payNow,
 		};
 
-		// Include address if delivery is selected
-		if (method === 'delivery') {
-			orderInfo.address = formData.address;
-		}
+		setIsSubmitting(true);
+		setSubmissionError(null);
 
-		console.log('Submitting order:', orderInfo);
-		console.log('Pay Now:', payNow);
+		try {
+			const response = await fetch('/api/submitPromotionOrder', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(orderInfo),
+			});
 
-		if (payNow) {
-			// Open the buyNowLink in a new tab
-			if (!item?.buyNowLink) {
-				window.open('https://www.google.com/', '_blank');
+			const data = await response.json();
+
+			if (response.ok && data.success) {
+				console.log('Order submitted successfully:', data);
+
+				if (payNow) {
+					if (item?.buyNowLink) {
+						window.open(item.buyNowLink, '_blank');
+					} else {
+						console.warn('buyNowLink is not provided for this item.');
+						window.open('https://www.google.com/', '_blank');
+					}
+					onClose();
+				} else {
+					setStep(4);
+				}
 			} else {
-				console.warn('buyNowLink is not provided for this item.');
+				console.error(
+					'Failed to submit order:',
+					data.message || 'Unknown error'
+				);
+				setSubmissionError(data.message || 'Failed to submit order.');
 			}
-			// Close the modal after opening the link
-			onClose();
-		} else {
-			// Proceed to Thank You step
-			setStep(4);
+		} catch (error) {
+			console.error('Error submitting order:', error);
+			setSubmissionError('An unexpected error occurred. Please try again.');
+		} finally {
+			setIsSubmitting(false);
 		}
 	}
 
@@ -278,6 +300,7 @@ export default function OrderModal({
 					</div>
 				</div>
 			</div>
+      {isSubmitting && <LoadingOverlay />}
 		</>
 	);
 }
