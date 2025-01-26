@@ -14,11 +14,11 @@ export function generateKatieJosPromotionOrder({
 	let greeting;
 
 	if (currentHour < 12) {
-		greeting = 'Good Morning Katie Jo';
+		greeting = 'Good Morning Katie Jo,';
 	} else if (currentHour < 18) {
-		greeting = 'Good Afternoon Katie Jo';
+		greeting = 'Good Afternoon Katie Jo,';
 	} else {
-		greeting = 'Good Evening Katie Jo';
+		greeting = 'Good Evening Katie Jo,';
 	}
 
 	// Determine payment status and method
@@ -66,9 +66,14 @@ export function generateKatieJosPromotionOrder({
       `,
 		html: `
         <div style="font-family: Arial, sans-serif; color: ${'#012623'}; background-color: ${'#F0FFFE'}; padding: 20px; border-radius: 8px;">
-        <div style="text-align: center; margin-bottom: 20px;">
-          <img src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" alt="Client Logo" style="max-width: 200px; height: auto;" />
+        <div style="text-align: center; margin-bottom: 40px;">
+            <img 
+                src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" 
+                alt="Client Logo" 
+                style="max-width: 200px; height: auto; opacity: 0.6;" 
+            />
         </div>
+
           <h4 style="color: ${'#29B2AC'};">${greeting}</h4>
           <h2 style="color: ${'#29B2AC'};">A new promotion order has been submitted!</h2>
           
