@@ -9,13 +9,18 @@ export function generateKatieJosPromotionOrder({
 	address,
 	payNow,
 }) {
-	// Determine the time of day for greeting
-	const currentHour = new Date().getHours();
+	const currentHour = new Date().toLocaleString('en-US', {
+		hour: 'numeric',
+		minute: 'numeric',
+		hour12: false,
+		timeZone: 'America/Chicago',
+	});
+
 	let greeting;
 
-	if (currentHour < 12) {
+	if (currentHour < '11:30') {
 		greeting = 'Good Morning Katie Jo,';
-	} else if (currentHour < 18) {
+	} else if (currentHour < '16:30') {
 		greeting = 'Good Afternoon Katie Jo,';
 	} else {
 		greeting = 'Good Evening Katie Jo,';
