@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import OfferingGroup from './OfferingGroup';
-import OrderModal from './checkout-process/OrderModal';
+import OrderModal from './modal-components/OrderModal';
 
 const Offerings = ({ data, deliveryDetails, pickupDetails }) => {
 	const [showModal, setShowModal] = useState(false);

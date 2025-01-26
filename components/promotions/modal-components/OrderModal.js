@@ -7,13 +7,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 // Import the step components
-import StepChooseMethod from './steps/StepChooseMethod';
-import StepDeliveryAddress from './steps/StepDeliveryAddress';
-import StepUserInfo from './steps/StepUserInfo';
-import StepPaymentChoice from './steps/StepPaymentChoice';
-import StepThankYou from './steps/StepThankYou'; // New StepThankYou component
+import StepChooseMethod from '../checkout-process/steps/StepChooseMethod';
+import StepDeliveryAddress from '../checkout-process/steps/StepDeliveryAddress';
+import StepUserInfo from '../checkout-process/steps/StepUserInfo';
+import StepPaymentChoice from '../checkout-process/steps/StepPaymentChoice';
+import StepThankYou from '../checkout-process/steps/StepThankYou'; // New StepThankYou component
 
-import DeliveryValidationError from './steps/DeliveryValidationError';
+import DeliveryValidationError from '../checkout-process/steps/DeliveryValidationError';
 import LoadingOverlay from './LoadingOverlay';
 
 export default function OrderModal({
