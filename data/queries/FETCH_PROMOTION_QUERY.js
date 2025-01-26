@@ -20,6 +20,11 @@ export const FETCH_PROMOTION_QUERY = `
       details
     },
     giftOption,
+   autoResponseEmail {
+    emailContent,
+    pickupDetailsLine,
+    deliveryDetailsLine
+  },
     offerings[]{
       title,
       subtitle,

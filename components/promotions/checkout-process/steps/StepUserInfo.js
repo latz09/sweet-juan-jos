@@ -62,7 +62,10 @@ export default function StepUserInfo({
 				<div className='text-center'>
 					<p className='text-dark/80 font-bold italic'>{infoText}</p>
 					<h3 className='mb-4 text-2xl font-bold mt-8'>
-						Contact & Gift Details
+                        {
+                            giftOption ? 'Contact & Gift Details' : 'Contact Details'
+                        }
+						
 					</h3>
 				</div>
 

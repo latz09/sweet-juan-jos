@@ -36,12 +36,17 @@ const Promotions = async ({ params }) => {
 				<Offerings
 					data={promotion.offerings}
 					deliveryDetails={
-						promotion.delivery?.enabled ? promotion.delivery.details : null
+						promotion.delivery?.enabled
+							? promotion.delivery.details
+							: 'not-available'
 					}
 					pickupDetails={
-						promotion.pickup?.enabled ? promotion.pickup.details : null
+						promotion.pickup?.enabled
+							? promotion.pickup.details
+							: 'not-available'
 					}
 					giftOption={promotion.giftOption || false}
+					autoResponseEmailData={promotion.autoResponseEmail || null}
 				/>
 			)}
 		</main>

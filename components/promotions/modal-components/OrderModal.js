@@ -23,7 +23,9 @@ export default function OrderModal({
 	deliveryDetails,
 	pickupDetails,
 	giftOption,
+	autoResponseEmailData,
 }) {
+	
 	// Step indicators:
 	// 0 -> Choose method
 	// 1 -> Delivery address (if "delivery"), else skip
@@ -104,6 +106,7 @@ export default function OrderModal({
 			address: method === 'delivery' ? formData.address : '',
 			payNow,
 			giftOption,
+			autoResponseEmailData,
 		};
 
 		setIsSubmitting(true);
@@ -192,7 +195,12 @@ export default function OrderModal({
 	switch (step) {
 		case 0: // Step 0: Choose method
 			content = (
-				<StepChooseMethod method={method} onSelectMethod={handleSelectMethod} />
+				<StepChooseMethod
+					method={method}
+					onSelectMethod={handleSelectMethod}
+					pickupDetails={pickupDetails}
+					deliveryDetails={deliveryDetails}
+				/>
 			);
 			break;
 

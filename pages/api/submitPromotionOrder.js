@@ -1,5 +1,8 @@
+// pages/api/submitPromotionOrder.js
+
 import { sanityClient } from '@/lib/sanityConnection';
 import transporter from '@/lib/nodemailer';
+import { generateAutoReplyEmailForPromotion } from '@/components/promotions/email-templates/promotions/generateAutoReplyEmailForPromotion';
 import { generateKatieJosPromotionOrder } from '@/components/promotions/email-templates/promotions/generateKatieJosPromotionOrder';
 
 export default async function handler(req, res) {
@@ -23,6 +26,7 @@ export default async function handler(req, res) {
 			address,
 			payNow,
 			giftOption,
+			autoResponseEmailData,
 		} = req.body;
 
 		// 2. Store in Sanity
@@ -38,12 +42,13 @@ export default async function handler(req, res) {
 			address: address || '',
 			createdAt: new Date().toISOString(),
 			payNow: !!payNow, // Convert to boolean
+			giftOption: !!giftOption, // Convert to boolean
 		};
 
 		const sanityResult = await sanityClient.create(doc);
 
-		// 3. Generate email content using the template
-		const emailContent = generateKatieJosPromotionOrder({
+		// 3. Generate internal email content
+		const internalEmailContent = generateKatieJosPromotionOrder({
 			itemTitle,
 			method,
 			name,
@@ -56,19 +61,46 @@ export default async function handler(req, res) {
 			giftOption,
 		});
 
-		// 4. Send Email
-		await transporter.sendMail({
-			from: 'Order Form <latzwebresources@gmail.com>',
-			to: 'jordan@latzwebdesign.com',
-			subject: emailContent.subject,
-			text: emailContent.text,
-			html: emailContent.html,
+		// 4. Generate auto-response email content
+		const autoReplyEmailContent = generateAutoReplyEmailForPromotion({
+			itemTitle,
+			method,
+			name,
+			email,
+			phone,
+			recipientName,
+			giftNote,
+			address,
+			payNow,
+			giftOption,
+			autoResponseEmailData,
 		});
 
-		// 5. Respond with success
+		// 5. Send internal email
+		const internalEmailPromise = transporter.sendMail({
+			from: 'Order Form <latzwebresources@gmail.com>',
+			to: 'jordan@latzwebdesign.com',
+			subject: internalEmailContent.subject,
+			text: internalEmailContent.text,
+			html: internalEmailContent.html,
+		});
+
+		// 6. Send auto-response email to customer
+		const autoResponseEmailPromise = transporter.sendMail({
+			from: 'Katie Jo <sweetjuanjos@gmail.com>', // Replace with your sender email
+			to: email,
+			subject: autoReplyEmailContent.subject,
+			text: autoReplyEmailContent.text,
+			html: autoReplyEmailContent.html,
+		});
+
+		// Await both email promises
+		await Promise.all([internalEmailPromise, autoResponseEmailPromise]);
+
+		// 7. Respond with success
 		return res.status(200).json({
 			success: true,
-			message: 'Order submitted and stored in Sanity successfully',
+			message: 'Order submitted and emails sent successfully.',
 			data: sanityResult,
 		});
 	} catch (error) {

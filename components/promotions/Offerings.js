@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 import OfferingGroup from './OfferingGroup';
 import OrderModal from './modal-components/OrderModal';
 
-const Offerings = ({ data, deliveryDetails, pickupDetails, giftOption }) => {
+const Offerings = ({ data, deliveryDetails, pickupDetails, giftOption, autoResponseEmailData }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [selectedItemCost, setSelectedItemCost] = useState(null);
+
 
 	useEffect(() => {
 		// Add or remove the no-scroll class to the body based on showModal state
@@ -53,6 +54,7 @@ const Offerings = ({ data, deliveryDetails, pickupDetails, giftOption }) => {
 					onClose={handleCloseModal}
 					deliveryDetails={deliveryDetails}
 					pickupDetails={pickupDetails}
+					autoResponseEmailData={autoResponseEmailData}
 				/>
 			)}
 		</div>
