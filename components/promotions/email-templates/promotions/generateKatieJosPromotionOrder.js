@@ -99,7 +99,7 @@ export function generateKatieJosPromotionOrder({
             ${giftNoteContent}
           </ul>
   
-          <p style="margin-top: 20px;">See your <a href="https://sanity.studio/" style="color: ${'#29B2AC'};">Sanity Studio</a> for more details.</p>
+          <p style="margin-top: 20px;">See your <a href="https://sweet-juanjos.sanity.studio/structure/promotionOrders" style="color: ${'#29B2AC'};">Dashboard</a> for more details.</p>
         </div>
       `,
 	};
