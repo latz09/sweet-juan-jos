@@ -5,6 +5,7 @@ export const FETCH_PROMOTION_QUERY = `
     title,
     subtitle,
     slug,
+    "landingPageImage": landingPageImage.asset->url,
     active,
     timeline{
       startDate,

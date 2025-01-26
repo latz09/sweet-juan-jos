@@ -280,7 +280,7 @@ export default function OrderModal({
 										{item?.itemCost || '0.00'}
 									</div>
 								</div>
-								<p className='text-xs md:text-base text-center md:text-start mt-1 pr-3 pl-2'>
+								<p className='text-sm md:text-base text-center md:text-start mt-1 pr-3 pl-2'>
 									{item?.itemDescription || 'No description'}
 								</p>
 							</div>
@@ -300,7 +300,7 @@ export default function OrderModal({
 					</div>
 				</div>
 			</div>
-      {isSubmitting && <LoadingOverlay />}
+			{isSubmitting && <LoadingOverlay />}
 		</>
 	);
 }
