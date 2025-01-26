@@ -74,7 +74,7 @@ export function generateKatieJosPromotionOrder({
             />
         </div>
 
-          <h4 style="color: ${'#29B2AC'};">${greeting}</h4>
+          <h4 style="color: ${'#012623'}; opacity: 0.8;">${greeting}</h4>
           <h2 style="color: ${'#29B2AC'};">A new promotion order has been submitted!</h2>
           
           <hr style="border: 1px solid ${'#29B2AC'}; margin: 20px 0;" />
