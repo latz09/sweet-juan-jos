@@ -22,6 +22,7 @@ export default function OrderModal({
 	onClose,
 	deliveryDetails,
 	pickupDetails,
+	giftOption,
 }) {
 	// Step indicators:
 	// 0 -> Choose method
@@ -102,6 +103,7 @@ export default function OrderModal({
 			giftNote: formData.giftNote,
 			address: method === 'delivery' ? formData.address : '',
 			payNow,
+			giftOption,
 		};
 
 		setIsSubmitting(true);
@@ -216,6 +218,7 @@ export default function OrderModal({
 					onChange={handleChange}
 					onNext={handleUserInfoNext}
 					onBack={handleGoBack}
+					giftOption={giftOption}
 				/>
 			);
 			break;

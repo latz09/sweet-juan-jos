@@ -22,6 +22,7 @@ export default async function handler(req, res) {
 			giftNote,
 			address,
 			payNow,
+			giftOption,
 		} = req.body;
 
 		// 2. Store in Sanity
@@ -52,6 +53,7 @@ export default async function handler(req, res) {
 			giftNote,
 			address,
 			payNow,
+			giftOption,
 		});
 
 		// 4. Send Email

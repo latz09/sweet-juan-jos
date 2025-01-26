@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import OfferingGroup from './OfferingGroup';
 import OrderModal from './modal-components/OrderModal';
 
-const Offerings = ({ data, deliveryDetails, pickupDetails }) => {
+const Offerings = ({ data, deliveryDetails, pickupDetails, giftOption }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [selectedItemCost, setSelectedItemCost] = useState(null);
@@ -49,7 +49,7 @@ const Offerings = ({ data, deliveryDetails, pickupDetails }) => {
 			{showModal && (
 				<OrderModal
 					item={selectedItem}
-					
+					giftOption={giftOption}
 					onClose={handleCloseModal}
 					deliveryDetails={deliveryDetails}
 					pickupDetails={pickupDetails}

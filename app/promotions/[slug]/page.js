@@ -41,6 +41,7 @@ const Promotions = async ({ params }) => {
 					pickupDetails={
 						promotion.pickup?.enabled ? promotion.pickup.details : null
 					}
+					giftOption={promotion.giftOption || false}
 				/>
 			)}
 		</main>

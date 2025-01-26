@@ -19,6 +19,7 @@ export const FETCH_PROMOTION_QUERY = `
       enabled,
       details
     },
+    giftOption,
     offerings[]{
       title,
       subtitle,

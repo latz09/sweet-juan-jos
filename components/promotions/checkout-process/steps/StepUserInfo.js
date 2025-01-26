@@ -9,6 +9,7 @@ export default function StepUserInfo({
 	onChange,
 	onNext,
 	onBack,
+	giftOption,
 }) {
 	// Show some info about the chosen method
 	const infoText =
@@ -37,8 +38,8 @@ export default function StepUserInfo({
 			newErrors.phone = 'Phone number is required.';
 		}
 
-		// Require recipientName (remove this if you want it optional)
-		if (!formData.recipientName.trim()) {
+		// Require recipientName only if giftOption is true
+		if (giftOption && !formData.recipientName.trim()) {
 			newErrors.recipientName = 'Recipient name is required.';
 		}
 
@@ -65,10 +66,14 @@ export default function StepUserInfo({
 					</h3>
 				</div>
 
-				<div className='grid lg:grid-cols-2 gap-8 mt-4 place-items-center'>
+				<div
+					className={`grid ${giftOption ? 'lg:grid-cols-2' : 'grid-cols-1'} gap-8 mt-4 place-items-center ${
+						!giftOption ? 'md:w-1/2 md:mx-auto' : ''
+					}`}
+				>
 					<div className='w-full md:w-5/6 mx-auto'>
 						{/* Your Name */}
-                        {errors.name && (
+						{errors.name && (
 							<p className='text-[#a4336b] font-bold'>{errors.name}</p>
 						)}
 						<input
@@ -79,10 +84,9 @@ export default function StepUserInfo({
 							onChange={onChange}
 							className='promotion-form-input'
 						/>
-						
 
 						{/* Your Email */}
-                        {errors.email && (
+						{errors.email && (
 							<p className='text-[#a4336b] font-bold'>{errors.email}</p>
 						)}
 						<input
@@ -93,10 +97,9 @@ export default function StepUserInfo({
 							onChange={onChange}
 							className='promotion-form-input'
 						/>
-						
 
 						{/* Your Phone Number */}
-                        {errors.phone && (
+						{errors.phone && (
 							<p className='text-[#a4336b] font-bold'>{errors.phone}</p>
 						)}
 						<input
@@ -107,34 +110,37 @@ export default function StepUserInfo({
 							onChange={onChange}
 							className='promotion-form-input'
 						/>
-						
 					</div>
 
-					{/* Name of Recipient */}
-					<div className='w-full md:w-5/6 mx-auto'>
-                    {errors.recipientName && (
-							<p className='text-[#a4336b] font-bold'>{errors.recipientName}</p>
-						)}
-						<input
-							type='text'
-							name='recipientName'
-							placeholder='Recipient Name'
-							value={formData.recipientName}
-							onChange={onChange}
-							className='promotion-form-input'
-						/>
-					
+					{/* Gift Option */}
+					{giftOption && (
+						<div className='w-full md:w-5/6 mx-auto'>
+							{/* Recipient Name */}
+							{errors.recipientName && (
+								<p className='text-[#a4336b] font-bold'>
+									{errors.recipientName}
+								</p>
+							)}
+							<input
+								type='text'
+								name='recipientName'
+								placeholder='Recipient Name'
+								value={formData.recipientName}
+								onChange={onChange}
+								className='promotion-form-input'
+							/>
 
-						{/* Note to add to gift */}
-						<textarea
-							name='giftNote'
-							placeholder='Write a note to include with the gift...'
-							value={formData.giftNote}
-							onChange={onChange}
-							rows={3}
-							className='promotion-form-input'
-						/>
-					</div>
+							{/* Note to add to gift */}
+							<textarea
+								name='giftNote'
+								placeholder='Write a note to include with the gift...'
+								value={formData.giftNote}
+								onChange={onChange}
+								rows={3}
+								className='promotion-form-input'
+							/>
+						</div>
+					)}
 				</div>
 
 				<div className='flex gap-8 mx-auto items-center mt-8'>

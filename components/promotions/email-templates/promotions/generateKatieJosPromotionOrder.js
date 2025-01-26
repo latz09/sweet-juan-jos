@@ -8,6 +8,7 @@ export function generateKatieJosPromotionOrder({
 	giftNote,
 	address,
 	payNow,
+	giftOption,
 }) {
 	const currentHour = new Date().toLocaleString('en-US', {
 		hour: 'numeric',
@@ -41,6 +42,26 @@ export function generateKatieJosPromotionOrder({
         </blockquote>`
 		: '<p style="color: #555;">No gift note provided.</p>';
 
+	// Conditional Gift Information Section
+	const giftInformationText = giftOption
+		? `
+        Gift Information:
+        Recipient: ${recipientName}
+        Gift Note: ${giftNote || 'No gift note provided.'}
+      `
+		: '';
+
+	const giftInformationHtml = giftOption
+		? `
+        <h3 style="color: ${'#29B2AC'};">Gift Information:</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Recipient:</strong> ${recipientName}</li>
+          <li><strong>Gift Note:</strong></li>
+          ${giftNoteContent}
+        </ul>
+      `
+		: '';
+
 	return {
 		subject: `New Promotion Order from ${name || 'Unknown'}`,
 		text: `
@@ -65,9 +86,7 @@ export function generateKatieJosPromotionOrder({
         Email: ${email}
         Phone: ${phone}
   
-        Gift Information:
-        Recipient: ${recipientName}
-        Gift Note: ${giftNote || 'No gift note provided.'}
+        ${giftInformationText}
       `,
 		html: `
         <div style="font-family: Arial, sans-serif; color: ${'#012623'}; background-color: ${'#F0FFFE'}; padding: 20px; border-radius: 8px;">
@@ -100,14 +119,7 @@ export function generateKatieJosPromotionOrder({
             <li><strong>Phone:</strong> <a href="tel:${phone}" style="color: ${'#29B2AC'};">${phone}</a></li>
           </ul>
   
-          <hr style="border: 1px solid ${'#29B2AC'}; margin: 20px 0;" />
-  
-          <h3 style="color: ${'#29B2AC'};">Gift Information:</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li><strong>Recipient:</strong> ${recipientName}</li>
-            <li><strong>Gift Note:</strong></li>
-            ${giftNoteContent}
-          </ul>
+          ${giftInformationHtml}
   
           <p style="margin-top: 20px;">See your <a href="https://sweet-juanjos.sanity.studio/structure/promotionOrders" style="color: ${'#29B2AC'};">Dashboard</a> for more details.</p>
         </div>
