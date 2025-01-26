@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
 		// 2. Store in Sanity
 		const doc = {
-			_type: 'promotionOrder',
+			_type: 'promotionOrders',
 			itemTitle: itemTitle || 'Unknown Item',
 			method: method || 'Unknown',
 			name: name || 'N/A',

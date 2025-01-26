@@ -8,6 +8,7 @@ import Delivery from '@/components/promotions/Delivery';
 // import Pickup from '@/components/promotions/PickUp';
 import Offerings from '@/components/promotions/Offerings';
 import Availability from '@/components/promotions/Availability';
+import PromotionLandingHero from '@/components/promotions/PromotionLandingHero';
 
 const Promotions = async ({ params }) => {
 	const { slug } = params;
@@ -22,40 +23,15 @@ const Promotions = async ({ params }) => {
 
 	return (
 		<main className=' '>
-			
-			<div className='relative py-16 shadow-lg shadow-primary/20 px-2 overflow-hidden'>
-				{/* Background Image */}
-				{promotion.landingPageImage && (
-					<Image
-						src={promotion.landingPageImage}
-						alt='Promotion Background'
-						fill // Replaces layout="fill"
-						className='z-0 object-cover' // Replaces objectFit="cover"
-						priority
-					/>
-				)}
+			<PromotionLandingHero
+				imageUrl={promotion.landingPageImage || null}
+				promotionTitle={promotion.title || ''}
+				promotionSubtitle={promotion.subtitle || ''}
+				pickupDetails={promotion.pickup?.details || null}
+				deliveryDetails={promotion.delivery?.details || null}
+				timeline={promotion.timeline || null}
+			/>
 
-				{/* Overlay */}
-				<div className='absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/80 to-dark/90 z-10'></div>
-
-				{/* Content */}
-				<div className='relative z-20'>
-					<PromotionHeading
-						title={promotion.title || ''}
-						subtitle={promotion.subtitle || ''}
-					/>
-					<Availability
-						delivery={promotion.delivery}
-						pickup={promotion.pickup}
-					/>
-					{promotion.timeline && <TimeLine data={promotion.timeline} />}
-				</div>
-			</div>
-			;
-			{promotion.delivery && promotion.delivery.enabled && (
-				<Delivery data={promotion.delivery.details} />
-			)}
-			
 			{promotion.offerings && promotion.offerings.length > 0 && (
 				<Offerings
 					data={promotion.offerings}
