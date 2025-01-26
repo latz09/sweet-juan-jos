@@ -36,7 +36,7 @@ const Promotions = async ({ params }) => {
 				)}
 
 				{/* Overlay */}
-				<div className='absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/70 to-dark/80 z-10'></div>
+				<div className='absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/80 to-dark/90 z-10'></div>
 
 				{/* Content */}
 				<div className='relative z-20'>
