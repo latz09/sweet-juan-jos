@@ -32,7 +32,7 @@ export function generateKatieJosPromotionOrder({
 		? 'Paid on Square (cross-reference for confirmation).'
 		: 'Payment will be made upon receiving the items.';
 	const orderType =
-		method === 'Delivery' ? `Delivery to:<br>${address}` : 'Pickup';
+		method === 'delivery' ? `Delivery to:<br>${address}` : 'Pickup';
 
 	// Determine gift note content
 	const giftNoteContent = giftNote

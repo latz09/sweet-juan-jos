@@ -13,6 +13,7 @@ const PromotionLandingHero = ({
 	deliveryDetails,
 	timeline,
 }) => {
+	
 	return (
 		<div className='relative py-16 shadow-lg shadow-primary/20 px-2 overflow-hidden'>
 			{/* Background Image */}

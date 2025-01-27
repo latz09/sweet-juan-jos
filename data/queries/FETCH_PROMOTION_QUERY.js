@@ -32,6 +32,7 @@ export const FETCH_PROMOTION_QUERY = `
       
       items[]{
         itemTitle,
+        itemSubtitle,
         itemDescription,
         itemCost,
         "itemImageUrl": itemImage.asset->url,

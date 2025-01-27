@@ -1,19 +1,20 @@
 const Availability = ({ delivery, pickup }) => {
+	// Determine the availability message
 	let message = '';
 
-	if (delivery?.enabled && pickup?.enabled) {
+	if (delivery && pickup) {
 		message = 'Available for Pickup and Delivery';
-	} else if (delivery?.enabled) {
+	} else if (delivery) {
 		message = 'Available for Delivery';
-	} else if (pickup?.enabled) {
+	} else if (pickup) {
 		message = 'Available for Pickup';
 	} else {
-		message = 'Not Available';
+		message = '';
 	}
 
 	return (
 		<section className='my-6 text-center'>
-			<h2 className='text-xl font-semibold text-light'>{message}</h2>
+			<h2 className='text-xl lg:text-2xl font-semibold text-light'>{message}!</h2>
 		</section>
 	);
 };

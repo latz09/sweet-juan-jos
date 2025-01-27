@@ -20,15 +20,19 @@ const Promotions = async ({ params }) => {
 	if (!promotion) {
 		notFound(); // This will trigger Next.js's built-in 404 page
 	}
-
+	
 	return (
 		<main className=' '>
 			<PromotionLandingHero
 				imageUrl={promotion.landingPageImage || null}
 				promotionTitle={promotion.title || ''}
 				promotionSubtitle={promotion.subtitle || ''}
-				pickupDetails={promotion.pickup?.details || null}
-				deliveryDetails={promotion.delivery?.details || null}
+				pickupDetails={
+					promotion.pickup?.enabled ? promotion.pickup.details : null
+				}
+				deliveryDetails={
+					promotion.delivery?.enabled ? promotion.delivery.details : null
+				}
 				timeline={promotion.timeline || null}
 			/>
 

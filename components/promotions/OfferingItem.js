@@ -37,16 +37,19 @@ const OfferingItem = ({ item, onOrderNow }) => {
 				</FadeInAndRotate>
 			</div>
 
-			<div className='text-center flex-grow flex flex-col gap-2 justify-center'>
-				<p className='font-bold text-dark text-2xl lg:text-3xl'>
-					{item.itemTitle}
-				</p>
+			<div className='text-center flex-grow flex flex-col gap-6 justify-center'>
+				<div className="space-y-1 font-bold">
+					<p className='font-bold text-dark text-2xl lg:text-3xl'>
+						{item.itemTitle}
+					</p>
+					<p>{`(${item.itemSubtitle})`}</p>
+				</div>
 				<div className='text-lg md:text-xl text-gray-600'>
 					{item.itemDescription}
 				</div>
 			</div>
 
-			<div className='flex justify-center mt-4'>
+			<div className='flex justify-center mt-6'>
 				<button
 					className='font-bold text-lg md:text-xl bg-primary py-2 px-8  text-light rounded-full transition-colors duration-300 sm:group-hover:bg-dark'
 					onClick={() => onOrderNow(item)}

@@ -9,12 +9,12 @@ const StepThankYou = ({ onClose }) => {
 				<h3 className='text-2xl font-semibold text-green-600 mb-4'>
 					Thank You for Your Order!
 				</h3>
-				<p className='text-dark/80 max-w-3xl mx-auto font-bold tracking-wider'>
-					Thank you for your order! Payment will be collected at the time of
+				<p className='text-dark/80 max-w-3xl mx-auto font-bold tracking-wider text-lg'>
+					Payment will be collected at the time of
 					{` `}
 					<span className='text-primary font-semibold'>delivery or pickup</span>
 					, depending on the option you selected. We appreciate your business
-					and look forward to serving you!
+					and look forward to baking for you!
 				</p>
 				<p className='mt-4 text-dark/60 max-w-3xl mx-auto tracking-wider'>
 					{`An email confirmation has been sent to your inbox. Please check your
