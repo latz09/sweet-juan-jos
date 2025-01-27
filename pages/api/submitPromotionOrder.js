@@ -17,6 +17,7 @@ export default async function handler(req, res) {
 		// 1. Parse JSON from request body
 		const {
 			itemTitle,
+			itemSubtitle,
 			method,
 			name,
 			email,
@@ -64,6 +65,7 @@ export default async function handler(req, res) {
 		// 4. Generate auto-response email content
 		const autoReplyEmailContent = generateAutoReplyEmailForPromotion({
 			itemTitle,
+			itemSubtitle,
 			method,
 			name,
 			email,
@@ -88,6 +90,7 @@ export default async function handler(req, res) {
 		// 6. Send auto-response email to customer
 		const autoResponseEmailPromise = transporter.sendMail({
 			from: 'Katie Jo <sweetjuanjos@gmail.com>', // Replace with your sender email
+
 			to: email,
 			subject: autoReplyEmailContent.subject,
 			text: autoReplyEmailContent.text,

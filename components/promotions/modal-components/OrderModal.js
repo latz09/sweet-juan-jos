@@ -97,6 +97,7 @@ export default function OrderModal({
 	async function handlePaymentChoice(payNow) {
 		const orderInfo = {
 			itemTitle: item?.itemTitle || 'Unknown Item',
+			itemSubtitle: item?.itemSubtitle || '',
 			method,
 			name: formData.name,
 			email: formData.email,

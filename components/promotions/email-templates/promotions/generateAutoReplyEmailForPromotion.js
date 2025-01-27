@@ -2,6 +2,7 @@
 
 export function generateAutoReplyEmailForPromotion({
 	itemTitle,
+	itemSubtitle,
 	method,
 	name,
 	email,
@@ -85,7 +86,7 @@ export function generateAutoReplyEmailForPromotion({
 			${method.toLowerCase() === 'delivery' ? autoResponseEmailData.deliveryDetailsLine : autoResponseEmailData.pickupDetailsLine}
 
 			Order Details:
-			Item Ordered: ${itemTitle}
+			Item Ordered: ${itemTitle} - ${itemSubtitle}
 			Method: ${method}
 			${method.toLowerCase() === 'delivery' ? `Address: ${address}` : 'Pickup Location'}
 
@@ -114,7 +115,7 @@ export function generateAutoReplyEmailForPromotion({
 					${methodDetailsLine}
 				<h3 style="color: #29B2AC;">Order Details:</h3>
 				<ul style="list-style: none; padding: 0;">      
-					<li><strong>Sweet Ordered:</strong> ${itemTitle}</li>
+					<li><strong>Sweet Ordered:</strong> ${itemTitle} - (${itemSubtitle})</li>
 					<li><strong>Method:</strong> ${method}</li>
 					${
 						method.toLowerCase() === 'delivery'
