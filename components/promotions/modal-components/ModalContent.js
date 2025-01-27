@@ -16,6 +16,7 @@ export default function ModalContent({
 	handleContactSupport,
 	content,
 	isSubmitting,
+	isPickupAvailable
 }) {
 	return (
 		<>
@@ -72,6 +73,7 @@ export default function ModalContent({
 								<DeliveryValidationError
 									handleChoosePickup={handleChoosePickup}
 									handleContactSupport={handleContactSupport}
+									isPickupAvailable={isPickupAvailable}
 								/>
 							) : (
 								content

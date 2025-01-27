@@ -212,6 +212,7 @@ export default function OrderModal({
 						deliveryDetails={deliveryDetails}
 						onNext={handleAddressNext}
 						onBack={handleGoBack}
+						
 					/>
 				);
 			}
@@ -260,6 +261,7 @@ export default function OrderModal({
 			handleContactSupport={handleContactSupport}
 			content={content}
 			isSubmitting={isSubmitting}
+			isPickupAvailable={pickupDetails !== 'not-available'}
 		/>
 	);
 }
