@@ -26,7 +26,7 @@ export default function NotFound() {
 		<main className='h-[80vh] flex flex-col justify-center items-center bg-gray-100 text-gray-800'>
 			<h1 className='text-4xl font-bold mb-4'>404 - Page Not Found</h1>
 			<p className='text-lg mb-6'>
-				Sorry, the page you're looking for doesn't exist.
+				Sorry, the page you are looking for does not exist.
 			</p>
 			
 			<div>
