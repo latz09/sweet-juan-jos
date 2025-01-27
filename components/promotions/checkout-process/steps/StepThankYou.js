@@ -16,7 +16,7 @@ const StepThankYou = ({ onClose }) => {
 					, depending on the option you selected. We appreciate your business
 					and look forward to baking for you!
 				</p>
-				<p className='mt-4 text-dark/60 max-w-3xl mx-auto tracking-wider'>
+				<p className='mt-4 text-dark/90 max-w-3xl mx-auto tracking-wider'>
 					{`An email confirmation has been sent to your inbox. Please check your
 					spam or junk folder if you don't see it in your inbox.`}
 				</p>
