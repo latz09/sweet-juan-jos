@@ -14,7 +14,7 @@ const Availability = ({ delivery, pickup }) => {
 
 	return (
 		<section className='my-6 text-center'>
-			<h2 className='text-xl lg:text-2xl font-semibold text-light'>{message}!</h2>
+			<h2 className='text-xl lg:text-2xl font-semibold text-light'>{message}</h2>
 		</section>
 	);
 };
