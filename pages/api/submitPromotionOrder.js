@@ -81,7 +81,7 @@ export default async function handler(req, res) {
 		// 5. Send internal email
 		const internalEmailPromise = transporter.sendMail({
 			from: 'Order Form <latzwebresources@gmail.com>',
-			to: 'jordan@latzwebdesign.com',
+			to: 'sweetjuanjos@gmail.com',
 			subject: internalEmailContent.subject,
 			text: internalEmailContent.text,
 			html: internalEmailContent.html,
