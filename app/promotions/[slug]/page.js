@@ -1,13 +1,9 @@
 import { sanityClient } from '@/lib/sanityConnection';
 import { FETCH_PROMOTION_QUERY } from '@/data/queries/FETCH_PROMOTION_QUERY';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import PromotionHeading from '@/components/promotions/PromotionHeading';
-import TimeLine from '@/components/promotions/TimeLine';
-import Delivery from '@/components/promotions/Delivery';
 // import Pickup from '@/components/promotions/PickUp';
 import Offerings from '@/components/promotions/Offerings';
-import Availability from '@/components/promotions/Availability';
+
 import PromotionLandingHero from '@/components/promotions/PromotionLandingHero';
 
 const Promotions = async ({ params }) => {

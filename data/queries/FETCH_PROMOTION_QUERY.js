@@ -41,3 +41,14 @@ export const FETCH_PROMOTION_QUERY = `
     }
   }
 `;
+
+
+export const FETCH_AUTORESPONSE_EMAIL_QUERY = `
+  *[_type == "promotions" && slug.current == $slug && active == true][0]{
+    autoResponseEmail {
+      emailContent,
+      pickupDetailsLine,
+      deliveryDetailsLine
+    }
+  }
+`;
