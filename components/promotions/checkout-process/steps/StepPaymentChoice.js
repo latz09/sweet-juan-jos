@@ -2,74 +2,63 @@ import AnimateUp from '@/components/utils/animations/AnimateUp';
 
 export default function StepPaymentChoice({ onPayNow, onPayLater, onBack }) {
 	return (
-		<div>
+		<div className="container mx-auto px-4 py-8">
 			<AnimateUp>
-				<h3 className='mb-8 text-lg font-semibold text-center'>
+				<h3 className="mb-8 text-2xl font-bold text-center text-gray-800">
 					How would you like to pay?
 				</h3>
 
 				{/* Cards for Payment Options */}
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-6 '>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6">
 					{/* Pay Now Card */}
-					<PaymentOptionCard
-						title='Pay Now'
-						description='Pay securely online to confirm your order. We accept all major credit cards.'
-						buttonText='Select Pay Now'
+					<div
+						className="bg-white shadow-md shadow-primary/30 rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 cursor-pointer border border-primary/60"
 						onClick={onPayNow}
-						cardBgClass='bg-primary/20 text-dark shadow-lg' // Primary background
-						buttonBgClass='bg-light text-white' // Dark button
-						textColorClass='text-dark font-bold' // White text
-					/>
+					>
+						<div>
+							<h4 className="text-2xl font-bold mb-3 text-primary">
+								Pay Now
+							</h4>
+							<p className="text-lg text-gray-700">
+								Pay securely online with Square to confirm your order. We accept
+								all major credit cards.
+							</p>
+						</div>
+						<button className="mt-6 px-5 py-2 rounded-md bg-primary text-light font-bold hover:bg-primary-dark transition-colors duration-300">
+							Select Pay Now
+						</button>
+					</div>
+
 					{/* Pay Later Card */}
-					<PaymentOptionCard
-						title='Pay Later'
-						description='Choose this option to pay when you receive your order. Perfect if you prefer cash on pickup or delivery.'
-						buttonText='Select Pay Later'
+					<div
+						className="bg-white shadow-sm rounded-lg p-6 flex flex-col justify-between hover:shadow-none transition-shadow duration-300 cursor-pointer border border-primary/10 scale-95"
 						onClick={onPayLater}
-						cardBgClass='bg-light scale-90 border border-primary/20' // Light background
-						buttonBgClass=' border border-primary/30 text-black' // Gray button
-						textColorClass='text-gray-800' // Dark text
-					/>
+					>
+						<div>
+							<h4 className="text-2xl font-bold mb-3 text-secondary">
+								Pay Later
+							</h4>
+							<p className="text-lg text-gray-700">
+								Choose this option to pay upon delivery or pickup. We accept
+								payments via Venmo, Zelle, cash, or check.
+							</p>
+						</div>
+						<button className="mt-6 px-5 py-2 rounded-md bg-secondary text-dark border border-primary/40 font-bold ">
+							Select Pay Later
+						</button>
+					</div>
 				</div>
 
 				{/* Back Button */}
-				<div className='mt-12 text-center'>
+				<div className="mt-12 text-center">
 					<button
-						className='px-4 py-2 rounded-sm border border-dark/60'
+						className="px-6 py-2 rounded-md border border-dark/40 font-bold"
 						onClick={onBack}
 					>
 						Back
 					</button>
 				</div>
 			</AnimateUp>
-		</div>
-	);
-}
-
-function PaymentOptionCard({
-	title,
-	description,
-	buttonText,
-	onClick,
-	cardBgClass,
-	buttonBgClass,
-	textColorClass,
-}) {
-	return (
-		<div
-			className={`  rounded-lg  p-4 flex flex-col justify-between cursor-pointer ${cardBgClass}`}
-            onClick={onClick}
-		>
-			<div>
-				<h4 className={`text-2xl  lg:text-3xl font-bold mb-2 ${textColorClass}`}>{title}</h4>
-				<p className={`text-lg ${textColorClass}`}>{description}</p>
-			</div>
-			<button
-				className={`mt-4 px-4 py-2 rounded hover:opacity-90 ${buttonBgClass} ${textColorClass}`}
-				
-			>
-				{buttonText}
-			</button>
 		</div>
 	);
 }

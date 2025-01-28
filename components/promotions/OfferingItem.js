@@ -1,15 +1,32 @@
 import Image from 'next/image';
+import { useCart } from './checkout-process/steps/cart/CartContext';
 import { FaDollarSign } from 'react-icons/fa6';
 import { SubHeading } from '../utils/Typography';
 import AnimateUp from '../utils/animations/AnimateUp';
 import logo from '@/public/images/logo/transparent-juanjos.png';
 import FadeInAndRotate from '../utils/animations/FadeInAndRotate';
 
-const OfferingItem = ({ item, onOrderNow }) => {
+const OfferingItem = ({ item }) => {
+	const { addToCart } = useCart();
+
+	function handleAddToCart(e) {
+		e.stopPropagation();
+		// Add the item to the cart
+		addToCart({
+			id: `${Math.random()}`, // ensure unique id
+			name: item.itemTitle,
+			itemImageUrl: item.itemImageUrl,
+			itemSubtitle: item.itemSubtitle,
+			price: parseFloat(item.itemCost || '0'),
+			quantity: 1,
+		});
+		// Optionally do something else, like show a toast "Item added"
+	}
+
 	return (
 		<div
 			className='group relative flex flex-col justify-between gap-8 h-full bg-gradient-to-l from-light via-primary/5 to-light rounded-lg shadow shadow-primary/20 px-4 pb-8 pt-16 border border-primary/20 sm:hover:shadow-lg sm:hover:shadow-primary/30 sm:hover:border-dark/60 sm:hover:bg-light sm:hover:scale-95 transition duration-500 cursor-pointer'
-			onClick={() => onOrderNow(item)}
+			onClick={handleAddToCart}
 		>
 			{/* Logo positioned at the top-right corner */}
 			<Image
@@ -38,7 +55,7 @@ const OfferingItem = ({ item, onOrderNow }) => {
 			</div>
 
 			<div className='text-center flex-grow flex flex-col gap-6 justify-center'>
-				<div className="space-y-1 font-bold">
+				<div className='space-y-1 font-bold'>
 					<p className='font-bold text-dark text-2xl lg:text-3xl'>
 						{item.itemTitle}
 					</p>
@@ -50,11 +67,8 @@ const OfferingItem = ({ item, onOrderNow }) => {
 			</div>
 
 			<div className='flex justify-center mt-6'>
-				<button
-					className='font-bold text-lg md:text-xl bg-primary py-2 px-8  text-light rounded-full transition-colors duration-300 sm:group-hover:bg-dark'
-					onClick={() => onOrderNow(item)}
-				>
-					Order Now
+				<button className='font-bold text-lg md:text-xl bg-primary py-2 px-8  text-light rounded-full transition-colors duration-300 sm:group-hover:bg-dark'>
+					Add to Order
 				</button>
 			</div>
 		</div>

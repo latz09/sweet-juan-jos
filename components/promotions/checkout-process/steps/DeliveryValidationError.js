@@ -1,4 +1,7 @@
+'use client';
+
 import AnimateUp from '@/components/utils/animations/AnimateUp';
+import Link from 'next/link';
 
 const DeliveryValidationError = ({
 	handleChoosePickup,
@@ -12,7 +15,7 @@ const DeliveryValidationError = ({
 					Oh Shoot, Delivery Unavailable.
 				</h3>
 				<p className='text-[#a4336b] mb-8 font-bold tracking-wider max-w-2xl mx-auto lg:text-lg'>
-					{`We are sorry, but delivery is not currently available to this location.  Please contact us directly for possible delivery or pick up options.`}
+					{`We are sorry, but delivery is not currently available to this location. Please contact us directly for possible delivery or pick up options.`}
 				</p>
 				<div className='flex flex-col gap-4 sm:flex-row justify-center text-lg lg:text-xl'>
 					{isPickupAvailable && (

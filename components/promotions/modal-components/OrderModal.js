@@ -1,267 +1,237 @@
 'use client';
-
-import { useState, useEffect } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { FaDollarSign } from 'react-icons/fa6';
-import Image from 'next/image';
+import handlePaymentChoice from '../checkout-process/steps/cart/handlePaymentChoice';
+import { useState } from 'react';
+import { useCart } from '../checkout-process/steps/cart/CartContext'; // Import cart context
 import { useRouter } from 'next/navigation';
-
 // Import the step components
 import StepChooseMethod from '../checkout-process/steps/StepChooseMethod';
 import StepDeliveryAddress from '../checkout-process/steps/StepDeliveryAddress';
 import StepUserInfo from '../checkout-process/steps/StepUserInfo';
 import StepPaymentChoice from '../checkout-process/steps/StepPaymentChoice';
-import StepThankYou from '../checkout-process/steps/StepThankYou'; // New StepThankYou component
-
+import StepThankYou from '../checkout-process/steps/StepThankYou';
+import StepCart from '../checkout-process/steps/cart/StepCart';
 import DeliveryValidationError from '../checkout-process/steps/DeliveryValidationError';
-import LoadingOverlay from './LoadingOverlay';
+
 import ModalContent from './ModalContent';
 
-export default function OrderModal({
-	item,
-	onClose,
-	deliveryDetails,
-	pickupDetails,
-	giftOption,
-	autoResponseEmailData,
-}) {
-	
-	// Step indicators:
-	// 0 -> Choose method
-	// 1 -> Delivery address (if "delivery"), else skip
-	// 2 -> Contact & gift details
-	// 3 -> Payment choice
-	// 4 -> Thank You (after Pay Later)
+// OrderModal.jsx
+
+export default function OrderModal({ onClose, ...props }) {
+	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } =
+		useCart();
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState(null);
-	const router = useRouter();
-	const [submissionError, setSubmissionError] = useState(null);
-	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	// Instead of just { address: '' }, store street, city, zip separately:
 	const [formData, setFormData] = useState({
-		address: '',
+		street: '',
+		city: '',
+		zip: '',
 		name: '',
 		email: '',
 		phone: '',
 		recipientName: '',
 		giftNote: '',
+		cartData: cart,
 	});
 
-	const [showValidationError, setShowValidationError] = useState(false);
+	const router = useRouter();
 
-	// Define allowed zip codes
-	const allowedZipCodes = ['54481', '54482', '54467']; // Replace with actual zip codes
+	// Keep your existing cart logic...
 
-	// Disable background scrolling when modal is open
-	useEffect(() => {
-		document.body.classList.add('no-scroll');
-		return () => {
-			document.body.classList.remove('no-scroll');
-		};
-	}, []);
+	// Step transitions
+	function handleNext() {
+		setStep((prev) => prev + 1);
+	}
 
-	// Close modal on ESC key
-	useEffect(() => {
-		function handleEsc(e) {
-			if (e.key === 'Escape') {
-				onClose();
+	/**
+	 *  A custom "Back" button logic so skipping works properly.
+	 *
+	 *  - If we are on step 3 (the User Info screen), check if method=pickup.
+	 *    Because we *never* really visited Step 2 if method=pickup,
+	 *    so going "back" should skip it.
+	 */
+	function handleBack() {
+		setStep((prev) => {
+			if (prev === 3 && method === 'pickup') {
+				return 1; // jump back to Step 1: Choose Method
+			} else {
+				return Math.max(prev - 1, 0);
 			}
-		}
-		window.addEventListener('keydown', handleEsc);
-		return () => window.removeEventListener('keydown', handleEsc);
-	}, [onClose]);
+		});
+	}
 
-	// Step navigation handlers
+	/**
+	 *  Decide step # when user picks method:
+	 *    - If "delivery" => go to step 2
+	 *    - If "pickup"   => skip step 2 entirely, go to step 3
+	 */
 	function handleSelectMethod(selectedMethod) {
 		setMethod(selectedMethod);
-		if (selectedMethod === 'pickup') {
-			setStep(2); // Skip address
-		} else {
-			setStep(1); // Go to address
-		}
-	}
-
-	function handleAddressNext(fullAddress) {
-		const zip = fullAddress.split(',').pop().trim();
-		if (!allowedZipCodes.includes(zip)) {
-			setShowValidationError(true);
-		} else {
-			setFormData((prev) => ({ ...prev, address: fullAddress })); // Update formData.address
+		if (selectedMethod === 'delivery') {
 			setStep(2);
+		} else {
+			// pickup => skip Delivery Address
+			setStep(3);
 		}
 	}
 
-	function handleUserInfoNext() {
+	function handleAddressNext() {
+		// Zip allowed? If not => setStep(6). Otherwise => step=3
+		// (We’ll check it inside the StepDeliveryAddress.)
 		setStep(3);
 	}
 
-	async function handlePaymentChoice(payNow) {
-		const orderInfo = {
-			itemTitle: item?.itemTitle || 'Unknown Item',
-			itemSubtitle: item?.itemSubtitle || '',
-			method,
-			name: formData.name,
-			email: formData.email,
-			phone: formData.phone,
-			recipientName: formData.recipientName,
-			giftNote: formData.giftNote,
-			address: method === 'delivery' ? formData.address : '',
-			payNow,
-			giftOption,
-			autoResponseEmailData,
-		};
-
-		setIsSubmitting(true);
-		setSubmissionError(null);
-
-		try {
-			const response = await fetch('/api/submitPromotionOrder', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(orderInfo),
-			});
-
-			const data = await response.json();
-
-			if (response.ok && data.success) {
-				console.log('Order submitted successfully:', data);
-
-				if (payNow) {
-					if (item?.buyNowLink) {
-						window.open(item.buyNowLink, '_blank');
-					} else {
-						console.warn('buyNowLink is not provided for this item.');
-						window.open('https://www.google.com/', '_blank');
-					}
-					onClose();
-				} else {
-					setStep(4);
-				}
-			} else {
-				console.error(
-					'Failed to submit order:',
-					data.message || 'Unknown error'
-				);
-				setSubmissionError(data.message || 'Failed to submit order.');
-			}
-		} catch (error) {
-			console.error('Error submitting order:', error);
-			setSubmissionError('An unexpected error occurred. Please try again.');
-		} finally {
-			setIsSubmitting(false);
-		}
+	function handleUserInfoNext() {
+		setStep(4);
 	}
 
-	// Back button logic
-	function handleGoBack() {
-		if (step === 4) {
-			setStep(3);
-		} else if (step === 3) {
-			setStep(2);
-		} else if (step === 2) {
-			if (method === 'delivery') {
-				setStep(1);
-			} else {
-				setStep(0);
-			}
-		} else if (step === 1) {
-			setStep(0);
-		}
-		// Step 0 has no back
-	}
+	// function handlePaymentChoice(payNow) {
+	// 	console.log('Payment choice:', payNow);
+	// 	console.log('Order data:', formData);
 
-	// Handle input changes for user info
-	function handleChange(e) {
-		const { name, value } = e.target;
-		setFormData((prev) => ({ ...prev, [name]: value }));
-	}
+	// 	if (payNow) {
+	// 		// Logic for "Pay Now"
+	// 		console.log('Redirecting to payment gateway...');
+	// 		setTimeout(() => {
+	// 			console.log('Payment processed successfully.');
+	// 			clearCart(); // Clear the cart after payment is processed
+	// 			onClose(); // Go to Thank You step
+	// 		}, 2000); // Simulate payment delay
+	// 	} else {
+	// 		// Logic for "Pay Later"
+	// 		console.log('Order confirmed for pay later.');
+	// 		clearCart(); // Clear the cart immediately
+	// 		setStep(5); // Go to Thank You step immediately
+	// 	}
+	// }
 
-	// Handle retrying zip code validation by choosing pickup
+	// For the Delivery Validation error step
 	function handleChoosePickup() {
 		setMethod('pickup');
-		setStep(2);
-		setShowValidationError(false);
+		setStep(3); // Goes to contact & gift details
 	}
-
-	// Handle contacting support
 	function handleContactSupport() {
-		// Navigate to the Contact Katie Jo page using Next.js App Router
-		router.push('/contact-katie-jo');
+		router.push('/contact-katie-jo'); // Navigate to the contact page
+		onClose(); // Close the modal
 	}
 
-	// Determine which step content to show using switch statement
+	// Render the right content based on step
 	let content;
-
 	switch (step) {
-		case 0: // Step 0: Choose method
+		case 0:
+			content = (
+				<StepCart
+					cart={cart}
+					cartTotal={cartTotal}
+					removeFromCart={removeFromCart}
+					updateCartItemQuantity={updateCartItemQuantity}
+					onNext={handleNext}
+					// Add any other props
+				/>
+			);
+			break;
+
+		case 1:
 			content = (
 				<StepChooseMethod
 					method={method}
 					onSelectMethod={handleSelectMethod}
-					pickupDetails={pickupDetails}
-					deliveryDetails={deliveryDetails}
+					onBack={handleBack}
+					pickupDetails={props.pickupDetails}
+					deliveryDetails={props.deliveryDetails}
 				/>
 			);
 			break;
 
-		case 1: // Step 1: Delivery address (only if method is 'delivery')
+		case 2:
+			// Only valid if method=delivery
 			if (method === 'delivery') {
 				content = (
 					<StepDeliveryAddress
-						deliveryDetails={deliveryDetails}
+						deliveryDetails={props.deliveryDetails}
+						// Instead of local state, read & write from formData
+						street={formData.street}
+						city={formData.city}
+						zip={formData.zip}
+						onChange={(field, value) =>
+							setFormData((prev) => ({ ...prev, [field]: value }))
+						}
 						onNext={handleAddressNext}
-						onBack={handleGoBack}
-						
+						onBack={handleBack}
+						onValidationError={() => setStep(6)}
 					/>
 				);
+			} else {
+				// If user tries to go to step2 with method=pickup,
+				// you could return null or forcibly jump to step3.
+				content = null;
 			}
 			break;
 
-		case 2: // Step 2: User info
+		case 3:
 			content = (
 				<StepUserInfo
 					method={method}
-					pickupDetails={pickupDetails}
-					deliveryAddress={formData.address}
+					pickupDetails={props.pickupDetails}
+					deliveryAddress={`${formData.street}, ${formData.city}, ${formData.zip}`}
 					formData={formData}
-					onChange={handleChange}
+					onChange={(e) =>
+						setFormData((prev) => ({
+							...prev,
+							[e.target.name]: e.target.value,
+						}))
+					}
 					onNext={handleUserInfoNext}
-					onBack={handleGoBack}
-					giftOption={giftOption}
+					onBack={handleBack}
+					giftOption={props.giftOption}
 				/>
 			);
 			break;
 
-		case 3: // Step 3: Payment choice
+		case 4:
 			content = (
 				<StepPaymentChoice
-					onPayNow={() => handlePaymentChoice(true)}
-					onPayLater={() => handlePaymentChoice(false)}
-					onBack={handleGoBack}
+					onPayNow={() =>
+						handlePaymentChoice({
+							payNow: true,
+							formData,
+							clearCart,
+							setStep,
+							onClose,
+						})
+					}
+					onPayLater={() =>
+						handlePaymentChoice({
+							payNow: false,
+							formData,
+							clearCart,
+							setStep,
+							onClose,
+						})
+					}
+					onBack={handleBack}
 				/>
 			);
 			break;
 
-		case 4: // Step 4: Thank You
+		case 5:
 			content = <StepThankYou onClose={onClose} />;
+			break;
+
+		case 6:
+			content = (
+				<DeliveryValidationError
+					handleChoosePickup={handleChoosePickup}
+					handleContactSupport={handleContactSupport}
+					isPickupAvailable={props.pickupDetails !== 'not-available'}
+				/>
+			);
 			break;
 
 		default:
 			content = <p className='text-red-500'>Invalid step.</p>;
-			break;
 	}
 
-	return (
-		<ModalContent
-			onClose={onClose}
-			item={item}
-			showValidationError={showValidationError}
-			handleChoosePickup={handleChoosePickup}
-			handleContactSupport={handleContactSupport}
-			content={content}
-			isSubmitting={isSubmitting}
-			isPickupAvailable={pickupDetails !== 'not-available'}
-		/>
-	);
+	return <ModalContent onClose={onClose} content={content} />;
 }
