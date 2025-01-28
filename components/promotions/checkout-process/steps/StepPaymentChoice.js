@@ -4,7 +4,7 @@ export default function StepPaymentChoice({ onPayNow, onPayLater, onBack }) {
 	return (
 		<div className="container mx-auto px-4 py-8">
 			<AnimateUp>
-				<h3 className="mb-8 text-2xl font-bold text-center text-gray-800">
+				<h3 className="mb-8 text-2xl font-bold text-center ">
 					How would you like to pay?
 				</h3>
 
@@ -16,15 +16,15 @@ export default function StepPaymentChoice({ onPayNow, onPayLater, onBack }) {
 						onClick={onPayNow}
 					>
 						<div>
-							<h4 className="text-2xl font-bold mb-3 text-primary">
+							<h4 className="text-3xl font-bold mb-3 text-primary">
 								Pay Now
 							</h4>
-							<p className="text-lg text-gray-700">
+							<p className="text-lg font-bold">
 								Pay securely online with Square to confirm your order. We accept
 								all major credit cards.
 							</p>
 						</div>
-						<button className="mt-6 px-5 py-2 rounded-md bg-primary text-light font-bold hover:bg-primary-dark transition-colors duration-300">
+						<button className="mt-6 px-5 py-2 rounded-md bg-primary text-light font-bold hover:bg-primary-dark text-lg transition-colors duration-300">
 							Select Pay Now
 						</button>
 					</div>
@@ -35,15 +35,15 @@ export default function StepPaymentChoice({ onPayNow, onPayLater, onBack }) {
 						onClick={onPayLater}
 					>
 						<div>
-							<h4 className="text-2xl font-bold mb-3 text-secondary">
+							<h4 className="text-3xl font-bold mb-3 text-secondary">
 								Pay Later
 							</h4>
-							<p className="text-lg text-gray-700">
+							<p className="text-lg font-bold">
 								Choose this option to pay upon delivery or pickup. We accept
 								payments via Venmo, Zelle, cash, or check.
 							</p>
 						</div>
-						<button className="mt-6 px-5 py-2 rounded-md bg-secondary text-dark border border-primary/40 font-bold ">
+						<button className="mt-6 px-5 py-2 rounded-md bg-secondary text-dark border border-primary/40 font-bold text-lg ">
 							Select Pay Later
 						</button>
 					</div>
