@@ -2,7 +2,7 @@ import AnimateUp from '@/components/utils/animations/AnimateUp';
 
 export default function StepPaymentChoice({ onPayNow, onPayLater, onBack }) {
 	return (
-		<div className="container mx-auto px-4 py-8">
+		<div className=" mx-auto  py-8">
 			<AnimateUp>
 				<h3 className="mb-8 text-2xl font-bold text-center ">
 					How would you like to pay?
