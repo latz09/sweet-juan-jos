@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useCart } from './CartContext'; // Adjust path as needed
 import OrderModal from '@/components/promotions/modal-components/OrderModal';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import { FaHeart } from 'react-icons/fa';
 export default function CartBar({
 	deliveryDetails,
 	pickupDetails,
@@ -34,7 +34,9 @@ export default function CartBar({
 
 			// Remove the bubble after 1.5 seconds
 			setTimeout(() => {
-				setBubbles((prevBubbles) => prevBubbles.filter((bubble) => bubble.id !== newBubble.id));
+				setBubbles((prevBubbles) =>
+					prevBubbles.filter((bubble) => bubble.id !== newBubble.id)
+				);
 			}, 1500);
 		}
 	}, [cart.length]); // Runs whenever cart changes
@@ -90,9 +92,14 @@ export default function CartBar({
 									animate={{ y: -50, opacity: 1 }}
 									exit={{ y: -70, opacity: 0 }}
 									transition={{ duration: 1, ease: 'easeOut' }}
-									className='absolute bottom-12 left-1/2 transform -translate-x-1/2 bg-light text-primary font-bold px-4 py-2 rounded-full text-base border border-primary shadow-lg shadow-primary/30 tracking-widest '
+									className='absolute bottom-12 left-1/2 transform -translate-x-1/2 bg-[#E55451] text-light font-bold px-4 py-2 rounded-full text-base border border-[#FCBAB8] shadow-lg shadow-primary/30 tracking-widest '
 								>
-									{bubble.text}
+									<div className="flex items-center gap-2 ">
+										<span>
+											<FaHeart />
+										</span>
+										<span>{bubble.text}</span>
+									</div>
 								</motion.div>
 							))}
 						</AnimatePresence>
