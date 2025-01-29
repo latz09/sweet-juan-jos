@@ -12,7 +12,7 @@ const LoadingOverlay = () => {
 			</p>
 
 			{/* Logo at the bottom center */}
-			<div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-gradient-to-b from-light/60 via-light/50 to-light/60 shadow-lg shadow-light/30 p-6 rounded border border-light/40'>
+			<div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 '>
 				<Image
 					src={logo}
 					alt='logo'

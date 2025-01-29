@@ -35,13 +35,13 @@ export default async function handlePaymentChoice({
 				clearCart();
 				setIsSubmitting(false);
 				onClose();
-			}, 3200);
+			}, 200);
 		} else {
 			setTimeout(() => {
 				clearCart();
 				setStep(5);
 				setIsSubmitting(false);
-			}, 3200);
+			}, 200);
 		}
 	} catch (error) {
 		console.error('Error submitting order:', error);
