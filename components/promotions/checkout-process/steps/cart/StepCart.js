@@ -29,7 +29,7 @@ const StepCart = ({
 								} `}
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
-                                transition={{ duration:  0.3, delay: index * 0.3 }}
+                                transition={{ duration:  0.26, delay: index * 0.25 }}
 							>
 								<div className='py-4 grid  md:grid-cols-4   items-center relative p-4'>
 									{/* Item Image */}
