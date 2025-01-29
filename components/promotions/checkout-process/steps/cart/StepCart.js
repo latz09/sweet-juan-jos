@@ -43,7 +43,7 @@ const StepCart = ({
 										/>
 
 										{/* Item Details */}
-										<div className='flex-1 '>
+										<div className='flex-1 select-none touch-none -webkit-touch-callout-none'>
 											<p className='font-bold text-lg'>{item.name}</p>
 
 											<p className='font-bold '>{`(${item.itemSubtitle})`}</p>
