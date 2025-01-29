@@ -50,17 +50,16 @@ export default function CartBar({
 						animate={{ y: 0, opacity: 1 }}
 						exit={{ y: 100, opacity: 0 }}
 						transition={{ type: 'spring', stiffness: 100, damping: 27 }}
-						className='fixed bottom-0 left-0 right-0 bg-dark text-light p-4 flex justify-center gap-8 items-center z-50 shadow-lg border-t-2 border-primary cursor-pointer'
-            onClick={handleOpenCart}
+						className='fixed bottom-0 left-0 right-0  bg-dark text-light p-4 flex justify-around md:justify-center md:gap-12  items-center z-50 shadow-lg border-t-2 border-primary cursor-pointer'
+						onClick={handleOpenCart}
 					>
-						<p className="text-base md:text-lg font-bold tracking-wider">
-							{itemCount} {itemCount === 1 ? 'item' : 'items'} in cart — Total:
-							${cartTotal.toFixed(2)}
+						<p className='text-base md:text-lg font-bold tracking-wider grid place-items-center'>
+							<span>
+								{itemCount} {itemCount === 1 ? 'item' : 'items'} in cart
+							</span>
+							<span>Total: ${cartTotal.toFixed(2)}</span>
 						</p>
-						<button
-							className='bg-primary text-light font-bold px-4 py-2 rounded-sm shadow-lg shadow-primary/30'
-							
-						>
+						<button className='bg-primary text-light font-bold px-4 py-2 rounded-sm shadow-lg shadow-primary/30'>
 							Place Order
 						</button>
 					</motion.div>
