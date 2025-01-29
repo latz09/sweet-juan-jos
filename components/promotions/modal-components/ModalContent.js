@@ -2,8 +2,7 @@
 'use client';
 
 import { AiOutlineClose } from 'react-icons/ai';
-import { FaDollarSign } from 'react-icons/fa6';
-import Image from 'next/image';
+import { motion as m } from 'framer-motion';
 
 import DeliveryValidationError from '../checkout-process/steps/DeliveryValidationError';
 import LoadingOverlay from './LoadingOverlay';
@@ -21,20 +20,29 @@ export default function ModalContent({
 	return (
 		<>
 			{/* Overlay */}
-			<div
+			<m.div
 				className='fixed inset-0 bg-dark/50 backdrop-blur-sm z-50'
 				onClick={onClose}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				exit={{ opacity: 0 }}
+				transition = {{ duration: 0.8, delay: 0.2 }}
+				
 			/>
 
 			{/* Modal Container */}
-			<div className='fixed inset-0 z-50 flex items-center justify-center'>
+			<m.div className='fixed inset-0 z-50 flex items-center justify-center'
+			initial={{ x: '-100%' }}
+			animate={{ x: 0 }}
+			exit={{ x: '-100%' }}
+			transition={{ type: 'spring', stiffness: 90, damping: 15 }}>
 				<div
 					className='relative bg-light  w-full max-w-5xl h-[90vh] lg:h-[70vh] mx-auto rounded shadow-lg overflow-hidden'
 					onClick={(e) => e.stopPropagation()} // Prevent click propagation
 				>
 					{/* Close Button */}
 					<button
-						className='absolute top-2 md:top-4 right-2 md:right-4 bg-light p-1 md:p-2 rounded-full md:text-lg text-primary shadow-lg'
+						className='absolute top-4 right-4 bg-light p-1 md:p-2 rounded-full md:text-lg text-primary shadow-lg'
 						onClick={onClose}
 						aria-label='Close Modal'
 					>
@@ -60,7 +68,7 @@ export default function ModalContent({
 						</div>
 					</div>
 				</div>
-			</div>
+			</m.div>
 
 			{/* LoadingOverlay */}
 			{isSubmitting && <LoadingOverlay />}

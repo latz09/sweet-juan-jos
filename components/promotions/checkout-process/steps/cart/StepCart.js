@@ -1,16 +1,17 @@
 'use client';
 
 import Image from 'next/image';
+import { motion as m } from 'framer-motion';
 
 const StepCart = ({
 	cart,
 	cartTotal,
 	removeFromCart,
 	onNext,
-    
+    onClose,
+
 	updateCartItemQuantity,
 }) => {
-	
 	return (
 		<div className=' text-dark p-4 w-full max-w-3xl mx-auto'>
 			{cart.length === 0 ? (
@@ -19,13 +20,16 @@ const StepCart = ({
 				<>
 					<ul className='grid divide-y divide-primary/50   w-full  '>
 						{cart.map((item, index) => (
-							<li
+							<m.li
 								key={item.id}
 								className={`grid py-6 shadow-md rounded-sm ${
 									index % 2 === 0
 										? 'bg-primary/10 shadow-primary/10'
 										: 'bg-dark/10 shadow-dark/10'
 								} `}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration:  0.3, delay: index * 0.3 }}
 							>
 								<div className='py-4 grid  md:grid-cols-4   items-center relative p-4'>
 									{/* Item Image */}
@@ -90,7 +94,7 @@ const StepCart = ({
 								</div>
 
 								{/* Remove Button */}
-							</li>
+							</m.li>
 						))}
 					</ul>
 
@@ -99,12 +103,20 @@ const StepCart = ({
 						<p className='font-bold text-xl text-center'>
 							Total: ${cartTotal.toFixed(2)}
 						</p>
-						<button
-							className='bg-primary font-bold text-xl text-light px-6 py-3 rounded-lg hover:bg-primary/90 transition'
-							onClick={onNext}
-						>
-							Place Your Order
-						</button>
+						<div className="grid gap-4 md:flex md:items-center md:gap-8">
+							<button
+								className='bg-primary font-bold text-xl text-light px-6 py-3 rounded-lg hover:bg-primary/70 hover:scale-95  transition duration-500'
+								onClick={onNext}
+							>
+								Place Your Order
+							</button>
+							<button
+								className='border border-primary/50 font-bold text-xl text-primary px-6 py-3 rounded-lg hover:bg-primary/5 hover:scale-95 hover:border-primary/0 transition duration-500'
+								onClick={onClose}
+							>
+								Add More Items
+							</button>
+						</div>
 					</div>
 				</>
 			)}

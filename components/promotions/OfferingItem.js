@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import { useCart } from './checkout-process/steps/cart/CartContext';
 import { FaDollarSign } from 'react-icons/fa6';
-import { SubHeading } from '../utils/Typography';
-import AnimateUp from '../utils/animations/AnimateUp';
+
 import logo from '@/public/images/logo/transparent-juanjos.png';
 import FadeInAndRotate from '../utils/animations/FadeInAndRotate';
 

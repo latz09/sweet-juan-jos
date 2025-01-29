@@ -1,3 +1,4 @@
+import AnimateUp from '@/components/utils/animations/AnimateUp';
 import { useState } from 'react';
 
 export default function StepDeliveryAddress({
@@ -52,71 +53,77 @@ export default function StepDeliveryAddress({
 	}
 
 	return (
-		<div className='md:w-2/3 mx-auto'>
-			<p className='text-dark/80 font-bold italic text-center'>
-				Delivery details: {deliveryDetails}
-			</p>
-			<div>
-				<h3 className='mb-2 text-lg font-semibold mt-8'>Delivery Address</h3>
+		<AnimateUp>
+			<div className='md:w-2/3 mx-auto'>
+				<p className='text-dark/80 font-bold italic text-center'>
+					Delivery details: {deliveryDetails}
+				</p>
+				<div>
+					<h3 className='mb-2 text-lg font-semibold mt-8'>Delivery Address</h3>
 
-				{/* Street Address */}
-				{errors.street && (
-					<p className='text-primary font-bold tracking-wider'>
-						{errors.street}
-					</p>
-				)}
-				<label htmlFor='street'>Street Address</label>
-				<input
-					id='street'
-					name='street'
-					value={street}
-					onChange={(e) => onChange('street', e.target.value)}
-					className='promotion-form-input'
-				/>
+					{/* Street Address */}
+					{errors.street && (
+						<p className='text-primary font-bold tracking-wider'>
+							{errors.street}
+						</p>
+					)}
+					<label htmlFor='street'>Street Address</label>
+					<input
+						id='street'
+						name='street'
+						value={street}
+						onChange={(e) => onChange('street', e.target.value)}
+						className='promotion-form-input'
+					/>
 
-				{/* City */}
-				<label htmlFor='city'>City/Town</label>
-				{errors.city && (
-					<p className='text-primary font-bold tracking-wider'>{errors.city}</p>
-				)}
-				<input
-					id='city'
-					name='city'
-					value={city}
-					onChange={(e) => onChange('city', e.target.value)}
-					className='promotion-form-input'
-				/>
+					{/* City */}
+					<label htmlFor='city'>City/Town</label>
+					{errors.city && (
+						<p className='text-primary font-bold tracking-wider'>
+							{errors.city}
+						</p>
+					)}
+					<input
+						id='city'
+						name='city'
+						value={city}
+						onChange={(e) => onChange('city', e.target.value)}
+						className='promotion-form-input'
+					/>
 
-				{/* Zip Code */}
-				{errors.zip && (
-					<p className='text-primary font-bold tracking-wider'>{errors.zip}</p>
-				)}
-				<label htmlFor='zip'>Zip Code</label>
-				<input
-					id='zip'
-					name='zip'
-					value={zip}
-					onChange={(e) => onChange('zip', e.target.value)}
-					className='promotion-form-input'
-				/>
-			</div>
+					{/* Zip Code */}
+					{errors.zip && (
+						<p className='text-primary font-bold tracking-wider'>
+							{errors.zip}
+						</p>
+					)}
+					<label htmlFor='zip'>Zip Code</label>
+					<input
+						id='zip'
+						name='zip'
+						value={zip}
+						onChange={(e) => onChange('zip', e.target.value)}
+						className='promotion-form-input'
+					/>
+				</div>
 
-			<div className='grid place-items-center'>
-				<div className='flex gap-8 mx-auto items-center mt-8'>
-					<button
-						className='px-4 py-2 rounded-sm border border-dark/60'
-						onClick={onBack}
-					>
-						Back
-					</button>
-					<button
-						className='px-4 py-2 bg-primary text-light font-bold rounded-sm shadow-lg'
-						onClick={handleNextClick}
-					>
-						Next
-					</button>
+				<div className='grid place-items-center'>
+					<div className='flex gap-8 mx-auto items-center mt-8'>
+						<button
+							className='px-4 py-2 rounded-sm border border-dark/60'
+							onClick={onBack}
+						>
+							Back
+						</button>
+						<button
+							className='px-4 py-2 bg-primary text-light font-bold rounded-sm shadow-lg'
+							onClick={handleNextClick}
+						>
+							Next
+						</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</AnimateUp>
 	);
 }

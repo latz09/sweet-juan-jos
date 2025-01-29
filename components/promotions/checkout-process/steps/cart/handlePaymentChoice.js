@@ -4,22 +4,27 @@ export default function handlePaymentChoice({
 	clearCart,
 	setStep,
 	onClose,
+	setIsSubmitting,
 }) {
 	console.log('Payment choice:', payNow);
 	console.log('Order data:', formData);
 
+	setIsSubmitting(true); // Show LoadingOverlay
+
 	if (payNow) {
-		// Logic for "Pay Now"
 		console.log('Redirecting to payment gateway...');
 		setTimeout(() => {
 			console.log('Payment processed successfully.');
-			clearCart(); // Clear the cart after payment is processed
-			onClose(); // Close the modal or navigate to Thank You
-		}, 2000); // Simulate payment delay
+			clearCart(); // Clear cart after payment
+			setIsSubmitting(false); // Hide loading
+			onClose(); // Close modal
+		}, 3200);
 	} else {
-		// Logic for "Pay Later"
 		console.log('Order confirmed for pay later.');
-		clearCart(); // Clear the cart immediately
-		setStep(5); // Go to Thank You step immediately
+		setTimeout(() => {
+			clearCart(); // Clear cart immediately
+			setStep(5); // Go to Thank You step
+			setIsSubmitting(false); // Hide loading
+		}, 3200); // Simulating a short delay
 	}
 }
