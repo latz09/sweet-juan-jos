@@ -1,44 +1,75 @@
-// emailTemplates/promotionOrderEmail.js
-
-export function generateAutoReplyEmailForPromotion({
-	itemTitle,
-	itemSubtitle,
-	method,
+export function generateCustomerConfirmationEmail({
 	name,
 	email,
 	phone,
 	recipientName,
 	giftNote,
-	address,
+	street,
+	city,
+	zip,
 	payNow,
-	giftOption,
-	autoResponseEmailData,
+	orderMethod,
+	promotionDetails = {},
+	cartData = [],
 }) {
+	// Extract fields from promotionDetails
+	const {
+		pickupDetails = '',
+		deliveryDetails = '',
+		autoResponseEmailData = {},
+		giftOption = false,
+	} = promotionDetails;
+
+	// Extract autoResponseEmailData fields
+	const {
+		emailContent = [],
+		deliveryDetailsLine = '',
+		pickupDetailsLine = '',
+	} = autoResponseEmailData;
+
+	// Construct full address (only if it's delivery)
+	const address =
+		orderMethod === 'delivery'
+			? [street, city, zip].filter(Boolean).join(', ')
+			: 'Pickup';
+
+	// Format Ordered Items
+	const formatItemListHTML = () =>
+		cartData
+			.map((item) => {
+				const sub = item.itemSubtitle ? `(${item.itemSubtitle})` : '';
+				return `<li><strong>${item.name}</strong> ${sub} x <strong>${item.quantity}</strong></li>`;
+			})
+			.join('');
+
+	// Greeting based on time of day
 	const getCurrentGreeting = () => {
-		const currentHour = new Date().toLocaleString('en-US', {
-			hour: 'numeric',
-			minute: 'numeric',
-			hour12: false,
-			timeZone: 'America/Chicago',
-		});
-		if (currentHour < '11:30') return 'Good Morning';
-		if (currentHour < '16:30') return 'Good Afternoon';
+		const hour = new Date().getHours();
+		if (hour < 11) return 'Good Morning';
+		if (hour < 17) return 'Good Afternoon';
 		return 'Good Evening';
 	};
 
-	const formatPaymentStatus = () =>
-		payNow
-			? 'You have chosen to pay now. Please ensure your payment was successfully completed on Square.'
-			: `You have chosen to pay later. Payment will be collected at the time of ${
-					method.toLowerCase() === 'delivery' ? 'delivery' : 'pickup'
-				}.`;
+	const greeting = getCurrentGreeting();
 
-	const formatOrderType = () =>
-		method.toLowerCase() === 'delivery'
-			? `Delivery to:<br>${address}`
-			: 'Pickup';
+	// Map through emailContent to create opening lines
+	const formatEmailContentHTML = () =>
+		emailContent
+			.map((line) => `<p style="margin: 10px 0;">${line}</p>`)
+			.join('');
 
-	const formatGiftNote = () =>
+	// Determine which details line to display based on orderMethod
+	const formatMethodDetailsHTML = () => {
+		if (orderMethod === 'delivery') {
+			return `<p style="margin: 10px 0;">${deliveryDetailsLine}</p>`;
+		} else if (orderMethod === 'pickup') {
+			return `<p style="margin: 10px 0;">${pickupDetailsLine}</p>`;
+		}
+		return '';
+	};
+
+	// Gift Note Block
+	const formatGiftNoteHTML = () =>
 		giftNote
 			? `
 			<blockquote style="font-style: italic; background-color: #CBFFFD; padding: 10px; border-left: 4px solid #29B2AC; margin: 10px 0;">
@@ -46,92 +77,74 @@ export function generateAutoReplyEmailForPromotion({
 			</blockquote>`
 			: '<p style="color: #555;">No gift note provided.</p>';
 
-	const formatGiftInformation = () =>
+	// Gift Information Block
+	const formatGiftInformationHTML = () =>
 		giftOption
 			? `
 			<h3 style="color: #29B2AC;">Gift Information:</h3>
 			<ul style="list-style: none; padding: 0;">
 				<li><strong>Recipient:</strong> ${recipientName}</li>
 				<li><strong>Gift Note:</strong></li>
-				${formatGiftNote()}
+				${formatGiftNoteHTML()}
 			</ul>
 			`
 			: '';
 
-	const formatEmailContent = () =>
-		autoResponseEmailData.emailContent.map((line) => `<p>${line}</p>`).join('');
+	const formatPaymentDetailsHTML = () => {
+		if (payNow) {
+			return `<p style="margin: 10px 0;">You chose to pay online. Please verify that the payment was processed successfully.</p>`;
+		} else {
+			return `
+					<p style="margin: 10px 0;">You chose to pay upon receiving your sweets.</p>
+					<strong>Accepted payment methods:</strong>
+					<ul style="padding-left: 20px; margin-top: 5px;">
+						<li><strong>Cash</strong></li>
+						<li><strong>Venmo:</strong> @JoTrzeb</li>
+						<li><strong>Check:</strong> Payable to <em>Sweet Juanjo’s</em></li>
+						<li><strong>Zelle:</strong> sweetjuanjos@gmail.com</li>
+					</ul>`;
+		}
+	};
 
-	const formatMethodDetails = () =>
-		`<p>${
-			method.toLowerCase() === 'delivery'
-				? autoResponseEmailData.deliveryDetailsLine
-				: autoResponseEmailData.pickupDetailsLine
-		}</p>`;
-
-	const greeting = getCurrentGreeting();
-	const paymentStatus = formatPaymentStatus();
-	const giftInformationHtml = formatGiftInformation();
-	const emailContentHtml = formatEmailContent();
-	const methodDetailsLine = formatMethodDetails();
-
+	// Compile Customer Email Content
 	return {
-		subject: `${name}, thank You for Your Order!`,
-		text: 
-		`
-			${greeting} ${name},
+		subject: `Sweet Juanjo's - Order Confirmation for ${name}`,
 
-			${autoResponseEmailData.emailContent.join('\n\n')}
-
-			${method.toLowerCase() === 'delivery' ? 'Delivery Details:' : 'Pickup Details:'}
-			${method.toLowerCase() === 'delivery' ? autoResponseEmailData.deliveryDetailsLine : autoResponseEmailData.pickupDetailsLine}
-
-			Order Details:
-			Item Ordered: ${itemTitle} - ${itemSubtitle}
-			Method: ${method}
-			${method.toLowerCase() === 'delivery' ? `Address: ${address}` : 'Pickup Location'}
-
-			${giftOption ? `Recipient Name: ${recipientName}\nGift Note: ${giftNote || 'No gift note provided.'}` : ''}
-
-			${paymentStatus}
-
-			We look forward to baking for you!
-
-			Best regards,
-			Katie Jo
-		`,
-
+		// HTML Email
 		html: `
-			<div style="font-family: Arial, sans-serif; color: #012623; background-color: #F0FFFE; padding: 20px; border-radius: 8px;">
-				<div style="text-align: center; margin-bottom: 20px;">
-					<img 
-						src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" 
-						alt="Client Logo" 
-						style="max-width: 200px; height: auto; opacity: 0.6;" 
-					/>
-				</div>
-
-				<h4 style="color: #012623; opacity: 0.8;">${greeting} ${name},</h4>				
-					${emailContentHtml}
-					${methodDetailsLine}
-				<h3 style="color: #29B2AC;">Order Details:</h3>
-				<ul style="list-style: none; padding: 0;">      
-					<li><strong>Sweet Ordered:</strong> ${itemTitle} - (${itemSubtitle})</li>
-					<li><strong>Method:</strong> ${method}</li>
-					${
-						method.toLowerCase() === 'delivery'
-							? `<li><strong>Address:</strong> ${address}</li>`
-							: '<li><strong>Pickup Location:</strong> 5598 Cabernet Ct, Stevens Point, WI 54482 </li>'
-					}
-				</ul>
-
-				${giftInformationHtml}
-
-				<p style="margin-top: 20px;">${paymentStatus}</p>
-
-				<p>We look forward to serving you!</p>
-
-				<p>Best regards,<br/>Katie Jo</p>
+		<div style="font-family: Arial, sans-serif; color: #012623; background-color: #F0FFFE; padding: 20px; border-radius: 8px;">
+		    <div style="text-align: center; margin-bottom: 45px;">
+				<img 
+				src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" 
+				alt="Client Logo" 
+				style="max-width: 200px; height: auto; opacity: 0.6;" 
+				/>
 			</div>
+			<h4 style="color: #012623; opacity: 0.8;">${greeting} ${name},</h4>		
+
+			<!-- Opening Lines from emailContent -->
+			${formatEmailContentHTML()}
+
+			<!-- Conditional Delivery or Pickup Details Line -->
+			${formatMethodDetailsHTML()}
+
+			
+
+			<hr style="border: 1px solid #29B2AC; margin: 20px 0;" />
+
+			<h3 style="color: #29B2AC;">Order Details:</h3>
+			<ul style="list-style: none; padding: 0;">  
+				${formatItemListHTML()}
+				<li style="margin-top: 10px"><strong>Method:</strong> ${orderMethod.toUpperCase()}</li>
+				<li><strong>Address:</strong> ${address}</li>
+			</ul>
+
+				${formatGiftInformationHTML()} 
+				<div style="margin-top: 10px margin-bottom: 10px">${formatPaymentDetailsHTML()}	</div>
+			<p>We look forward to baking for you! </p>
+
+			<p>Best regards,<br/>Sweet Juanjo's</p>
+		</div>
 		`,
 	};
 }

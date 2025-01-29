@@ -1,128 +1,141 @@
 export function generateKatieJosPromotionOrder({
-	itemTitle,
-	method,
-	name,
-	email,
-	phone,
-	recipientName,
-	giftNote,
-	address,
-	payNow,
-	giftOption,
+  cartData = [],
+  orderMethod = '',
+  name = '',
+  email = '',
+  phone = '',
+  recipientName = '',
+  giftNote = '',
+  street = '',
+  city = '',
+  zip = '',
+  payNow = false,
+  giftOption = false,
+  promotionDetails = {},
 }) {
-	const currentHour = new Date().toLocaleString('en-US', {
-		hour: 'numeric',
-		minute: 'numeric',
-		hour12: false,
-		timeZone: 'America/Chicago',
-	});
+  // Extract promotion details
+  const { deliveryDetails = '', pickupDetails = '', autoResponseEmailData } = promotionDetails;
 
-	let greeting;
+  // Determine Greeting Based on Time
+  const currentHour = new Date().getHours();
+  let greeting =
+    currentHour < 11
+      ? 'Good Morning Katie Jo,'
+      : currentHour < 17
+      ? 'Good Afternoon Katie Jo,'
+      : 'Good Evening Katie Jo,';
 
-	if (currentHour < '11:30') {
-		greeting = 'Good Morning Katie Jo,';
-	} else if (currentHour < '16:30') {
-		greeting = 'Good Afternoon Katie Jo,';
-	} else {
-		greeting = 'Good Evening Katie Jo,';
-	}
+  // Format Address
+  const fullAddress =
+    orderMethod === 'delivery'
+      ? `${street}, ${city}, ${zip}`
+      : 'Pickup at 5598 Cabernet Ct, Stevens Point, WI 54482';
 
-	// Determine payment status and method
-	const paymentStatus = payNow
-		? 'Paid on Square (cross-reference for confirmation).'
-		: 'Payment will be made upon receiving the items.';
-	const orderType =
-		method === 'delivery' ? `Delivery to:<br>${address}` : 'Pickup';
+  // Format Ordered Items List (Styled)
+  const itemListHTML = cartData
+    .map(
+      (item) =>
+        `<li><strong>${item.name}</strong> ${
+          item.itemSubtitle ? `(${item.itemSubtitle})` : ''
+        } x <strong>${item.quantity}</strong></li>`
+    )
+    .join('');
 
-	// Determine gift note content
-	const giftNoteContent = giftNote
-		? `
-        <blockquote style="font-style: italic; background-color: ${'#CBFFFD'}; padding: 10px; border-left: 4px solid ${'#29B2AC'}; margin: 10px 0;">
-          ${giftNote}
-        </blockquote>`
-		: '<p style="color: #555;">No gift note provided.</p>';
+  const itemListText = cartData
+    .map(
+      (item) =>
+        `${item.name} ${
+          item.itemSubtitle ? `(${item.itemSubtitle})` : ''
+        } x ${item.quantity}`
+    )
+    .join(', ');
 
-	// Conditional Gift Information Section
-	const giftInformationText = giftOption
-		? `
-        Gift Information:
-        Recipient: ${recipientName}
-        Gift Note: ${giftNote || 'No gift note provided.'}
-      `
-		: '';
+  // Determine Payment Status
+  const paymentStatus = payNow
+    ? 'Paid on Square (cross-reference for confirmation).'
+    : 'Payment will be made upon receiving the items.';
 
-	const giftInformationHtml = giftOption
-		? `
-        <h3 style="color: ${'#29B2AC'};">Gift Information:</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li><strong>Recipient:</strong> ${recipientName}</li>
-          <li><strong>Gift Note:</strong></li>
-          ${giftNoteContent}
-        </ul>
-      `
-		: '';
+  // Gift Note (Styled)
+  const giftNoteHTML = giftNote
+    ? `<blockquote style="font-style: italic; background-color: #CBFFFD; padding: 10px; border-left: 4px solid #29B2AC; margin: 10px 0;">
+				${giftNote}
+			</blockquote>`
+    : '<p style="color: #555;">No gift note provided.</p>';
 
-	return {
-		subject: `New Promotion Order from ${name || 'Unknown'}`,
-		text: `
-        ${greeting},
-  
-        A new promotion order has been submitted!
-  
-        Order Details:
-        Item Ordered: ${itemTitle}
-  
-        Payment Status:
-        ${paymentStatus}
-  
-        Method:
-        ${method}
-  
-        Address (if applicable):
-        ${method === 'Delivery' ? address : 'Pickup'}
-  
-        Ordered By:
-        Name: ${name}
-        Email: ${email}
-        Phone: ${phone}
-  
-        ${giftInformationText}
-      `,
-		html: `
-        <div style="font-family: Arial, sans-serif; color: ${'#012623'}; background-color: ${'#F0FFFE'}; padding: 20px; border-radius: 8px;">
-        <div style="text-align: center; margin-bottom: 40px;">
-            <img 
-                src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" 
-                alt="Client Logo" 
-                style="max-width: 200px; height: auto; opacity: 0.6;" 
-            />
-        </div>
+  const giftNoteText = giftNote ? `Gift Note:\n${giftNote}` : 'No gift note provided.';
 
-          <h4 style="color: ${'#012623'}; opacity: 0.8;">${greeting}</h4>
-          <h2 style="color: ${'#29B2AC'};">A new promotion order has been submitted!</h2>
-          
-          <hr style="border: 1px solid ${'#29B2AC'}; margin: 20px 0;" />
-  
-          <h3 style="color: ${'#29B2AC'};">Order Details:</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li><strong>Item Ordered:</strong> ${itemTitle}</li>
-            <li><strong>Payment Status:</strong> ${paymentStatus}</li>
-            <li><strong>Order Type:</strong> ${orderType}</li>
-          </ul>
-  
-          <hr style="border: 1px solid ${'#29B2AC'}; margin: 20px 0;" />
-  
-          <h3 style="color: ${'#29B2AC'};">Ordered By:</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li><strong>Name:</strong> ${name}</li>
-            <li><strong>Email:</strong> <a href="mailto:${email}" style="color: ${'#29B2AC'};">${email}</a></li>
-            <li><strong>Phone:</strong> <a href="tel:${phone}" style="color: ${'#29B2AC'};">${phone}</a></li>
-          </ul>
-  
-          ${giftInformationHtml}
-  
-          <p style="margin-top: 20px;">See your <a href="https://sweet-juanjos.sanity.studio/structure/promotionOrders" style="color: ${'#29B2AC'};">Dashboard</a> for more details.</p>
-        </div>
-      `,
-	};
+  // Ensure Recipient Info is Always Included
+  const recipientDetailsHTML = `
+    <h3 style="color: #29B2AC;">Recipient Information:</h3>
+    <ul style="list-style: none; padding: 0;">
+      <li><strong>Recipient Name:</strong> ${recipientName || 'N/A'}</li>
+      <li><strong>Gift Note:</strong> ${giftNote || 'No gift note provided.'}</li>
+    </ul>`;
+
+  const recipientDetailsText = `
+    Recipient Name: ${recipientName || 'N/A'}
+    Gift Note: ${giftNote || 'No gift note provided.'}`;
+
+  // Construct Email Content
+  return {
+    subject: `New Promotion Order from ${name || 'Unknown'}`,
+    text: `
+    ${greeting}
+
+    A new promotion order has been submitted!
+
+    Order Details:
+    Items Ordered: ${itemListText}
+    Payment Status: ${paymentStatus}
+    Order Type: ${orderMethod.toUpperCase()}
+    Address: ${fullAddress}
+
+    Ordered By:
+    Name: ${name}
+    Email: ${email}
+    Phone: ${phone}
+
+    ${recipientDetailsText}
+
+    See your Dashboard for more details.
+    `.trim(),
+
+    html: `
+    <div style="font-family: Arial, sans-serif; color: #012623; background-color: #F0FFFE; padding: 20px; border-radius: 8px;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <img 
+          src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" 
+          alt="Client Logo" 
+          style="max-width: 200px; height: auto; opacity: 0.6;" 
+        />
+      </div>
+
+      <h4 style="color: #012623; opacity: 0.8;">${greeting}</h4>
+      <h2 style="color: #29B2AC;">A new promotion order has been submitted!</h2>
+      
+      <hr style="border: 1px solid #29B2AC; margin: 20px 0;" />
+
+      <h3 style="color: #29B2AC;">Order Details:</h3>
+      <ul style="list-style: none; padding: 0;">
+        ${itemListHTML}
+        <li style="margin-top: 10px"><strong>Order Type:</strong> ${orderMethod.toUpperCase()}</li>
+        <li><strong>Address:</strong> ${fullAddress}</li>
+        <li style="margin-top: 10px"><strong>Payment Status:</strong> ${paymentStatus}</li>
+      </ul>
+
+      <hr style="border: 1px solid #29B2AC; margin: 20px 0;" />
+
+      <h3 style="color: #29B2AC;">Ordered By:</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><strong>Name:</strong> ${name}</li>
+        <li><strong>Email:</strong> <a href="mailto:${email}" style="color: #29B2AC;">${email}</a></li>
+        <li><strong>Phone:</strong> <a href="tel:${phone}" style="color: #29B2AC;">${phone}</a></li>
+      </ul>
+
+      ${recipientDetailsHTML}
+
+      <p style="margin-top: 20px;">See your <a href="https://sweet-juanjos.sanity.studio/structure/promotionOrders" style="color: #29B2AC;">Dashboard</a> for more details.</p>
+    </div>
+    `,
+  };
 }

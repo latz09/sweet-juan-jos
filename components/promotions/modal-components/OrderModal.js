@@ -1,7 +1,7 @@
 'use client';
 import handlePaymentChoice from '../checkout-process/steps/cart/handlePaymentChoice';
 import { useState } from 'react';
-import { useCart } from '../checkout-process/steps/cart/CartContext'; 
+import { useCart } from '../checkout-process/steps/cart/CartContext';
 import { useRouter } from 'next/navigation';
 import StepChooseMethod from '../checkout-process/steps/StepChooseMethod';
 import StepDeliveryAddress from '../checkout-process/steps/StepDeliveryAddress';
@@ -14,7 +14,8 @@ import ModalContent from './ModalContent';
 import LoadingOverlay from './LoadingOverlay'; // Import your loading overlay
 
 export default function OrderModal({ onClose, ...props }) {
-	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } = useCart();
+	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } =
+		useCart();
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState(null);
 	const [isSubmitting, setIsSubmitting] = useState(false); // Track loading state
@@ -26,10 +27,13 @@ export default function OrderModal({ onClose, ...props }) {
 		name: '',
 		email: '',
 		phone: '',
+		orderMethod: '',
 		recipientName: '',
 		giftNote: '',
 		cartData: cart,
+		promotionDetails: { ...props },
 	});
+	console.log('formData:', formData);
 
 	const router = useRouter();
 
@@ -38,11 +42,21 @@ export default function OrderModal({ onClose, ...props }) {
 	}
 
 	function handleBack() {
-		setStep((prev) => (prev === 3 && method === 'pickup' ? 1 : Math.max(prev - 1, 0)));
+		setStep((prev) =>
+			prev === 3 && method === 'pickup' ? 1 : Math.max(prev - 1, 0)
+		);
 	}
 
 	function handleSelectMethod(selectedMethod) {
 		setMethod(selectedMethod);
+
+		// Use functional update to ensure state is updated correctly
+		setFormData((prev) => {
+			const updatedData = { ...prev, orderMethod: selectedMethod };
+			
+			return updatedData;
+		});
+
 		setStep(selectedMethod === 'delivery' ? 2 : 3);
 	}
 
@@ -56,6 +70,10 @@ export default function OrderModal({ onClose, ...props }) {
 
 	function handleChoosePickup() {
 		setMethod('pickup');
+		setFormData((prev) => ({
+			...prev,
+			orderMethod: 'pickup', // Set orderMethod directly
+		}));
 		setStep(3);
 	}
 
@@ -92,18 +110,21 @@ export default function OrderModal({ onClose, ...props }) {
 			break;
 
 		case 2:
-			content = method === 'delivery' ? (
-				<StepDeliveryAddress
-					deliveryDetails={props.deliveryDetails}
-					street={formData.street}
-					city={formData.city}
-					zip={formData.zip}
-					onChange={(field, value) => setFormData((prev) => ({ ...prev, [field]: value }))}
-					onNext={handleAddressNext}
-					onBack={handleBack}
-					onValidationError={() => setStep(6)}
-				/>
-			) : null;
+			content =
+				method === 'delivery' ? (
+					<StepDeliveryAddress
+						deliveryDetails={props.deliveryDetails}
+						street={formData.street}
+						city={formData.city}
+						zip={formData.zip}
+						onChange={(field, value) =>
+							setFormData((prev) => ({ ...prev, [field]: value }))
+						}
+						onNext={handleAddressNext}
+						onBack={handleBack}
+						onValidationError={() => setStep(6)}
+					/>
+				) : null;
 			break;
 
 		case 3:
@@ -113,7 +134,12 @@ export default function OrderModal({ onClose, ...props }) {
 					pickupDetails={props.pickupDetails}
 					deliveryAddress={`${formData.street}, ${formData.city}, ${formData.zip}`}
 					formData={formData}
-					onChange={(e) => setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+					onChange={(e) =>
+						setFormData((prev) => ({
+							...prev,
+							[e.target.name]: e.target.value,
+						}))
+					}
 					onNext={handleUserInfoNext}
 					onBack={handleBack}
 					giftOption={props.giftOption}
@@ -127,7 +153,7 @@ export default function OrderModal({ onClose, ...props }) {
 					onPayNow={() =>
 						handlePaymentChoice({
 							payNow: true,
-							formData,
+							formData: { ...formData, orderMethod: method },
 							clearCart,
 							setStep,
 							onClose,
@@ -137,7 +163,7 @@ export default function OrderModal({ onClose, ...props }) {
 					onPayLater={() =>
 						handlePaymentChoice({
 							payNow: false,
-							formData,
+							formData: { ...formData, orderMethod: method },
 							clearCart,
 							setStep,
 							onClose,
@@ -169,8 +195,13 @@ export default function OrderModal({ onClose, ...props }) {
 
 	return (
 		<>
-			<ModalContent onClose={onClose} content={content} isSubmitting={isSubmitting} />
-			{isSubmitting && <LoadingOverlay />} {/* Show LoadingOverlay when submitting */}
+			<ModalContent
+				onClose={onClose}
+				content={content}
+				isSubmitting={isSubmitting}
+			/>
+			{isSubmitting && <LoadingOverlay />}{' '}
+			{/* Show LoadingOverlay when submitting */}
 		</>
 	);
 }

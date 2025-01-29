@@ -1,116 +1,130 @@
-// pages/api/submitPromotionOrder.js
-
+import { v4 as uuidv4 } from 'uuid';
 import { sanityClient } from '@/lib/sanityConnection';
-import transporter from '@/lib/nodemailer';
-import { generateAutoReplyEmailForPromotion } from '@/components/promotions/email-templates/promotions/generateAutoReplyEmailForPromotion';
 import { generateKatieJosPromotionOrder } from '@/components/promotions/email-templates/promotions/generateKatieJosPromotionOrder';
+import { generateCustomerConfirmationEmail } from '@/components/promotions/email-templates/promotions/generateAutoReplyEmailForPromotion';
+import transporter from '@/lib/nodemailer';
 
 export default async function handler(req, res) {
 	if (req.method !== 'POST') {
 		res.setHeader('Allow', ['POST']);
-		return res
-			.status(405)
-			.json({ message: `Method ${req.method} not allowed` });
+		return res.status(405).json({ message: `Method ${req.method} not allowed` });
 	}
 
 	try {
-		// 1. Parse JSON from request body
+		// 1. Destructure request
 		const {
-			itemTitle,
-			itemSubtitle,
-			method,
-			name,
-			email,
-			phone,
-			recipientName,
-			giftNote,
-			address,
-			payNow,
-			giftOption,
-			autoResponseEmailData,
+			cartData = [],
+			street = '',
+			city = '',
+			zip = '',
+			name = 'N/A',
+			email = 'N/A',
+			phone = 'N/A',
+			recipientName = '',
+			giftNote = '',
+			promotionDetails = {},
+			orderMethod = '',
+			payNow = false,
 		} = req.body;
 
-		// 2. Store in Sanity
+		// 2. Additional from promotionDetails
+		const {
+			deliveryDetails = '',
+			pickupDetails = '',
+			giftOption = false,
+		} = promotionDetails;
+
+		// 3. Create doc for Sanity
+		const fullAddress = [street, city, zip].filter(Boolean).join(', ');
+
 		const doc = {
 			_type: 'promotionOrders',
-			itemTitle: itemTitle || 'Unknown Item',
-			method: method || 'Unknown',
-			name: name || 'N/A',
-			email: email || 'N/A',
-			phone: phone || 'N/A',
-			recipientName: recipientName || '',
-			giftNote: giftNote || '',
-			address: address || '',
 			createdAt: new Date().toISOString(),
-			payNow: !!payNow, // Convert to boolean
-			giftOption: !!giftOption, // Convert to boolean
+			orderedBy: {
+				name,
+				email,
+				phone,
+				address: fullAddress,
+				orderMethod,
+			},
+			recipientDetails: {
+				recipientName,
+				giftNote,
+			},
+			items: cartData.map((item) => ({
+				_key: uuidv4(),
+				_type: 'cartItem',
+				name: item.name,
+				price: item.price,
+				quantity: item.quantity,
+			})),
 		};
 
 		const sanityResult = await sanityClient.create(doc);
 
-		// 3. Generate internal email content
+		// 4. Generate email content for internal notification
 		const internalEmailContent = generateKatieJosPromotionOrder({
-			itemTitle,
-			method,
 			name,
 			email,
 			phone,
 			recipientName,
 			giftNote,
-			address,
+			street,
+			city,
+			zip,
+			orderMethod,
 			payNow,
-			giftOption,
+			promotionDetails, // includes pickup/delivery, giftOption, etc.
+			cartData,
 		});
 
-		// 4. Generate auto-response email content
-		const autoReplyEmailContent = generateAutoReplyEmailForPromotion({
-			itemTitle,
-			itemSubtitle,
-			method,
+		// 5. Generate customer confirmation email content
+		const customerEmailContent = generateCustomerConfirmationEmail({
 			name,
 			email,
 			phone,
 			recipientName,
 			giftNote,
-			address,
+			street,
+			city,
+			zip,
+			orderMethod,
+			promotionDetails,
+			cartData,
 			payNow,
-			giftOption,
-			autoResponseEmailData,
 		});
 
-		// 5. Send internal email
+		// 6. Send both emails concurrently
 		const internalEmailPromise = transporter.sendMail({
-			from: 'Order Form <latzwebresources@gmail.com>',
-			to: 'sweetjuanjos@gmail.com',
+			from: 'Promotional Order Received <sweetjuanjos@gmail.com>',
+			to: 'jordan@latzwebdesign.com',
 			subject: internalEmailContent.subject,
 			text: internalEmailContent.text,
 			html: internalEmailContent.html,
 		});
 
-		// 6. Send auto-response email to customer
-		const autoResponseEmailPromise = transporter.sendMail({
-			from: 'Katie Jo <sweetjuanjos@gmail.com>', // Replace with your sender email
-
-			to: email,
-			subject: autoReplyEmailContent.subject,
-			text: autoReplyEmailContent.text,
-			html: autoReplyEmailContent.html,
+		const customerEmailPromise = transporter.sendMail({
+			from: 'Sweet Juanjos <sweetjuanjos@gmail.com>',
+			to: email, // Send to customer
+			subject: customerEmailContent.subject,
+			text: customerEmailContent.text,
+			html: customerEmailContent.html,
 		});
 
-		// Await both email promises
-		await Promise.all([internalEmailPromise, autoResponseEmailPromise]);
+		// Await both emails to finish sending
+		await Promise.all([internalEmailPromise, customerEmailPromise]);
 
-		// 7. Respond with success
+		// 7. Respond
 		return res.status(200).json({
 			success: true,
-			message: 'Order submitted and emails sent successfully.',
+			message: 'Order submitted to Sanity and emails sent successfully.',
 			data: sanityResult,
 		});
 	} catch (error) {
-		console.error('Error submitting promotion order:', error);
+		console.error('Error submitting order to Sanity or sending emails:', error);
 		return res.status(500).json({
 			success: false,
-			message: 'Something went wrong submitting the order.',
+			message: 'Something went wrong.',
 			error: error.message,
 		});
 	}

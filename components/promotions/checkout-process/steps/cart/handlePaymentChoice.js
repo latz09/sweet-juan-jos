@@ -1,4 +1,4 @@
-export default function handlePaymentChoice({
+export default async function handlePaymentChoice({
 	payNow,
 	formData,
 	clearCart,
@@ -6,25 +6,46 @@ export default function handlePaymentChoice({
 	onClose,
 	setIsSubmitting,
 }) {
-	console.log('Payment choice:', payNow);
-	console.log('Order data:', formData);
 
-	setIsSubmitting(true); // Show LoadingOverlay
 
-	if (payNow) {
-		console.log('Redirecting to payment gateway...');
-		setTimeout(() => {
-			console.log('Payment processed successfully.');
-			clearCart(); // Clear cart after payment
-			setIsSubmitting(false); // Hide loading
-			onClose(); // Close modal
-		}, 3200);
-	} else {
-		console.log('Order confirmed for pay later.');
-		setTimeout(() => {
-			clearCart(); // Clear cart immediately
-			setStep(5); // Go to Thank You step
-			setIsSubmitting(false); // Hide loading
-		}, 3200); // Simulating a short delay
+	setIsSubmitting(true);
+
+	try {
+		// Send data to Sanity API
+		const response = await fetch('/api/submitPromotionOrder', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				...formData,
+				payNow,
+			}),
+		});
+
+		const result = await response.json();
+
+		if (!response.ok) {
+			throw new Error(result.message || 'Failed to submit order');
+		}
+
+		console.log('Sanity submission result:', result);
+
+		// Handle success
+		if (payNow) {
+			setTimeout(() => {
+				clearCart();
+				setIsSubmitting(false);
+				onClose();
+			}, 3200);
+		} else {
+			setTimeout(() => {
+				clearCart();
+				setStep(5);
+				setIsSubmitting(false);
+			}, 3200);
+		}
+	} catch (error) {
+		console.error('Error submitting order:', error);
+		alert('There was an issue submitting your order. Please try again.');
+		setIsSubmitting(false);
 	}
 }
