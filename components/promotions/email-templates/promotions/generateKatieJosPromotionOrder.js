@@ -35,7 +35,7 @@ export function generateKatieJosPromotionOrder({
   const itemListHTML = cartData
     .map(
       (item) =>
-        `<li><strong>${item.name}</strong> ${
+        `<li style="margin-bottom: 2px"><strong>${item.name}</strong> ${
           item.itemSubtitle ? `(${item.itemSubtitle})` : ''
         } x <strong>${item.quantity}</strong></li>`
     )
