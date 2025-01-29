@@ -97,7 +97,7 @@ export default async function handler(req, res) {
 		// 6. Send both emails concurrently
 		const internalEmailPromise = transporter.sendMail({
 			from: 'Promotional Order Received <sweetjuanjos@gmail.com>',
-			to: 'jordan@latzwebdesign.com',
+			to: 'sweetjuanjos@gmail.com',
 			subject: internalEmailContent.subject,
 			text: internalEmailContent.text,
 			html: internalEmailContent.html,
@@ -114,11 +114,25 @@ export default async function handler(req, res) {
 		// Await both emails to finish sending
 		await Promise.all([internalEmailPromise, customerEmailPromise]);
 
+		let paymentLink = null;
+		if (payNow) {
+		  paymentLink = await createCheckoutLink({
+			cartData,
+			name,
+			email,
+			street,
+			city,
+			zip,
+			phone,
+			orderMethod,
+		  });
+		}
+
 		// 7. Respond
 		return res.status(200).json({
 			success: true,
 			message: 'Order submitted to Sanity and emails sent successfully.',
-			data: sanityResult,
+			data: sanityResult, paymentLink,
 		});
 	} catch (error) {
 		console.error('Error submitting order to Sanity or sending emails:', error);

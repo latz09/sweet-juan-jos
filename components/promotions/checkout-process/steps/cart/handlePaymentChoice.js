@@ -6,8 +6,6 @@ export default async function handlePaymentChoice({
 	onClose,
 	setIsSubmitting,
 }) {
-
-
 	setIsSubmitting(true);
 
 	try {
@@ -29,8 +27,24 @@ export default async function handlePaymentChoice({
 
 		console.log('Sanity submission result:', result);
 
-		// Handle success
 		if (payNow) {
+			// We already do the fetch to `/api/submitPromotionOrder`
+			const result = await response.json();
+
+			if (!response.ok) {
+				throw new Error(result.message || 'Failed to submit order');
+			}
+
+			// If payNow, we expect `result.paymentLink` from the server
+			const { paymentLink } = result;
+			console.log('Payment Link from Square:', paymentLink);
+
+			if (paymentLink) {
+				// Redirect user to Square Checkout
+				window.location.href = paymentLink;
+			}
+
+			// Then do your normal clearing cart stuff, etc.
 			setTimeout(() => {
 				clearCart();
 				setIsSubmitting(false);
