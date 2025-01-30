@@ -21,13 +21,15 @@ export async function generateMetadata({ params }) {
 		};
 	}
 
-	// Convert endDate to Central Time and format it (e.g., February 11th)
+	// Convert endDate to Central Time (Chicago Time Zone) and format it
 	const endDateRaw = promotion.timeline?.endDate;
-	const endDateFormatted = endDateRaw
-		? DateTime.fromISO(endDateRaw, { zone: 'utc' })
-				.setZone('America/Chicago')
-				.toFormat("MMMM d 'at' h:mm a")
-		: 'TBA';
+	let endDateFormatted = 'TBA';
+
+	if (endDateRaw) {
+		const endDate = new Date(endDateRaw);
+		const options = { timeZone: 'America/Chicago', month: 'long', day: 'numeric' };
+		endDateFormatted = new Intl.DateTimeFormat('en-US', options).format(endDate);
+	}
 
 	// Format title and description
 	const formattedTitle = `Sweet Juanjos - ${promotion.title || 'Delicious Treats'}`;
@@ -51,6 +53,7 @@ export async function generateMetadata({ params }) {
 		},
 	};
 }
+
 
 const Promotions = async ({ params }) => {
 	const { slug } = params;
