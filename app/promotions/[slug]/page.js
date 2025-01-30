@@ -6,6 +6,8 @@ import Offerings from '@/components/promotions/Offerings';
 
 import PromotionLandingHero from '@/components/promotions/PromotionLandingHero';
 
+import { DateTime } from 'luxon';
+
 export async function generateMetadata({ params }) {
 	const { slug } = params;
 
@@ -19,9 +21,17 @@ export async function generateMetadata({ params }) {
 		};
 	}
 
+	// Convert endDate to Central Time and format it (e.g., February 11th)
+	const endDateRaw = promotion.timeline?.endDate;
+	const endDateFormatted = endDateRaw
+		? DateTime.fromISO(endDateRaw, { zone: 'utc' })
+				.setZone('America/Chicago')
+				.toFormat("MMMM d 'at' h:mm a")
+		: 'TBA';
+
+	// Format title and description
 	const formattedTitle = `Sweet Juanjos - ${promotion.title || 'Delicious Treats'}`;
-	const formattedDescription =
-		promotion.subtitle || 'Discover our special treats for every occasion!';
+	const formattedDescription = `${promotion.subtitle || 'Discover our special treats for every occasion!'} - Order by ${endDateFormatted}`;
 
 	return {
 		title: formattedTitle,
