@@ -10,6 +10,7 @@ export default function CartBar({
 	pickupDetails,
 	giftOption,
 	autoResponseEmailData,
+	promotionSlug,
 }) {
 	const { cart, cartTotal } = useCart();
 	const [cartOpen, setCartOpen] = useState(false);
@@ -117,6 +118,7 @@ export default function CartBar({
 						pickupDetails={pickupDetails}
 						giftOption={giftOption}
 						autoResponseEmailData={autoResponseEmailData}
+						promotionSlug={promotionSlug}
 					/>
 				)}
 			</AnimatePresence>

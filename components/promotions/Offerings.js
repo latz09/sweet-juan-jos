@@ -10,6 +10,7 @@ const Offerings = ({
 	pickupDetails,
 	giftOption,
 	autoResponseEmailData,
+	promotionSlug,
 }) => {
 	return (
 		<div className='grid gap-24 lg:gap-32 mt-12 max-w-4xl mx-auto'>
@@ -28,6 +29,7 @@ const Offerings = ({
 				pickupDetails={pickupDetails}
 				giftOption={giftOption}
 				autoResponseEmailData={autoResponseEmailData}
+				promotionSlug={promotionSlug}
 			/>
 		</div>
 	);

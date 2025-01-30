@@ -13,7 +13,7 @@ import DeliveryValidationError from '../checkout-process/steps/DeliveryValidatio
 import ModalContent from './ModalContent';
 import LoadingOverlay from './LoadingOverlay'; // Import your loading overlay
 
-export default function OrderModal({ onClose, ...props }) {
+export default function OrderModal({ promotionSlug, onClose, ...props }) {
 	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } =
 		useCart();
 	const [step, setStep] = useState(0);
@@ -32,6 +32,7 @@ export default function OrderModal({ onClose, ...props }) {
 		giftNote: '',
 		cartData: cart,
 		promotionDetails: { ...props },
+		slug: promotionSlug,
 	});
 	console.log('formData:', formData);
 
@@ -158,6 +159,7 @@ export default function OrderModal({ onClose, ...props }) {
 							setStep,
 							onClose,
 							setIsSubmitting, // Pass setIsSubmitting
+							
 						})
 					}
 					onPayLater={() =>
@@ -168,6 +170,7 @@ export default function OrderModal({ onClose, ...props }) {
 							setStep,
 							onClose,
 							setIsSubmitting, // Pass setIsSubmitting
+							
 						})
 					}
 					onBack={handleBack}

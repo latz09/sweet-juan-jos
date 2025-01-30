@@ -8,6 +8,7 @@ import PromotionLandingHero from '@/components/promotions/PromotionLandingHero';
 
 const Promotions = async ({ params }) => {
 	const { slug } = params;
+	
 
 	// Fetch promotion data from Sanity
 	const promotion = await sanityClient.fetch(FETCH_PROMOTION_QUERY, { slug });
@@ -48,6 +49,7 @@ const Promotions = async ({ params }) => {
 						}
 						giftOption={promotion.giftOption || false}
 						autoResponseEmailData={promotion.autoResponseEmail || null}
+						promotionSlug={slug}
 					/>
 				)}
 			</CartProvider>

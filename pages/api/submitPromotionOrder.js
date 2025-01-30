@@ -3,6 +3,7 @@ import { sanityClient } from '@/lib/sanityConnection';
 import { generateKatieJosPromotionOrder } from '@/components/promotions/email-templates/promotions/generateKatieJosPromotionOrder';
 import { generateCustomerConfirmationEmail } from '@/components/promotions/email-templates/promotions/generateAutoReplyEmailForPromotion';
 import transporter from '@/lib/nodemailer';
+import { createCheckoutLink } from '@/lib/createCheckoutLink';
 
 export default async function handler(req, res) {
 	if (req.method !== 'POST') {
@@ -25,6 +26,7 @@ export default async function handler(req, res) {
 			promotionDetails = {},
 			orderMethod = '',
 			payNow = false,
+			slug = '',
 		} = req.body;
 
 		// 2. Additional from promotionDetails
@@ -97,7 +99,8 @@ export default async function handler(req, res) {
 		// 6. Send both emails concurrently
 		const internalEmailPromise = transporter.sendMail({
 			from: 'Promotional Order Received <sweetjuanjos@gmail.com>',
-			to: 'sweetjuanjos@gmail.com',
+			// to: 'sweetjuanjos@gmail.com',
+			to: 'jordan@latzwebdesign.com',
 			subject: internalEmailContent.subject,
 			text: internalEmailContent.text,
 			html: internalEmailContent.html,
@@ -125,6 +128,7 @@ export default async function handler(req, res) {
 			zip,
 			phone,
 			orderMethod,
+			slug,
 		  });
 		}
 

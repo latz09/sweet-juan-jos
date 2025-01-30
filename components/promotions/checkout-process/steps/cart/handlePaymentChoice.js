@@ -9,7 +9,7 @@ export default async function handlePaymentChoice({
 	setIsSubmitting(true);
 
 	try {
-		// Send data to Sanity API
+		// 1. Send data to /api/submitPromotionOrder
 		const response = await fetch('/api/submitPromotionOrder', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -19,38 +19,34 @@ export default async function handlePaymentChoice({
 			}),
 		});
 
+		// 2. Parse response once
 		const result = await response.json();
 
+		// 3. Check if request succeeded
 		if (!response.ok) {
 			throw new Error(result.message || 'Failed to submit order');
 		}
 
 		console.log('Sanity submission result:', result);
 
+		// 4. If payNow, handle payment link
 		if (payNow) {
-			// We already do the fetch to `/api/submitPromotionOrder`
-			const result = await response.json();
-
-			if (!response.ok) {
-				throw new Error(result.message || 'Failed to submit order');
-			}
-
-			// If payNow, we expect `result.paymentLink` from the server
 			const { paymentLink } = result;
 			console.log('Payment Link from Square:', paymentLink);
 
+			// Redirect to Square Checkout if available
 			if (paymentLink) {
-				// Redirect user to Square Checkout
 				window.location.href = paymentLink;
 			}
 
-			// Then do your normal clearing cart stuff, etc.
+			// Clear the cart and close
 			setTimeout(() => {
 				clearCart();
 				setIsSubmitting(false);
 				onClose();
 			}, 200);
 		} else {
+			// 5. Otherwise, continue to next step
 			setTimeout(() => {
 				clearCart();
 				setStep(5);

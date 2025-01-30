@@ -1,6 +1,14 @@
 import AnimateUp from '@/components/utils/animations/AnimateUp';
 import { useState } from 'react';
 
+// Utility to check if phone has at least 10 digits
+function isPhoneNumberValid(phone) {
+	// Remove non-digit characters
+	const digits = phone.replace(/\D/g, '');
+	// For US-based logic, require at least 10 digits
+	return digits.length === 10;
+}
+
 export default function StepUserInfo({
 	method,
 	pickupDetails,
@@ -33,17 +41,18 @@ export default function StepUserInfo({
 			newErrors.email = 'Valid email is required.';
 		}
 
-		// Require phone
-		if (!formData.phone.trim()) {
+		// Require phone -> Check for at least 10 digits
+		const phoneValue = formData.phone.trim();
+		if (!phoneValue) {
 			newErrors.phone = 'Phone number is required.';
+		} else if (!isPhoneNumberValid(phoneValue)) {
+			newErrors.phone = 'Please enter 10 digits in your phone number.';
 		}
 
 		// Require recipientName only if giftOption is true
 		if (giftOption && !formData.recipientName.trim()) {
 			newErrors.recipientName = 'Recipient name is required.';
 		}
-
-		// Note: We do NOT validate giftNote, leaving it optional
 
 		// If there are errors, set them and don't proceed
 		if (Object.keys(newErrors).length > 0) {
@@ -62,15 +71,14 @@ export default function StepUserInfo({
 				<div className='text-center'>
 					<p className='text-dark/80 font-bold italic'>{infoText}</p>
 					<h3 className='mb-4 text-2xl font-bold mt-8'>
-                        {
-                            giftOption ? 'Contact & Gift Details' : 'Contact Details'
-                        }
-						
+						{giftOption ? 'Contact & Gift Details' : 'Contact Details'}
 					</h3>
 				</div>
 
 				<div
-					className={`grid ${giftOption ? 'lg:grid-cols-2' : 'grid-cols-1'} gap-8 mt-4 place-items-center ${
+					className={`grid ${
+						giftOption ? 'lg:grid-cols-2' : 'grid-cols-1'
+					} gap-8 mt-4 place-items-center ${
 						!giftOption ? 'md:w-1/2 md:mx-auto' : ''
 					}`}
 				>
