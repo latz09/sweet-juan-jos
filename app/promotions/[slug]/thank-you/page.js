@@ -21,7 +21,7 @@ const ThankYouPage = async ({ params }) => {
 
 	return (
 		<main>
-			<div className='h-[75vh] grid place-items-center bg-gradient-to-b from-primary/5 to-dark/0 text-dark '>
+			<div className='h-[75vh]  grid place-items-center bg-gradient-to-b from-primary/5 to-dark/0 text-dark '>
 				<AnimateUp>
 					<div className='text-center p-4'>
 						<h3 className='text-2xl lg:text-3xl font-bold text-green-600 mb-4'>
