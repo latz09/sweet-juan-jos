@@ -6,9 +6,44 @@ import Offerings from '@/components/promotions/Offerings';
 
 import PromotionLandingHero from '@/components/promotions/PromotionLandingHero';
 
+export async function generateMetadata({ params }) {
+	const { slug } = params;
+
+	// Fetch promotion data from Sanity
+	const promotion = await sanityClient.fetch(FETCH_PROMOTION_QUERY, { slug });
+
+	if (!promotion) {
+		return {
+			title: 'Promotion Not Found',
+			description: 'The promotion you are looking for does not exist.',
+		};
+	}
+
+	const formattedTitle = `Sweet Juanjos - ${promotion.title || 'Delicious Treats'}`;
+	const formattedDescription =
+		promotion.subtitle || 'Discover our special treats for every occasion!';
+
+	return {
+		title: formattedTitle,
+		description: formattedDescription,
+		openGraph: {
+			title: formattedTitle,
+			description: formattedDescription,
+			images: promotion.landingPageImage
+				? [{ url: promotion.landingPageImage }]
+				: [],
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title: formattedTitle,
+			description: formattedDescription,
+			images: promotion.landingPageImage ? [promotion.landingPageImage] : [],
+		},
+	};
+}
+
 const Promotions = async ({ params }) => {
 	const { slug } = params;
-	
 
 	// Fetch promotion data from Sanity
 	const promotion = await sanityClient.fetch(FETCH_PROMOTION_QUERY, { slug });
