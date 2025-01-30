@@ -8,7 +8,7 @@ const StepCart = ({
 	cartTotal,
 	removeFromCart,
 	onNext,
-    onClose,
+	onClose,
 
 	updateCartItemQuantity,
 }) => {
@@ -27,9 +27,11 @@ const StepCart = ({
 										? 'bg-primary/10 shadow-primary/10'
 										: 'bg-dark/10 shadow-dark/10'
 								} `}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                transition={{ duration:  0.26, delay: index * 0.25 }}
+								initial={{ opacity: 0 }}
+								whileInView={{ opacity: 1 }}
+								transition={{ duration: 0.26 }}
+								viewport={{ once: true }}
+
 							>
 								<div className='py-4 grid  md:grid-cols-4   items-center relative p-4'>
 									{/* Item Image */}
@@ -69,7 +71,7 @@ const StepCart = ({
 										</button>
 										<div className='flex items-center gap-2 '>
 											<button
-												className='text-lg font-bold px-2 py-1 bg-gray-200 rounded hover:bg-gray-300'
+												className='text-lg font-bold px-4 py-2 bg-gray-200 rounded hover:bg-gray-300'
 												onClick={() =>
 													updateCartItemQuantity(
 														item.id,
@@ -82,10 +84,16 @@ const StepCart = ({
 											<span className='font-bold text-lg'>{item.quantity}</span>
 
 											<button
-												className='text-lg font-bold px-2 py-1 bg-gray-200 rounded hover:bg-gray-300'
+												className={`text-lg font-bold px-4 py-2 bg-gray-200 rounded ${
+													item.quantity < 10
+														? 'hover:bg-gray-300'
+														: 'opacity-0 cursor-not-allowed'
+												}`}
 												onClick={() =>
+													item.quantity < 10 &&
 													updateCartItemQuantity(item.id, item.quantity + 1)
 												}
+												disabled={item.quantity >= 10}
 											>
 												+
 											</button>
@@ -103,7 +111,7 @@ const StepCart = ({
 						<p className='font-bold text-xl text-center'>
 							Total: ${cartTotal.toFixed(2)}
 						</p>
-						<div className="grid gap-4 md:flex md:items-center md:gap-8">
+						<div className='grid gap-4 md:flex md:items-center md:gap-8'>
 							<button
 								className='bg-primary font-bold text-xl text-light px-6 py-3 rounded-lg hover:bg-primary/70 hover:scale-95  transition duration-500'
 								onClick={onNext}

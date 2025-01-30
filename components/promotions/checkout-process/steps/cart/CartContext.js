@@ -50,8 +50,10 @@ export const CartProvider = ({ children }) => {
 		setCart((prev) => prev.filter((item) => item.id !== id));
 	};
 
-	// Update item quantity
+	// Update item quantity (prevent exceeding 10)
 	const updateCartItemQuantity = (id, newQuantity) => {
+		if (newQuantity > 10) return; // Prevent increasing above 10
+	
 		setCart((prev) =>
 			prev.map((item) =>
 				item.id === id ? { ...item, quantity: newQuantity } : item
