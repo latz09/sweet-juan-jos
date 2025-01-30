@@ -44,14 +44,14 @@ export default async function handlePaymentChoice({
 				clearCart();
 				setIsSubmitting(false);
 				onClose();
-			}, 200);
+			}, 100);
 		} else {
 			// 5. Otherwise, continue to next step
 			setTimeout(() => {
 				clearCart();
 				setStep(5);
 				setIsSubmitting(false);
-			}, 200);
+			}, 100);
 		}
 	} catch (error) {
 		console.error('Error submitting order:', error);

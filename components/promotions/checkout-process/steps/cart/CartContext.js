@@ -18,21 +18,29 @@ export const CartProvider = ({ children }) => {
 	}, [cart]);
 
 	// Add item to cart
+
 	const addToCart = (item) => {
 		setCart((prev) => {
 			const existingItem = prev.find(
 				(cartItem) =>
 					cartItem.name === item.name && cartItem.price === item.price
 			);
+
 			if (existingItem) {
-				// If item exists, increment its quantity
+				// If item exists and is already at max quantity, return cart as is
+				if (existingItem.quantity >= 10) {
+					return prev;
+				}
+
+				// Otherwise, increment the quantity
 				return prev.map((cartItem) =>
 					cartItem.name === item.name && cartItem.price === item.price
 						? { ...cartItem, quantity: cartItem.quantity + 1 }
 						: cartItem
 				);
 			}
-			// If item doesn't exist, add it to the cart
+
+			// If item doesn't exist, add it with quantity 1
 			return [...prev, { ...item, quantity: 1 }];
 		});
 	};

@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
 
 	// Format title and description
 	const formattedTitle = `Sweet Juanjos - ${promotion.title || 'Delicious Treats'}`;
-	const formattedDescription = `${promotion.subtitle || 'Discover our special treats for every occasion!'} - Order by ${endDateFormatted}`;
+	const formattedDescription = `${promotion.subtitle || 'Discover our special treats for every occasion!'} - Order by ${endDateFormatted}!`;
 
 	return {
 		title: formattedTitle,
