@@ -21,7 +21,7 @@ const PromotionLandingHero = ({
 				src={imageUrl}
 				alt='Promotion Background'
 				fill
-				className='z-0 object-cover'
+				className='z-0 object-cover '
 				priority
 			/>
 
