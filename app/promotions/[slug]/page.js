@@ -6,7 +6,7 @@ import Offerings from '@/components/promotions/Offerings';
 
 import PromotionLandingHero from '@/components/promotions/PromotionLandingHero';
 
-import { DateTime } from 'luxon';
+
 
 export async function generateMetadata({ params }) {
 	const { slug } = params;
