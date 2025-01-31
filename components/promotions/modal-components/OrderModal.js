@@ -34,7 +34,7 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 		promotionDetails: { ...props },
 		slug: promotionSlug,
 	});
-	console.log('formData:', formData);
+	// console.log('formData:', formData);
 
 	const router = useRouter();
 

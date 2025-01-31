@@ -1,18 +1,21 @@
 import { v4 as uuidv4 } from 'uuid';
 import { sanityClient } from '@/lib/sanityConnection';
-import { generateKatieJosPromotionOrder } from '@/components/promotions/email-templates/promotions/generateKatieJosPromotionOrder';
-import { generateCustomerConfirmationEmail } from '@/components/promotions/email-templates/promotions/generateAutoReplyEmailForPromotion';
 import transporter from '@/lib/nodemailer';
 import { createCheckoutLink } from '@/lib/createCheckoutLink';
+
+import { generateKatieJosPromotionOrder } from '@/components/promotions/email-templates/promotions/generateKatieJosPromotionOrder';
+import { generateCustomerConfirmationEmail } from '@/components/promotions/email-templates/promotions/generateAutoReplyEmailForPromotion';
 
 export default async function handler(req, res) {
 	if (req.method !== 'POST') {
 		res.setHeader('Allow', ['POST']);
-		return res.status(405).json({ message: `Method ${req.method} not allowed` });
+		return res
+			.status(405)
+			.json({ message: `Method ${req.method} not allowed` });
 	}
 
 	try {
-		// 1. Destructure request
+		// 1) Destructure request
 		const {
 			cartData = [],
 			street = '',
@@ -29,14 +32,27 @@ export default async function handler(req, res) {
 			slug = '',
 		} = req.body;
 
-		// 2. Additional from promotionDetails
+		// 2) Additional from promotionDetails
 		const {
 			deliveryDetails = '',
 			pickupDetails = '',
 			giftOption = false,
 		} = promotionDetails;
 
-		// 3. Create doc for Sanity
+		// 3) Generate payment link unconditionally
+		let paymentLink = await createCheckoutLink({
+			cartData,
+			name,
+			email,
+			street,
+			city,
+			zip,
+			phone,
+			orderMethod,
+			slug,
+		});
+
+		// 4) Prepare the doc for Sanity (now we can safely reference paymentLink if we want to store it)
 		const fullAddress = [street, city, zip].filter(Boolean).join(', ');
 
 		const doc = {
@@ -48,6 +64,7 @@ export default async function handler(req, res) {
 				phone,
 				address: fullAddress,
 				orderMethod,
+				payNow,
 			},
 			recipientDetails: {
 				recipientName,
@@ -60,11 +77,16 @@ export default async function handler(req, res) {
 				price: item.price,
 				quantity: item.quantity,
 			})),
+
+			// Optionally store the link at the top level.
+			// If you only want it once, add it here (not inside every item).
+			paymentLink,
 		};
 
+		// 5) Create doc in Sanity
 		const sanityResult = await sanityClient.create(doc);
 
-		// 4. Generate email content for internal notification
+		// 6) Generate email content (pass paymentLink so they can use or display it)
 		const internalEmailContent = generateKatieJosPromotionOrder({
 			name,
 			email,
@@ -76,11 +98,11 @@ export default async function handler(req, res) {
 			zip,
 			orderMethod,
 			payNow,
-			promotionDetails, // includes pickup/delivery, giftOption, etc.
+			promotionDetails,
 			cartData,
+			
 		});
 
-		// 5. Generate customer confirmation email content
 		const customerEmailContent = generateCustomerConfirmationEmail({
 			name,
 			email,
@@ -94,12 +116,12 @@ export default async function handler(req, res) {
 			promotionDetails,
 			cartData,
 			payNow,
+			paymentLink,
 		});
 
-		// 6. Send both emails concurrently
+		// 7) Send both emails concurrently
 		const internalEmailPromise = transporter.sendMail({
 			from: 'Promotional Order Received <sweetjuanjos@gmail.com>',
-			// to: 'sweetjuanjos@gmail.com',
 			to: process.env.CLIENT_EMAIL,
 			subject: internalEmailContent.subject,
 			text: internalEmailContent.text,
@@ -114,29 +136,14 @@ export default async function handler(req, res) {
 			html: customerEmailContent.html,
 		});
 
-		// Await both emails to finish sending
 		await Promise.all([internalEmailPromise, customerEmailPromise]);
 
-		let paymentLink = null;
-		if (payNow) {
-		  paymentLink = await createCheckoutLink({
-			cartData,
-			name,
-			email,
-			street,
-			city,
-			zip,
-			phone,
-			orderMethod,
-			slug,
-		  });
-		}
-
-		// 7. Respond
+		// 8) Respond
 		return res.status(200).json({
 			success: true,
 			message: 'Order submitted to Sanity and emails sent successfully.',
-			data: sanityResult, paymentLink,
+			data: sanityResult,
+			paymentLink,
 		});
 	} catch (error) {
 		console.error('Error submitting order to Sanity or sending emails:', error);

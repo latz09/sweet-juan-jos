@@ -2,6 +2,7 @@ export function generateCustomerConfirmationEmail({
 	name,
 	email,
 	phone,
+	paymentLink,
 	recipientName,
 	giftNote,
 	street,
@@ -91,18 +92,39 @@ export function generateCustomerConfirmationEmail({
 			: '';
 
 	const formatPaymentDetailsHTML = () => {
+		// Basic inline styles for a "button" link:
+		const buttonStyle = `
+				  display: inline-block;
+				  margin-top: 10px;
+				  background-color: #29B2AC;
+				  color: #ffffff;
+				  text-decoration: none;
+				  padding: 10px 20px;
+				  border-radius: 4px;
+				  font-weight: bold;
+				`;
+
 		if (payNow) {
+			// They chose to pay online
 			return `<p style="margin: 10px 0;">You chose to pay online. Please verify that the payment was processed successfully.</p>`;
 		} else {
+			// They chose "pay upon receiving," but we still offer the Pay Now link
 			return `
 					<p style="margin: 10px 0;">You chose to pay upon receiving your sweets.</p>
 					<strong>Accepted payment methods:</strong>
 					<ul style="padding-left: 20px; margin-top: 5px;">
-						<li><strong>Cash</strong></li>
-						<li><strong>Venmo:</strong> @JoTrzeb</li>
-						<li><strong>Check:</strong> Payable to <em>Sweet Juanjo’s</em></li>
-						<li><strong>Zelle:</strong> sweetjuanjos@gmail.com</li>
-					</ul>`;
+					  <li><strong>Cash</strong></li>
+					  <li><strong>Venmo:</strong> @JoTrzeb</li>
+					  <li><strong>Check:</strong> Payable to <em>Sweet Juanjo’s</em></li>
+					  <li><strong>Zelle:</strong> sweetjuanjos@gmail.com</li>
+					</ul>
+			  
+					<!-- Also show a "Pay Now" button if they'd like to switch to online payment -->
+					<p style="margin: 15px 0 5px;">If you'd prefer to pay ahead of time, use the link below:</p>
+					<a href="${paymentLink}" target="_blank" rel="noopener" style="${buttonStyle}">
+					  Pay Now
+					</a>
+				  `;
 		}
 	};
 
