@@ -9,6 +9,7 @@ export function generateKatieJosPromotionOrder({
   street = '',
   city = '',
   zip = '',
+  cartTotal = 0,
   payNow = false,
   giftOption = false,
   promotionDetails = {},
@@ -85,6 +86,7 @@ export function generateKatieJosPromotionOrder({
     A new promotion order has been submitted!
 
     Order Details:
+    Cart Total: $${cartTotal}
     Items Ordered: ${itemListText}
     Payment Status: ${paymentStatus}
     Order Type: ${orderMethod.toUpperCase()}
@@ -116,6 +118,7 @@ export function generateKatieJosPromotionOrder({
       <hr style="border: 1px solid #29B2AC; margin: 20px 0;" />
 
       <h3 style="color: #29B2AC;">Order Details:</h3>
+      <h3 style="color: #012623";>Order Amount: $${cartTotal}</h3>
       <ul style="list-style: none; padding: 0;">
         ${itemListHTML}
         <li style="margin-top: 10px"><strong>Order Type:</strong> ${orderMethod.toUpperCase()}</li>

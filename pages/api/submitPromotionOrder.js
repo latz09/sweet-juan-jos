@@ -29,6 +29,7 @@ export default async function handler(req, res) {
 			promotionDetails = {},
 			orderMethod = '',
 			payNow = false,
+			cartTotal = '0',
 			slug = '',
 		} = req.body;
 
@@ -100,6 +101,7 @@ export default async function handler(req, res) {
 			payNow,
 			promotionDetails,
 			cartData,
+			cartTotal,
 			
 		});
 
@@ -123,6 +125,7 @@ export default async function handler(req, res) {
 		const internalEmailPromise = transporter.sendMail({
 			from: 'Promotional Order Received <sweetjuanjos@gmail.com>',
 			to: process.env.CLIENT_EMAIL,
+			// to: 'jordan@latzwebdesign.com',
 			subject: internalEmailContent.subject,
 			text: internalEmailContent.text,
 			html: internalEmailContent.html,

@@ -158,6 +158,7 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 							clearCart,
 							setStep,
 							onClose,
+							cartTotal,
 							setIsSubmitting, // Pass setIsSubmitting
 							
 						})
@@ -169,6 +170,7 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 							clearCart,
 							setStep,
 							onClose,
+							cartTotal,
 							setIsSubmitting, // Pass setIsSubmitting
 							
 						})

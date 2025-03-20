@@ -2,6 +2,7 @@ export default async function handlePaymentChoice({
 	payNow,
 	formData,
 	clearCart,
+	cartTotal,
 	setStep,
 	onClose,
 	setIsSubmitting,
@@ -10,11 +11,13 @@ export default async function handlePaymentChoice({
 
 	try {
 		// 1. Send data to /api/submitPromotionOrder
+		console.log(cartTotal)
 		const response = await fetch('/api/submitPromotionOrder', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				...formData,
+				cartTotal,
 				payNow,
 			}),
 		});

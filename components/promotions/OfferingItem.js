@@ -50,30 +50,36 @@ const OfferingItem = ({ item }) => {
 				<span className='font-normal text-sm opacity-40 sm:group-hover:opacity-100 '>
 					<FaDollarSign />
 				</span>
-				<span>{item.itemCost}</span>
+				{item.itemCost && <span>{item.itemCost}</span>}
 			</div>
 
 			<div className='flex justify-center'>
 				<FadeInAndRotate>
-					<Image
-						src={item.itemImageUrl}
-						alt={item.itemTitle}
-						width={110}
-						height={110}
-					/>
+					{item.itemImageUrl && (
+						<Image
+							src={item.itemImageUrl}
+							alt={item.itemTitle || 'Default Alt'}
+							width={110}
+							height={110}
+						/>
+					)}
 				</FadeInAndRotate>
 			</div>
 
 			<div className='text-center flex-grow flex flex-col gap-6 justify-center'>
 				<div className='space-y-1 font-bold'>
-					<p className='font-bold text-dark text-2xl lg:text-3xl '>
-						{item.itemTitle}
-					</p>
-					<p>{`(${item.itemSubtitle})`}</p>
+					{item.itemTitle && (
+						<p className='font-bold text-dark text-2xl lg:text-3xl '>
+							{item.itemTitle}
+						</p>
+					)}
+					{item.itemSubtitle && <p>{`(${item.itemSubtitle})`}</p>}
 				</div>
-				<div className='text-lg md:text-xl text-gray-600'>
-					{item.itemDescription}
-				</div>
+				{item.itemDescription && (
+					<div className='text-lg md:text-xl text-gray-600'>
+						{item.itemDescription}
+					</div>
+				)}
 			</div>
 
 			<div className='flex justify-center mt-6'>

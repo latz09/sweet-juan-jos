@@ -45,7 +45,13 @@ export function generateCustomerConfirmationEmail({
 
 	// Greeting based on time of day
 	const getCurrentGreeting = () => {
-		const hour = new Date().getHours();
+		const now = new Date();
+		const hour = new Intl.DateTimeFormat('en-US', {
+			hour: 'numeric',
+			hour12: false,
+			timeZone: 'America/Chicago',
+		}).format(now);
+
 		if (hour < 11) return 'Good Morning';
 		if (hour < 17) return 'Good Afternoon';
 		return 'Good Evening';
