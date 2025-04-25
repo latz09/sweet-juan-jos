@@ -9,6 +9,7 @@ import LandingHero from '@/components/heros/LandingHero';
 import BannerLayout from '@/components/heros/BannerLayout';
 import PageEntry from '@/components/utils/animations/PageEntry';
 
+
 export default async function Home() {
 	const query = FETCH_PAGE_QUERY;
 	const dataAsArray = await sanityClient.fetch(query);
@@ -17,7 +18,7 @@ export default async function Home() {
 	return (
 		<div>
 			<PageEntry className='grid gap-24'>
-				<LandingHero landingImage={data.landingImage} />
+				<LandingHero landingImage={data.landingImage} />				
 				<IntroBlurb data={data.intro} />
 				<ServiceCards data={data.servicePhotoLinks} />
 				<BannerLayout
