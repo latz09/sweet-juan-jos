@@ -14,10 +14,15 @@ const PopupModal = ({
 }) => {
 	const router = useRouter();
 
-	const handleLinkClick = () => {
-		onClose();
-		router.push(linkUrl);
-	};
+	const handleLinkClick = async () => {
+        // Start navigation first
+        router.push(linkUrl);
+    
+        // OPTIONAL: wait for a short time to allow page to transition, THEN close
+        setTimeout(() => {
+            onClose();
+        }, 400); // 300ms usually feels good, adjust if needed
+    };
 
 	// Helper function to format date to "5pm on May 11th"
 	const formatOrderByDate = (isoDateString) => {
