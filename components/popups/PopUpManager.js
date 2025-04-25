@@ -5,8 +5,8 @@ import PromotionPopup from './PromotionPopup';
 import OnlineOrderingPopup from './OnlineOrderingPopup';
 
 const PopUpManager = ({ promotion, acceptingOrders }) => {
-	const pathname = usePathname(); // 👈 get the current URL path
-
+	const pathname = usePathname(); 
+   
 	// Don't show popups on these pages
 	if (
 		pathname.startsWith('/online-ordering') ||

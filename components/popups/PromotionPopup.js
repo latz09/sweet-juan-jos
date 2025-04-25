@@ -47,7 +47,7 @@ const PromotionPopup = ({ promotion }) => {
 						imageUrl={promotion.landingPageImage}
 						linkUrl={`/promotions/${promotion.slug.current}`}
 						onClose={closeModal}
-						orderByDate={promotion.orderByDate}
+						orderByDate={promotion.timeline.endDate}
 					/>
 				)}
 
