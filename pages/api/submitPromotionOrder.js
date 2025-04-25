@@ -102,13 +102,12 @@ export default async function handler(req, res) {
 			promotionDetails,
 			cartData,
 			cartTotal,
-			
 		});
 
 		const customerEmailContent = generateCustomerConfirmationEmail({
 			name,
 			email,
-			phone,
+			phone, 
 			recipientName,
 			giftNote,
 			street,

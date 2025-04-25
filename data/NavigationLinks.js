@@ -29,5 +29,10 @@ export const NavigationLinks = [
         id: 6,
         name: 'Contact',
         slug: '/contact-katie-jo'
-    }
+    },
+    {
+        id: 7,
+        name: 'Online Ordering',
+        slug: '/online-ordering'
+    },
 ];
