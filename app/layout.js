@@ -1,7 +1,7 @@
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import { sanityClient } from '@/lib/sanityConnection';
-import { FETCH_ONLINE_ORDERING_QUERY as onlineOrderingQuery } from '@/data/queries/FETCH_ONLINE_ORDERING_QUERY';
+import { FETCH_ONLINE_ORDERING_AVAILABILITY as onlineOrderingQuery } from '@/data/queries/online-ordering/FETCH_ONLINE_ORDERING_AVAILABILITY';
 
 import { FETCH_PROMOTION_POP_UP_QUERY as promotionPopupQuery } from '@/data/queries/FETCH_PROMOTION_POP_UP_QUERY';
 
@@ -9,6 +9,7 @@ import Footer from '@/components/layout/Footer';
 import Navigation from '@/components/layout/Navigation';
 import { Josefin_Slab } from 'next/font/google';
 import PopUpManager from '@/components/popups/PopUpManager';
+import ToastContainer from '@/components/utils/animations/ToastContainer';
 
 const josefinSlab = Josefin_Slab({
 	// style: 'normal',
@@ -43,6 +44,7 @@ const RootLayout = async ({ children }) => {
 				<PopUpManager promotion={activePromotion} acceptingOrders={acceptingOrders} />
 				<div className='max-w-7l mx-auto '>
 					<div>{children}</div>
+					<ToastContainer />
 					<Footer />
 				</div>
 				<Analytics />

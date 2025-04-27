@@ -13,7 +13,7 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 	};
 
 	return (
-		<div className='fixed bottom-2 right-2 lg:bottom-4 lg:right-4 flex z-40 items-center'>
+		<div className='fixed bottom-[1px] right-[1px] lg:bottom-4 lg:right-4 flex z-40 items-center'>
 			{/* Outer wrapper that keeps the button perfectly aligned */}
 			<div className='flex flex-col items-center justify-center'>
 				<button
@@ -27,7 +27,7 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 							<FaChevronLeft size={20} />{' '}
 						</div>
 					) : (
-						<FaChevronRight size={20} />
+						<FaChevronRight size={20} className="" />
 					)}
 				</button>
 			</div>
@@ -36,7 +36,7 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 			<AnimatePresence>
 				{!isCollapsed && (
 					<motion.div
-						className='bg-dark text-light px-4 py-4 rounded-sm shadow-lg shadow-primary/30 cursor-pointer overflow-hidden ml-2'
+						className='bg-dark text-light px-4 py-2 rounded-sm shadow-lg shadow-primary/30 cursor-pointer overflow-hidden ml-2'
 						initial={{ opacity: 0, scale: 0.8 }}
 						animate={{ opacity: 1, scale: 1 }}
 						exit={{ opacity: 0, scale: 0.8 }}
@@ -48,14 +48,10 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 						onClick={onClick}
 					>
 						<div className='flex flex-col gap-2'>
-							<div>
-								<h2 className='text-lg lg:text-2xl font-bold'>{title}</h2>
-								<p className='lg:text-lg'>{subtitle}</p>
-							</div>
-							<div className='text-right mt-2'>
-								<span className='shadow-lg shadow-light/10 rounded-sm font-bold p-2 bg-light text-dark text-sm'>
-									Get Started
-								</span>
+							<p className='text-lg lg:text-xl'>{subtitle}</p>
+
+							<div className='text-right'>
+								<span className=' font-bold text-light underline underline-offset-4 decoration-light/40 uppercase'>Get Started</span>
 							</div>
 						</div>
 					</motion.div>

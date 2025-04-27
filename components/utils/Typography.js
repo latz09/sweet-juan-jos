@@ -13,7 +13,7 @@ export const MainHeading = ({ title, type }) => {
 
 	return (
 		<div>
-			<h1 className={`text-4xl lg:text-6xl font-bold text-center   ${type}`}>
+			<h1 className={`text-4xl lg:text-6xl font-bold text-center  ${type}`}>
 				{title}
 			</h1>
 		</div>
