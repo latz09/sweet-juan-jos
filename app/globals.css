@@ -62,5 +62,5 @@ body {
 }
 
 .online-order-form-input {
-	@apply w-full p-3 rounded-sm bg-light border border-primary/10  focus:border-primary/80 ring-0 focus:ring-0 focus:outline-none transition duration-1000;
+	@apply w-full p-3 rounded-sm bg-light border border-primary  focus:border-primary/10 ring-0 focus:ring-0 focus:outline-none transition duration-700 font-bold tracking-wider;
   }

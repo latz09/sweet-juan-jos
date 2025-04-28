@@ -30,55 +30,56 @@ const CheckoutPage = ({ settings }) => {
 
 	return (
 		<PageEntry>
-			<div className='max-w-3xl mx-auto p-6 space-y-10'>
+			<div className='f'>
 				<OrderSummary cart={cart} />
+				<div className='max-w-3xl mx-auto  p-6 space-y-24 '>
+					<FulfillmentOptions
+						settings={settings}
+						selectedMethod={selectedMethod}
+						setSelectedMethod={setSelectedMethod}
+						deliveryAddress={deliveryAddress}
+						setDeliveryAddress={setDeliveryAddress}
+						zipValid={zipValid}
+						setZipValid={setZipValid}
+						giftInfo={giftInfo}
+						setGiftInfo={setGiftInfo}
+					/>
 
-				<FulfillmentOptions
-					settings={settings}
-					selectedMethod={selectedMethod}
-					setSelectedMethod={setSelectedMethod}
-					deliveryAddress={deliveryAddress}
-					setDeliveryAddress={setDeliveryAddress}
-					zipValid={zipValid}
-					setZipValid={setZipValid}
-					giftInfo={giftInfo}
-					setGiftInfo={setGiftInfo}
-				/>
+					<ContactForm
+						contactInfo={contactInfo}
+						setContactInfo={setContactInfo}
+					/>
 
-				<ContactForm
-					contactInfo={contactInfo}
-					setContactInfo={setContactInfo}
-				/>
-
-				<ConfirmOrderButton
-					cart={cart}
-					selectedMethod={selectedMethod}
-					contactInfo={contactInfo}
-					deliveryAddress={deliveryAddress}
-					zipValid={zipValid}
-					settings={settings}
-				/>
-				<div className='flex items-center justify-center space-x-4 mt-2'>
-					<img
-						src='https://cdn.simpleicons.org/visa'
-						alt='Visa'
-						className='h-8'
+					<ConfirmOrderButton
+						cart={cart}
+						selectedMethod={selectedMethod}
+						contactInfo={contactInfo}
+						deliveryAddress={deliveryAddress}
+						zipValid={zipValid}
+						settings={settings}
 					/>
-					<img
-						src='https://cdn.simpleicons.org/mastercard'
-						alt='Mastercard'
-						className='h-8'
-					/>
-					<img
-						src='https://cdn.simpleicons.org/americanexpress'
-						alt='American Express'
-						className='h-8'
-					/>
-					<img
-						src='https://cdn.simpleicons.org/discover'
-						alt='Discover'
-						className='h-8'
-					/>
+					<div className='flex items-center justify-center space-x-4 mt-2'>
+						<img
+							src='https://cdn.simpleicons.org/visa'
+							alt='Visa'
+							className='h-8'
+						/>
+						<img
+							src='https://cdn.simpleicons.org/mastercard'
+							alt='Mastercard'
+							className='h-8'
+						/>
+						<img
+							src='https://cdn.simpleicons.org/americanexpress'
+							alt='American Express'
+							className='h-8'
+						/>
+						<img
+							src='https://cdn.simpleicons.org/discover'
+							alt='Discover'
+							className='h-8'
+						/>
+					</div>
 				</div>
 			</div>
 		</PageEntry>

@@ -81,11 +81,11 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-2 bg-primary/5 px-4 py-8 rounded text-dark/80 md:text-lg'
+						className='origin-top overflow-hidden space-y-2 bg-primary/5 px-4 py-8 rounded text-dark md:text-lg pb-12'
 					>
-						<h3 className='text-lg lg:text-2xl font-bold'>Pickup Details</h3>
+						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>Pickup Details</h3>
 						{pickupInfo.map((paragraph, idx) => (
-							<p key={idx}>{parseBoldSyntax(paragraph)}</p>
+							<p key={idx} className="text-xl lg:text-2xl" >{parseBoldSyntax(paragraph)}</p>
 						))}
 					</motion.div>
 				)}
@@ -97,11 +97,11 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-4 bg-primary/5 px-4 py-8 rounded text-dark/80 md:text-lg'
+						className='origin-top overflow-hidden space-y-4 bg-primary/5 px-4 py-8 rounded text-dark md:text-lg '
 					>
-						<h3 className='text-lg lg:text-2xl font-bold'>Delivery Details</h3>
+						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>Delivery Details</h3>
 						{deliveryInfo.map((paragraph, idx) => (
-							<p key={idx}>{parseBoldSyntax(paragraph)}</p>
+							<p key={idx} className="text-xl lg:text-2xl" >{parseBoldSyntax(paragraph)}</p>
 						))}
 					</motion.div>
 				)}
@@ -116,9 +116,9 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-4'
+						className='origin-top overflow-hidden space-y-4 pt-4'
 					>
-						<h3 className='text-lg lg:text-2xl font-bold mt-4'>
+						<h3 className='text-xl lg:text-2xl font-bold mt-4'>
 							Where Should Your Sweets Be Dropped Off?
 						</h3>
 						<div className='space-y-4'>
@@ -181,12 +181,12 @@ const FulfillmentOptions = ({
 
 			{/* Gift Option if enabled */}
 			{allowGifting && (
-				<div className='space-y-4'>
+				<div className='space-y-4 pt-16 '>
 					<button
 						type='button'
 						onClick={() => setIsGift(!isGift)}
-						className={`w-full py-3 rounded font-bold transition ${
-							isGift ? 'bg-primary text-light' : 'bg-primary/10 text-dark'
+						className={`w-full py-3 rounded font-bold transition shadow ${
+							isGift ? 'bg-primary/85 uppercase text-light shadow-none' : 'bg-primary/5 text-dark'
 						}`}
 					>
 						{isGift ? '✓ Marked as a Gift' : 'Is this a gift for someone?'}
@@ -200,9 +200,9 @@ const FulfillmentOptions = ({
 								animate={{ opacity: 1, scaleY: 1 }}
 								exit={{ opacity: 0, scaleY: 0 }}
 								transition={{ duration: 0.4, ease: 'easeInOut' }}
-								className='origin-top overflow-hidden space-y-4 bg-primary/5 px-4 py-8 rounded text-dark/80'
+								className='origin-top overflow-hidden space-y-4 bg-primary/5 px-4 py-8 rounded text-dark'
 							>
-								<h3 className='text-lg lg:text-2xl font-bold'>
+								<h3 className='text-xl lg:text-2xl font-bold'>
 									{`Who's the Sweet Treat For?`}
 								</h3>
 								<input
