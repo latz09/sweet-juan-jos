@@ -13,7 +13,7 @@ const CartButton = () => {
   const pathname = usePathname(); // 👈 Get current path
 
   // Don't show popup on "/" or "/online-ordering/cart"
-if (pathname === '/' || pathname === '/online-ordering/cart' || pathname === '/promotions') {
+if (pathname === '/' || pathname === '/online-ordering/cart' ||  pathname.startsWith('/promotions') {
   return null;
 }
 
