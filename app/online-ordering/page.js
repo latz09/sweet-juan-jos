@@ -4,6 +4,7 @@ import { FETCH_AVAILABLE_CATEGORIES_QUERY } from '@/data/queries/online-ordering
 import PageEntry from '@/components/utils/animations/PageEntry';
 import OrderingPage from '@/components/online-ordering/OrderingPage';
 
+
 const OnlineOrdering = async () => {
 	const [settings, categories] = await Promise.all([
 		sanityClient.fetch(FETCH_ONLINE_ORDERING_SETTINGS_QUERY),

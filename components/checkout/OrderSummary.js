@@ -15,8 +15,9 @@ const OrderSummary = ({ cart }) => {
 
 	return (
 		<section className='space-y-4 '>
-			<div className='py-8 bg-primary/10 text-dark text-center'>
-				<h1 className='text-2xl lg:text-4xl font-bold'>
+			<div className='py-8 bg-primary/10 text-dark text-center space-y-1 '>
+				<p>Checkout</p>
+				<h1 className='text-2xl lg:text-4xl font-bold pb-4'>
 					Review Your Sweets Order
 				</h1>
 
@@ -30,7 +31,7 @@ const OrderSummary = ({ cart }) => {
 
 				{/* Toggle button */}
 				{itemCount > 0 && (
-					<div className="grid place-items-center mt-4">
+					<div className='grid place-items-center mt-4'>
 						<button
 							type='button'
 							onClick={() => setOpen(!open)}
@@ -60,7 +61,7 @@ const OrderSummary = ({ cart }) => {
 							animate={{ height: 'auto', opacity: 1 }}
 							exit={{ height: 0, opacity: 0 }}
 							transition={{ duration: 0.4, ease: 'easeInOut' }}
-							className='overflow-hidden'
+							className='overflow-hidden py-8'
 						>
 							<div className='space-y-4 pt-4'>
 								{cart.map((item) => (

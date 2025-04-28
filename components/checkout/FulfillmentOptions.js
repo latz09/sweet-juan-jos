@@ -53,7 +53,7 @@ const FulfillmentOptions = ({
 						className={`text-lg uppercase w-full px-4 py-2 rounded-sm shadow font-bold scale-95 transition duration-500 ${
 							selectedMethod === 'pickup'
 								? 'bg-primary text-light shadow-lg shadow-primary/30 scale-100'
-								: 'bg-primary/5 shadow-none'
+								: 'bg-light border border-primary/60 shadow-none'
 						}`}
 					>
 						Pickup
@@ -65,7 +65,7 @@ const FulfillmentOptions = ({
 						className={`text-lg uppercase w-full px-4 py-2 rounded-sm shadow font-bold scale-95 transition duration-500 ${
 							selectedMethod === 'delivery'
 								? 'bg-primary text-light shadow-lg shadow-primary/30 scale-100'
-								: 'bg-primary/5 shadow-none'
+								: 'bg-light border border-primary/60 shadow-none'
 						}`}
 					>
 						Delivery
@@ -182,7 +182,7 @@ const FulfillmentOptions = ({
 
 			{/* Gift Option if enabled */}
 			{allowGifting && (
-				<div className='space-y-4 pt-16 '>
+				<div className='space-y-4 pt-4 lg:pt-16 '>
 					<button
 						type='button'
 						onClick={() => setIsGift(!isGift)}

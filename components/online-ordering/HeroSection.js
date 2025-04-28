@@ -7,7 +7,8 @@ import logo from '@/public/images/logo/transparent-juanjos.png';
 
 const HeroSection = ({ heroImageUrl, pageTitle, introText }) => {
 	return (
-		<div className="text-center space-y-12">
+		<div className="text-center space-y-2">
+			<MainHeading title={pageTitle} type="primary" />
 			{heroImageUrl && (
 				<div className="relative w-full h-[40vh] md:h-[50vh]">
 					<Image
@@ -25,8 +26,8 @@ const HeroSection = ({ heroImageUrl, pageTitle, introText }) => {
 					</div>
 				</div>
 			)}
-			<div>
-				<MainHeading title={pageTitle} type="primary" />
+			<div className="pt-12">
+				
 				{introText?.length > 0 && (
 					<div className="mt-4 max-w-5xl mx-auto space-y-2">
 						{introText.map((para, idx) => (
