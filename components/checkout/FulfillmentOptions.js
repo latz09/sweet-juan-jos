@@ -33,7 +33,7 @@ const FulfillmentOptions = ({
 	}, [allowPickup, allowDelivery, setSelectedMethod]);
 
 	const renderHeading = () => {
-		if (allowPickup && allowDelivery) return 'Available for Pickup or Delivery';
+		if (allowPickup && allowDelivery) return 'Choose Between';
 		if (allowPickup && !allowDelivery) return 'Available for Pickup Only';
 		if (!allowPickup && allowDelivery) return 'Available for Delivery Only';
 		return '';
@@ -42,15 +42,15 @@ const FulfillmentOptions = ({
 	return (
 		<section className='space-y-6'>
 			{/* Dynamic heading */}
-			<h2 className='text-2xl font-bold'>{renderHeading()}</h2>
+			<h2 className='text-2xl font-bold text-center'>{renderHeading()}</h2>
 
 			{/* Buttons only if both are available */}
 			{allowPickup && allowDelivery && (
-				<div className='flex gap-4'>
+				<div className='flex gap-4 justify-center items-center pb-4'>
 					<button
 						type='button'
 						onClick={() => setSelectedMethod('pickup')}
-						className={`px-4 py-2 rounded-sm shadow font-bold scale-95 transition duration-500 ${
+						className={`text-lg uppercase w-full px-4 py-2 rounded-sm shadow font-bold scale-95 transition duration-500 ${
 							selectedMethod === 'pickup'
 								? 'bg-primary text-light shadow-lg shadow-primary/30 scale-100'
 								: 'bg-primary/5 shadow-none'
@@ -58,10 +58,11 @@ const FulfillmentOptions = ({
 					>
 						Pickup
 					</button>
+          <span className="uppercase font-bold opacity-80">or</span>
 					<button
 						type='button'
 						onClick={() => setSelectedMethod('delivery')}
-						className={`px-4 py-2 rounded-sm shadow font-bold scale-95 transition duration-500 ${
+						className={`text-lg uppercase w-full px-4 py-2 rounded-sm shadow font-bold scale-95 transition duration-500 ${
 							selectedMethod === 'delivery'
 								? 'bg-primary text-light shadow-lg shadow-primary/30 scale-100'
 								: 'bg-primary/5 shadow-none'
@@ -81,7 +82,7 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-2 bg-primary/5 px-4 py-8 rounded text-dark md:text-lg pb-12'
+						className='origin-top overflow-hidden space-y-2  text-dark md:text-lg pb-12'
 					>
 						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>Pickup Details</h3>
 						{pickupInfo.map((paragraph, idx) => (
@@ -97,7 +98,7 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-4 bg-primary/5 px-4 py-8 rounded text-dark md:text-lg '
+						className='origin-top overflow-hidden space-y-4  text-dark md:text-lg '
 					>
 						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>Delivery Details</h3>
 						{deliveryInfo.map((paragraph, idx) => (
@@ -124,7 +125,7 @@ const FulfillmentOptions = ({
 						<div className='space-y-4'>
 							<input
 								type='text'
-								placeholder='Your Street Address'
+								placeholder='Street '
 								value={deliveryAddress.address}
 								onChange={(e) =>
 									setDeliveryAddress({
@@ -136,7 +137,7 @@ const FulfillmentOptions = ({
 							/>
 							<input
 								type='text'
-								placeholder='Your City'
+								placeholder='City'
 								value={deliveryAddress.city}
 								onChange={(e) =>
 									setDeliveryAddress({
@@ -186,7 +187,7 @@ const FulfillmentOptions = ({
 						type='button'
 						onClick={() => setIsGift(!isGift)}
 						className={`w-full py-3 rounded font-bold transition shadow ${
-							isGift ? 'bg-primary/85 uppercase text-light shadow-none' : 'bg-primary/5 text-dark'
+							isGift ? 'text-lg uppercase  shadow-none' : 'bg-primary/5 text-dark'
 						}`}
 					>
 						{isGift ? '✓ Marked as a Gift' : 'Is this a gift for someone?'}
@@ -200,7 +201,7 @@ const FulfillmentOptions = ({
 								animate={{ opacity: 1, scaleY: 1 }}
 								exit={{ opacity: 0, scaleY: 0 }}
 								transition={{ duration: 0.4, ease: 'easeInOut' }}
-								className='origin-top overflow-hidden space-y-4 bg-primary/5 px-4 py-8 rounded text-dark'
+								className='origin-top overflow-hidden space-y-4  text-dark'
 							>
 								<h3 className='text-xl lg:text-2xl font-bold'>
 									{`Who's the Sweet Treat For?`}

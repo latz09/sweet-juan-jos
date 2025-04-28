@@ -51,7 +51,7 @@ const OrderSummary = ({ cart }) => {
 			</div>
 
 			{/* Cart Items with Animation */}
-			<div className='max-w-3xl mx-auto '>
+			<div className='max-w-3xl mx-auto px-2'>
 				<AnimatePresence initial={false}>
 					{open && itemCount > 0 && (
 						<motion.div
