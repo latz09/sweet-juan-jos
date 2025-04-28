@@ -26,7 +26,7 @@ const HeroSection = ({ heroImageUrl, pageTitle, introText }) => {
 					</div>
 				</div>
 			)}
-			<div className="pt-12">
+			<div className="pt-4 lg:pt-10">
 				
 				{introText?.length > 0 && (
 					<div className="mt-4 max-w-5xl mx-auto space-y-2">

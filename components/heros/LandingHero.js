@@ -4,6 +4,7 @@ import ButtonLink from '../utils/ButtonLink';
 import Socials from '../utils/Socials';
 import LandingHeroAnimate from '../utils/animations/LandingHeroAnimate';
 
+
 const LandingHero = ({ landingImage }) => {
 	return (
 		<div className='relative h-[75vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>
@@ -33,6 +34,7 @@ const LandingHero = ({ landingImage }) => {
 						type='secondary'
 						href='/contact-katie-jo'
 					/>
+					
 				</LandingHeroAnimate>
 			</div>
 			<div> </div>

@@ -13,24 +13,9 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 	};
 
 	return (
-		<div className='fixed bottom-[1px] right-[1px] lg:bottom-4 lg:right-4 flex z-40 items-center'>
+		<div className='fixed bottom-[1px] right-[1px] lg:bottom-4 lg:right-4 flex md:grid z-40 items-end justify-end gap-4'>
 			{/* Outer wrapper that keeps the button perfectly aligned */}
-			<div className='flex flex-col items-center justify-center'>
-				<button
-					onClick={handleToggle}
-					className='bg-primary text-light p-2 rounded-full shadow-lg shadow-primary/30 hover:scale-110 transition'
-					aria-label='Toggle Banner'
-				>
-					{isCollapsed ? (
-						<div className='animate-pulse'>
-							{' '}
-							<FaChevronLeft size={20} />{' '}
-						</div>
-					) : (
-						<FaChevronRight size={20} className="" />
-					)}
-				</button>
-			</div>
+			
 
 			{/* Banner itself */}
 			<AnimatePresence>
@@ -56,7 +41,22 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 						</div>
 					</motion.div>
 				)}
-			</AnimatePresence>
+			</AnimatePresence><div className='flex flex-col items-end justify-end'>
+				<button
+					onClick={handleToggle}
+					className='bg-primary text-light p-2 rounded-full shadow-lg shadow-primary/30 hover:scale-110 transition'
+					aria-label='Toggle Banner'
+				>
+					{isCollapsed ? (
+						<div className='animate-pulse'>
+							{' '}
+							<FaChevronLeft size={20} />{' '}
+						</div>
+					) : (
+						<FaChevronRight size={20} className="" />
+					)}
+				</button>
+			</div>
 		</div>
 	);
 };

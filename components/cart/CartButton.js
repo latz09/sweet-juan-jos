@@ -12,10 +12,11 @@ const CartButton = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname(); // 👈 Get current path
 
-  // Don't show cart button on the /online-ordering/cart page
-  if (pathname === '/online-ordering/cart') {
-    return null;
-  }
+  // Don't show popup on "/" or "/online-ordering/cart"
+if (pathname === '/' || pathname === '/online-ordering/cart') {
+  return null;
+}
+
 
   return (
     <>

@@ -5,13 +5,14 @@ import PromotionPopup from './PromotionPopup';
 import OnlineOrderingPopup from './OnlineOrderingPopup';
 
 const PopUpManager = ({ promotion, acceptingOrders }) => {
-	const pathname = usePathname(); 
-   
+	const pathname = usePathname();
+
 	// Don't show popups on these pages
 	if (
 		pathname.startsWith('/online-ordering') ||
 		pathname.startsWith('/promotions') ||
-		pathname.startsWith('/contact-katie-jo')
+		pathname.startsWith('/contact-katie-jo') ||
+		pathname.startsWith('/weddings-and-special-events')
 	) {
 		return null;
 	}
