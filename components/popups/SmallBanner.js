@@ -13,7 +13,7 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 	};
 
 	return (
-		<div className='fixed bottom-[1px] right-[1px] lg:bottom-4 lg:right-4 flex md:grid z-40 items-end justify-end gap-4'>
+		<div className='fixed bottom-[1px] right-[1px] lg:bottom-4 lg:right-4 grid z-40 items-end justify-end gap-2 md:gap-4'>
 			{/* Outer wrapper that keeps the button perfectly aligned */}
 			
 
