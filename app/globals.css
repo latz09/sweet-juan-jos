@@ -60,3 +60,7 @@ body {
 .promotion-form-label {
 	@apply block mb-2 text-lg md:text-xl font-bold opacity-60 focus:opacity-100 
 }
+
+.online-order-form-input {
+	@apply w-full p-3 rounded-sm bg-light border border-primary/10  focus:border-primary/80 ring-0 focus:ring-0 focus:outline-none transition duration-1000;
+  }

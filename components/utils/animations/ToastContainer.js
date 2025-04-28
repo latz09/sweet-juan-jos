@@ -7,14 +7,14 @@ const ToastContainer = () => {
   const { toasts } = useToastStore();
 
   return (
-    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[9999] space-y-4">
+    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[9999] space-y-4 w-5/6 md:w-1/2 lg:w-1/3 mx-auto ">
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div
             key={toast.id}
-            initial={{ opacity: 0, y: 50 }} // 👈 Start lower
-            animate={{ opacity: 1, y: 0 }}  // 👈 Animate up to center
-            exit={{ opacity: 0, y: 50 }}     // 👈 Exit down again
+            initial={{ opacity: 0, y: 50 }} 
+            animate={{ opacity: 1, y: 0 }}  
+            exit={{ opacity: 0, y: 50 }}    
             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             className="bg-dark text-light px-6 py-3 rounded-sm shadow-lg font-bold text-center text-lg"
           >

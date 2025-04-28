@@ -7,7 +7,7 @@ import ProductGrid from './ProductGrid';
 
 const OrderingPage = ({ settings, categories }) => {
 	const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-console.log(settings.availableProducts, 'availableProducts');
+
 	useEffect(() => {
 		if (categories.length > 0 && !selectedCategoryId) {
 			setSelectedCategoryId(categories[0]._id);

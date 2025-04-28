@@ -11,6 +11,7 @@ import { Josefin_Slab } from 'next/font/google';
 import PopUpManager from '@/components/popups/PopUpManager';
 import ToastContainer from '@/components/utils/animations/ToastContainer';
 
+
 const josefinSlab = Josefin_Slab({
 	// style: 'normal',
 	// weight: '800, 700', // Specify the weights and styles you need
@@ -43,10 +44,12 @@ const RootLayout = async ({ children }) => {
 				<Navigation acceptingOrders={acceptingOrders} />
 				<PopUpManager promotion={activePromotion} acceptingOrders={acceptingOrders} />
 				<div className='max-w-7l mx-auto '>
+					
 					<div>{children}</div>
 					<ToastContainer />
 					<Footer />
 				</div>
+			
 				<Analytics />
 			</body>
 		</html>

@@ -9,10 +9,11 @@ import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { NavigationLinks } from '@/data/NavigationLinks';
 import logo from '../../public/images/logo/transparent-juanjos.png';
 import LinkIfActive from '../online-ordering/LinkIfActive';
+import CartButton from '../cart/CartButton';
 
 const Navigation = ({ acceptingOrders }) => {
 	return (
-		<div className='py-2 lg:py-6 sticky top-0 bg-light/95 z-40'>
+		<div className='py-2 xl:py-6 sticky top-0 bg-light/95 z-40'>
 			<DesktopNavigation acceptingOrders={acceptingOrders} />
 			<MobileNavigation acceptingOrders={acceptingOrders} />
 		</div>
@@ -21,26 +22,31 @@ const Navigation = ({ acceptingOrders }) => {
 
 export default Navigation;
 
-const DesktopNavigation = ({acceptingOrders}) => {
+const DesktopNavigation = ({ acceptingOrders }) => {
 	return (
-		<div className='hidden lg:block max-w-[90rem] mx-auto px-2 pb-2'>
+		<div className='hidden xl:block max-w-[90rem] mx-auto px-2 pb-2'>
 			<div className='mt-[2px] border-y border-primary py-4 flex items-center justify-around'>
 				{NavigationLinks.map((link) => (
 					<Link key={link.id} href={link.slug} passHref>
-						<div
-							className={`text-lg  px-4  font-bold   transition duration-500 border-x hover:scale-110 `}
-						>
+						<div className='text-lg px-4 font-bold transition duration-500 border-x hover:scale-110'>
 							{link.name}
 						</div>
 					</Link>
 				))}
+
+				{/* Your Online Ordering Link */}
 				<LinkIfActive acceptingOrders={acceptingOrders} />
+
+				{/* Cart Button inline next to LinkIfActive */}
+				<div className='ml-4'>
+					<CartButton size='desktop' />
+				</div>
 			</div>
 		</div>
 	);
 };
 
-const MobileNavigation = ({acceptingOrders}) => {
+const MobileNavigation = ({ acceptingOrders }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	useNoScroll(isMenuOpen);
 
@@ -53,7 +59,7 @@ const MobileNavigation = ({acceptingOrders}) => {
 
 	return (
 		<>
-			<div className='lg:hidden py-1'>
+			<div className='xl:hidden py-1'>
 				<div className='p-4'>
 					<div className='flex justify-between items-center'>
 						<Link href='/'>
@@ -65,6 +71,7 @@ const MobileNavigation = ({acceptingOrders}) => {
 								className='pl-4'
 							/>
 						</Link>
+						<CartButton size='mobile' />
 						<button
 							onClick={toggleMenu}
 							className='text-2xl'
