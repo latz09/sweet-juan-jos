@@ -1,13 +1,17 @@
+import { sanityClient } from '@/lib/sanityConnection';
+import { FETCH_ONLINE_ORDERING_AVAILABILITY as query } from '@/data/queries/online-ordering/FETCH_ONLINE_ORDERING_AVAILABILITY';
 import Image from 'next/image';
 import logo from '../../public/images/logo/transparent-juanjos.png';
-import ButtonLink from '../utils/ButtonLink';
+import ButtonLink, { OnlineOrderingLandingButton } from '../utils/ButtonLink';
 import Socials from '../utils/Socials';
 import LandingHeroAnimate from '../utils/animations/LandingHeroAnimate';
 
-
-const LandingHero = ({ landingImage }) => {
+const LandingHero = async ({ landingImage }) => {
+	const onlineOrderingAvailable = await sanityClient.fetch(query);
+	const acceptingOnlineOrders = onlineOrderingAvailable[0]?.acceptingOrders;
+	
 	return (
-		<div className='relative h-[75vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>
+		<div className='relative h-[85vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>
 			<Image
 				src={landingImage}
 				alt='sweet juanjos'
@@ -23,18 +27,26 @@ const LandingHero = ({ landingImage }) => {
 					objectPosition: 'center ',
 				}}
 			/>
-			<div className='absolute inset-0 bg-gradient-to-b from-light/10 via-light/40 to-light/0 z-10 text-center grid place-items-center '>
+			<div className='absolute inset-0 bg-gradient-to-b from-light/10 via-light/50 to-light/20 z-10 text-center grid place-items-center '>
 				<LandingHeroAnimate className='flex flex-col gap-4 '>
 					<div className='p-8 grid gap-6 place-items-center font '>
 						<Socials includeText={false} color='light' />
-						<Image src={logo} alt='sweet juanjos' width={350} height={350} />
+						<Image src={logo} alt='sweet juanjos' width={300} height={300} />
 					</div>
-					<ButtonLink
-						title='Request an Order'
-						type='secondary'
-						href='/contact-katie-jo'
-					/>
+					<div className="grid gap-4 place-items-center">
+						<ButtonLink
+							title='Request an Order'
+							type='secondary'
+							href='/contact-katie-jo'
+						/>
+						
+					{acceptingOnlineOrders && (
+						<OnlineOrderingLandingButton />
+					)}
+						
 					
+						
+					</div>
 				</LandingHeroAnimate>
 			</div>
 			<div> </div>
