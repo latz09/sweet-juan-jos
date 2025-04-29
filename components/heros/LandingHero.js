@@ -9,7 +9,7 @@ import LandingHeroAnimate from '../utils/animations/LandingHeroAnimate';
 const LandingHero = async ({ landingImage }) => {
 	const onlineOrderingAvailable = await sanityClient.fetch(query);
 	const acceptingOnlineOrders = onlineOrderingAvailable[0]?.acceptingOrders;
-	
+
 	return (
 		<div className='relative h-[85vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>
 			<Image
@@ -30,26 +30,21 @@ const LandingHero = async ({ landingImage }) => {
 			<div className='absolute inset-0 bg-gradient-to-b from-light/10 via-light/50 to-light/20 z-10 text-center grid place-items-center '>
 				<LandingHeroAnimate className='flex flex-col gap-4 '>
 					<div className='p-8 grid gap-6 place-items-center font '>
-						<Socials includeText={false} color='light' />
 						<Image src={logo} alt='sweet juanjos' width={300} height={300} />
+						<Socials includeText={false} color='light' />
 					</div>
-					<div className="grid gap-4 place-items-center">
+					<div className='grid gap-4 place-items-center'>
 						<ButtonLink
 							title='Request an Order'
 							type='secondary'
 							href='/contact-katie-jo'
 						/>
-						
-					{acceptingOnlineOrders && (
-						<OnlineOrderingLandingButton />
-					)}
-						
-					
-						
+
+						{acceptingOnlineOrders && <OnlineOrderingLandingButton />}
 					</div>
 				</LandingHeroAnimate>
 			</div>
-			<div> </div>
+			
 		</div>
 	);
 };

@@ -13,7 +13,7 @@ const ButtonLink = ({
 			break;
 		case 'secondary':
 			type =
-				'text-dark bg-gradient-to-b from-light/50 via-light/70 to-light/50 border border-light/40 shadow-lg shadow-dark/40 hover:bg-light/80 transition duration-700	';
+				'text-dark bg-gradient-to-b from-light/50 via-light/70 to-light/50  shadow-lg shadow-primary/40 hover:bg-light/80 transition duration-700	';
 			break;
 	}
 
