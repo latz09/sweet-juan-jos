@@ -41,7 +41,7 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 	}
 
 	return (
-		<div className="fixed bottom-[1px] right-[1px] lg:bottom-4 lg:right-4 grid z-40 items-end justify-end gap-2 md:gap-4">
+		<div className="fixed bottom-2 right-2 lg:bottom-4 lg:right-4 grid z-40 items-end justify-end gap-2 md:gap-4">
 			<AnimatePresence>
 				{!isCollapsed && (
 					<motion.div
