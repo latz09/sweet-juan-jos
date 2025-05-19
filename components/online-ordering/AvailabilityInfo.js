@@ -31,24 +31,38 @@ export default function AvailabilityInfo({
 
 	return (
 		<div className='w-full bg-dark text-dark px-6 py-4 backdrop-blur-md'>
-			<p className='font-bold text-center text-xl text-light'>{availabilityLabel}</p>
+			<p className='font-bold text-center text-xl text-light'>
+				{availabilityLabel}
+			</p>
 
-			<div className='mt-4 grid md:grid-cols-2 place-items-center  gap-4 text-sm text-center max-w-xl mx-auto'>
+			<div
+				className={`mt-4 grid place-items-center gap-4 text-sm text-center max-w-xl mx-auto ${
+					allowDelivery && allowPickup ? 'md:grid-cols-2' : 'grid-cols-1'
+				}`}
+			>
 				{allowDelivery && (
-					<AvailabilityToggle
-						label='Delivery'
-						icon={FaTruck}
-						details={deliveryInfo}
-						onClick={openModal}
-					/>
+					<div
+						className={`${!(allowPickup && allowDelivery) ? 'w-1/2' : 'w-full'}`}
+					>
+						<AvailabilityToggle
+							label='Delivery'
+							icon={FaTruck}
+							details={deliveryInfo}
+							onClick={openModal}
+						/>
+					</div>
 				)}
 				{allowPickup && (
-					<AvailabilityToggle
-						label='Pickup'
-						icon={FaStore}
-						details={pickupInfo}
-						onClick={openModal}
-					/>
+					<div
+						className={`${!(allowPickup && allowDelivery) ? 'w-1/2' : 'w-full'}`}
+					>
+						<AvailabilityToggle
+							label='Pickup'
+							icon={FaStore}
+							details={pickupInfo}
+							onClick={openModal}
+						/>
+					</div>
 				)}
 			</div>
 
@@ -89,7 +103,9 @@ const Modal = ({ onClose, label, details, Icon }) => {
 
 				<div className='space-y-3 text-base text-gray-700'>
 					{details.map((line, idx) => (
-						<p className="text-xl lg:text-2xl" key={idx}>{parseBoldSyntax(line)}</p>
+						<p className='text-xl lg:text-2xl' key={idx}>
+							{parseBoldSyntax(line)}
+						</p>
 					))}
 				</div>
 
