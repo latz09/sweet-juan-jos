@@ -8,12 +8,17 @@ import FulfillmentOptions from './FulfillmentOptions';
 import ContactForm from './ContactForm';
 import ConfirmOrderButton from './ConfirmOrderButton';
 import useCartStore from '@/lib/useCartStore';
+import { DELIVERY_FEE } from '@/lib/constants';
 
 const CheckoutPage = ({ settings }) => {
 	const cart = useCartStore((state) => state.cart);
+	const cartTotal = useCartStore((state) => state.cartTotalPrice());
+	const [selectedMethod, setSelectedMethod] = useState(''); // pickup | delivery
+	const finalTotal =
+		selectedMethod === 'delivery' ? cartTotal + DELIVERY_FEE : cartTotal;
 
 	// Form state
-	const [selectedMethod, setSelectedMethod] = useState(''); // pickup | delivery
+
 	const [deliveryAddress, setDeliveryAddress] = useState({
 		address: '',
 		city: '',
@@ -31,7 +36,11 @@ const CheckoutPage = ({ settings }) => {
 	return (
 		<PageEntry>
 			<div className='f'>
-				<OrderSummary cart={cart} />
+				<OrderSummary
+					cart={cart}
+					total={finalTotal}
+					selectedMethod={selectedMethod}
+				/>
 				<div className='max-w-3xl mx-auto  p-4 lg:p-6 space-y-24 '>
 					<FulfillmentOptions
 						settings={settings}

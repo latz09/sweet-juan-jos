@@ -2,30 +2,45 @@
 
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { CartItem } from '../cart/CartModal'; // Reusing your existing cart item layout
+import { CartItem } from '../cart/CartModal';
 import useCartStore from '@/lib/useCartStore';
-import { AnimatePresence, motion } from 'framer-motion'; // 👈 Add this
+import { AnimatePresence, motion } from 'framer-motion';
+import { DELIVERY_FEE } from '@/lib/constants';
 
-const OrderSummary = ({ cart }) => {
+const OrderSummary = ({ cart, total, selectedMethod }) => {
 	const [open, setOpen] = useState(false);
 	const cartTotalPrice = useCartStore((state) => state.cartTotalPrice);
 
 	const itemCount = cart.length;
-	const totalPrice = cartTotalPrice();
+	const subtotal = cartTotalPrice(); // base total without delivery
+	const showDelivery = selectedMethod === 'delivery';
 
 	return (
-		<section className='space-y-4 '>
-			<div className='py-8 bg-primary/10 text-dark text-center space-y-1 '>
+		<section className='space-y-4'>
+			<div className='py-8 bg-primary/10 text-dark text-center space-y-1'>
 				<p>Checkout</p>
 				<h1 className='text-2xl lg:text-4xl font-bold pb-4'>
 					Review Your Sweets Order
 				</h1>
 
-				{/* Items count + total price */}
+				{/* Items count + subtotal */}
 				{itemCount > 0 && (
-					<div className=' text-lg font-semibold'>
-						{itemCount} {itemCount === 1 ? 'Item' : 'Items'} - $
-						{totalPrice.toFixed(2)}
+					<div className='text-lg font-semibold space-y-1'>
+						<div>
+							{itemCount} {itemCount === 1 ? 'Item' : 'Items'} – ${subtotal.toFixed(2)}
+						</div>
+
+						{/* Optional Delivery Fee */}
+						{showDelivery && (
+							<div className=' font-bold text-dark/80'>
+								+ ${DELIVERY_FEE.toFixed(2)} Delivery Fee
+							</div>
+						)}
+
+						{/* Final Total */}
+						<div className='pt-2 font-bold text-xl'>
+							Total: ${total.toFixed(2)}
+						</div>
 					</div>
 				)}
 
@@ -35,7 +50,7 @@ const OrderSummary = ({ cart }) => {
 						<button
 							type='button'
 							onClick={() => setOpen(!open)}
-							className='flex items-center  gap-2 text-dark text-lg font-bold hover:text-dark/80 transition uppercase'
+							className='flex items-center gap-2 text-dark text-lg font-bold hover:text-dark/80 transition uppercase'
 						>
 							{open ? (
 								<>
@@ -72,7 +87,8 @@ const OrderSummary = ({ cart }) => {
 					)}
 				</AnimatePresence>
 			</div>
-			{/* If cart empty */}
+
+			{/* If cart is empty */}
 			{itemCount === 0 && (
 				<p className='text-center text-dark/60 text-lg'>Your cart is empty.</p>
 			)}
