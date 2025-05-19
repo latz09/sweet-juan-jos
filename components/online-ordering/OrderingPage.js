@@ -41,6 +41,7 @@ const OrderingPage = ({ settings, categories }) => {
 					setSelectedCategoryId={setSelectedCategoryId}
 				/>
 				<ProductGrid products={filteredProducts} />
+				
 			</div>
 		</div>
 	);

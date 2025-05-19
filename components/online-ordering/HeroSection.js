@@ -41,7 +41,7 @@ const HeroSection = ({
 			/>
 			<div className='pt-4 lg:pt-10'>
 				{introText?.length > 0 && (
-					<div className=' max-w-5xl mx-auto space-y-2 p-4'>
+					<div className=' max-w-5xl mx-auto space-y-2 p-4 font-bold uppercase text-dark/80'>
 						{introText.map((para, idx) => (
 							<Paragraph key={idx} content={para} />
 						))}
