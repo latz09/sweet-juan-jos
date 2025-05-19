@@ -41,10 +41,11 @@ const HeroSection = ({
 			/>
 			<div className='pt-4 lg:pt-10'>
 				{introText?.length > 0 && (
-					<div className='m-4 max-w-5xl mx-auto space-y-2'>
+					<div className=' max-w-5xl mx-auto space-y-2 p-4'>
 						{introText.map((para, idx) => (
 							<Paragraph key={idx} content={para} />
 						))}
+						
 					</div>
 				)}
 			</div>

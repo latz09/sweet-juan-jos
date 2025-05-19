@@ -33,7 +33,7 @@ export default function AvailabilityInfo({
 		<div className='w-full bg-dark text-dark px-6 py-4 backdrop-blur-md'>
 			<p className='font-bold text-center text-xl text-light'>{availabilityLabel}</p>
 
-			<div className='mt-4 grid grid-cols-2 place-items-center  gap-4 text-sm text-center max-w-xl mx-auto'>
+			<div className='mt-4 grid md:grid-cols-2 place-items-center  gap-4 text-sm text-center max-w-xl mx-auto'>
 				{allowDelivery && (
 					<AvailabilityToggle
 						label='Delivery'
