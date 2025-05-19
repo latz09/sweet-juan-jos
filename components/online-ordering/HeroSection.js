@@ -18,7 +18,7 @@ const HeroSection = ({
 	return (
 		<div className='text-center '>
 			{heroImageUrl && (
-				<div className='relative w-full h-[60vh] lg:h-[60vh]'>
+				<div className='relative w-full h-[50vh] lg:h-[60vh]'>
 					<Image
 						src={heroImageUrl}
 						alt={pageTitle}
