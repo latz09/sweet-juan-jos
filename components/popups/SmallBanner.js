@@ -8,10 +8,7 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	const [isNearBottom, setIsNearBottom] = useState(false);
 
-	const handleToggle = (e) => {
-		e.stopPropagation();
-		setIsCollapsed(!isCollapsed);
-	};
+	
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -41,9 +38,10 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 	}
 
 	return (
-		<div className="fixed bottom-2 right-2 lg:bottom-4 lg:right-4 grid z-40 items-end justify-end gap-2 md:gap-4">
+		
+		<div className="fixed inset-x-0 bottom-4 flex justify-center z-40">
 			<AnimatePresence>
-				{!isCollapsed && (
+				
 					<motion.div
 						className="bg-dark text-light px-4 py-2 rounded-sm shadow-lg shadow-primary/30 cursor-pointer overflow-hidden ml-2"
 						initial={{ opacity: 0, scale: 0.8 }}
@@ -56,34 +54,14 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 						}}
 						onClick={onClick}
 					>
-						<div className="flex flex-col gap-2">
-							<p className="text-lg lg:text-xl">{subtitle}</p>
+						<div className="tracking-wider text-center font-bold uppercase">
+							View Latest Promotion
 
-							<div className="text-right">
-								<span className="font-bold text-light underline underline-offset-4 decoration-light/40 uppercase">
-									Get Started
-								</span>
-							</div>
 						</div>
 					</motion.div>
-				)}
+			
 			</AnimatePresence>
 
-			<div className="flex flex-col items-end justify-end">
-				<button
-					onClick={handleToggle}
-					className="bg-primary text-light p-2 rounded-full shadow-lg shadow-primary/30 hover:scale-110 transition"
-					aria-label="Toggle Banner"
-				>
-					{isCollapsed ? (
-						<div className="animate-pulse">
-							<FaChevronLeft size={20} />
-						</div>
-					) : (
-						<FaChevronRight size={20} />
-					)}
-				</button>
-			</div>
 		</div>
 	);
 };

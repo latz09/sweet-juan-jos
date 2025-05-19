@@ -21,13 +21,18 @@ const OrderingPage = ({ settings, categories }) => {
 			product.category._id === selectedCategoryId
 		);
 	});
+	console.log(settings)
 
 	return (
-		<div className='min-h-screen space-y-16 lg:space-y-24 py-10'>
+		<div className='min-h-screen space-y-16 lg:space-y-24 '>
 			<HeroSection
 				heroImageUrl={settings?.heroImage?.asset?.url}
 				pageTitle={settings?.pageTitle}
 				introText={settings?.introText}
+				allowDelivery={settings?.allowDelivery}
+				allowPickup={settings?.allowPickup}
+				deliveryInfo={settings?.deliveryInfo}
+				pickupInfo={settings?.pickupInfo}
 			/>
 			<div className='space-y-6'>
 				<CategorySelector

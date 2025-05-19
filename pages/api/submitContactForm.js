@@ -22,7 +22,7 @@ const parseForm = (req, form) => {
 // Date formatting function
 const formatDate = (dateString) => {
 	const date = new Date(dateString);
-	const options = { month: 'long', day: 'numeric' };
+	const options = { month: 'long', day: 'numeric', year: 'numeric' };
 	const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
 
 	// Adding the suffix (st, nd, rd, th) to the day
@@ -45,7 +45,8 @@ const formatDate = (dateString) => {
 				break;
 		}
 
-	return `${formattedDate}${daySuffix}`;
+	// Inject suffix before the year
+	return formattedDate.replace(`${day}`, `${day}${daySuffix}`);
 };
 
 export default async function handler(req, res) {
@@ -138,7 +139,7 @@ export default async function handler(req, res) {
 		// Nodemailer email sending code
 		const mailOptions = {
 			from: `Contact Form Submission <${email[0]}>`,
-			to: process.env.CLIENT_EMAIL, 			
+			to: process.env.CLIENT_EMAIL,
 			subject: `Thank you, ${name[0]}, for your interest in Sweet Juanjo's! `,
 			text: `A new form has been submitted with the following details:
             Name: ${name[0]}

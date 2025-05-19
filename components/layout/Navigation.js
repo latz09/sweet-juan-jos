@@ -35,7 +35,7 @@ const DesktopNavigation = ({ acceptingOrders }) => {
 				))}
 
 				{/* Your Online Ordering Link */}
-				<LinkIfActive acceptingOrders={acceptingOrders} />
+				<LinkIfActive acceptingOrders={acceptingOrders} mobile={false} />
 
 				{/* Cart Button inline next to LinkIfActive */}
 				<div className='ml-4'>
@@ -107,6 +107,7 @@ const MobileNavigation = ({ acceptingOrders }) => {
 								<LinkIfActive
 									toggleMenu={toggleMenu}
 									acceptingOrders={acceptingOrders}
+									mobile={true}
 								/>
 								{NavigationLinks.map((link) => (
 									<motion.div

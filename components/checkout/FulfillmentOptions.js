@@ -34,8 +34,8 @@ const FulfillmentOptions = ({
 
 	const renderHeading = () => {
 		if (allowPickup && allowDelivery) return 'Choose Between';
-		if (allowPickup && !allowDelivery) return 'Available for Pickup Only';
-		if (!allowPickup && allowDelivery) return 'Available for Delivery Only';
+		if (allowPickup && !allowDelivery) return 'Available for Pickup';
+		if (!allowPickup && allowDelivery) return 'Available for Delivery';
 		return '';
 	};
 
@@ -58,7 +58,7 @@ const FulfillmentOptions = ({
 					>
 						Pickup
 					</button>
-          <span className="uppercase font-bold opacity-80">or</span>
+					<span className='uppercase font-bold opacity-80'>or</span>
 					<button
 						type='button'
 						onClick={() => setSelectedMethod('delivery')}
@@ -84,9 +84,13 @@ const FulfillmentOptions = ({
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
 						className='origin-top overflow-hidden space-y-2  text-dark md:text-lg pb-12'
 					>
-						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>Pickup Details</h3>
+						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>
+							Pickup Details
+						</h3>
 						{pickupInfo.map((paragraph, idx) => (
-							<p key={idx} className="text-xl lg:text-2xl" >{parseBoldSyntax(paragraph)}</p>
+							<p key={idx} className='text-xl lg:text-2xl'>
+								{parseBoldSyntax(paragraph)}
+							</p>
 						))}
 					</motion.div>
 				)}
@@ -100,9 +104,13 @@ const FulfillmentOptions = ({
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
 						className='origin-top overflow-hidden space-y-4  text-dark md:text-lg '
 					>
-						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>Delivery Details</h3>
+						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>
+							Delivery Details
+						</h3>
 						{deliveryInfo.map((paragraph, idx) => (
-							<p key={idx} className="text-xl lg:text-2xl" >{parseBoldSyntax(paragraph)}</p>
+							<p key={idx} className='text-xl lg:text-2xl'>
+								{parseBoldSyntax(paragraph)}
+							</p>
 						))}
 					</motion.div>
 				)}
@@ -187,7 +195,9 @@ const FulfillmentOptions = ({
 						type='button'
 						onClick={() => setIsGift(!isGift)}
 						className={`w-full py-3 rounded font-bold transition shadow ${
-							isGift ? 'text-lg uppercase  shadow-none' : 'bg-primary/5 text-dark'
+							isGift
+								? 'text-lg uppercase  shadow-none'
+								: 'bg-primary/5 text-dark'
 						}`}
 					>
 						{isGift ? '✓ Marked as a Gift' : 'Is this a gift for someone?'}

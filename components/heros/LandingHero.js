@@ -33,7 +33,7 @@ const LandingHero = async ({ landingImage }) => {
 						<Image src={logo} alt='sweet juanjos' width={300} height={300} />
 						<Socials includeText={false} color='light' />
 					</div>
-					<div className='grid gap-4 place-items-center'>
+					<div className='grid lg:grid-cols-2 gap-4 place-items-cente'>
 						<ButtonLink
 							title='Request an Order'
 							type='secondary'

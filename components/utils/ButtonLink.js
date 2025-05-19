@@ -13,7 +13,7 @@ const ButtonLink = ({
 			break;
 		case 'secondary':
 			type =
-				'text-dark bg-gradient-to-b from-light/50 via-light/70 to-light/50  shadow-lg shadow-primary/40 hover:bg-light/80 transition duration-700	';
+				'text-dark bg-gradient-to-b from-light/50 via-light/70 to-light/50  shadow-lg shadow-primary/40 hover:bg-light/80 transition duration-700 w-full	';
 			break;
 	}
 
@@ -37,22 +37,22 @@ export default ButtonLink;
 export const OnlineOrderingLandingButton = () => {
 	return (
 		<FadeInAndRotate>
-			<div className='mt-6 px-2'>
+			
 				<Link href={'online-ordering'}>
-					<div className='grid place-items-center space-y-1'>
-						<button className=' text-dark font-black text-2xl uppercase'>
-							Online Ordering Now Available!
+					<div className='grid place-items-center space-y-3 lg:space-y-1'>
+						<button className=' py-3  px-8  font-bold text-2xl lg:text-4xl  hover:scale-95 transition duration-700 text-dark bg-primary shadow-lg shadow-primary/40 hover:bg-primary/80 w-full'>
+							Order Now
 						</button>
 
 						<p className='text-dark font-bold uppercase tracking-wide text-sm lg:text-base pb-2'>
-							Limited Menu Available — Order Today for Friday!
+							<span className="italic">Limited Menu Available</span>
+							
+							
 						</p>
-						<p className=' px-4 py-1 bg-dark rounded-sm text-light font-bold uppercase'>
-							View Menu
-						</p>
+					
 					</div>
 				</Link>
-			</div>
+			
 		</FadeInAndRotate>
 	);
 };
