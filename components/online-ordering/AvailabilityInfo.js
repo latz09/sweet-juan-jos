@@ -70,7 +70,7 @@ const AvailabilityToggle = ({ label, icon: Icon, details = [], onClick }) => {
 	return (
 		<button
 			onClick={() => onClick(label, details, Icon)}
-			className='text-primary font-bold inline-flex justify-center items-center gap-3 bg-light px-4 py-2 rounded-sm w-full text-center lg:text-xl'
+			className='text-primary font-bold inline-flex justify-center items-center gap-3 bg-light px-4 py-2 rounded-sm w-full text-center text-lg lg:text-xl'
 		>
 			<Icon />
 			{`${label} details`}

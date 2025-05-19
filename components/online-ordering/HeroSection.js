@@ -18,7 +18,7 @@ const HeroSection = ({
 	return (
 		<div className='text-center '>
 			{heroImageUrl && (
-				<div className='relative w-full h-[65vh] lg:h-[70vh]'>
+				<div className='relative w-full h-[60vh] lg:h-[60vh]'>
 					<Image
 						src={heroImageUrl}
 						alt={pageTitle}
@@ -41,7 +41,7 @@ const HeroSection = ({
 			/>
 			<div className='pt-4 lg:pt-10'>
 				{introText?.length > 0 && (
-					<div className='mt-4 max-w-5xl mx-auto space-y-2'>
+					<div className='m-4 max-w-5xl mx-auto space-y-2'>
 						{introText.map((para, idx) => (
 							<Paragraph key={idx} content={para} />
 						))}

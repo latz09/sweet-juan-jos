@@ -21,7 +21,7 @@ const OrderingPage = ({ settings, categories }) => {
 			product.category._id === selectedCategoryId
 		);
 	});
-	console.log(settings)
+	
 
 	return (
 		<div className='min-h-screen space-y-16 lg:space-y-24 '>
