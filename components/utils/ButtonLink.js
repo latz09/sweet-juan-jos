@@ -37,22 +37,16 @@ export default ButtonLink;
 export const OnlineOrderingLandingButton = () => {
 	return (
 		<FadeInAndRotate>
-			
-				<Link href={'online-ordering'}>
-					<div className='grid place-items-center space-y-3 lg:space-y-1'>
-						<button className=' py-3  px-8  font-bold text-2xl lg:text-4xl  hover:scale-95 transition duration-700 text-dark bg-primary shadow-lg shadow-primary/40 hover:bg-primary/80 w-full'>
-							Order Now
-						</button>
-
-						<p className='text-dark font-bold uppercase tracking-wide text-sm lg:text-base pb-2'>
-							<span className="italic">Limited Menu Available</span>
-							
-							
-						</p>
-					
-					</div>
-				</Link>
-			
+			<Link href={'online-ordering'}>
+				<div className='grid place-items-center space-y-2'>
+					<button className='py-3 px-8 font-bold text-2xl lg:text-4xl hover:scale-95 transition duration-700 text-dark bg-primary shadow-lg shadow-light/40 hover:bg-primary/80 w-full'>
+						Order Now
+					</button>
+					<p className='text-dark font-bold uppercase tracking-wide text-xs lg:text-sm italic -mt-1'>
+						Limited Menu Available
+					</p>
+				</div>
+			</Link>
 		</FadeInAndRotate>
 	);
 };

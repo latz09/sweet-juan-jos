@@ -33,6 +33,7 @@ const OrderingPage = ({ settings, categories }) => {
 				allowPickup={settings?.allowPickup}
 				deliveryInfo={settings?.deliveryInfo}
 				pickupInfo={settings?.pickupInfo}
+				deliveryFee={settings?.deliveryFee}
 			/>
 			<div className='space-y-6'>
 				<CategorySelector

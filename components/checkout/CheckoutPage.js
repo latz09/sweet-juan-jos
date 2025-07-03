@@ -8,17 +8,18 @@ import FulfillmentOptions from './FulfillmentOptions';
 import ContactForm from './ContactForm';
 import ConfirmOrderButton from './ConfirmOrderButton';
 import useCartStore from '@/lib/useCartStore';
-import { DELIVERY_FEE } from '@/lib/constants';
 
 const CheckoutPage = ({ settings }) => {
 	const cart = useCartStore((state) => state.cart);
 	const cartTotal = useCartStore((state) => state.cartTotalPrice());
 	const [selectedMethod, setSelectedMethod] = useState(''); // pickup | delivery
+
+	// Use delivery fee from settings, fallback to 5.00 if not set
+	const deliveryFee = settings?.deliveryFee || 5.0;
 	const finalTotal =
-		selectedMethod === 'delivery' ? cartTotal + DELIVERY_FEE : cartTotal;
+		selectedMethod === 'delivery' ? cartTotal + deliveryFee : cartTotal;
 
 	// Form state
-
 	const [deliveryAddress, setDeliveryAddress] = useState({
 		address: '',
 		city: '',
@@ -52,6 +53,7 @@ const CheckoutPage = ({ settings }) => {
 						setZipValid={setZipValid}
 						giftInfo={giftInfo}
 						setGiftInfo={setGiftInfo}
+						deliveryFee={deliveryFee}
 					/>
 
 					<ContactForm
@@ -65,7 +67,9 @@ const CheckoutPage = ({ settings }) => {
 						contactInfo={contactInfo}
 						deliveryAddress={deliveryAddress}
 						zipValid={zipValid}
+						giftInfo={giftInfo}
 						settings={settings}
+						deliveryFee={deliveryFee}
 					/>
 					<div className='flex items-center justify-center space-x-4 mt-2'>
 						<img

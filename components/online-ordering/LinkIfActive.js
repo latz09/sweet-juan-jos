@@ -13,7 +13,7 @@ const LinkIfActive = ({ acceptingOrders, toggleMenu, mobile }) => {
 				</Link>
 			) : (
 				<Link href='/online-ordering' onClick={toggleMenu}>
-					<div className=' text-center inline-block text-3xl uppercase text-primary border-x-2 underline underline-offset-4 decoration-1 decoration-wavy  border-primary font-bold w-full py-3 px-8 cursor-pointer '>
+					<div className='font-black text-center inline-block text-3xl uppercase text-primary border-x-2 underline underline-offset-4 decoration-1 decoration-wavy  border-primary  w-full py-3 px-8 cursor-pointer '>
 						Online Ordering
 					</div>
 				</Link>

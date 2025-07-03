@@ -10,6 +10,7 @@ const FulfillmentOptions = ({
 	settings,
 	selectedMethod,
 	setSelectedMethod,
+	deliveryFee,
 	deliveryAddress,
 	setDeliveryAddress,
 	zipValid,
@@ -20,7 +21,15 @@ const FulfillmentOptions = ({
 	const { allowPickup, allowDelivery, pickupInfo, deliveryInfo, allowGifting } =
 		settings;
 
+	// Check if this is a gift based on whether any gift info exists
 	const [isGift, setIsGift] = useState(false);
+
+	// Initialize isGift based on existing giftInfo
+	useEffect(() => {
+		if (giftInfo && (giftInfo.name || giftInfo.note)) {
+			setIsGift(true);
+		}
+	}, [giftInfo]);
 
 	// Auto-select if only one option is available
 	useEffect(() => {
@@ -38,6 +47,30 @@ const FulfillmentOptions = ({
 		if (!allowPickup && allowDelivery) return 'Available for Delivery';
 		return '';
 	};
+
+	// Handle toggling gift status
+	const handleGiftToggle = () => {
+		const newIsGift = !isGift;
+		setIsGift(newIsGift);
+		
+		// If turning off gift, clear the gift info
+		if (!newIsGift) {
+			setGiftInfo({ name: '', note: '' });
+		}
+	};
+
+	// Generate delivery fee message
+	const getDeliveryFeeMessage = () => {
+		if (selectedMethod !== 'delivery' || deliveryFee === undefined) return null;
+		
+		if (deliveryFee === 0) {
+			return 'Free delivery this week!';
+		} else {
+			return `Delivery fee: $${deliveryFee.toFixed(2)}`;
+		}
+	};
+
+	const deliveryFeeMessage = getDeliveryFeeMessage();
 
 	return (
 		<section className='space-y-6'>
@@ -112,6 +145,20 @@ const FulfillmentOptions = ({
 								{parseBoldSyntax(paragraph)}
 							</p>
 						))}
+
+						{/* Delivery fee message with matching styling from AvailabilityInfo */}
+						{deliveryFeeMessage && (
+							<div className='mt-6 p-4 bg-primary/10 rounded-sm border-l-2 rounded-l-lg border-primary'>
+								<p className={`text-xl uppercase font-black text-center ${
+									deliveryFee === 0 
+										? '' 
+										: 'text-white'
+								}`}>
+									{deliveryFee === 0 && '🎉 '}
+									{deliveryFeeMessage}
+								</p>
+							</div>
+						)}
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -193,7 +240,7 @@ const FulfillmentOptions = ({
 				<div className='space-y-4 pt-4 lg:pt-16 '>
 					<button
 						type='button'
-						onClick={() => setIsGift(!isGift)}
+						onClick={handleGiftToggle}
 						className={`w-full py-3 rounded font-bold transition shadow ${
 							isGift
 								? 'text-lg uppercase  shadow-none'
@@ -219,7 +266,7 @@ const FulfillmentOptions = ({
 								<input
 									type='text'
 									placeholder='Recipient Name'
-									value={giftInfo.name}
+									value={giftInfo.name || ''}
 									onChange={(e) =>
 										setGiftInfo({ ...giftInfo, name: e.target.value })
 									}
@@ -227,7 +274,7 @@ const FulfillmentOptions = ({
 								/>
 								<textarea
 									placeholder='Optional Note'
-									value={giftInfo.note}
+									value={giftInfo.note || ''}
 									onChange={(e) =>
 										setGiftInfo({ ...giftInfo, note: e.target.value })
 									}

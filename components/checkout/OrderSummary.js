@@ -5,11 +5,11 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { CartItem } from '../cart/CartModal';
 import useCartStore from '@/lib/useCartStore';
 import { AnimatePresence, motion } from 'framer-motion';
-import { DELIVERY_FEE } from '@/lib/constants';
 
-const OrderSummary = ({ cart, total, selectedMethod }) => {
+const OrderSummary = ({ cart, total, selectedMethod, deliveryFee }) => {
 	const [open, setOpen] = useState(false);
 	const cartTotalPrice = useCartStore((state) => state.cartTotalPrice);
+	
 
 	const itemCount = cart.length;
 	const subtotal = cartTotalPrice(); // base total without delivery
@@ -33,7 +33,7 @@ const OrderSummary = ({ cart, total, selectedMethod }) => {
 						{/* Optional Delivery Fee */}
 						{showDelivery && (
 							<div className=' font-bold text-dark/80'>
-								+ ${DELIVERY_FEE.toFixed(2)} Delivery Fee
+								+ ${deliveryFee} Delivery Fee
 							</div>
 						)}
 

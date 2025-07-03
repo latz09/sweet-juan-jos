@@ -13,6 +13,7 @@ export const FETCH_ONLINE_ORDERING_SETTINGS_QUERY = `
   pickupInfo,
   deliveryInfo,
   allowGifting,
+  deliveryFee,
   confirmationSubject,
   confirmationBody,
   onlineOrderingActive,

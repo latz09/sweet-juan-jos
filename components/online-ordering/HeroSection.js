@@ -14,6 +14,7 @@ const HeroSection = ({
 	allowPickup,
 	deliveryInfo,
 	pickupInfo,
+	deliveryFee
 }) => {
 	return (
 		<div className='text-center '>
@@ -27,7 +28,10 @@ const HeroSection = ({
 					/>
 					<div className='absolute inset-0 grid place-items-center bg-gradient-to-b from-light/10 via-light/50 to-light/20'>
 						<div className='grid place-items-center gap-4'>
-							<Image src={logo} alt='Logo Overlay' className='max-w-xs' />
+							<Image src={logo} alt='Logo Overlay' 
+								width = {215}
+								height = {215}
+							/>
 							<MainHeading title={pageTitle} type='dark' />
 						</div>
 					</div>
@@ -38,6 +42,7 @@ const HeroSection = ({
 				allowPickup={allowPickup}
 				deliveryInfo={deliveryInfo}
 				pickupInfo={pickupInfo}
+				deliveryFee={deliveryFee}
 			/>
 			<div className='pt-4 lg:pt-10'>
 				{introText?.length > 0 && (

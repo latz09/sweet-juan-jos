@@ -65,16 +65,27 @@ const CopyRight = () => {
 			<Link href='/legal/privacy-policy'>
 				<span className='text-xs font-semibold'>Privacy Policy</span>
 			</Link>
+
+			<p>{`© ${currentYear} by Sweet Juanjo's.`}</p>
+			<PoweredBy />
+		</div>
+	);
+};
+
+const PoweredBy = () => {
+	return (
+		<div>
 			<a
 				href='https://www.latzwebdesign.com'
 				target='_blank'
 				rel='noopener noreferrer'
-				className='flex items-center justify-center gap-2 font-semibold text-dark '
+				className='grid place-items-center  text-dark text-base tracking-normal '
 			>
 				<p>
-					{`© ${currentYear} by Sweet Juanjo's. Handcrafted with care by `}
-					<span className='font-bold '>LatzWebDesign.</span>
+					{`Powered by `}
+					<span className='font-bold '>Latz Web Design</span>
 				</p>
+				<p className='text-sm font-semibold'>© LatzWebDesign.com</p>
 			</a>
 		</div>
 	);
