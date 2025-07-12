@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 	const signature = req.headers['x-square-hmacsha256-signature'];
 	const signatureKey = process.env.OL_WEBHOOK_KEY;
 	// const webhookUrl = process.env.OL_WEBHOOK_URL;
-	const webhookUrl = 'https://sweet-juan-jos-git-online-ordering-sweet-juanjos.vercel.app/api/onlineOrderingWebhook';
+	const webhookUrl = process.env.OL_WEBHOOK_URL;
 
 	console.log('🔐 Webhook URL from env:', webhookUrl);
 	console.log('🔑 Signature present:', !!signature);
