@@ -1,9 +1,10 @@
+// pages/api/onlineOrderingWebhook.js
 import crypto from 'crypto';
 import { sanityClient } from '@/lib/sanityConnection';
 
 export const config = { api: { bodyParser: false } };
 
-// hardcode your ngrok URL and webhook key here:
+// 🔒 Hard‑code your live webhook URL and signing key for testing:
 const WEBHOOK_URL =
 	'https://sweet-juan-jos-git-online-ordering-sweet-juanjos.vercel.app/api/onlineOrderingWebhook';
 const SIGNATURE_KEY = 'P0SJCv0JS88OISMLTqpNQw';
@@ -24,68 +25,64 @@ export default async function handler(req, res) {
 	}
 
 	const rawBody = await getRawBody(req);
-	const signature = req.headers['x-square-hmacsha256-signature'];
+	// Try both possible header names
+	const signature =
+		req.headers['x-square-hmacsha256-signature'] ||
+		req.headers['x-square-signature'];
 
-	// Verify webhook signature
 	if (!signature) {
 		console.error('❌ Missing signature header');
-		return res.status(403).json({ message: 'Missing signature' });
+		return res.status(401).json({ message: 'Missing signature' });
 	}
 
+	// Compute HMAC over the exact URL + raw body
 	const hmac = crypto
 		.createHmac('sha256', SIGNATURE_KEY)
 		.update(WEBHOOK_URL + rawBody)
 		.digest('base64');
 
 	if (hmac !== signature) {
-		console.error('❌ Invalid webhook signature');
-		return res.status(403).json({ message: 'Invalid signature' });
+		console.error('❌ Signature mismatch');
+		return res.status(401).json({ message: 'Invalid signature' });
 	}
 
 	let event;
 	try {
 		event = JSON.parse(rawBody);
 	} catch (err) {
-		console.error('❌ Invalid JSON body:', err);
-		return res.status(400).json({ message: 'Invalid JSON' });
+		console.error('❌ Invalid JSON:', err);
+		return res.status(400).json({ message: 'Malformed JSON' });
 	}
 
 	console.log('✅ Webhook event type:', event.type);
 
-	// now handle the payment.updated event
+	// Only act on completed payments
 	if (event.type === 'payment.updated') {
 		const payment = event.data?.object?.payment;
-		if (!payment) {
-			console.warn('❌ No payment object found');
-			return res.status(200).json({ success: true });
-		}
-
-		const { status, id: paymentId, order_id: squareOrderId } = payment;
-		console.log('💳 Payment status:', status, 'ID:', paymentId);
-
-		if (status === 'COMPLETED') {
+		if (payment?.status === 'COMPLETED') {
 			try {
-				const thirtyMinutesAgo = new Date(
+				const thirtyMinAgo = new Date(
 					Date.now() - 30 * 60 * 1000
 				).toISOString();
-				const pendingOrders = await sanityClient.fetch(
-					`*[_type == "submittedOrder" && status == "pending" && createdAt > $time] | order(createdAt desc)`,
-					{ time: thirtyMinutesAgo }
+				// Grab the most recent pending order
+				const order = await sanityClient.fetch(
+					`*[_type=="submittedOrder" && status=="pending" && createdAt > $t]
+            | order(createdAt desc)[0]`,
+					{ t: thirtyMinAgo }
 				);
-
-				if (!pendingOrders.length) {
-					console.warn('❗ No recent pending orders found');
-					return res.status(200).json({ success: false });
+				if (!order) {
+					console.warn('❗ No pending order found in last 30m');
+					return res.status(200).json({ success: true });
 				}
 
-				const order = pendingOrders[0];
+				// Patch to “paid”
 				await sanityClient
 					.patch(order._id)
 					.set({
 						status: 'paid',
 						paidAt: new Date().toISOString(),
-						paymentId,
-						squareOrderId,
+						paymentId: payment.id,
+						squareOrderId: payment.order_id,
 						customerEmail: payment.buyer_email_address || '',
 					})
 					.commit();
@@ -93,15 +90,12 @@ export default async function handler(req, res) {
 				console.log(`✅ Order ${order._id} marked as paid`);
 				return res.status(200).json({ success: true });
 			} catch (err) {
-				console.error('❌ Error processing payment webhook:', err);
-				return res
-					.status(500)
-					.json({ success: false, error: 'Failed to process payment' });
+				console.error('❌ Error updating Sanity:', err);
+				return res.status(500).json({ message: 'Server error' });
 			}
 		}
-	} else {
-		console.log(`⏭️ Event type ${event.type} – not handled`);
 	}
 
+	// Ignore other event types
 	return res.status(200).json({ success: true });
 }
