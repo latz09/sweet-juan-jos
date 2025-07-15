@@ -19,7 +19,7 @@ const AboutBlurb = ({ data, ourStoryData }) => {
 					className='w-3/5 lg:w-full mx-auto shadow-lg shadow-primary/40 rounded-lg'
 				/>
 				<div
-					className='lg:col-span-2 place-self-center text-center lg:text-justify'
+					className='lg:col-span-2 place-self-center text-center lg:text-justify '
 					
 				>
 					<SubHeading title={data.heading} type='dark' />
