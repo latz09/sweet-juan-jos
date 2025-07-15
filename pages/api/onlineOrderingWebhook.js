@@ -27,21 +27,30 @@ export default async function handler(req, res) {
 	const host = req.headers['host'];
 	const webhookUrl = `${protocol}://${host}${req.url}`;
 
-	// Verify webhook signature
-	if (!signature || !signatureKey || !webhookUrl) {
-		console.error('❌ Missing required webhook configuration');
+	// 🛠 Debug logs
+	console.log('🛠 [DEBUG] Protocol:', protocol);
+	console.log('🛠 [DEBUG] Host:', host);
+	console.log('🛠 [DEBUG] Req URL:', req.url);
+	console.log('🛠 [DEBUG] Full webhook URL:', webhookUrl);
+	console.log('🛠 [DEBUG] Signature header present:', signature ? 'yes' : 'no');
+	console.log('🛠 [DEBUG] Signature key loaded:', signatureKey ? 'yes' : 'no');
+
+	if (!signature || !signatureKey) {
+		console.error('❌ Missing signature or webhook key');
 		return res.status(403).json({ message: 'Missing webhook configuration' });
 	}
 
+	// Calculate HMAC
 	const hmac = crypto
 		.createHmac('sha256', signatureKey)
 		.update(webhookUrl + rawBody)
 		.digest('base64');
 
+	console.log('🛠 [DEBUG] Calculated HMAC:', hmac);
+	console.log('🛠 [DEBUG] Received Signature:', signature);
+
 	if (hmac !== signature) {
 		console.error('❌ Invalid webhook signature');
-		console.error('Expected HMAC:', hmac);
-		console.error('Received Signature:', signature);
 		return res.status(403).json({ message: 'Invalid signature' });
 	}
 
@@ -55,15 +64,12 @@ export default async function handler(req, res) {
 
 	console.log('✅ Webhook event type:', event.type);
 
-	// Handle payment completion
 	if (event.type === 'payment.updated') {
 		const payment = event.data?.object?.payment;
 
 		if (!payment) {
 			console.log('❌ No payment object found');
-			return res
-				.status(200)
-				.json({ success: true, message: 'No payment object' });
+			return res.status(200).json({ success: true, message: 'No payment object' });
 		}
 
 		const { status, id: paymentId, order_id: squareOrderId } = payment;
@@ -74,9 +80,7 @@ export default async function handler(req, res) {
 			console.log(`💸 Payment completed: ${paymentId}`);
 
 			try {
-				const thirtyMinutesAgo = new Date(
-					Date.now() - 30 * 60 * 1000
-				).toISOString();
+				const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
 
 				const pendingOrders = await sanityClient.fetch(
 					`*[_type == "submittedOrder" && status == "pending" && createdAt > $thirtyMinutesAgo] | order(createdAt desc)`,
@@ -89,7 +93,7 @@ export default async function handler(req, res) {
 					console.warn('❗ No recent pending orders found');
 					return res.status(200).json({
 						success: false,
-						message: 'No recent pending orders found',
+						message: 'No recent pending orders found'
 					});
 				}
 
@@ -113,13 +117,14 @@ export default async function handler(req, res) {
 
 				return res.status(200).json({
 					success: true,
-					message: `Order ${orderId} updated successfully`,
+					message: `Order ${orderId} updated successfully`
 				});
+
 			} catch (err) {
 				console.error('❌ Error processing payment webhook:', err);
 				return res.status(500).json({
 					success: false,
-					error: 'Failed to process payment',
+					error: 'Failed to process payment'
 				});
 			}
 		} else {
