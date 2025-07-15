@@ -12,7 +12,7 @@ async function getRawBody(req) {
 
 // 🔒 Hard‑coded for testing:
 const WEBHOOK_URL =
-  'https://fbfb80034188.ngrok-free.app/api/onlineOrderingWebhook';
+  'https://www.sweetjuanjos.com/api/onlineOrderingWebhook';
 const SIGNATURE_KEY = 'P0SJCv0JS88OISMLTqpNQw';
 
 export default async function handler(req, res) {
