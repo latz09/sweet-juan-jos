@@ -173,7 +173,7 @@ export default async function handler(req, res) {
 			},
 			checkoutOptions: {
 				askForShippingAddress: false, // We're collecting this ourselves
-				redirectUrl: `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/online-ordering/order-success`,
+				redirectUrl: `${process.env.NEXTAUTH_URL || 'https://www.sweetjuanjos.com'}/online-ordering/order-success`,
 			},
 		};
 
