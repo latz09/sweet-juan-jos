@@ -20,39 +20,43 @@ export default async function handler(req, res) {
 
 	const rawBody = await getRawBody(req);
 	const signature = req.headers['x-square-hmacsha256-signature'];
-	// const signatureKey = process.env.OL_WEBHOOK_KEY;
-	const signatureKey = 'P0SJCv0JS88OISMLTqpNQw';
+	const signatureKey = 'P0SJCv0JS88OISMLTqpNQw'; // 🔥 Replace with your real secret!
 
-	// Dynamically build full webhook URL
-	const protocol = req.headers['x-forwarded-proto'] || 'https';
-	const host = req.headers['host'];
-	const webhookUrl = `${protocol}://${host}${req.url}`;
+	// Use the exact webhook URL registered in Square dashboard (no dynamic building!)
+	const webhookUrl =
+		'https://sweet-juan-jos-git-online-ordering-sweet-juanjos.vercel.app/api/onlineOrderingWebhook';
 
-	// 🛠 Debug logs
-	console.log('🛠 [DEBUG] Protocol:', protocol);
-	console.log('🛠 [DEBUG] Host:', host);
-	console.log('🛠 [DEBUG] Req URL:', req.url);
-	console.log('🛠 [DEBUG] Full webhook URL:', webhookUrl);
+	// Debug log everything
+	console.log('🛠 [DEBUG] req.url:', req.url);
+	console.log('🛠 [DEBUG] Using hardcoded webhookUrl:', webhookUrl);
 	console.log('🛠 [DEBUG] Signature header present:', signature ? 'yes' : 'no');
 	console.log('🛠 [DEBUG] Signature key loaded:', signatureKey ? 'yes' : 'no');
 
-	if (!signature || !signatureKey) {
-		console.error('❌ Missing signature or webhook key');
-		return res.status(403).json({ message: 'Missing webhook configuration' });
-	}
+	// Optional: bypass signature check for ?debug=1
+	const skipSignature = req.query.debug === '1';
 
-	// Calculate HMAC
-	const hmac = crypto
-		.createHmac('sha256', signatureKey)
-		.update(webhookUrl + rawBody)
-		.digest('base64');
+	if (!skipSignature) {
+		if (!signature || !signatureKey) {
+			console.error('❌ Missing signature or webhook key');
+			return res.status(403).json({ message: 'Missing webhook configuration' });
+		}
 
-	console.log('🛠 [DEBUG] Calculated HMAC:', hmac);
-	console.log('🛠 [DEBUG] Received Signature:', signature);
+		const hmacInput = webhookUrl + rawBody;
+		const hmac = crypto
+			.createHmac('sha256', signatureKey)
+			.update(hmacInput)
+			.digest('base64');
 
-	if (hmac !== signature) {
-		console.error('❌ Invalid webhook signature');
-		return res.status(403).json({ message: 'Invalid signature' });
+		console.log('🛠 [DEBUG] HMAC input string:', hmacInput);
+		console.log('🛠 [DEBUG] Calculated HMAC:', hmac);
+		console.log('🛠 [DEBUG] Received Signature:', signature);
+
+		if (hmac !== signature) {
+			console.error('❌ Invalid webhook signature');
+			return res.status(403).json({ message: 'Invalid signature' });
+		}
+	} else {
+		console.warn('⚠️ Signature check bypassed in debug mode!');
 	}
 
 	let event;
@@ -70,7 +74,9 @@ export default async function handler(req, res) {
 
 		if (!payment) {
 			console.log('❌ No payment object found');
-			return res.status(200).json({ success: true, message: 'No payment object' });
+			return res
+				.status(200)
+				.json({ success: true, message: 'No payment object' });
 		}
 
 		const { status, id: paymentId, order_id: squareOrderId } = payment;
@@ -81,7 +87,9 @@ export default async function handler(req, res) {
 			console.log(`💸 Payment completed: ${paymentId}`);
 
 			try {
-				const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+				const thirtyMinutesAgo = new Date(
+					Date.now() - 30 * 60 * 1000
+				).toISOString();
 
 				const pendingOrders = await sanityClient.fetch(
 					`*[_type == "submittedOrder" && status == "pending" && createdAt > $thirtyMinutesAgo] | order(createdAt desc)`,
@@ -94,7 +102,7 @@ export default async function handler(req, res) {
 					console.warn('❗ No recent pending orders found');
 					return res.status(200).json({
 						success: false,
-						message: 'No recent pending orders found'
+						message: 'No recent pending orders found',
 					});
 				}
 
@@ -118,14 +126,13 @@ export default async function handler(req, res) {
 
 				return res.status(200).json({
 					success: true,
-					message: `Order ${orderId} updated successfully`
+					message: `Order ${orderId} updated successfully`,
 				});
-
 			} catch (err) {
 				console.error('❌ Error processing payment webhook:', err);
 				return res.status(500).json({
 					success: false,
-					error: 'Failed to process payment'
+					error: 'Failed to process payment',
 				});
 			}
 		} else {
