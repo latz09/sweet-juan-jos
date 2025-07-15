@@ -5,94 +5,91 @@ import { sanityClient } from '@/lib/sanityConnection';
 export const config = { api: { bodyParser: false } };
 
 async function getRawBody(req) {
-	let data = '';
-	for await (const chunk of req) data += chunk;
-	return data;
+  let data = '';
+  for await (const chunk of req) data += chunk;
+  return data;
 }
 
+// 🔒 Hard‑coded for testing:
+const WEBHOOK_URL =
+  process.env.OL_WEBHOOK_URL ;
+const SIGNATURE_KEY = process.env.OL_WEBHOOK_KEY;
+
 export default async function handler(req, res) {
-	// Only POST allowed
-	if (req.method !== 'POST') {
-		res.setHeader('Allow', 'POST');
-		return res.status(405).send('Method Not Allowed');
-	}
+  console.log('🔔 Webhook received:', req.method, req.url);
+  if (req.method !== 'POST') {
+    return res.status(405).send('Method Not Allowed');
+  }
 
-	const WEBHOOK_URL = process.env.OL_WEBHOOK_URL;
-	const SIGNATURE_KEY = process.env.OL_WEBHOOK_KEY;
-	if (!WEBHOOK_URL || !SIGNATURE_KEY) {
-		console.error(
-			'❌ Webhook misconfigured: missing OL_WEBHOOK_URL or OL_WEBHOOK_KEY'
-		);
-		return res.status(500).send('Webhook misconfigured');
-	}
+  const rawBody = await getRawBody(req);
+  // Square might send either header name
+  const signature =
+    req.headers['x-square-hmacsha256-signature'] ||
+    req.headers['x-square-signature'];
+  console.log('🪪 Incoming signature header:', signature);
 
-	// Read raw body for signature verification
-	const rawBody = await getRawBody(req);
-	const signature =
-		req.headers['x-square-hmacsha256-signature'] ||
-		req.headers['x-square-signature'];
-	if (!signature) {
-		console.warn('❌ Missing signature header');
-		return res.status(401).send('Unauthorized');
-	}
+  // Compute the HMAC over the exact URL + raw body
+  const computedHmac = crypto
+    .createHmac('sha256', SIGNATURE_KEY)
+    .update(WEBHOOK_URL + rawBody)
+    .digest('base64');
+  console.log('🔑 Computed HMAC:', computedHmac);
 
-	// Verify HMAC
-	const expectedHmac = crypto
-		.createHmac('sha256', SIGNATURE_KEY)
-		.update(WEBHOOK_URL + rawBody)
-		.digest('base64');
+  // ——— OPTION A: Strict check ———
+  if (signature !== computedHmac) {
+    console.error('❌ Signature mismatch; rejecting with 401');
+    return res.status(401).send('Invalid signature');
+  }
+  console.log('✅ Signature verified');
 
-	if (signature !== expectedHmac) {
-		console.warn('❌ Invalid signature');
-		return res.status(401).send('Unauthorized');
-	}
+  // ——— OPTION B: Bypass check for now ———
+  // comment out the `if (signature !== computedHmac)` block
+  // to force the handler to continue and let you verify order updates
 
-	// Parse the event
-	let event;
-	try {
-		event = JSON.parse(rawBody);
-	} catch (err) {
-		console.error('❌ Malformed JSON:', err);
-		return res.status(400).send('Bad Request');
-	}
+  let event;
+  try {
+    event = JSON.parse(rawBody);
+  } catch (err) {
+    console.error('❌ Invalid JSON body:', err);
+    return res.status(400).send('Invalid JSON');
+  }
+  console.log('📬 Webhook event type:', event.type);
 
-	// Only process completed payments
-	if (event.type === 'payment.updated') {
-		const payment = event.data?.object?.payment;
-		if (payment?.status === 'COMPLETED') {
-			try {
-				// Find the most recent pending order in the last 30 minutes
-				const thirtyMinAgo = new Date(
-					Date.now() - 30 * 60 * 1000
-				).toISOString();
-				const order = await sanityClient.fetch(
-					`*[_type=="submittedOrder" && status=="pending" && createdAt > $t]
+  if (event.type === 'payment.updated') {
+    const payment = event.data?.object?.payment;
+    if (payment?.status === 'COMPLETED') {
+      try {
+        const since = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+        const order = await sanityClient.fetch(
+          `*[_type=="submittedOrder" && status=="pending" && createdAt > $t]
             | order(createdAt desc)[0]`,
-					{ t: thirtyMinAgo }
-				);
+          { t: since }
+        );
+        if (!order) {
+          console.warn('⚠️ No pending order found');
+          return res.status(200).json({ success: true });
+        }
 
-				if (order) {
-					await sanityClient
-						.patch(order._id)
-						.set({
-							status: 'paid',
-							paidAt: new Date().toISOString(),
-							paymentId: payment.id,
-							squareOrderId: payment.order_id,
-							customerEmail: payment.buyer_email_address || '',
-						})
-						.commit();
-					console.log(`✅ Order ${order._id} marked as paid`);
-				} else {
-					console.warn('⚠️ No pending order found to update');
-				}
-			} catch (err) {
-				console.error('❌ Error updating Sanity order:', err);
-				return res.status(500).send('Server Error');
-			}
-		}
-	}
+        await sanityClient
+          .patch(order._id)
+          .set({
+            status: 'paid',
+            paidAt: new Date().toISOString(),
+            paymentId: payment.id,
+            squareOrderId: payment.order_id,
+            customerEmail: payment.buyer_email_address || '',
+          })
+          .commit();
 
-	// Acknowledge all other events
-	return res.status(200).send('OK');
+        console.log(`✅ Order ${order._id} marked as paid`);
+        return res.status(200).json({ success: true });
+      } catch (err) {
+        console.error('❌ Error updating Sanity:', err);
+        return res.status(500).send('Processing error');
+      }
+    }
+  }
+
+  // For all other events just return 200
+  return res.status(200).json({ success: true });
 }
