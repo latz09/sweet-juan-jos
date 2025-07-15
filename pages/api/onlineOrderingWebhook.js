@@ -20,7 +20,8 @@ export default async function handler(req, res) {
 
 	const rawBody = await getRawBody(req);
 	const signature = req.headers['x-square-hmacsha256-signature'];
-	const signatureKey = process.env.OL_WEBHOOK_KEY;
+	// const signatureKey = process.env.OL_WEBHOOK_KEY;
+	const signatureKey = 'P0SJCv0JS88OISMLTqpNQw';
 
 	// Dynamically build full webhook URL
 	const protocol = req.headers['x-forwarded-proto'] || 'https';
