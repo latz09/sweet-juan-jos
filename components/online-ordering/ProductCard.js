@@ -9,7 +9,7 @@ import { MAX_ONLINE_ORDER_TOTAL } from '@/lib/constants';
 
 import LimitModal from './LimitModal';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, maxOrderAmount }) => {
 	
 	const [selectedQuantity, setSelectedQuantity] = useState(null);
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
 		const itemTotal = parseFloat(calculateTotalPrice());
 		const newTotal = getCartTotalPrice() + itemTotal;
 
-		if (newTotal > MAX_ONLINE_ORDER_TOTAL) {
+		if (newTotal > maxOrderAmount) {
 			setShowLimitModal(true);
 			return;
 		}
@@ -92,7 +92,10 @@ const ProductCard = ({ product }) => {
 			</div>
 
 			{showLimitModal && (
-				<LimitModal onClose={() => setShowLimitModal(false)} />
+				<LimitModal
+					maxOrderAmount={maxOrderAmount}
+					onClose={() => setShowLimitModal(false)}
+				/>
 			)}
 		</>
 	);

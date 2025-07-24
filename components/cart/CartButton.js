@@ -30,7 +30,7 @@ const CartButton = () => {
 				<>
 					<button
 						onClick={() => setOpen(true)}
-						className='fixed bottom-6 right-6 w-14 h-14 bg-primary rounded-full shadow-lg shadow-primary/30 hover:shadow-none hover:bg-dark transition duration-500 z-[50] flex items-center justify-center group'
+						className='fixed bottom-6 right-6 w-14 h-14 bg-primary border border-light/50 rounded-full shadow-lg shadow-primary/30 hover:shadow-none hover:bg-dark transition duration-500 z-[50] flex items-center justify-center group'
 					>
 						<FaGift className='text-light text-2xl' />
 						<div className='absolute -top-2 -right-2 bg-dark text-light rounded-full size-6 flex items-center justify-center font-bold group-hover:animate-bounce group-hover:bg-primary transition duration-500'>

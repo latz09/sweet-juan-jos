@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { FaTriangleExclamation } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MAX_ONLINE_ORDER_TOTAL } from '@/lib/constants';
+;
 
-const LimitModal = ({ onClose }) => {
+const LimitModal = ({ onClose, maxOrderAmount }) => {
 	return (
 		<AnimatePresence>
 			<motion.div
@@ -22,9 +22,9 @@ const LimitModal = ({ onClose }) => {
 					className='bg-light max-w-md w-full rounded-lg p-6 shadow-xl relative text-center'
 				>
 					<FaTriangleExclamation className='text-primary text-3xl mb-4 mx-auto' />
-					<h2 className='text-xl font-bold mb-2'>Order Limit Exceeded</h2>
-					<p className='mb-6'>
-						For orders over <strong>${MAX_ONLINE_ORDER_TOTAL}</strong>, please use our event inquiry form. You will be able to share details, upload inspiration photos, and we will follow up quickly after.
+					<h2 className='text-xl lg:text-2xl font-bold mb-2'>Order Limit Exceeded</h2>
+					<p className='mb-6 lg:text-lg'>
+						For orders over <strong>${maxOrderAmount}</strong>, please use our event inquiry form. You will be able to share details, upload inspiration photos, and we will follow up quickly after.
 					</p>
 					<div className='flex justify-center gap-4 uppercase font-bold'>
 						<button

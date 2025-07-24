@@ -41,8 +41,8 @@ const OrderingPage = ({ settings, categories }) => {
 					selectedCategoryId={selectedCategoryId}
 					setSelectedCategoryId={setSelectedCategoryId}
 				/>
-				<ProductGrid products={filteredProducts} />
-				
+				<ProductGrid products={filteredProducts} maxOrderAmount={settings?.maxOrderAmount} />
+
 			</div>
 		</div>
 	);
