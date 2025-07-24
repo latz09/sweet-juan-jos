@@ -13,13 +13,14 @@ const OrderSuccessPage = () => {
 
 	return (
 		<div className='h-[70vh] grid place-items-center'>
-			<div className='text-center space-y-4'>
+			<div className='text-center space-y-4 px-4'>
 				<p className='text-4xl text-primary font-bold uppercase tracking-wider'>
 					Order Success!
 				</p>
-				<p className='text-xl text-gray-600'>
-					{`Thank you for your order. We'll be in touch soon! `}
-				</p>
+				<div className='space-y-2'>
+					<p className='text-xl text-gray-600'>{`Thank you for your order.`}</p>
+					<p className='text-xl text-gray-600'>{`We'll be in touch soon! `}</p>
+				</div>
 			</div>
 		</div>
 	);

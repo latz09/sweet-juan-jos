@@ -14,6 +14,7 @@ const CheckoutPage = ({ settings }) => {
 	const cartTotal = useCartStore((state) => state.cartTotalPrice());
 	const [selectedMethod, setSelectedMethod] = useState(''); // pickup | delivery
 
+
 	// Use delivery fee from settings, fallback to 5.00 if not set
 	const deliveryFee = settings?.deliveryFee || 5.0;
 	const finalTotal =

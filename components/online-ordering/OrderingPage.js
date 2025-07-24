@@ -21,7 +21,6 @@ const OrderingPage = ({ settings, categories }) => {
 			product.category._id === selectedCategoryId
 		);
 	});
-	
 
 	return (
 		<div className='min-h-screen space-y-16 lg:space-y-24 '>
@@ -41,8 +40,10 @@ const OrderingPage = ({ settings, categories }) => {
 					selectedCategoryId={selectedCategoryId}
 					setSelectedCategoryId={setSelectedCategoryId}
 				/>
-				<ProductGrid products={filteredProducts} />
-				
+				<ProductGrid
+					products={filteredProducts}
+					maxOrderAmount={settings.maxOrderAmount}
+				/>
 			</div>
 		</div>
 	);

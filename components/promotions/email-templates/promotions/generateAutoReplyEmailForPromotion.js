@@ -5,7 +5,7 @@ export function generateCustomerConfirmationEmail({
 	paymentLink,
 	recipientName,
 	giftNote,
-	street,
+street,
 	city,
 	zip,
 	payNow,

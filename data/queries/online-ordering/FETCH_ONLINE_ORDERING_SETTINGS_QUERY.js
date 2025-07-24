@@ -14,6 +14,7 @@ export const FETCH_ONLINE_ORDERING_SETTINGS_QUERY = `
   deliveryInfo,
   allowGifting,
   deliveryFee,
+  maxOrderAmount,
   confirmationSubject,
   confirmationBody,
   onlineOrderingActive,

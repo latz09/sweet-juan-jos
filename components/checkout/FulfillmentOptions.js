@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { parseBoldSyntax } from '../utils/parseBoldSyntax';
 
-const allowedDeliveryZips = ['12345', '54321', '11223']; // Example zip codes
+const allowedDeliveryZips = ['54481', '54482', '54467']; // Example zip codes
 
 const FulfillmentOptions = ({
 	settings,
@@ -227,7 +227,7 @@ const FulfillmentOptions = ({
 							/>
 						</div>
 						{!zipValid && (
-							<p className='text-red-600 text-sm'>
+							<p className='text-red-600 font-bold text-xl text-center tracking-wide'>
 								Sorry, we do not deliver to that ZIP Code.
 							</p>
 						)}

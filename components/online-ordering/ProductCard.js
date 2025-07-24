@@ -5,12 +5,12 @@ import ProductImage from './ProductImage';
 import ProductInfo from './ProductInfo';
 import useCartStore from '@/lib/useCartStore';
 import useToastStore from '@/lib/useToastStore';
-import { MAX_ONLINE_ORDER_TOTAL } from '@/lib/constants';
+
 
 import LimitModal from './LimitModal';
 
-const ProductCard = ({ product }) => {
-	
+const ProductCard = ({ product, maxOrderAmount }) => {
+
 	const [selectedQuantity, setSelectedQuantity] = useState(null);
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
 	const [selectedFrosting, setSelectedFrosting] = useState(null);
@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
 		const itemTotal = parseFloat(calculateTotalPrice());
 		const newTotal = getCartTotalPrice() + itemTotal;
 
-		if (newTotal > MAX_ONLINE_ORDER_TOTAL) {
+		if (newTotal > maxOrderAmount) {
 			setShowLimitModal(true);
 			return;
 		}
@@ -92,7 +92,7 @@ const ProductCard = ({ product }) => {
 			</div>
 
 			{showLimitModal && (
-				<LimitModal onClose={() => setShowLimitModal(false)} />
+				<LimitModal maxOrderAmount={maxOrderAmount} onClose={() => setShowLimitModal(false)} />
 			)}
 		</>
 	);
