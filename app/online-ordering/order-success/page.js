@@ -19,7 +19,7 @@ const OrderSuccessPage = () => {
 				</p>
 				<div className='space-y-2'>
 					<p className='text-xl text-gray-600'>{`Thank you for your order.`}</p>
-					<p className='text-xl text-gray-600'>{`We'll be in touch soon! `}</p>
+					<p className='text-xl text-gray-600'>{`We Cant Wait to Bake for You `}</p>
 				</div>
 			</div>
 		</div>
