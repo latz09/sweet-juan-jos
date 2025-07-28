@@ -10,8 +10,8 @@ const LandingHero = async ({ landingImage }) => {
 
 	
 	const onlineOrderingAvailable = await sanityClient.fetch(query);
-	// const acceptingOnlineOrders = onlineOrderingAvailable[0]?.acceptingOrders;
-	const acceptingOnlineOrders = false;
+	const acceptingOnlineOrders = onlineOrderingAvailable[0]?.acceptingOrders;
+	// const acceptingOnlineOrders = false;
 
 	return (
 		<div className='relative h-[85vh] lg:h-[80vh] w-full  shadow-lg shadow-primary/40 '>

@@ -39,8 +39,8 @@ const DesktopNavigation = ({ acceptingOrders }) => {
 
 				{/* Cart Button inline next to LinkIfActive */}
 				<div className='ml-4'>
-					{/* <CartButton size='desktop' acceptingOrders={acceptingOrders} /> */}
-					<CartButton size='desktop' acceptingOrders={true} />
+					<CartButton size='desktop' acceptingOrders={acceptingOrders} />
+					{/* <CartButton size='desktop' acceptingOrders={true} /> */}
 				</div>
 			</div>
 		</div>
@@ -72,8 +72,8 @@ const MobileNavigation = ({ acceptingOrders }) => {
 								className='pl-4'
 							/>
 						</Link>
-						{/* <CartButton size='mobile' acceptingOrders={acceptingOrders} /> */}
-						<CartButton size='mobile' acceptingOrders={true} />
+						<CartButton size='mobile' acceptingOrders={acceptingOrders} />
+						{/* <CartButton size='mobile' acceptingOrders={true} /> */}
 						<button
 							onClick={toggleMenu}
 							className='text-2xl'
