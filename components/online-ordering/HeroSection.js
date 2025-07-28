@@ -14,7 +14,7 @@ const HeroSection = ({
 	allowPickup,
 	deliveryInfo,
 	pickupInfo,
-	deliveryFee
+	deliveryFee,
 }) => {
 	return (
 		<div className='text-center '>
@@ -25,13 +25,11 @@ const HeroSection = ({
 						alt={pageTitle}
 						fill
 						className='object-cover rounded'
+						priority={true}
 					/>
 					<div className='absolute inset-0 grid place-items-center bg-gradient-to-b from-light/10 via-light/50 to-light/20'>
 						<div className='grid place-items-center gap-4'>
-							<Image src={logo} alt='Logo Overlay' 
-								width = {215}
-								height = {215}
-							/>
+							<Image src={logo} alt='Logo Overlay' width={215} height={215} />
 							<MainHeading title={pageTitle} type='dark' />
 						</div>
 					</div>
@@ -50,7 +48,6 @@ const HeroSection = ({
 						{introText.map((para, idx) => (
 							<Paragraph key={idx} content={para} />
 						))}
-						
 					</div>
 				)}
 			</div>

@@ -9,6 +9,7 @@ import useToastStore from '@/lib/useToastStore';
 import LimitModal from './LimitModal';
 
 const ProductCard = ({ product, maxOrderAmount, acceptingOrders }) => {
+	
 	const [selectedQuantity, setSelectedQuantity] = useState(null);
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
 	const [selectedFrosting, setSelectedFrosting] = useState(null);
