@@ -4,7 +4,8 @@ import { SquareClient, SquareEnvironment } from 'square';
 import { sanityClient } from '@/lib/sanityConnection';
 
 const squareClient = new SquareClient({
-  token: process.env.OL_SANDBOX_ACCESS_TOKEN,
+  token: process.env.SQUARE_SANDBOX_ACCESS_TOKEN,
+  // token: process.env.OL_SANDBOX_ACCESS_TOKEN,
   environment: SquareEnvironment.Sandbox,
 });
 
@@ -133,7 +134,8 @@ export default async function handler(req, res) {
     const payload = {
       idempotencyKey: uuidv4(),
       order: {
-        locationId: process.env.OL_LOCATION_ID,
+        locationId: process.env.SQUARE_SANDBOX_LOCATION_ID,
+        // locationId: process.env.OL_LOCATION_ID,
         lineItems,
       },
       checkoutOptions: {
