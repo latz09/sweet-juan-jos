@@ -43,6 +43,7 @@ const OrderingPage = ({ settings, categories }) => {
 				<ProductGrid
 					products={filteredProducts}
 					maxOrderAmount={settings.maxOrderAmount}
+					acceptingOrders={settings.acceptingOrders}
 				/>
 			</div>
 		</div>

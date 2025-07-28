@@ -6,7 +6,7 @@ import { useState } from 'react';
 import CartModal from './CartModal';
 import { usePathname } from 'next/navigation';
 
-const CartButton = () => {
+const CartButton = ({ acceptingOrders }) => {
 	const cart = useCartStore((state) => state.cart);
 	const cartCount = cart.length;
 	const cartTotal = useCartStore((state) => state.cartTotalPrice());
@@ -45,7 +45,7 @@ const CartButton = () => {
 				</>
 			)}
 
-			{open && <CartModal setOpen={setOpen} />}
+			{open && <CartModal setOpen={setOpen} acceptingOrders={acceptingOrders} />}
 		</>
 	);
 };

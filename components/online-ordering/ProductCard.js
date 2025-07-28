@@ -6,11 +6,9 @@ import ProductInfo from './ProductInfo';
 import useCartStore from '@/lib/useCartStore';
 import useToastStore from '@/lib/useToastStore';
 
-
 import LimitModal from './LimitModal';
 
-const ProductCard = ({ product, maxOrderAmount }) => {
-
+const ProductCard = ({ product, maxOrderAmount, acceptingOrders }) => {
 	const [selectedQuantity, setSelectedQuantity] = useState(null);
 	const [selectedFlavor, setSelectedFlavor] = useState(null);
 	const [selectedFrosting, setSelectedFrosting] = useState(null);
@@ -81,10 +79,13 @@ const ProductCard = ({ product, maxOrderAmount }) => {
 					{readyToAdd() && (
 						<div className='grid md:place-items-end'>
 							<button
-								onClick={handleAddToCart}
-								className='md:px-8 py-3 rounded bg-primary text-light font-black text-xl hover:bg-dark transition'
+								onClick={acceptingOrders ? handleAddToCart : undefined}
+								disabled={!acceptingOrders}
+								aria-disabled={!acceptingOrders}
+								className={`md:px-8 py-3 rounded font-black text-xl transition
+        ${acceptingOrders ? 'bg-primary text-light hover:bg-dark' : 'bg-primary/30 text-dark/70 italic cursor-not-allowed'}`}
 							>
-								Add to Cart
+								{acceptingOrders ? 'Add to Cart' : 'Not Available'}
 							</button>
 						</div>
 					)}
@@ -92,7 +93,10 @@ const ProductCard = ({ product, maxOrderAmount }) => {
 			</div>
 
 			{showLimitModal && (
-				<LimitModal maxOrderAmount={maxOrderAmount} onClose={() => setShowLimitModal(false)} />
+				<LimitModal
+					maxOrderAmount={maxOrderAmount}
+					onClose={() => setShowLimitModal(false)}
+				/>
 			)}
 		</>
 	);
