@@ -41,8 +41,14 @@ const RootLayout = async ({ children }) => {
 	return (
 		<html lang='en'>
 			<body className={`${josefinSlab.className}  text-dark`}>
-				<Navigation acceptingOrders={acceptingOrders} />
-				<PopUpManager promotion={activePromotion} acceptingOrders={acceptingOrders} />
+
+
+				{/* <Navigation acceptingOrders={acceptingOrders} /> */}
+				<Navigation acceptingOrders={false} />
+
+
+				
+				{/* <PopUpManager promotion={activePromotion} acceptingOrders={acceptingOrders} /> */}
 				<div className='max-w-7l mx-auto '>
 					
 					<div>{children}</div>
