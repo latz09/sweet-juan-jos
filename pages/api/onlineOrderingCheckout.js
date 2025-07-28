@@ -109,17 +109,30 @@ export default async function handler(req, res) {
 
     // Build Square line items
     const lineItems = enrichedCart.map((item) => {
-      const name = item.title;
+      // Build descriptive name including options
+      let name = item.title;
+      const options = [];
+      if (item.selectedQuantity) options.push(item.selectedQuantity);
+      if (item.selectedFlavor) options.push(`Flavor: ${item.selectedFlavor}`);
+      if (item.selectedFrosting) options.push(`Frosting: ${item.selectedFrosting}`);
+      
+      if (options.length > 0) {
+        name += ` (${options.join(', ')})`;
+      }
+
+      // For Square, always use quantity 1 and the total price
+      // This way "1/2 Dozen" shows as 1 item at $12, not 6 items at $2 each
       return {
         name,
-        quantity: String(item.quantity),
+        quantity: '1',
         basePriceMoney: {
-          amount: BigInt(Math.round(item.totalPrice * 100)),
+          amount: BigInt(Math.round(item.totalPrice * 100)), // Total price in cents
           currency: 'USD',
         },
         note: JSON.stringify({ orderId }),
       };
     });
+    
     if (selectedMethod === 'delivery' && deliveryFee > 0) {
       lineItems.push({
         name: 'Delivery Fee',
