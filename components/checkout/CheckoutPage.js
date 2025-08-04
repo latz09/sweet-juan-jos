@@ -16,7 +16,7 @@ const CheckoutPage = ({ settings }) => {
 
 
 	// Use delivery fee from settings, fallback to 5.00 if not set
-	const deliveryFee = settings?.deliveryFee || 5.0;
+	const deliveryFee = settings?.deliveryFee || 0;
 	const finalTotal =
 		selectedMethod === 'delivery' ? cartTotal + deliveryFee : cartTotal;
 
