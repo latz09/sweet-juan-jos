@@ -37,36 +37,41 @@ export default function AvailabilityInfo({
 			</p>
 
 			<div
-				className={`mt-4 grid place-items-center gap-4 text-sm text-center max-w-xl mx-auto ${
-					allowDelivery && allowPickup ? 'md:grid-cols-2' : 'grid-cols-1'
-				}`}
-			>
-				{allowDelivery && (
-					<div
-						className={`${!(allowPickup && allowDelivery) ? 'w-1/2' : 'w-full'}`}
-					>
-						<AvailabilityToggle
-							label='Delivery'
-							icon={FaTruck}
-							details={deliveryInfo}
-							deliveryFee={deliveryFee}
-							onClick={openModal}
-						/>
-					</div>
-				)}
-				{allowPickup && (
-					<div
-						className={`${!(allowPickup && allowDelivery) ? 'w-1/2' : 'w-full'}`}
-					>
-						<AvailabilityToggle
-							label='Pickup'
-							icon={FaStore}
-							details={pickupInfo}
-							onClick={openModal}
-						/>
-					</div>
-				)}
-			</div>
+	className={`mt-4 grid place-items-center gap-4 text-sm text-center max-w-3xl mx-auto ${
+		allowDelivery && allowPickup ? 'md:grid-cols-2' : 'grid-cols-1'
+	}`}
+>
+	{allowDelivery && (
+		<div
+			className={`${
+				allowDelivery && !allowPickup ? 'w-full' : 'w-full md:w-auto'
+			}`}
+		>
+			<AvailabilityToggle
+				label='Delivery'
+				icon={FaTruck}
+				details={deliveryInfo}
+				deliveryFee={deliveryFee}
+				onClick={openModal}
+			/>
+		</div>
+	)}
+	{allowPickup && (
+		<div
+			className={`${
+				allowPickup && !allowDelivery ? 'w-full' : 'w-full md:w-auto'
+			}`}
+		>
+			<AvailabilityToggle
+				label='Pickup'
+				icon={FaStore}
+				details={pickupInfo}
+				onClick={openModal}
+			/>
+		</div>
+	)}
+</div>
+
 
 			{modalContent && (
 				<Modal
