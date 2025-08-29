@@ -30,7 +30,7 @@ const LandingHero = async ({ landingImage }) => {
 					objectPosition: 'center ',
 				}}
 			/>
-			<div className='absolute inset-0 bg-gradient-to-b from-light/10 via-light/50 to-light/20 z-10 text-center grid place-items-center '>
+			<div className='absolute inset-0 bg-gradient-to-b from-light/10 via-light/50 to-light/20 z-10 text-center grid place-items-center'>
 				<LandingHeroAnimate className='flex flex-col gap-4 '>
 					<div className='p-8 grid gap-6 place-items-center font '>
 						<Image src={logo} alt='sweet juanjos' width={300} height={300} />
