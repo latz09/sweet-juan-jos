@@ -28,7 +28,7 @@ const PromotionLandingHero = ({
 			<div className='absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/70 to-dark/80 z-10'></div>
 
 			{/* Content */}
-			<div className='relative z-20'>
+			<div className='relative z-20 max-w-7xl mx-auto'>
 				{(promotionTitle || promotionSubtitle) && (
 					<PromotionHeading
 						title={promotionTitle}
