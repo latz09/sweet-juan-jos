@@ -9,9 +9,13 @@ const Offerings = ({
 	deliveryDetails,
 	pickupDetails,
 	giftOption,
-	autoResponseEmailData,
+	autoResponseEmailData, 
 	promotionSlug,
+	deliveryDateTimeSlots,
+	pickupDateTimeSlots,
 }) => {
+
+	
 	return (
 		<div className='grid gap-24 lg:gap-32 mt-12 max-w-4xl mx-auto'>
 			{data.map((groupItems, index) => {
@@ -30,6 +34,8 @@ const Offerings = ({
 				giftOption={giftOption}
 				autoResponseEmailData={autoResponseEmailData}
 				promotionSlug={promotionSlug}
+				deliveryDateTimeSlots={deliveryDateTimeSlots}
+				pickupDateTimeSlots={pickupDateTimeSlots}
 			/>
 		</div>
 	);

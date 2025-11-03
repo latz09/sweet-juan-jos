@@ -76,11 +76,11 @@ const MobileNavigation = ({ acceptingOrders }) => {
 								className='pl-4'
 							/>
 						</Link>
-						{/* 
 						
-						REMOVED-11/3
-							<CartButton size='mobile' acceptingOrders={acceptingOrders} /> 
-						*/}
+						
+						{/* REMOVED-11/3 */}
+							{/* <CartButton size='mobile' acceptingOrders={acceptingOrders} /> */}
+						
 
 
 						{/* ?? */}
@@ -117,11 +117,11 @@ const MobileNavigation = ({ acceptingOrders }) => {
 						{/* Scrollable menu section */}
 						<div className='pt-20 overflow-y-auto flex-1 p-6 scrollbar-hide '>
 							<div className='grid grid-cols-1 gap-10 '>
-								<LinkIfActive
+								{/* <LinkIfActive
 									toggleMenu={toggleMenu}
 									acceptingOrders={acceptingOrders}
 									mobile={true}
-								/>
+								/> */}
 								{NavigationLinks.map((link) => (
 									<motion.div
 										key={link.id}

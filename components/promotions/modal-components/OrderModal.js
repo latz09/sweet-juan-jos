@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useCart } from '../checkout-process/steps/cart/CartContext';
 import { useRouter } from 'next/navigation';
 import StepChooseMethod from '../checkout-process/steps/StepChooseMethod';
+import StepDateTimeSelection from '../checkout-process/steps/StepDateTimeSelection';
 import StepDeliveryAddress from '../checkout-process/steps/StepDeliveryAddress';
 import StepUserInfo from '../checkout-process/steps/StepUserInfo';
 import StepPaymentChoice from '../checkout-process/steps/StepPaymentChoice';
@@ -11,14 +12,19 @@ import StepThankYou from '../checkout-process/steps/StepThankYou';
 import StepCart from '../checkout-process/steps/cart/StepCart';
 import DeliveryValidationError from '../checkout-process/steps/DeliveryValidationError';
 import ModalContent from './ModalContent';
-import LoadingOverlay from './LoadingOverlay'; // Import your loading overlay
+import LoadingOverlay from './LoadingOverlay';
 
-export default function OrderModal({ promotionSlug, onClose, ...props }) {
-	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } =
-		useCart();
+export default function OrderModal({ 
+	promotionSlug, 
+	deliveryDateTimeSlots, 
+	pickupDateTimeSlots, 
+	onClose, 
+	...props  
+}) {
+	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } = useCart();
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState(null);
-	const [isSubmitting, setIsSubmitting] = useState(false); // Track loading state
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const [formData, setFormData] = useState({
 		street: '',
@@ -30,11 +36,12 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 		orderMethod: '',
 		recipientName: '',
 		giftNote: '',
+		selectedDate: '',
+		selectedTimeSlot: '',
 		cartData: cart,
 		promotionDetails: { ...props },
 		slug: promotionSlug,
 	});
-	// console.log('formData:', formData);
 
 	const router = useRouter();
 
@@ -43,22 +50,40 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 	}
 
 	function handleBack() {
-		setStep((prev) =>
-			prev === 3 && method === 'pickup' ? 1 : Math.max(prev - 1, 0)
-		);
+		// Adjust back navigation to account for new step
+		if (step === 3 && method === 'pickup') {
+			setStep(1.5); // Go back to date/time selection
+		} else if (step === 1.5) {
+			setStep(1); // Go back to method selection
+		} else if (step === 3 && method === 'delivery') {
+			setStep(2); // Go back to address
+		} else if (step === 2) {
+			setStep(1.5); // Go back to date/time selection
+		} else {
+			setStep((prev) => Math.max(prev - 1, 0));
+		}
 	}
 
 	function handleSelectMethod(selectedMethod) {
 		setMethod(selectedMethod);
+		setFormData((prev) => ({
+			...prev,
+			orderMethod: selectedMethod,
+		}));
+		setStep(1.5); // Go to date/time selection
+	}
 
-		// Use functional update to ensure state is updated correctly
-		setFormData((prev) => {
-			const updatedData = { ...prev, orderMethod: selectedMethod };
-			
-			return updatedData;
-		});
+	function handleDateSelect(date) {
+		setFormData((prev) => ({ ...prev, selectedDate: date }));
+	}
 
-		setStep(selectedMethod === 'delivery' ? 2 : 3);
+	function handleTimeSlotSelect(timeSlot) {
+		setFormData((prev) => ({ ...prev, selectedTimeSlot: timeSlot }));
+	}
+
+	function handleDateTimeNext() {
+		// After date/time selection, go to address (if delivery) or user info (if pickup)
+		setStep(method === 'delivery' ? 2 : 3);
 	}
 
 	function handleAddressNext() {
@@ -73,7 +98,7 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 		setMethod('pickup');
 		setFormData((prev) => ({
 			...prev,
-			orderMethod: 'pickup', // Set orderMethod directly
+			orderMethod: 'pickup',
 		}));
 		setStep(3);
 	}
@@ -100,12 +125,29 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 
 		case 1:
 			content = (
-				<StepChooseMethod
+				<StepChooseMethod 
 					method={method}
 					onSelectMethod={handleSelectMethod}
 					onBack={handleBack}
 					pickupDetails={props.pickupDetails}
 					deliveryDetails={props.deliveryDetails}
+				/>
+			);
+			break;
+
+		case 1.5:
+			content = (
+				<StepDateTimeSelection
+					method={method}
+					dateTimeSlots={
+						method === 'delivery' ? deliveryDateTimeSlots : pickupDateTimeSlots
+					}
+					selectedDate={formData.selectedDate}
+					selectedTimeSlot={formData.selectedTimeSlot}
+					onDateSelect={handleDateSelect}
+					onTimeSlotSelect={handleTimeSlotSelect}
+					onNext={handleDateTimeNext}
+					onBack={handleBack}
 				/>
 			);
 			break;
@@ -159,8 +201,7 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 							setStep,
 							onClose,
 							cartTotal,
-							setIsSubmitting, // Pass setIsSubmitting
-							
+							setIsSubmitting,
 						})
 					}
 					onPayLater={() =>
@@ -171,8 +212,7 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 							setStep,
 							onClose,
 							cartTotal,
-							setIsSubmitting, // Pass setIsSubmitting
-							
+							setIsSubmitting,
 						})
 					}
 					onBack={handleBack}
@@ -205,8 +245,7 @@ export default function OrderModal({ promotionSlug, onClose, ...props }) {
 				content={content}
 				isSubmitting={isSubmitting}
 			/>
-			{isSubmitting && <LoadingOverlay />}{' '}
-			{/* Show LoadingOverlay when submitting */}
+			{isSubmitting && <LoadingOverlay />}
 		</>
 	);
 }

@@ -3,7 +3,7 @@
 import { motion as m } from 'framer-motion';
 import OfferingItem from './OfferingItem';
 
-const OfferingGroup = ({ groupItems, onOrderNow }) => {
+const OfferingGroup = ({ groupItems, onOrderNow }) => { 
 	return (
 		<div className=' space-y-12 pt-4 '>
 			<m.div

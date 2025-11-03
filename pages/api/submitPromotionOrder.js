@@ -31,6 +31,8 @@ export default async function handler(req, res) {
 			payNow = false,
 			cartTotal = '0',
 			slug = '',
+			selectedDate = '', // NEW
+			selectedTimeSlot = '', // NEW
 		} = req.body;
 
 		// 2) Additional from promotionDetails
@@ -53,7 +55,7 @@ export default async function handler(req, res) {
 			slug,
 		});
 
-		// 4) Prepare the doc for Sanity (now we can safely reference paymentLink if we want to store it)
+		// 4) Prepare the doc for Sanity
 		const fullAddress = [street, city, zip].filter(Boolean).join(', ');
 
 		const doc = {
@@ -67,6 +69,11 @@ export default async function handler(req, res) {
 				orderMethod,
 				payNow,
 			},
+			// NEW: Store selected date & time
+			selectedDateTime: {
+				date: selectedDate,
+				timeSlot: selectedTimeSlot,
+			},
 			recipientDetails: {
 				recipientName,
 				giftNote,
@@ -78,16 +85,13 @@ export default async function handler(req, res) {
 				price: item.price,
 				quantity: item.quantity,
 			})),
-
-			// Optionally store the link at the top level.
-			// If you only want it once, add it here (not inside every item).
 			paymentLink,
 		};
 
 		// 5) Create doc in Sanity
 		const sanityResult = await sanityClient.create(doc);
 
-		// 6) Generate email content (pass paymentLink so they can use or display it)
+		// 6) Generate email content (NOW passing selectedDate and selectedTimeSlot)
 		const internalEmailContent = generateKatieJosPromotionOrder({
 			name,
 			email,
@@ -102,6 +106,8 @@ export default async function handler(req, res) {
 			promotionDetails,
 			cartData,
 			cartTotal,
+			selectedDate, // NEW
+			selectedTimeSlot, // NEW
 		});
 
 		const customerEmailContent = generateCustomerConfirmationEmail({
@@ -118,6 +124,8 @@ export default async function handler(req, res) {
 			cartData,
 			payNow,
 			paymentLink,
+			selectedDate, // NEW
+			selectedTimeSlot, // NEW
 		});
 
 		// 7) Send both emails concurrently

@@ -5,13 +5,15 @@ export function generateCustomerConfirmationEmail({
 	paymentLink,
 	recipientName,
 	giftNote,
-street,
+	street,
 	city,
 	zip,
 	payNow,
 	orderMethod,
 	promotionDetails = {},
 	cartData = [],
+	selectedDate = '', // NEW
+	selectedTimeSlot = '', // NEW
 }) {
 	// Extract fields from promotionDetails
 	const {
@@ -32,7 +34,21 @@ street,
 	const address =
 		orderMethod === 'delivery'
 			? [street, city, zip].filter(Boolean).join(', ')
-			: 'Pickup';
+			: 'Pickup at 5598 Cabernet Ct, Stevens Point, WI 54482';
+
+	// Format date for display (e.g., "2024-12-23" → "December 23, 2024")
+	const formatDate = (dateString) => {
+		if (!dateString) return 'Not selected';
+		const date = new Date(dateString);
+		return date.toLocaleDateString('en-US', {
+			month: 'long',
+			day: 'numeric',
+			year: 'numeric',
+		});
+	};
+
+	const formattedDate = formatDate(selectedDate);
+	const formattedTimeSlot = selectedTimeSlot || 'Not selected';
 
 	// Format Ordered Items
 	const formatItemListHTML = () =>
@@ -121,7 +137,7 @@ street,
 					<ul style="padding-left: 20px; margin-top: 5px;">
 					  <li><strong>Cash</strong></li>
 					  <li><strong>Venmo:</strong> @JoTrzeb</li>
-					  <li><strong>Check:</strong> Payable to <em>Sweet Juanjo’s</em></li>
+					  <li><strong>Check:</strong> Payable to <em>Sweet Juanjo's</em></li>
 					  <li><strong>Zelle:</strong> sweetjuanjos@gmail.com</li>
 					</ul>
 			  
@@ -156,14 +172,14 @@ street,
 			<!-- Conditional Delivery or Pickup Details Line -->
 			${formatMethodDetailsHTML()}
 
-			
-
 			<hr style="border: 1px solid #29B2AC; margin: 20px 0;" />
 
 			<h3 style="color: #29B2AC;">Order Details:</h3>
 			<ul style="list-style: none; padding: 0;">  
 				${formatItemListHTML()}
 				<li style="margin-top: 10px"><strong>Method:</strong> ${orderMethod.toUpperCase()}</li>
+				<li><strong>Date:</strong> ${formattedDate}</li>
+				<li><strong>Time:</strong> ${formattedTimeSlot}</li>
 				<li><strong>Address:</strong> ${address}</li>
 			</ul>
 

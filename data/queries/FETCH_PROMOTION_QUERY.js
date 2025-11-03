@@ -13,18 +13,30 @@ export const FETCH_PROMOTION_QUERY = `
     },
     delivery{
       enabled,
-      details
+      details,
+      dateTimeSlots[]{
+        date,
+        timeSlots[]{
+          timeSlot
+        }
+      }
     },
     pickup{
       enabled,
-      details
+      details,
+      dateTimeSlots[]{
+        date,
+        timeSlots[]{
+          timeSlot
+        }
+      }
     },
     giftOption,
-   autoResponseEmail {
-    emailContent,
-    pickupDetailsLine,
-    deliveryDetailsLine
-  },
+    autoResponseEmail {
+      emailContent,
+      pickupDetailsLine,
+      deliveryDetailsLine
+    },
     offerings[]{
       title,
       subtitle,

@@ -47,7 +47,7 @@ const LandingHero = async ({ landingImage }) => {
 							href='/contact-katie-jo'
 						/>
 
-						{acceptingOnlineOrders && <OnlineOrderingLandingButton />}
+						{/* {acceptingOnlineOrders && <OnlineOrderingLandingButton />} */}
 					</div>
 				</LandingHeroAnimate>
 			</div>

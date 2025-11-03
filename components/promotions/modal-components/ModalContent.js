@@ -37,7 +37,7 @@ export default function ModalContent({
 			exit={{ x: '-100%' }}
 			transition={{ type: 'spring', stiffness: 90, damping: 15 }}>
 				<div
-					className='relative bg-light  w-full max-w-5xl h-[90vh] lg:h-[70vh] mx-auto rounded shadow-lg overflow-hidden'
+					className='relative bg-light  w-full max-w-5xl h-[90vh] lg:h-[95vh] mx-auto rounded shadow-lg overflow-hidden'
 					onClick={(e) => e.stopPropagation()} // Prevent click propagation
 				>
 					{/* Close Button */}

@@ -8,9 +8,11 @@ import { FaHeart } from 'react-icons/fa';
 export default function CartBar({
 	deliveryDetails,
 	pickupDetails,
-	giftOption,
+	giftOption, 
 	autoResponseEmailData,
 	promotionSlug,
+	deliveryDateTimeSlots,
+	pickupDateTimeSlots,
 }) {
 	const { cart, cartTotal } = useCart();
 	const [cartOpen, setCartOpen] = useState(false);
@@ -119,6 +121,8 @@ export default function CartBar({
 						giftOption={giftOption}
 						autoResponseEmailData={autoResponseEmailData}
 						promotionSlug={promotionSlug}
+						deliveryDateTimeSlots={deliveryDateTimeSlots}
+						pickupDateTimeSlots={pickupDateTimeSlots}
 					/>
 				)}
 			</AnimatePresence>

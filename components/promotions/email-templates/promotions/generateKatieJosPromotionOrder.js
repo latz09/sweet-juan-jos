@@ -10,9 +10,11 @@ export function generateKatieJosPromotionOrder({
   city = '',
   zip = '',
   cartTotal = 0,
-  payNow = false,
+  payNow = false, 
   giftOption = false,
   promotionDetails = {},
+  selectedDate = '', // NEW
+  selectedTimeSlot = '', // NEW
 }) {
   // Extract promotion details
   const { deliveryDetails = '', pickupDetails = '', autoResponseEmailData } = promotionDetails;
@@ -31,6 +33,20 @@ export function generateKatieJosPromotionOrder({
     orderMethod === 'delivery'
       ? `${street}, ${city}, ${zip}`
       : 'Pickup at 5598 Cabernet Ct, Stevens Point, WI 54482';
+
+  // Format date for display (e.g., "2024-12-23" → "December 23, 2024")
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Not selected';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
+  const formattedDate = formatDate(selectedDate);
+  const formattedTimeSlot = selectedTimeSlot || 'Not selected';
 
   // Format Ordered Items List (Styled)
   const itemListHTML = cartData
@@ -90,6 +106,8 @@ export function generateKatieJosPromotionOrder({
     Items Ordered: ${itemListText}
     Payment Status: ${paymentStatus}
     Order Type: ${orderMethod.toUpperCase()}
+    Date: ${formattedDate}
+    Time: ${formattedTimeSlot}
     Address: ${fullAddress}
 
     Ordered By:
@@ -122,6 +140,8 @@ export function generateKatieJosPromotionOrder({
       <ul style="list-style: none; padding: 0;">
         ${itemListHTML}
         <li style="margin-top: 10px"><strong>Order Type:</strong> ${orderMethod.toUpperCase()}</li>
+        <li><strong>Date:</strong> ${formattedDate}</li>
+        <li><strong>Time:</strong> ${formattedTimeSlot}</li>
         <li><strong>Address:</strong> ${fullAddress}</li>
         <li style="margin-top: 10px"><strong>Payment Status:</strong> ${paymentStatus}</li>
       </ul>
