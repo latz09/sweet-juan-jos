@@ -14,7 +14,7 @@ export function generateCustomerEmail(order, onlineOrderingSettings) {
   } = order;
 
   const {
-    confirmationSubject = 'Sweet Juanjo's Order Confirmation',
+    confirmationSubject = `Sweet Juanjo's Order Confirmation`,
     confirmationBody = [],
     pickupInfo = [],
     deliveryInfo = [],
@@ -25,7 +25,7 @@ export function generateCustomerEmail(order, onlineOrderingSettings) {
   const addressString =
     fulfillmentMethod === 'delivery'
       ? `${deliveryAddress.address}, ${deliveryAddress.city}, ${deliveryAddress.state} ${deliveryAddress.zip}`
-      : 'Pickup at Sweet Juanjo's';
+      : `Pickup at Sweet Juanjo's`;
 
   // NEW: Format date for display
   const formatDate = (dateString) => {
