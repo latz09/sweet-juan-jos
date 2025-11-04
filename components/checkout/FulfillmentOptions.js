@@ -130,7 +130,7 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-2 text-dark md:text-lg pb-6'
+						className='origin-top overflow-hidden  grid place-items-center text-center gap-2 pt-2 text-dark md:text-lg pb-6'
 					>
 						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>
 							Pickup Details
@@ -150,7 +150,7 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-4 text-dark md:text-lg pb-6'
+						className='origin-top overflow-hidden grid place-items-center text-center gap-2 pt-2 text-dark md:text-lg pb-6'
 					>
 						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>
 							Delivery Details

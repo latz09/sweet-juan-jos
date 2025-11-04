@@ -22,7 +22,7 @@ export default function StepUserInfo({
 	// Show some info about the chosen method
 	const infoText =
 		method === 'pickup'
-			? `Pickup details: ${pickupDetails}`
+			? `${pickupDetails}`
 			: `Delivery address: ${deliveryAddress}`;
 
 	// State to track validation errors
@@ -69,7 +69,7 @@ export default function StepUserInfo({
 		<AnimateUp className='w-full'>
 			<div className='w-full grid'>
 				<div className='text-center'>
-					<p className='text-dark/80 font-bold italic'>{infoText}</p>
+					<p className='text-dark font-bold text-lg'>{infoText}</p>
 					<h3 className='mb-4 text-2xl font-bold mt-8'>
 						{giftOption ? 'Contact & Gift Details' : 'Contact Details'}
 					</h3>

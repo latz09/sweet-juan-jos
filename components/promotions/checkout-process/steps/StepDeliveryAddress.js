@@ -55,9 +55,10 @@ export default function StepDeliveryAddress({
 	return (
 		<AnimateUp>
 			<div className='md:w-full mx-auto '>
-				<p className='text-dark/80 font-bold italic text-center'>
-					Delivery details: {deliveryDetails}
-				</p>
+				<div className='text-dark font-bold  text-center space-y-2 text-lg '>
+					<p className="text-lg font-normal">Delivery details </p>
+					<p>{deliveryDetails}</p>
+				</div>
 				<div>
 					<h3 className='mb-2 text-lg font-semibold mt-8'>Delivery Address</h3>
 
