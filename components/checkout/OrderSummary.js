@@ -63,7 +63,7 @@ const OrderSummary = ({ cart, total, selectedMethod, deliveryFee }) => {
 				</motion.div>
 			</div>
 			{itemCount > 0 && (
-				<div className='text-lg font-semibold flex justify-center items-center gap-4'>
+				<div className='text-lg font-semibold grid place-items-center gap-1  lg:flex justify-center items-center lg:gap-4'>
 					<div>
 						{itemCount} {itemCount === 1 ? 'Item' : 'Items'} – $
 						{subtotal.toFixed(2)}
