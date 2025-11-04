@@ -25,7 +25,7 @@ const ContactForm = ({ contactInfo, setContactInfo, showForm = true }) => {
           />
           <input
             type="text"
-            placeholder="Phone Number"
+            placeholder="Phone Number" 
             value={contactInfo.phone}
             onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
             className="online-order-form-input"

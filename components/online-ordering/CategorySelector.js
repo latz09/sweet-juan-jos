@@ -15,7 +15,7 @@ const CategorySelector = ({ categories, selectedCategoryId, setSelectedCategoryI
               }`}
               onClick={() => setSelectedCategoryId(cat._id)}
             >
-              {cat.title}
+              {cat.title} 
             </button>
           ))}
         </div>

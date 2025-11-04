@@ -21,6 +21,8 @@ const OrderingPage = ({ settings, categories }) => {
 			product.category._id === selectedCategoryId
 		);
 	});
+	console.log(settings.deliveryDateTimeSlots[0])
+
 
 	return (
 		<div className='min-h-screen space-y-16 lg:space-y-24 '>
@@ -33,6 +35,8 @@ const OrderingPage = ({ settings, categories }) => {
 				deliveryInfo={settings?.deliveryInfo}
 				pickupInfo={settings?.pickupInfo}
 				deliveryFee={settings?.deliveryFee}
+				pickupSlots={settings?.pickupDateTimeSlots}
+				deliverySlots={settings?.deliveryDateTimeSlots}
 			/>
 			<div className='space-y-6'>
 				<CategorySelector

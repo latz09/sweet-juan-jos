@@ -39,15 +39,18 @@ const TimeLine = ({ data }) => {
 	});
 
 	return (
-		<div className='text-center text-light text-2xl mt-8'>
-			{`Orders Due by `}
-			<span className='font-bold underline underline-offset-4 decoration-primary/30 '>
-				{formattedTime}
-			</span>{' '}
-			on{' '}
-			<span className='font-bold'>
-				{formattedDate.replace(day, dayWithSuffix)}!
-			</span>
+		<div className=''>
+			<div className='inline-block  rounded backdrop-blur-sm'>
+				<p className='text-dark text-xl lg:text-2xl font-bold'>
+					<span className='text-dark'>Orders Due by </span>
+					<span className='font-bold underline decoration-primary underline-offset-4 decoration-[1.5px]'>{formattedTime}</span>
+					<span className='text-dark'> on </span>
+					<span className='font-bold underline decoration-primary underline-offset-4 decoration-[1.5px]'>
+						{formattedDate.replace(day, dayWithSuffix)}
+					</span>
+					<span className='font-bold underline decoration-primary underline-offset-4 decoration-[1.5px]'>!</span>
+				</p>
+			</div>
 		</div>
 	);
 };

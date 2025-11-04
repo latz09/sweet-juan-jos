@@ -1,22 +1,27 @@
-const Availability = ({ delivery, pickup }) => {
-	// Determine the availability message
-	let message = '';
+const Availability = ({ pickupSlots = [], deliverySlots = [] }) => {
+  const hasPickup = Array.isArray(pickupSlots) && pickupSlots.length > 0;
+  const hasDelivery = Array.isArray(deliverySlots) && deliverySlots.length > 0;
 
-	if (delivery && pickup) {
-		message = 'Available for Pickup and Delivery';
-	} else if (delivery) {
-		message = 'Available for Delivery';
-	} else if (pickup) {
-		message = 'Available for Pickup';
-	} else {
-		message = '';
-	}
+  let message = '';
+  if (hasPickup && hasDelivery) {
+    message = 'Available for Pickup and Delivery';
+  } else if (hasPickup) {
+    message = 'Available for Pickup';
+  } else if (hasDelivery) {
+    message = 'Available for Delivery';
+  } else {
+    return null; // neither available — don't render
+  }
 
-	return (
-		<section className='my-6 text-center'>
-			<h2 className='text-xl lg:text-2xl font-semibold text-light'>{message}</h2>
-		</section>
-	);
+  return (
+    <div className='mt-4 lg:mt-6'>
+      <div className='inline-block'>
+        <p className='text-dark text-lg lg:text-xl font-semibold tracking-wide'>
+          {message}
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default Availability;

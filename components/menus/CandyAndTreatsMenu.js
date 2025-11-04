@@ -4,7 +4,7 @@ import { MainHeading, SubHeading } from '../utils/Typography';
 const CandyAndTreatsMenu = ({ data }) => {
 	return (
 		<div className='lg:mx-auto grid gap-8 lg:gap-16'>
-			<div className='opacity-70'>
+			<div className='opacity-70 grid place-items-center'>
 				<MainHeading title='Prices per dozen' type='dark' />
 			</div>
 			<CookieAndCandyMenu data={data} />

@@ -20,7 +20,7 @@ export default CookieMenu;
 
 const SpecialtyCookeMenu = ({ specialtyFlavors }) => {
 	return (
-	  <div className='grid gap-4 lg:gap-12 mb-4 lg:mb-8'>
+	  <div className='grid gap-4 lg:gap-12 mb-4 lg:mb-8 text-center'>
 		<MainHeading title='Specialty Cookie Flavors' type='primary' />
 		<div className='flex flex-wrap items-center justify-center gap-y-4 lg:gap-y-12 mx-auto text-center font-bold w-full'>
 		  {specialtyFlavors.map((cookie, index) => {

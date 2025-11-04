@@ -10,10 +10,11 @@ export function generateCustomerEmail(order, onlineOrderingSettings) {
     giftInfo = {},
     cart = [],
     total,
+    selectedDateTime = {}, // NEW
   } = order;
 
   const {
-    confirmationSubject = 'Sweet Juanjo’s Order Confirmation',
+    confirmationSubject = 'Sweet Juanjo's Order Confirmation',
     confirmationBody = [],
     pickupInfo = [],
     deliveryInfo = [],
@@ -24,7 +25,21 @@ export function generateCustomerEmail(order, onlineOrderingSettings) {
   const addressString =
     fulfillmentMethod === 'delivery'
       ? `${deliveryAddress.address}, ${deliveryAddress.city}, ${deliveryAddress.state} ${deliveryAddress.zip}`
-      : 'Pickup at Sweet Juanjo’s';
+      : 'Pickup at Sweet Juanjo's';
+
+  // NEW: Format date for display
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Not selected';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
+  const formattedDate = formatDate(selectedDateTime.date);
+  const formattedTimeSlot = selectedDateTime.timeSlot || 'Not selected';
 
   const formatCartItems = cart
     .map((item) => {
@@ -70,11 +85,13 @@ export function generateCustomerEmail(order, onlineOrderingSettings) {
     html: `
       <div style="font-family:Arial,sans-serif;background:#F0FFFE;padding:20px;border-radius:8px;">
         <div style="text-align:center;margin-bottom:20px;">
-          <img src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" alt="Sweet Juanjo’s" style="max-width:180px;opacity:0.85;" />
+          <img src="https://cdn.sanity.io/images/5veay66n/production/6911cf0024adacb9f474ae910bcefec7072ae74b-400x225.png" alt="Sweet Juanjo's" style="max-width:180px;opacity:0.85;" />
         </div>
         <h2 style="color:#012623;border-bottom:2px solid #29B2AC;padding-bottom:8px;">Thank you, ${customerName}!</h2>
         ${openingLinesHTML}
         ${methodInfoHTML}
+        <p style="margin-top:10px;"><strong>Date:</strong> ${formattedDate}</p>
+        <p style="margin-top:10px;"><strong>Time:</strong> ${formattedTimeSlot}</p>
         <p style="margin-top:10px;"><strong>Address:</strong> ${addressString}</p>
         <ul style="margin-top:10px;padding-left:20px;color:#012623;">${formatCartItems}</ul>
         <p style="margin-top:10px;"><strong>Amount Paid:</strong> $${total.toFixed(2)}</p>
@@ -89,6 +106,8 @@ ${openingLinesText}
 
 ${methodInfoText}
 
+Date: ${formattedDate}
+Time: ${formattedTimeSlot}
 Address: ${addressString}
 
 Items:

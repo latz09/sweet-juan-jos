@@ -13,7 +13,7 @@ export const MainHeading = ({ title, type }) => {
 
 	return (
 		<div>
-			<h1 className={`text-4xl lg:text-6xl font-bold text-center  ${type}`}>
+			<h1 className={`text-4xl lg:text-6xl font-bold text-  ${type}`}>
 				{title}
 			</h1>
 		</div>
@@ -36,7 +36,7 @@ export const SubHeading = ({ title, type }) => {
 	return (
 		<div>
 			<h3
-				className={`text-2xl lg:text-4xl  font-bold px-2 text-center ${type} `}
+				className={`text-2xl lg:text-4xl  font-bold px-2 text-cener ${type} `}
 			>
 				{title}
 			</h3>

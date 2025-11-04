@@ -17,7 +17,7 @@ const Offerings = ({
 
 	
 	return (
-		<div className='grid gap-24 lg:gap-32 mt-12 max-w-4xl mx-auto'>
+		<div className='grid gap-24 lg:gap-32 mt-12 max-w-7xl mx-auto'>
 			{data.map((groupItems, index) => {
 				return (
 					<OfferingGroup

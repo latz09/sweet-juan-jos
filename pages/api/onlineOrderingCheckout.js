@@ -3,10 +3,16 @@ import { v4 as uuidv4 } from 'uuid';
 import { SquareClient, SquareEnvironment } from 'square';
 import { sanityClient } from '@/lib/sanityConnection';
 
+// FIXED: Use correct Square credentials based on environment
 const squareClient = new SquareClient({
-  token: process.env.SQUARE_PRODUCTION_ACCESS_TOKEN,
-  // token: process.env.OL_SANDBOX_ACCESS_TOKEN,
-  environment: SquareEnvironment.Production,
+  token:
+    process.env.SQUARE_ENV === 'production'
+      ? process.env.SQUARE_PRODUCTION_ACCESS_TOKEN
+      : process.env.OL_SANDBOX_ACCESS_TOKEN,
+  environment:
+    process.env.SQUARE_ENV === 'production'
+      ? SquareEnvironment.Production
+      : SquareEnvironment.Sandbox,
 });
 
 export default async function handler(req, res) {
@@ -23,6 +29,8 @@ export default async function handler(req, res) {
     deliveryAddress = {},
     deliveryFee = 0,
     giftInfo = {},
+    selectedDate = '', // NEW
+    selectedTimeSlot = '', // NEW
   } = req.body;
 
   if (!cart.length) {
@@ -31,10 +39,14 @@ export default async function handler(req, res) {
   if (!contactInfo.name || !contactInfo.phone || !contactInfo.email) {
     return res.status(400).json({ message: 'Missing contact information.' });
   }
+  // NEW: Validate date/time
+  if (!selectedDate || !selectedTimeSlot) {
+    return res.status(400).json({ message: 'Missing date or time slot.' });
+  }
 
   let orderId;
   try {
-    orderId = `order-${uuidv4()}`;
+    orderId = `order-${uuidv4()}`; 
     const createdAt = new Date().toISOString();
 
     // 1️⃣ Normalize cart items for Sanity
@@ -85,6 +97,11 @@ export default async function handler(req, res) {
         email: contactInfo.email,
       },
       fulfillmentMethod: selectedMethod,
+      // NEW: Store selected date & time
+      selectedDateTime: {
+        date: selectedDate,
+        timeSlot: selectedTimeSlot,
+      },
       subtotal,
       deliveryFee: selectedMethod === 'delivery' ? deliveryFee : 0,
       total,
@@ -144,11 +161,16 @@ export default async function handler(req, res) {
       });
     }
 
+    // FIXED: Use correct location ID based on environment
+    const locationId =
+      process.env.SQUARE_ENV === 'production'
+        ? process.env.SQUARE_PRODUCTION_LOCATION_ID
+        : process.env.OL_LOCATION_ID;
+
     const payload = {
       idempotencyKey: uuidv4(),
       order: {
-        locationId: process.env.SQUARE_PRODUCTION_LOCATION_ID,
-        // locationId: process.env.OL_LOCATION_ID,
+        locationId,
         lineItems,
       },
       checkoutOptions: {

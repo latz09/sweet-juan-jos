@@ -13,7 +13,7 @@ const AvailableDisplayItemsPage = async () => {
 	const data = await sanityClient.fetch(query);
 	
 	return (
-		<div className='pt-4 lg:pt-16 grid gap-12 lg:gap-16 bg-gradient-to-b from-light via-primary/20 to-light'>
+		<div className='pt-4 lg:pt-16 grid gap-12 lg:gap-16 bg-gradient-to-b from-light via-primary/20 to-light text-center'>
 			<MainHeading title='Available Display Items' />
 			<AnimateUp>
 				<AvailableDisplayItems data={data} />

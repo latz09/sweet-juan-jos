@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { parseBoldSyntax } from '../utils/parseBoldSyntax';
+import DateTimeSelector from './DateTimeSelector';
 
 const allowedDeliveryZips = ['54481', '54482', '54467']; // Example zip codes
 
@@ -17,6 +18,10 @@ const FulfillmentOptions = ({
 	setZipValid,
 	giftInfo,
 	setGiftInfo,
+	selectedDate,
+	setSelectedDate,
+	selectedTimeSlot,
+	setSelectedTimeSlot,
 }) => {
 	const { allowPickup, allowDelivery, pickupInfo, deliveryInfo, allowGifting } =
 		settings;
@@ -52,7 +57,7 @@ const FulfillmentOptions = ({
 	const handleGiftToggle = () => {
 		const newIsGift = !isGift;
 		setIsGift(newIsGift);
-		
+
 		// If turning off gift, clear the gift info
 		if (!newIsGift) {
 			setGiftInfo({ name: '', note: '' });
@@ -62,7 +67,7 @@ const FulfillmentOptions = ({
 	// Generate delivery fee message
 	const getDeliveryFeeMessage = () => {
 		if (selectedMethod !== 'delivery' || deliveryFee === undefined) return null;
-		
+
 		if (deliveryFee === 0) {
 			return 'Free delivery this week!';
 		} else {
@@ -71,6 +76,16 @@ const FulfillmentOptions = ({
 	};
 
 	const deliveryFeeMessage = getDeliveryFeeMessage();
+
+	// Get the correct date/time slots based on selected method
+	const dateTimeSlots =
+		selectedMethod === 'delivery'
+			? settings?.deliveryDateTimeSlots || []
+			: settings?.pickupDateTimeSlots || [];
+
+	// Determine if delivery address should show
+	const showDeliveryAddress =
+		selectedMethod === 'delivery' && selectedDate && selectedTimeSlot;
 
 	return (
 		<section className='space-y-6'>
@@ -115,7 +130,7 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-2  text-dark md:text-lg pb-12'
+						className='origin-top overflow-hidden space-y-2 text-dark md:text-lg pb-6'
 					>
 						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>
 							Pickup Details
@@ -135,7 +150,7 @@ const FulfillmentOptions = ({
 						animate={{ opacity: 1, scaleY: 1 }}
 						exit={{ opacity: 0, scaleY: 0 }}
 						transition={{ duration: 0.4, ease: 'easeInOut' }}
-						className='origin-top overflow-hidden space-y-4  text-dark md:text-lg '
+						className='origin-top overflow-hidden space-y-4 text-dark md:text-lg pb-6'
 					>
 						<h3 className='text-xl lg:text-2xl font-bold opacity-80'>
 							Delivery Details
@@ -146,14 +161,14 @@ const FulfillmentOptions = ({
 							</p>
 						))}
 
-						{/* Delivery fee message with matching styling from AvailabilityInfo */}
+						{/* Delivery fee message */}
 						{deliveryFeeMessage && (
 							<div className='mt-6 p-4 bg-primary/10 rounded-sm border-l-2 rounded-l-lg border-primary'>
-								<p className={`text-xl uppercase font-black text-center ${
-									deliveryFee === 0 
-										? '' 
-										: 'text-white'
-								}`}>
+								<p
+									className={`text-xl uppercase font-black text-center ${
+										deliveryFee === 0 ? '' : 'text-white'
+									}`}
+								>
 									{deliveryFee === 0 && '🎉 '}
 									{deliveryFeeMessage}
 								</p>
@@ -163,9 +178,19 @@ const FulfillmentOptions = ({
 				)}
 			</AnimatePresence>
 
-			{/* Animate Address Fields if delivery selected */}
+			{/* Date/Time Selector - integrated here */}
+			<DateTimeSelector
+				selectedMethod={selectedMethod}
+				dateTimeSlots={dateTimeSlots}
+				selectedDate={selectedDate}
+				selectedTimeSlot={selectedTimeSlot}
+				onDateSelect={setSelectedDate}
+				onTimeSlotSelect={setSelectedTimeSlot}
+			/>
+
+			{/* Animate Address Fields - ONLY if delivery AND date/time selected */}
 			<AnimatePresence mode='wait' initial={false}>
-				{selectedMethod === 'delivery' && (
+				{showDeliveryAddress && (
 					<motion.div
 						key='delivery-address-fields'
 						initial={{ opacity: 0, scaleY: 0 }}

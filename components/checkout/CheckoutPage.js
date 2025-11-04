@@ -14,8 +14,6 @@ const CheckoutPage = ({ settings }) => {
 	const cartTotal = useCartStore((state) => state.cartTotalPrice());
 	const [selectedMethod, setSelectedMethod] = useState(''); // pickup | delivery
 
-
-
 	const deliveryFee = settings?.deliveryFee || 0;
 	const finalTotal =
 		selectedMethod === 'delivery' ? cartTotal + deliveryFee : cartTotal;
@@ -35,6 +33,13 @@ const CheckoutPage = ({ settings }) => {
 	const [zipValid, setZipValid] = useState(true);
 	const [giftInfo, setGiftInfo] = useState({ name: '', note: '' });
 
+	// Date/Time state
+	const [selectedDate, setSelectedDate] = useState('');
+	const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+
+	// Determine if contact form should show
+	const showContactForm = selectedMethod && selectedDate && selectedTimeSlot;
+
 	return (
 		<PageEntry>
 			<div className='f'>
@@ -42,8 +47,9 @@ const CheckoutPage = ({ settings }) => {
 					cart={cart}
 					total={finalTotal}
 					selectedMethod={selectedMethod}
+					deliveryFee={deliveryFee}
 				/>
-				<div className='max-w-3xl mx-auto  p-4 lg:p-6 space-y-24 '>
+				<div className='max-w-5xl mx-auto  p-4 lg:p-6 space-y-24 '>
 					<FulfillmentOptions
 						settings={settings}
 						selectedMethod={selectedMethod}
@@ -55,23 +61,37 @@ const CheckoutPage = ({ settings }) => {
 						giftInfo={giftInfo}
 						setGiftInfo={setGiftInfo}
 						deliveryFee={deliveryFee}
+						selectedDate={selectedDate}
+						setSelectedDate={setSelectedDate}
+						selectedTimeSlot={selectedTimeSlot}
+						setSelectedTimeSlot={setSelectedTimeSlot}
 					/>
 
-					<ContactForm
-						contactInfo={contactInfo}
-						setContactInfo={setContactInfo}
-					/>
+					{/* Only show contact form after method, date, and time are selected */}
+					{showContactForm && (
+						<ContactForm
+							contactInfo={contactInfo}
+							setContactInfo={setContactInfo}
+						/>
+					)}
 
-					<ConfirmOrderButton
-						cart={cart}
-						selectedMethod={selectedMethod}
-						contactInfo={contactInfo}
-						deliveryAddress={deliveryAddress}
-						zipValid={zipValid}
-						giftInfo={giftInfo}
-						settings={settings}
-						deliveryFee={deliveryFee}
-					/>
+					{/* Only show confirm button if contact form would be shown */}
+					{showContactForm && (
+						<ConfirmOrderButton
+							cart={cart}
+							selectedMethod={selectedMethod}
+							contactInfo={contactInfo}
+							deliveryAddress={deliveryAddress}
+							zipValid={zipValid}
+							giftInfo={giftInfo}
+							settings={settings}
+							deliveryFee={deliveryFee}
+							selectedDate={selectedDate}
+							selectedTimeSlot={selectedTimeSlot}
+						/>
+					)}
+
+					{/* Credit card logos - always show */}
 					<div className='flex items-center justify-center space-x-4 mt-2'>
 						<img
 							src='https://cdn.simpleicons.org/visa'

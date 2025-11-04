@@ -14,6 +14,6 @@ const ProductGrid = ({ products, maxOrderAmount, acceptingOrders }) => {
 			))}
 		</div>
 	);
-};
+}; 
 
 export default ProductGrid;

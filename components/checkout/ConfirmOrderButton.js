@@ -11,7 +11,9 @@ const ConfirmOrderButton = ({
 	zipValid,
 	giftInfo = {},
 	settings,
-	deliveryFee = 5.0, // fallback value
+	deliveryFee = 5.0,
+	selectedDate = '', // NEW
+	selectedTimeSlot = '', // NEW
 }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -22,12 +24,15 @@ const ConfirmOrderButton = ({
 		setIsHydrated(true);
 	}, []);
 
+	// Updated validation to include date/time
 	const isFormValid =
-		cart.length > 0 &&
+		cart.length > 0 && 
 		selectedMethod &&
 		contactInfo.name &&
 		contactInfo.phone &&
 		contactInfo.email &&
+		selectedDate && // NEW: Date is required
+		selectedTimeSlot && // NEW: Time slot is required
 		(selectedMethod !== 'delivery' || zipValid);
 
 	const cartTotal = useCartStore((state) => state.cartTotalPrice());
@@ -35,7 +40,14 @@ const ConfirmOrderButton = ({
 	const finalTotal = showDelivery ? cartTotal + deliveryFee : cartTotal;
 
 	const handleConfirmOrder = async () => {
-		if (!isFormValid) return;
+		if (!isFormValid) {
+			// Show specific error if date/time missing
+			if (!selectedDate || !selectedTimeSlot) {
+				setError('Please select a date and time for your order.');
+				return;
+			}
+			return;
+		}
 
 		setIsLoading(true);
 		setError('');
@@ -54,6 +66,8 @@ const ConfirmOrderButton = ({
 						selectedMethod === 'delivery' ? deliveryAddress : null,
 					deliveryFee: showDelivery ? deliveryFee : 0,
 					giftInfo,
+					selectedDate, // NEW
+					selectedTimeSlot, // NEW
 				}),
 			});
 
@@ -89,7 +103,7 @@ const ConfirmOrderButton = ({
 				type='button'
 				onClick={handleConfirmOrder}
 				disabled={!isFormValid || isLoading}
-				className='w-full p-4 text-xl font-bold rounded bg-primary text-light hover:bg-dark transition disabled:opacity-50'
+				className='w-full p-4 text-xl font-bold rounded bg-primary text-light hover:bg-dark transition disabled:opacity-50 disabled:cursor-not-allowed'
 			>
 				{isLoading ? 'Processing...' : 'Confirm Order'}
 			</button>

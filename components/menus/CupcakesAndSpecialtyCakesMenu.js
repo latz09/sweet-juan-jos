@@ -12,7 +12,7 @@ const CupcakesAndSpecialtyCakesMenu = ({
 	cupcakePrice,
 }) => {
 	return (
-		<div className='grid gap-8 lg:gap-20'>
+		<div className='grid gap-8 lg:gap-20 text-center'>
 			<MainHeading title='Choose Your Flavor' type='dark' />
 
 			<Flavors

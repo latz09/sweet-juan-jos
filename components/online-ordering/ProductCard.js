@@ -33,7 +33,7 @@ const ProductCard = ({ product, maxOrderAmount, acceptingOrders }) => {
 		const itemTotal = parseFloat(calculateTotalPrice());
 		const newTotal = getCartTotalPrice() + itemTotal;
 
-		if (newTotal > maxOrderAmount) {
+		if (newTotal > maxOrderAmount) { 
 			setShowLimitModal(true);
 			return;
 		}
