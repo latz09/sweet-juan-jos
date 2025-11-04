@@ -69,7 +69,10 @@ export default function StepUserInfo({
 		<AnimateUp className='w-full'>
 			<div className='w-full grid'>
 				<div className='text-center'>
-					<p className='text-dark font-bold text-lg'>{infoText}</p>
+					{infoText !== 'null' && (
+						<p className='text-dark font-bold text-lg'>{infoText}</p>
+					)}
+
 					<h3 className='mb-4 text-2xl font-bold mt-8'>
 						{giftOption ? 'Contact & Gift Details' : 'Contact Details'}
 					</h3>
