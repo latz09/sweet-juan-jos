@@ -25,7 +25,7 @@ function SlotGroup({ title, slots }) {
   const sorted = [...slots].sort((a, b) => (a.date > b.date ? 1 : -1));
 
   return (
-    <div className='space-y-2'>
+    <div className='space-y-2 grid place-items-center lg:place-items-start'>
       <p className='font-semibold text-base lg:text-lg'>{title}</p>
       <div className='space-y-2'>
         {sorted.map(({ date, timeSlots }, idx) => {
@@ -78,7 +78,7 @@ export default function AvailabilityInfo({
   return (
     <div className='w-full mt-8 lg:mt-4 '>
       {/* Banner */}
-      <p className='font-bold  text-xl lg:text-2xl'>
+      <p className='font-bold  text-xl lg:text-2xl text-center lg:text-left pb-2 lg:pb-0'>
         {availabilityLabel}
         {deliveryFeeText && (
           <span className='block text-lg lg:text-xl mt-1'>

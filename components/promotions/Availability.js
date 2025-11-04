@@ -14,7 +14,7 @@ const Availability = ({ pickupSlots = [], deliverySlots = [] }) => {
   }
 
   return (
-    <div className='mt-4 lg:mt-6'>
+    <div className=' lg:mt-6'>
       <div className='inline-block'>
         <p className='text-dark text-lg lg:text-xl font-semibold tracking-wide'>
           {message}

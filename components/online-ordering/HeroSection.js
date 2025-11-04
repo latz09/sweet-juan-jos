@@ -18,16 +18,16 @@ const HeroSection = ({
 			<div className='space-y-3 lg:space-y-4'>
 				{/* 1) Title - always first */}
 				{pageTitle && (
-					<div className='order-1 lg:col-start-1'>
+					<div className='order-1 lg:col-start-1 text-center '>
 						<MainHeading title={pageTitle} type='dark' />
 					</div>
 				)}
 
 			{/* 2) Intro text - second */}
 			{introText?.length > 0 && (
-				<div className='order-2 space-y-2 lg:col-start-1'>
+				<div className='order-2 space-y-2 lg:col-start-1 text-center'>
 					{introText.map((para, idx) => (
-						<div key={idx}>
+						<div key={idx} className="grid place-items-center gap-2">
 							<Paragraph content={para} />
 							<div className='w-24 h-[2px] bg-primary hidden lg:block' />
 						</div>
@@ -57,7 +57,7 @@ const HeroSection = ({
 			)}
 
 			{/* 4) Availability - fourth on mobile, third in left column on desktop */}
-			<div className='order-4 w-full lg:col-start-1'>
+			<div className='order-4 w-full lg:col-start-1 '>
 				<AvailabilityInfo
 					pickupSlots={pickupSlots}
 					deliverySlots={deliverySlots}
