@@ -35,7 +35,7 @@ const DesktopNavigation = ({ acceptingOrders }) => {
 				))}
 
 				{/* Your Online Ordering Link */}
-				{/* <LinkIfActive acceptingOrders={acceptingOrders} mobile={false} /> */}
+				<LinkIfActive acceptingOrders={acceptingOrders} mobile={false} />
 
 				{/* Cart Button inline next to LinkIfActive */}
 				<div className='ml-4'>
@@ -117,11 +117,11 @@ const MobileNavigation = ({ acceptingOrders }) => {
 						{/* Scrollable menu section */}
 						<div className='pt-20 overflow-y-auto flex-1 p-6 scrollbar-hide '>
 							<div className='grid grid-cols-1 gap-10 '>
-								{/* <LinkIfActive
+								<LinkIfActive
 									toggleMenu={toggleMenu}
 									acceptingOrders={acceptingOrders}
 									mobile={true}
-								/> */}
+								/>
 								{NavigationLinks.map((link) => (
 									<motion.div
 										key={link.id}

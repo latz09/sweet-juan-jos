@@ -38,7 +38,7 @@ const LandingHero = async ({ landingImage }) => {
 					</div>
 					<div
 						className={`grid gap-4 ${
-							acceptingOnlineOrders ? 'lg:grid-cols-1' : 'lg:grid-cols-1'
+							acceptingOnlineOrders ? 'lg:grid-cols-2' : 'lg:grid-cols-1'
 						}`}
 					>
 						<ButtonLink
@@ -47,7 +47,7 @@ const LandingHero = async ({ landingImage }) => {
 							href='/contact-katie-jo'
 						/>
 
-						{/* {acceptingOnlineOrders && <OnlineOrderingLandingButton />} */}
+						{acceptingOnlineOrders && <OnlineOrderingLandingButton />}
 					</div>
 				</LandingHeroAnimate>
 			</div>
