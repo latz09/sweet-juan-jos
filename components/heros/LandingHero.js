@@ -52,7 +52,7 @@ const LandingHero = async ({ landingImage }) => {
 				</LandingHeroAnimate>
 			</div>
 		</div>
-	);
+)
 };
 
 export default LandingHero;

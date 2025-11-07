@@ -1,3 +1,5 @@
+// pages/api/submitPromotionOrder.js
+
 import { v4 as uuidv4 } from 'uuid';
 import { sanityClient } from '@/lib/sanityConnection';
 import transporter from '@/lib/nodemailer';
