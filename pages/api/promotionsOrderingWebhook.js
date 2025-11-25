@@ -50,19 +50,37 @@ export default async function handler(req, res) {
 		const payment = event.data?.object?.payment;
 		if (payment?.status === 'COMPLETED') {
 			try {
-				const thirtyMinAgo = new Date(
-					Date.now() - 30 * 60 * 1000
-				).toISOString();
-				
+				// Get Square Order ID from payment
+				const squareOrderId = payment.order_id;
+
+				if (!squareOrderId) {
+					console.warn('⚠️ [PROMO WEBHOOK] No order_id in payment');
+					return res.status(200).send('OK');
+				}
+
+				console.log(
+					'🔍 [PROMO WEBHOOK] Looking for order with Square Order ID:',
+					squareOrderId
+				);
+
+				// Find pending order that matches this Square Order ID
 				const order = await sanityClient.fetch(
-					`*[_type=="promotionOrders" && status=="pending" && createdAt > $t][0]`,
-					{ t: thirtyMinAgo }
+					`*[_type=="promotionOrders" 
+					   && status=="pending" 
+					   && squareOrderId == $squareOrderId
+					][0]`,
+					{ squareOrderId }
 				);
 
 				if (!order) {
-					console.warn('⚠️ [PROMO WEBHOOK] No pending order found to update');
+					console.warn(
+						'⚠️ [PROMO WEBHOOK] No matching pending order found for Square Order ID:',
+						squareOrderId
+					);
 					return res.status(200).send('OK');
 				}
+
+				console.log('🎯 [PROMO WEBHOOK] Found matching order:', order._id);
 
 				// Update order to 'paid' status
 				const updatedOrder = await sanityClient
@@ -76,7 +94,10 @@ export default async function handler(req, res) {
 					})
 					.commit();
 
-				console.log('✅ [PROMO WEBHOOK] Order updated to paid:', updatedOrder._id);
+				console.log(
+					'✅ [PROMO WEBHOOK] Order updated to paid:',
+					updatedOrder._id
+				);
 
 				// Prepare data for email generation
 				const {
@@ -86,7 +107,7 @@ export default async function handler(req, res) {
 					selectedDateTime = {},
 				} = updatedOrder;
 
-				const cartData = items.map(item => ({
+				const cartData = items.map((item) => ({
 					name: item.name,
 					price: item.price,
 					quantity: item.quantity,
@@ -159,7 +180,10 @@ export default async function handler(req, res) {
 
 				console.log('📧 [PROMO WEBHOOK] Confirmation emails sent');
 			} catch (err) {
-				console.error('❌ [PROMO WEBHOOK] Error updating Sanity or sending emails:', err);
+				console.error(
+					'❌ [PROMO WEBHOOK] Error updating Sanity or sending emails:',
+					err
+				);
 				return res.status(500).send('Server Error');
 			}
 		}

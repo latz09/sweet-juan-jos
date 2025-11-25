@@ -44,18 +44,19 @@ export default async function handler(req, res) {
 			giftOption = false,
 		} = promotionDetails;
 
-		// 3) Generate payment link unconditionally
-		let paymentLink = await createCheckoutLink({
-			cartData,
-			name,
-			email,
-			street,
-			city,
-			zip,
-			phone,
-			orderMethod,
-			slug,
-		});
+		// 3) Generate payment link and get Square Order ID
+		const { url: paymentLink, orderId: squareOrderId } =
+			await createCheckoutLink({
+				cartData,
+				name,
+				email,
+				street,
+				city,
+				zip,
+				phone,
+				orderMethod,
+				slug,
+			});
 
 		// 4) Prepare the doc for Sanity
 		const fullAddress = [street, city, zip].filter(Boolean).join(', ');
@@ -88,6 +89,7 @@ export default async function handler(req, res) {
 				quantity: item.quantity,
 			})),
 			paymentLink,
+			squareOrderId, // Store Square Order ID for webhook matching
 		};
 
 		// 5) Create doc in Sanity
