@@ -32,6 +32,10 @@ export const FETCH_PROMOTION_QUERY = `
       }
     },
     giftOption,
+    paymentOptions{
+      enablePayNow,
+      enablePayLater
+    },
     autoResponseEmail {
       emailContent,
       pickupDetailsLine,

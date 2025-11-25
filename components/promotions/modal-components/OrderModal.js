@@ -14,14 +14,17 @@ import DeliveryValidationError from '../checkout-process/steps/DeliveryValidatio
 import ModalContent from './ModalContent';
 import LoadingOverlay from './LoadingOverlay';
 
-export default function OrderModal({ 
-	promotionSlug, 
-	deliveryDateTimeSlots, 
-	pickupDateTimeSlots, 
-	onClose, 
-	...props  
+export default function OrderModal({
+	promotionSlug,
+	deliveryDateTimeSlots,
+	pickupDateTimeSlots,
+	onClose,
+	enablePayNow,
+	enablePayLater,
+	...props
 }) {
-	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } = useCart();
+	const { cart, cartTotal, removeFromCart, updateCartItemQuantity, clearCart } =
+		useCart();
 	const [step, setStep] = useState(0);
 	const [method, setMethod] = useState(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -125,7 +128,7 @@ export default function OrderModal({
 
 		case 1:
 			content = (
-				<StepChooseMethod 
+				<StepChooseMethod
 					method={method}
 					onSelectMethod={handleSelectMethod}
 					onBack={handleBack}
@@ -193,6 +196,8 @@ export default function OrderModal({
 		case 4:
 			content = (
 				<StepPaymentChoice
+					enablePayNow={enablePayNow}
+					enablePayLater={enablePayLater}
 					onPayNow={() =>
 						handlePaymentChoice({
 							payNow: true,

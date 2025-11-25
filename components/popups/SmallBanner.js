@@ -55,7 +55,7 @@ const SmallBanner = ({ title, subtitle, onClick }) => {
 						onClick={onClick}
 					>
 						<div className="tracking-wider text-center font-bold uppercase">
-							View Latest Promotion
+							View Latest Promotions
 
 						</div>
 					</motion.div>

@@ -33,8 +33,8 @@ export default async function handler(req, res) {
 			payNow = false,
 			cartTotal = '0',
 			slug = '',
-			selectedDate = '', // NEW
-			selectedTimeSlot = '', // NEW
+			selectedDate = '',
+			selectedTimeSlot = '',
 		} = req.body;
 
 		// 2) Additional from promotionDetails
@@ -62,6 +62,7 @@ export default async function handler(req, res) {
 
 		const doc = {
 			_type: 'promotionOrders',
+			status: 'pending', // Explicitly set initial status
 			createdAt: new Date().toISOString(),
 			orderedBy: {
 				name,
@@ -71,7 +72,6 @@ export default async function handler(req, res) {
 				orderMethod,
 				payNow,
 			},
-			// NEW: Store selected date & time
 			selectedDateTime: {
 				date: selectedDate,
 				timeSlot: selectedTimeSlot,
@@ -93,67 +93,76 @@ export default async function handler(req, res) {
 		// 5) Create doc in Sanity
 		const sanityResult = await sanityClient.create(doc);
 
-		// 6) Generate email content (NOW passing selectedDate and selectedTimeSlot)
-		const internalEmailContent = generateKatieJosPromotionOrder({
-			name,
-			email,
-			phone,
-			recipientName,
-			giftNote,
-			street,
-			city,
-			zip,
-			orderMethod,
-			payNow,
-			promotionDetails,
-			cartData,
-			cartTotal,
-			selectedDate, // NEW
-			selectedTimeSlot, // NEW
-		});
+		// 6) ONLY send emails if Pay Later (payNow === false)
+		// For Pay Now, the webhook will send emails after payment confirmation
+		if (!payNow) {
+			const internalEmailContent = generateKatieJosPromotionOrder({
+				name,
+				email,
+				phone,
+				recipientName,
+				giftNote,
+				street,
+				city,
+				zip,
+				orderMethod,
+				payNow,
+				promotionDetails,
+				cartData,
+				cartTotal,
+				selectedDate,
+				selectedTimeSlot,
+			});
 
-		const customerEmailContent = generateCustomerConfirmationEmail({
-			name,
-			email,
-			phone, 
-			recipientName,
-			giftNote,
-			street,
-			city,
-			zip,
-			orderMethod,
-			promotionDetails,
-			cartData,
-			payNow,
-			paymentLink,
-			selectedDate, // NEW
-			selectedTimeSlot, // NEW
-		});
+			const customerEmailContent = generateCustomerConfirmationEmail({
+				name,
+				email,
+				phone,
+				recipientName,
+				giftNote,
+				street,
+				city,
+				zip,
+				orderMethod,
+				promotionDetails,
+				cartData,
+				payNow,
+				paymentLink,
+				selectedDate,
+				selectedTimeSlot,
+			});
 
-		// 7) Send both emails concurrently
-		const internalEmailPromise = transporter.sendMail({
-			from: 'Promotional Order Received <sweetjuanjos@gmail.com>',
-			to: process.env.CLIENT_EMAIL,
-			// to: 'jordan@latzwebdesign.com',
-			subject: internalEmailContent.subject,
-			text: internalEmailContent.text,
-			html: internalEmailContent.html,
-		});
+			// Send both emails concurrently
+			await Promise.all([
+				transporter.sendMail({
+					from: 'Promotional Order Received <sweetjuanjos@gmail.com>',
+					to: process.env.CLIENT_EMAIL,
+					subject: internalEmailContent.subject,
+					text: internalEmailContent.text,
+					html: internalEmailContent.html,
+				}),
+				transporter.sendMail({
+					from: 'Sweet Juanjos <sweetjuanjos@gmail.com>',
+					to: email,
+					subject: customerEmailContent.subject,
+					text: customerEmailContent.text,
+					html: customerEmailContent.html,
+				}),
+			]);
 
-		const customerEmailPromise = transporter.sendMail({
-			from: 'Sweet Juanjos <sweetjuanjos@gmail.com>',
-			to: email, // Send to customer
-			subject: customerEmailContent.subject,
-			text: customerEmailContent.text,
-			html: customerEmailContent.html,
-		});
+			console.log('📧 Emails sent for Pay Later order');
+		} else {
+			console.log(
+				'💳 Pay Now order created - emails will be sent by webhook after payment'
+			);
+		}
 
-		await Promise.all([internalEmailPromise, customerEmailPromise]);
-
-		// 8) Respond
+		// 7) Respond
 		return res.status(200).json({
 			success: true,
-			message: 'Order submitted to Sanity and emails sent successfully.',
+			message: payNow
+				? 'Order submitted to Sanity successfully. Emails will be sent after payment confirmation.'
+				: 'Order submitted to Sanity and emails sent successfully.',
 			data: sanityResult,
 			paymentLink,
 		});

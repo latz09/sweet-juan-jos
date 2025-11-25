@@ -21,7 +21,7 @@ const PopupModal = ({
         // OPTIONAL: wait for a short time to allow page to transition, THEN close
         setTimeout(() => {
             onClose();
-        }, 400); // 300ms usually feels good, adjust if needed
+        }, 10); // 300ms usually feels good, adjust if needed
     };
 
 	// Helper function to format date to "5pm on May 11th"

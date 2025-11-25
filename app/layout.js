@@ -13,9 +13,6 @@ import ToastContainer from '@/components/utils/animations/ToastContainer';
 
 
 const josefinSlab = Josefin_Slab({
-	// style: 'normal',
-	// weight: '800, 700', // Specify the weights and styles you need
-	// display: 'swap',
 	subsets: ['latin'],
 });
 
@@ -32,25 +29,21 @@ export const metadata = {
 };
 
 const RootLayout = async ({ children }) => {
-	const promotion = await sanityClient.fetch(promotionPopupQuery);
+	const promotions = await sanityClient.fetch(promotionPopupQuery);
 	const onlineOrdering = await sanityClient.fetch(onlineOrderingQuery);
 
-	const acceptingOrders = onlineOrdering[0]?.acceptingOrders ?? false; // if it exists
-	const activePromotion = promotion ?? null; // promotion will be null if no active one
+	const acceptingOrders = onlineOrdering[0]?.acceptingOrders ?? false;
+	const activePromotions = promotions && promotions.length > 0 ? promotions : null;
 
 	return (
 		<html lang='en'>
 			<body className={`${josefinSlab.className}  text-dark`}>
 
-
 				<Navigation acceptingOrders={acceptingOrders} />
-				{/* <Navigation acceptingOrders={false} /> */}
-
-
+			
+				{/* <PopUpManager promotions={activePromotions} acceptingOrders={acceptingOrders} /> */}
 				
-				{/* <PopUpManager promotion={activePromotion} acceptingOrders={acceptingOrders} /> */}
 				<div className='max-w-7l mx-auto '>
-					
 					<div>{children}</div>
 					<ToastContainer />
 					<Footer />

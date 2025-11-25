@@ -35,7 +35,7 @@ const DesktopNavigation = ({ acceptingOrders }) => {
 				))}
 
 				{/* Your Online Ordering Link */}
-				{/* <LinkIfActive acceptingOrders={acceptingOrders} mobile={false} /> */}
+				<LinkIfActive acceptingOrders={acceptingOrders} mobile={false} />
 
 				{/* Cart Button inline next to LinkIfActive */}
 				<div className='ml-4'>
@@ -44,7 +44,7 @@ const DesktopNavigation = ({ acceptingOrders }) => {
 
 
 					{/* ?? */}
-					{/* <CartButton size='desktop' acceptingOrders={true} /> */}
+					<CartButton size='desktop' acceptingOrders={true} />
 				</div>
 			</div>
 		</div>
@@ -79,7 +79,7 @@ const MobileNavigation = ({ acceptingOrders }) => {
 						
 						
 						{/* REMOVED-11/3 */}
-							{/* <CartButton size='mobile' acceptingOrders={acceptingOrders} /> */}
+							<CartButton size='mobile' acceptingOrders={acceptingOrders} />
 						
 
 

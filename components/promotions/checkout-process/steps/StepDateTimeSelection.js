@@ -40,8 +40,12 @@ export default function StepDateTimeSelection({
 	}
 
 	// Format date for display (e.g., "2024-12-23" → "December 23, 2024")
+	// FIXED: Parse as local date instead of UTC
 	function formatDate(dateString) {
-		const date = new Date(dateString);
+		// Split the date string and create a date in local timezone
+		const [year, month, day] = dateString.split('-').map(Number);
+		const date = new Date(year, month - 1, day); // month is 0-indexed
+
 		return date.toLocaleDateString('en-US', {
 			month: 'long',
 			day: 'numeric',

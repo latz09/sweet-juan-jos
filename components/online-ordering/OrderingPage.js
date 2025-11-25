@@ -21,7 +21,7 @@ const OrderingPage = ({ settings, categories }) => {
 			product.category._id === selectedCategoryId
 		);
 	});
-	console.log(settings.deliveryDateTimeSlots[0])
+	
 
 
 	return (

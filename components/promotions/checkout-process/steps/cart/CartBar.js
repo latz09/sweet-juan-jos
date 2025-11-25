@@ -1,23 +1,26 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useCart } from './CartContext'; // Adjust path as needed
+import { useCart } from './CartContext';
 import OrderModal from '@/components/promotions/modal-components/OrderModal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaHeart } from 'react-icons/fa';
+
 export default function CartBar({
 	deliveryDetails,
 	pickupDetails,
-	giftOption, 
+	giftOption,
 	autoResponseEmailData,
 	promotionSlug,
 	deliveryDateTimeSlots,
 	pickupDateTimeSlots,
+	enablePayNow,
+	enablePayLater,
 }) {
 	const { cart, cartTotal } = useCart();
 	const [cartOpen, setCartOpen] = useState(false);
 	const [itemCount, setItemCount] = useState(0);
-	const [bubbles, setBubbles] = useState([]); // Store animated bubbles
+	const [bubbles, setBubbles] = useState([]);
 
 	// Calculate total items whenever cart updates
 	useEffect(() => {
@@ -29,7 +32,7 @@ export default function CartBar({
 	useEffect(() => {
 		if (cart.length > 0) {
 			const newBubble = {
-				id: Math.random(), // Unique ID
+				id: Math.random(),
 				text: 'Great Choice!',
 			};
 
@@ -42,7 +45,7 @@ export default function CartBar({
 				);
 			}, 1500);
 		}
-	}, [cart.length]); // Runs whenever cart changes
+	}, [cart.length]);
 
 	// Prevent background scrolling when cart is open
 	useEffect(() => {
@@ -97,7 +100,7 @@ export default function CartBar({
 									transition={{ duration: 1, ease: 'easeOut' }}
 									className='absolute bottom-12 left-1/2 transform -translate-x-1/2 bg-[#E55451] text-light font-bold px-4 py-2 rounded-full text-base border border-[#FCBAB8] shadow-lg shadow-primary/30 tracking-widest '
 								>
-									<div className="flex items-center gap-2 ">
+									<div className='flex items-center gap-2 '>
 										<span>
 											<FaHeart />
 										</span>
@@ -123,6 +126,8 @@ export default function CartBar({
 						promotionSlug={promotionSlug}
 						deliveryDateTimeSlots={deliveryDateTimeSlots}
 						pickupDateTimeSlots={pickupDateTimeSlots}
+						enablePayNow={enablePayNow}
+						enablePayLater={enablePayLater}
 					/>
 				)}
 			</AnimatePresence>
