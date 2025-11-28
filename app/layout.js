@@ -41,7 +41,7 @@ const RootLayout = async ({ children }) => {
 
 				<Navigation acceptingOrders={acceptingOrders} />
 			
-				{/* <PopUpManager promotions={activePromotions} acceptingOrders={acceptingOrders} /> */}
+				<PopUpManager promotions={activePromotions} acceptingOrders={acceptingOrders} />
 				
 				<div className='max-w-7l mx-auto '>
 					<div>{children}</div>
